@@ -1,0 +1,71 @@
+.si-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.speech-input {
+    margin: 0;
+}
+
+.si-wrapper button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 24px; /* Hauteur personnalisée pour correspondre à WhatsApp */
+    width: 24px; /* Largeur personnalisée pour correspondre à WhatsApp */
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: none;
+    font: 0/0 a;
+}
+
+.si-mic,
+.si-mic:before,
+.si-mic:after,
+.si-holder,
+.si-holder:before,
+.si-holder:after {
+    position: absolute;
+    background: #25d366; /* Couleur de fond de WhatsApp */
+}
+
+/* Microphone icon */
+.si-mic {
+    display: block;
+    height: 25%; /* Hauteur personnalisée pour correspondre à WhatsApp */
+    width: 25%; /* Largeur personnalisée pour correspondre à WhatsApp */
+    top: 9.375%; /* Position verticale personnalisée pour correspondre à WhatsApp */
+    left: 12.5%; /* Position horizontale personnalisée pour correspondre à WhatsApp */
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.si-mic:before {
+    position: absolute;
+    z-index: 1;
+    content: '';
+    width: 100%; /* Ajuster la largeur pour correspondre à WhatsApp */
+    height: 65%; /* Ajuster la hauteur pour correspondre à WhatsApp */
+    top: 0; /* Ajuster la position verticale pour correspondre à WhatsApp */
+    left: 0; /* Ajuster la position horizontale pour correspondre à WhatsApp */
+    background: #fff;
+}
+
+.si-mic:after {
+    z-index: 1;
+    content: '';
+    width: 100%; /* Ajuster la largeur pour correspondre à WhatsApp */
+    height: 35%; /* Ajuster la hauteur pour correspondre à WhatsApp */
+    top: 65%; /* Ajuster la position verticale pour correspondre à WhatsApp */
+    left: 0; /* Ajuster la position horizontale pour correspondre à WhatsApp */
+}
+
+.si-holder {
+    display: block;
+    height: 30%; /* Ajuster la hauteur pour correspondre à WhatsApp */
+    width: 30%; /* Ajuster la largeur pour correspondre à WhatsApp */
+    top: 35%; /* Position verticale personnalisée pour correspondre à WhatsApp */
+    left: 35%; /* Position horizontale personnalisée pour correspondre à WhatsApp */
+}

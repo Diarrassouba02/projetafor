@@ -1,0 +1,412 @@
+    .form-group {
+        margin-bottom: 10px;
+
+}
+
+
+    .successor {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .successor-label {
+        width: 100%;
+    }
+
+    .successor-input {
+        width: 100%;
+        margin-top: 5px; /* Ajoute un espace entre l'étiquette et le champ de saisie */
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .add-successor {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 5px 10px;
+    }
+
+    .remove-successor {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+
+
+
+.lignage {
+            margin-bottom: 10px;
+        }
+
+        .lignage-label {
+            font-weight: bold;
+        }
+
+        .lignage-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-lignage {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-lignage {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+ .campement {
+            margin-bottom: 10px;
+        }
+
+        .campement-label {
+            font-weight: bold;
+        }
+
+        .campement-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-campement {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-campement {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+        .sud {
+            margin-bottom: 10px;
+        }
+
+        .sud-label {
+            font-weight: bold;
+        }
+
+        .sud-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-sud {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-sud {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+
+
+ .nord {
+            margin-bottom: 10px;
+        }
+
+        .nord-label {
+            font-weight: bold;
+        }
+
+        .nord-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-nord {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-nord {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+       .ouest {
+            margin-bottom: 10px;
+        }
+
+        .ouest-label {
+            font-weight: bold;
+        }
+
+        .ouest-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-ouest {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-ouest {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+.est {
+            margin-bottom: 10px;
+        }
+
+        .est-label {
+            font-weight: bold;
+        }
+
+        .est-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-est {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-est {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+ .centre {
+            margin-bottom: 10px;
+        }
+
+        .centre-label {
+            font-weight: bold;
+        }
+
+        .centre-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-centre {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-centre {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+.ancien-site {
+            margin-bottom: 10px;
+        }
+
+        .ancien-site-label {
+            font-weight: bold;
+        }
+
+        .ancien-site-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-ancien-site {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-ancien-site {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+
+ .groupement {
+            margin-bottom: 10px;
+        }
+
+        .groupement-label {
+            font-weight: bold;
+        }
+
+        .groupement-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-groupement {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-groupement {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+.village-voisin {
+            margin-bottom: 10px;
+        }
+
+        .village-voisin-label {
+            font-weight: bold;
+        }
+
+        .village-voisin-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-village-voisin {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-village-voisin {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+
+.village {
+            margin-bottom: 10px;
+        }
+
+        .village-label {
+            font-weight: bold;
+        }
+
+        .village-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-village {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-village {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }

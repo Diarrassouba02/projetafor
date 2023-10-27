@@ -1,0 +1,196 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+		  <h4 class="page-title">Formulaire</h4>
+		  <ul class="breadcrumbs">
+		  <li class="nav-home">
+		  <a href="#">
+		  <i class="flaticon-home"></i>
+		  </a>
+		  </li>
+		  <li class="separator">
+		  <i class="flaticon-right-arrow"></i>
+		  </li>
+		  <li class="nav-item">
+		  <a href="#">Formulaire</a>
+			</li>
+			<li class="separator">
+			<i class="flaticon-right-arrow"></i>
+			</li>
+			<li class="nav-item">
+			<a href="#">Formulaire classic</a>
+			</li>
+			</ul>
+    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+						  <div class="card-title">Form Elements</div>
+						</div>
+              <div class="card-body">
+
+              <form action="{% url 'formulairemanuscrit' %}" method="POST" enctype="multipart/form-data">
+                             {% csrf_token %}
+              <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                    <label for="pays">Choisissez une région :</label>
+                    <select class="custom-select mb-3" id="pays" name="region">
+                    <option value="abidjan">District autonome d'Abidjan</option>
+                    <option value="tiassa">Agnéby-Tiassa</option>
+                    <option value="bafing">bafing</option>
+                    <option value="bagoue">Bagoué</option>
+                    <option value="belier">Bélier</option>
+                    <option value="bere">Béré</option>
+                    <option value="boukani">Bounkani</option>
+                    <option value="cavally">Cavally</option>
+                    <option value="folon">Folon</option>
+                    <option value="gbeke">Gbêkê</option>
+                    <option value="gbokle">Gbôkle</option>
+                    <option value="gbokle">Gbôkle</option>
+                    <option value="goh">Gôh</option>
+                    <option value="gontougo">Gontougo</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4 mb-3">
+                     <label for="ville">Choisissez un Département :</label>
+                    <select  class="custom-select mb-3" id="departement" name="departement">
+                    </select>
+                  </div>
+
+                  <div class="col-md-4 mb-3">
+                   <label for="quartier">Choisissez une sous préfecture :</label>
+                   <select class="custom-select mb-3" id="quartier" name="sous_prefecture">
+                   </select>
+                  </div>
+
+
+                  <div class="col-md-3 mb-3">
+                   <label for="validationDefaultUsername">nom du village</label>
+                  <div class="input-group">
+                  <div class="input-group-prepend">
+                  </div>
+                   <input type="text" class="speech-input" placeholder="village" name="village" lang="fr">
+
+                     </div>
+                     </div>
+
+
+                  <div class="col-md-3 mb-3">
+                    <label for="validationDefaultUsername">Nom Déclarant</label>
+                   <div class="input-group">
+                        <div class="input-group-prepend">
+                      </div>
+                      <input type="text" class="speech-input" placeholder="nom Déclarant" name="nomdec" lang="fr">
+
+                      </div>
+                      </div>
+
+
+                      <div class="col-md-3 mb-3">
+                      <label for="validationDefaultUsername">Prénom Déclarant</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+
+                          </div>
+                        <input type="text" class="speech-input" placeholder="Prenon Déclarant" name="prenondec" lang="fr">
+
+                       </div>
+                       </div>
+
+
+                      <div class="col-md-3 mb-3">
+                        <label for="validationDefaultUsername">Qualité Déclarant</label>
+                          <div class="input-group">
+                       <div class="input-group-prepend">
+                          </div>
+                           <input type="text" class="speech-input" placeholder="Qualité" name="qlt" lang="fr">
+                         </div>
+                         </div>
+
+
+
+                         <div class="col-md-3 mb-3">
+                           <label for="validationDefaultUsername">Date de naissance déclarant</label>
+                       <div class="input-group">
+                         <div class="input-group-prepend">
+
+                        </div>
+                          <input type="date" class="form-control" id="datedec" required>
+                          </div>
+                        </div>
+
+
+
+                         <div class="col-md-3 mb-3">
+                           <label for="validationDefaultUsername">Lieu de résidence Déclarant</label>
+                       <div class="input-group">
+                         <div class="input-group-prepend">
+
+                        </div>
+                          <input type="text" class="speech-input" placeholder="Lieu" name="lieuna" lang="fr">
+
+                          </div>
+                        </div>
+
+
+
+
+                          <div class="col-md-3 mb-3">
+                           <label for="validationDefaultUsername">Lieu de résidence Déclarant</label>
+                       <div class="input-group">
+                         <div class="input-group-prepend">
+
+                        </div>
+                          <input type="text" class="speech-input" placeholder="Lieu" name="lieuna" lang="fr">
+
+                          </div>
+                        </div>
+
+
+
+                           <div class="col-md-3 mb-3">
+                           <label for="validationDefaultUsername">Lieu de résidence Déclarant</label>
+                       <div class="input-group">
+                         <div class="input-group-prepend">
+
+                        </div>
+                          <input type="text" class="speech-input" placeholder="Lieu" name="lieuna" lang="fr">
+
+                          </div>
+                        </div>
+
+
+
+
+
+
+              </div>   <!-- la premier ligne -->
+
+
+                   <div class="card-action">
+							      <button class="btn btn-success">Enregistré</button>
+							      <button class="btn btn-danger">Cancel</button>
+						      </div>
+
+              </form>
+
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+{% endblock content %}
+

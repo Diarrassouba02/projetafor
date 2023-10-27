@@ -1,0 +1,336 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+
+
+<div class="content">
+     <div class="page-inner">
+          <div class="page-header">
+               <h4 class="page-title">Formulaire</h4>
+               <ul class="breadcrumbs">
+                  	<li class="nav-home">
+		                <a href="#">
+		                    <i class="flaticon-home"></i>
+		                </a>
+		            </li>
+		            <li class="separator">
+		                <i class="flaticon-right-arrow"></i>
+		            </li>
+		            <li class="nav-item">
+		                <a href="#">Formulaire</a>
+			        </li>
+			        <li class="separator">
+			            <i class="flaticon-right-arrow"></i>
+			        </li>
+			        <li class="nav-item">
+			            <a href="#">Formulaire classic</a>
+			        </li>
+               </ul>
+            </div>
+            <div class="row">
+                   <div class="col-md-12">
+                       <div class="card">
+                            <div class="card-header">
+						        <div class="card-title">Form Elements</div>
+						    </div>
+                            <div class="card-body">
+                                <form action="{% url 'formulairemanuscrit' %}" method="POST" enctype="multipart/form-data">
+                                                       {% csrf_token %}
+                                     <div class="form-row">
+                                         <div class="col-md-4 mb-3">
+                                             <label for="pays">Choisissez une région :</label>
+                                             <select class="custom-select mb-3" id="pays" name="region">
+                                                    <option value="abidjan">District autonome d'Abidjan</option>
+                                                    <option value="tiassa">Agnéby-Tiassa</option>
+                                                    <option value="bafing">bafing</option>
+                                                    <option value="bagoue">Bagoué</option>
+                                                    <option value="belier">Bélier</option>
+                                                    <option value="bere">Béré</option>
+                                                    <option value="boukani">Bounkani</option>
+                                                    <option value="cavally">Cavally</option>
+                                                    <option value="folon">Folon</option>
+                                                    <option value="gbeke">Gbêkê</option>
+                                                    <option value="gbokle">Gbôkle</option>
+                                                    <option value="gbokle">Gbôkle</option>
+                                                    <option value="goh">Gôh</option>
+                                                    <option value="gontougo">Gontougo</option>
+                                                </select>
+										    </div>
+										    <div class="col-md-4 mb-3">
+                                                <label for="ville">Choisissez un Département :</label>
+                                                <select  class="custom-select mb-3" id="departement" name="departement">
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="quartier">Choisissez une sous préfecture :</label>
+                                                <select class="custom-select mb-3" id="quartier" name="sous_prefecture">
+                                                </select>
+                                            </div>
+                                     </div>
+                                     <div class="form-row">
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationDefaultUsername">Nom de l'enqueteur</label>
+                                                <div class="input-group">
+                                                    <input id="nomenq" type="text" class="form-control  speech-input" name="nonenq">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationDefaultUsername">Prénom de l'enqueteur</label>
+                                                <div class="input-group">
+                                                    <input id="name1" type="text" class="form-control speech-input" name="prenomenq">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationDefaultUsername">nom du village</label>
+                                                <div class="input-group">
+                                                     <input id="name1" type="text" class="form-control speech-input" name="village">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationDefaultUsername">Signification</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="signification" class="form-control speech-input" id="signification" placeholder="" required>
+                                                </div>
+                                            </div>
+                                     </div>
+                                     <div class="form-row">
+                                          <div class="col-md-3 mb-3">
+                                               <label for="validationDefaultUsername">Nom Déclarant</label>
+                                               <div class="input-group">
+                                                   <input name="nomdec" type="text" class="form-control speech-input" id="nomdec" placeholder="" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationDefaultUsername">Prénom Déclarant</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="prenondec" class="form-control speech-input" id="prenomdec" placeholder="" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationDefaultUsername">Qualité Déclarant</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="qualitedec" class="form-control speech-input" id="nondec" placeholder="" required>
+                                                 </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="validationDefaultUsername">Date de naissance déclarant</label>
+                                                <div class="input-group">
+                                                    <input type="date" name="date" class="form-control" id="datedec" required>
+                                                </div>
+                                            </div>
+                                     </div>
+                                     <div class="form-row">
+                                        <div class="col-md-3 mb-3">
+                                                <label for="validationDefaultUsername">Lieu de naissance Déclarant</label>
+                                            <div class="input-group">
+                                                <input type="text" name="lieundec" class="form-control speech-input" id="lieundec" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="validationDefaultUsername">Lieu de résidence Déclarant</label>
+                                            <div class="input-group">
+                                                <input type="text" name="lieudec" class="form-control speech-input" id="lieudec" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="validationDefaultUsername">Non fondateur</label>
+                                            <div class="input-group">
+                                                <input type="text" name="nomf" class="form-control speech-input" id="nomf" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="validationDefaultUsername">Prénom fondateur</label>
+                                            <div class="input-group">
+                                                <input type="text" name="prenomf" class="form-control speech-input" id="prenomf" required>
+                                            </div>
+                                        </div>
+                                     </div>
+                                     <div class="form-row">
+                                          <div class="col-md-3 mb-3">
+                                              <label for="validationDefaultUsername">Activitées fondateur</label>
+                                              <div class="input-group">
+                                                  <input type="text" name="activitef" class="form-control speech-input" id="activitef" required>
+                                              </div>
+                                          </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="validationDefaultUsername">Lieu d'inhumation</label>
+                                            <div class="input-group">
+                                                <input type="text" name="lieuinf" class="form-control speech-input" id="lieuinf" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="validationDefaultUsername">Origine fondateur</label>
+                                            <div class="input-group">
+                                                <input type="text" name="originef" class="form-control speech-input" id="originef" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="ville">Personnes Trouvée sur les Lieux:</label>
+                                            <select  class="custom-select mb-3" id="departement" name="departement">
+                                                <option value="bafing">Village</option>
+							                    <option value="bafing">Groupement De Personne</option>
+							                    <option value="bafing">Aucune</option>
+                                             </select>
+                                        </div>
+                                     </div>
+                                     <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="ville">A t'il passé des accords:</label>
+                                                <select  class="custom-select mb-3" id="accord" name="accord">
+                                                    <option value="bafing">oui</option>
+							                        <option value="bafing">non</option>
+                                                </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="validationDefaultUsername">Lien avec personnes trouvées</label>
+                                            <div class="input-group">
+                                                <input type="text" name="personne" class="form-control speech-input" id="personne" required>
+                                             </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="validationDefaultUsername">époque d'installation</label>
+                                            <div class="input-group">
+                                                 <input type="text" name="epoque" class="form-control speech-input" id="epoque" required>
+                                              </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container mt-4">
+                                        <div id="successors">
+                                          <!-- Les champs de saisie des successeurs seront ajoutés ici -->
+                                        </div>
+                                        <div class="form-row mb-3">
+                                            <button type="button" id="add-successor" class="btn btn-success">+</button>
+                                        </div>
+                                     </div>
+                                    <div class="container mt-4">
+                                        <div id="lines">
+                                        <!-- Les champs de saisie des lignées seront ajoutés ici -->
+                                        </div>
+                                        <div class="form-row mb-3">
+                                            <button type="button" id="add-line" class="btn btn-success">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="validationDefaultUsername">période officialissation</label>
+                                            <div class="input-group">
+                                                <input type="text" name="dateoff" class="form-control speech-input" id="dateof" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="validationDefaultUsername">Nom de l'auritée d'officialissation</label>
+                                            <div class="input-group">
+                                                <input type="text" name="nomaut" class="form-control speech-input" id="dateof" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="ville">L'acte de création?</label>
+                                            <select  class="custom-select mb-3" id="act" name="act">
+                                                <option value="bafing">oui</option>
+							                    <option value="bafing">non</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                        <div class="container mt-4">
+
+
+                                        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Campements</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Ajout de Bootstrap CSS -->
+
+    <style>
+        .remove-campement {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <form id="campement-form">
+            <div id="campements">
+                <!-- Les champs de saisie des campements seront ajoutés ici -->
+            </div>
+            <div class="form-row mb-3">
+                <button type="button" id="add-campement" class="btn btn-success">+</button>
+                <button type="submit" class="btn btn-primary ml-2">Envoyer</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const campementsContainer = document.getElementById("campements");
+            const addCampementButton = document.getElementById("add-campement");
+            let campementCount = 0;
+
+            function createCampementInputs() {
+                const campementDiv = document.createElement("div");
+                campementDiv.className = "form-row mb-3";
+
+                const campementNameDiv = document.createElement("div");
+                campementNameDiv.className = "col-md-6";
+                const campementNameInput = document.createElement("input");
+                campementNameInput.type = "text";
+                campementNameInput.name = `campementName_${campementCount}`;
+                campementNameInput.placeholder = "Campement";
+                campementNameInput.className = "form-control";
+                campementNameDiv.appendChild(campementNameInput);
+
+                campementDiv.appendChild(campementNameDiv);
+
+                const removeButtonDiv = document.createElement("div");
+                removeButtonDiv.className = "col-md-12";
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "btn btn-danger remove-campement";
+                removeButtonDiv.appendChild(removeButton);
+                campementDiv.appendChild(removeButtonDiv);
+
+                campementsContainer.appendChild(campementDiv);
+
+                removeButton.addEventListener("click", function() {
+                    campementsContainer.removeChild(campementDiv);
+                    campementCount--;
+                });
+
+                campementCount++;
+            }
+
+            createCampementInputs();
+
+            addCampementButton.addEventListener("click", createCampementInputs);
+        });
+    </script>
+</body>
+</html>
+
+
+                  </div>
+
+
+								</form>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+          </div>
+     </div>
+</div>
+{% endblock content %}

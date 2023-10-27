@@ -1,0 +1,331 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+		  <h4 class="page-title">Forms</h4>
+		  <ul class="breadcrumbs">
+		  <li class="nav-home">
+		  <a href="#">
+		  <i class="flaticon-home"></i>
+		  </a>
+		  </li>
+		  <li class="separator">
+		  <i class="flaticon-right-arrow"></i>
+		  </li>
+		  <li class="nav-item">
+		  <a href="#">Forms</a>
+			</li>
+			<li class="separator">
+			<i class="flaticon-right-arrow"></i>
+			</li>
+			<li class="nav-item">
+			<a href="#">Basic Form</a>
+			</li>
+			</ul>
+    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+						  <div class="card-title">Form Elements</div>
+						</div>
+              <div class="card-body">
+
+              <form action="{% url 'formulairemanuscrit' %}" method="POST" enctype="multipart/form-data">
+                             {% csrf_token %}
+              <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                    <label for="pays">Choisissez une région :</label>
+                    <select class="custom-select mb-3" id="pays" name="region">
+                    <option value="abidjan">District autonome d'Abidjan</option>
+                    <option value="tiassa">Agnéby-Tiassa</option>
+                    <option value="bafing">bafing</option>
+                    <option value="bagoue">Bagoué</option>
+                    <option value="belier">Bélier</option>
+                    <option value="bere">Béré</option>
+                    <option value="boukani">Bounkani</option>
+                    <option value="cavally">Cavally</option>
+                    <option value="folon">Folon</option>
+                    <option value="gbeke">Gbêkê</option>
+                    <option value="gbokle">Gbôkle</option>
+                    <option value="gbokle">Gbôkle</option>
+                    <option value="goh">Gôh</option>
+                    <option value="gontougo">Gontougo</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4 mb-3">
+                     <label for="ville">Choisissez un Département :</label>
+                    <select  class="custom-select mb-3" id="departement" name="departement">
+                    </select>
+                  </div>
+
+                  <div class="col-md-4 mb-3">
+                   <label for="quartier">Choisissez une sous préfecture :</label>
+                   <select class="custom-select mb-3" id="quartier" name="sous_prefecture">
+                   </select>
+                  </div>
+
+
+                  <div class="col-md-3 mb-3">
+                   <label for="validationDefaultUsername">nom du village</label>
+                  <div class="input-group">
+                  <div class="input-group-prepend">
+                  </div>
+                   <input type="text" name="nom_village" class="form-control" id="village" placeholder="Nom Village" required>
+                     </div>
+                     </div>
+
+
+                  <div class="col-md-3 mb-3">
+                    <label for="validationDefaultUsername">Nom de l'Enqueteur</label>
+                   <div class="input-group">
+                        <div class="input-group-prepend">
+                      </div>
+                      <input name="nomequ" type="text" class="form-control" id="nomequ" placeholder="Nom Enqueteur" required>
+                      </div>
+                      </div>
+
+
+                      <div class="col-md-4 mb-3">
+                      <label for="validationDefaultUsername">Prénom Enqueteur</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+
+                          </div>
+                        <input type="text" class="form-control" id="prenonenqu" placeholder="Prénon Enqueteur" required>
+                       </div>
+                       </div>
+
+
+                      <div class="col-md-3 mb-3">
+                        <label for="validationDefaultUsername">Nom Déclarant</label>
+                          <div class="input-group">
+                       <div class="input-group-prepend">
+                          </div>
+                           <input type="text" class="form-control" id="nondec" placeholder="Nom Déclarant" required>
+                         </div>
+
+                         </div>
+
+
+
+
+              </div>   <!-- la premier ligne -->
+
+
+                   <div class="card-action">
+							      <button class="btn btn-success">Enregistré</button>
+							      <button class="btn btn-danger">Cancel</button>
+						      </div>
+
+              </form>
+
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+    <script>
+        var paysSelect = document.getElementById("pays");
+        var villeSelect = document.getElementById("departement");
+        var quartierSelect = document.getElementById("quartier");
+
+        var villesParPays = {
+            abidjan: {
+                abidjan: ["Abobo", "Adjame", "Attecoube ","Cocody ","Plateau","Yopougon",
+                          "Koumassi","Marcory","Port-Bouet","Treichville","Bingerville",
+                           "Brofodoumé","Anyama","Songon"],
+            },
+            tiassa: {
+                Agboville: ["Aboude", "Ananguie ", "Agboville","Attobrou","Azaguié",
+                           "Céchi","Grand-Morié","Guessiguié","Loviguié","Oress-Krobou","Rubino"],
+                Sikensi: ["Gomon","Sikensi"],
+                Taabo : ["Taabo", "Pacobo"],
+                Tiassalé:["Gbolouville","Morokro","N’Douci","Tiassalé"],
+                Grand_Lahou :["Ahouanou","Bacanda","Ebounou ","Grand-Lahou ","Toukouzou"],
+                Jacqueville:["Attoutou ","Jacqueville"]
+            },
+            bafing: {
+                Koro : ["Koro", "Booko", "Borotou","Mahandougou","Niokosso "],
+                Ouaninou: ["Gbelo", "Gouekan", "Ouaninou","Koonan ","Saboudougou","Santa"],
+                Touba: ["Dioman", "Foungbesso","Guintéguéla", "Touba"],
+                Kounahiri :["Kongasso","Kounahiri"],
+                Mankono:["Bouandougou","Mankono","Marandalah","Sarhala","Tiéningboué"]
+            },
+
+
+           bagoue:{
+                Boundiali: ["Baya", "Boundiali", "Ganaoni","Kasséré","Siempurgo"],
+                Kouto: ["Blességué", "Gbon", "Kolia","Kouto","Sianhala"],
+                Tengréla: ["Débété", "Kanakono","Papara", "Tengréla "],
+                Bengué :["Bougou","Katiala","Katogo","M'Bengué" ],
+                Sinématiali :["Bouakaha","Kagbolodougou","Sediego","Sinématiali"]
+            },
+
+
+            belier:{
+                   Didiévi:["Bollo","Didiévi","Molonou-Blé","Raviart","Tié-N'Diékro"],
+                   Djékanou:["Bonikro","","Djékanou"],
+                   Tiébissou:["Yakpabo-Sakassou","Tiébissou","Molonou","Tiébissou","Yakpabo-Sakassou"],
+                   Toumodi:["Angoda","Kokoumbo","Kpouébo","Toumodi"],
+                    Prikro:["Anianou","Famienkro ","Koffi-Amonkro","Nafana","Prikro "]
+            },
+
+
+
+             bere:{
+                Dianra: ["Dianra", "Dianra-Village"]
+                  },
+
+
+
+
+           boukani:{
+                Bouna: ["Bouka ", "Bouna", "Ondefidouo","Youndouo "],
+                Doropo: ["Danoa", "Doropo", "Kalamon","Niamoue"],
+                Nassian: ["Bogofa", "Kakpin" ,"Kotouba ","Nassian", "Sominassé"],
+                Téhini:["Gogo","Téhini","Tougbo" ],
+                Bondoukou:["Appimandou","Pinda-Boroko","Bondo","Bondoukou","Gouméré "
+                           ,"Laoud-Iba","Sapli-Sépingo","Sorobango","Tabagne","Tagadi","Taoudi","Yezimala"],
+                Koun_Fao :["Boahia","Kokomian","Kouassi-Dattékro","Koun-Fao ","Tankéssé ","Tienkoikro"],
+                Sandégué:["Bandakagni-Tomora","Dimandougou","Sandégué","Yorobodi"]
+            },
+
+
+
+
+
+           cavally:{
+                Bloléquin: ["Bloléquin", "Diboké", "Doké","Tinhou","Zéaglo"],
+                Guiglo: ["Bedy-Goazon ", "Guiglo", "Kaade","Nizahon"],
+                Taï: ["Taï", "Zagne"],
+                Toulépleu:["Bakoubly","Meo","Nezobly","Péhé","Tiobly","Toulépleu"],
+                Kouibly:["Kouibly","Nidrou","Ouyably-Gnondrou","Totrodrou"],
+
+            },
+
+
+        folon:{
+                Kaniasso:["Goulia", "Kaniasso", "Mahandiana-Sokourani"],
+                Minignan:["Kimbirila-Nord", "Minignan", "Sokoro","Tienko"],
+                Madinani:["Fengolo","Madinani ","N'Goloblasso"],
+                Odienné:["Bako","Bougousso ","Dioulatièdougou","Odienné","Tiémé"],
+                Samatiguila:["Kimbirila-Sud","Samatiguila"],
+                Séguélon:["Séguélon","Gbongaha"]
+
+
+            },
+
+        Séguélon:{
+                Kaniasso:["Goulia", "Kaniasso", "Mahandiana-Sokourani"],
+                Minignan:["Kimbirila-Nord", "Minignan", "Sokoro","Tienko"],
+                Madinani:["Fengolo","Madinani ","N'Goloblasso"],
+                Odienné:["Bako","Bougousso ","Dioulatièdougou","Odienné","Tiémé"],
+                Samatiguila:["Kimbirila-Sud","Samatiguila"],
+
+
+
+            },
+
+        gbeke:{
+                Béoumi:["Ando-Kékrénou","Béoumi ", "Bodokro", "Kondrobo","Lolobo","Marabadiassa","N'Guessankro"],
+                Botro:["Botro", "Diabo", "Krofoinsou","Languibonou"],
+                Bouaké:["Bouaké-Ville","Bouaké-SP","Bounda","Brobo","Djébonoua","Mamini"],
+                Sakassou:["Ayaou-Sran","Dibri-Assirikro","Sakassou","Toumodi-Sakassou"],
+
+
+             },
+
+
+
+        gbokle:{
+                Fresco:["Dahiri","Fresco", "Gbagbam", "Kondrobo","Lolobo","Marabadiassa","N'Guessankro"],
+                Sassandra:["Dakpadou","Grihiri","Lobakuya", "Medon", "Sago","Sassandra"],
+                Méagui:["Gnamangui","Méagui","Oupoyo"],
+                Soubré:["Grand-Zattry ","Liliyo","Okrouyo","Soubré"],
+
+             },
+
+
+
+
+        goh:{
+                Gagnoa:["Bayota","Dahiepa-Kehi", "Dignago", "Dougroupalegnaoa","Doukouyo","Gagnoa",
+                "Galebre-Galébouo","Gnagbodougnoa","Guibéroua","Ouragahio","Sérihio","Yopohue"],
+                Oumé:["Diégonéfla","Guépahouo ","Oumé", "Tonla"]
+
+
+             },
+
+
+
+
+        gontougo:{
+                Bondoukou:["Appimandou","Pinda-Boroko", "Bondo", "Bondoukou","Gouméré"
+                ,"Laoud-Iba ","Sapli-Sépingo","Sorobango","Tabagne","Tagadi","Taoudi ","Yezimala"],
+                Koun_Fao :["Boahia","Kokomian","Kouassi-Dattékro", "Koun-Fao", "Tankéssé","Tienkoikro"],
+                Sandégué:["Bandakagni-Tomora","Dimandougou","Sandégué","Yorobodi"],
+                Tanda:["Amanvi","Diamba","Tanda","Tchedio"],
+                Transua:["Assuéfry","Kouassi-Niaguini","Transua"]
+
+             },
+
+
+
+
+        };
+
+        function mettreAJourVilles() {
+            var paysSelectionne = paysSelect.value;
+
+            villeSelect.innerHTML = "<option value=''>Sélectionnez un Département</option>";
+            quartierSelect.innerHTML = "<option value=''>Sélectionnez une sous préfecture</option>";
+
+            if (paysSelectionne in villesParPays) {
+                for (var ville in villesParPays[paysSelectionne]) {
+                    var optionVille = document.createElement("option");
+                    optionVille.value = ville;
+                    optionVille.text = ville.charAt(0).toUpperCase() + ville.slice(1);
+                    villeSelect.appendChild(optionVille);
+                }
+            }
+        }
+
+        function mettreAJourQuartiers() {
+            var paysSelectionne = paysSelect.value;
+            var villeSelectionnee = villeSelect.value;
+
+            quartierSelect.innerHTML = "<option value=''>Sélectionnez sous préfecture</option>";
+
+            if (paysSelectionne in villesParPays && villeSelectionnee in villesParPays[paysSelectionne]) {
+                for (var i = 0; i < villesParPays[paysSelectionne][villeSelectionnee].length; i++) {
+                    var quartier = villesParPays[paysSelectionne][villeSelectionnee][i];
+                    var optionQuartier = document.createElement("option");
+                    optionQuartier.value = quartier;
+                    optionQuartier.text = quartier;
+                    quartierSelect.appendChild(optionQuartier);
+                }
+            }
+        }
+
+        paysSelect.addEventListener("change", mettreAJourVilles);
+        villeSelect.addEventListener("change", mettreAJourQuartiers);
+
+        mettreAJourVilles();
+        mettreAJourQuartiers();
+    </script>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+.si-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.speech-input {
+    margin: 0;
+}
+
+.si-wrapper button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 18px;
+    width: 18px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: none;
+    font: 0/0 a;
+}
+
+.si-mic,
+.si-mic:before,
+.si-holder {
+    position: absolute;
+    background: #25d366; /* Couleur de fond de WhatsApp */
+}
+
+/* Microphone icon */
+.si-mic {
+    display: block;
+    height: 70%; /* Ajuster la hauteur pour correspondre à l'apparence souhaitée */
+    width: 70%; /* Ajuster la largeur pour correspondre à l'apparence souhaitée */
+    top: 15%; /* Ajuster la position verticale */
+    left: 15%; /* Ajuster la position horizontale */
+    -webkit-border-radius: 99px; /* Coins arrondis */
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+}
+
+.si-mic:before {
+    position: absolute;
+    content: '';
+    width: 100%; /* Ajuster la largeur pour correspondre à l'apparence souhaitée */
+    height: 50%; /* Ajuster la hauteur pour correspondre à l'apparence souhaitée */
+    top: 0; /* Ajuster la position verticale */
+    left: 0; /* Ajuster la position horizontale */
+}
+
+.si-holder {
+    display: block;
+    height: 40%; /* Ajuster la hauteur pour correspondre à l'apparence souhaitée */
+    width: 40%; /* Ajuster la largeur pour correspondre à l'apparence souhaitée */
+    left: 30%; /* Ajuster la position horizontale */
+    top: 30%; /* Ajuster la position verticale */
+}

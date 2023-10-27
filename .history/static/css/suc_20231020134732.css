@@ -1,0 +1,29 @@
+.successor {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .successor-label {
+            flex: 1;
+        }
+
+        .successor-input {
+            flex: 2;
+            margin-right: 10px;
+        }
+
+        .add-successor {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-successor {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }

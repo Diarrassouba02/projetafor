@@ -1,0 +1,66 @@
+a.github-button {
+    display: inline-block;
+    width: 100px;
+}
+
+@media (min-width: 900px) {
+	h1 {
+		font-size: 4.0em;
+		margin: 1.0em 0;
+		max-width: 800px;
+	}
+	h1 iframe {
+		transform: scale(1.5) translate(25%,-14%);
+	}
+}
+
+.tag-name {
+	color: crimson;
+}
+
+.tag-marker {
+	color: #0000f0;
+}
+
+.speech-input {
+	width: 220px;
+	font-size: 2em;
+	padding: 0.4em;
+	box-sizing: border-box;
+}
+
+textarea {
+	height: 160px;
+}
+
+
+
+.successor {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .successor-label {
+            flex: 1;
+        }
+
+        .successor-input {
+            flex: 2;
+            margin-right: 10px;
+        }
+
+        .add-successor {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-successor {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }

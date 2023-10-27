@@ -1,0 +1,255 @@
+.successor {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .successor-label {
+            flex: 1;
+        }
+
+        .successor-input {
+            flex: 2;
+            margin-right: 10px;
+        }
+
+        .add-successor {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-successor {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+
+.lignage {
+            margin-bottom: 10px;
+        }
+
+        .lignage-label {
+            font-weight: bold;
+        }
+
+        .lignage-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-lignage {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-lignage {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+ .campement {
+            margin-bottom: 10px;
+        }
+
+        .campement-label {
+            font-weight: bold;
+        }
+
+        .campement-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-campement {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-campement {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+        .sud {
+            margin-bottom: 10px;
+        }
+
+        .sud-label {
+            font-weight: bold;
+        }
+
+        .sud-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-sud {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-sud {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+
+
+ .nord {
+            margin-bottom: 10px;
+        }
+
+        .nord-label {
+            font-weight: bold;
+        }
+
+        .nord-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-nord {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-nord {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+       .ouest {
+            margin-bottom: 10px;
+        }
+
+        .ouest-label {
+            font-weight: bold;
+        }
+
+        .ouest-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-ouest {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-ouest {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+
+.est {
+            margin-bottom: 10px;
+        }
+
+        .est-label {
+            font-weight: bold;
+        }
+
+        .est-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-est {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-est {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+
+
+ .centre {
+            margin-bottom: 10px;
+        }
+
+        .centre-label {
+            font-weight: bold;
+        }
+
+        .centre-input {
+            display: inline-block; /* Afficher les champs en ligne */
+            margin-right: 10px; /* Ajouter une marge entre les champs */
+        }
+
+        .add-centre {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .remove-centre {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
