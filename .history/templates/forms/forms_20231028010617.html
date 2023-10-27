@@ -152,12 +152,12 @@
                                         </div>
                                      </div>
                                      <div class="form-row">
-                                        <div class="col-md-3 mb-3">
-                                            <label for="validationDefaultUsername">Activitées fondateur</label>
-                                            <div class="input-group">
-                                                <input type="text" name="activitef" class="form-control speech-input" id="activitef" required>
-                                            </div>
-                                        </div>
+                                          <div class="col-md-3 mb-3">
+                                              <label for="validationDefaultUsername">Activitées fondateur</label>
+                                              <div class="input-group">
+                                                  <input type="text" name="activitef" class="form-control speech-input" id="activitef" required>
+                                              </div>
+                                          </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefaultUsername">Lieu d'inhumation</label>
                                             <div class="input-group">
@@ -176,16 +176,16 @@
                                                 <option value="bafing">Village</option>
 							                    <option value="bafing">Groupement De Personne</option>
 							                    <option value="bafing">Aucune</option>
-                                            </select>
+                                             </select>
                                         </div>
                                      </div>
                                      <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                             <label for="ville">A t'il passé des accords:</label>
-                                            <select  class="custom-select mb-3" id="accord" name="accord">
-                                                <option value="bafing">oui</option>
-							                    <option value="bafing">non</option>
-                                            </select>
+                                                <select  class="custom-select mb-3" id="accord" name="accord">
+                                                    <option value="bafing">oui</option>
+							                        <option value="bafing">non</option>
+                                                </select>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationDefaultUsername">Lien avec personnes trouvées</label>
@@ -280,39 +280,42 @@
                                         </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label for="ville">Mise à la disposition?</label>
-                                            <select  multiple class="form-control custom-select mb-3" id="act" name="act">
-                                                 <option value="bafing">héritage</option>
-							                     <option value="bafing">dont</option>
-							                     <option value="bafing">pret</option>
-							                     <option value="bafing">achat</option>
-							                     <option value="bafing">Location</option>
-                                            </select>                                    </div>
-                                        </div>
+                                        <label for="ville">Mise à la disposition?</label>
+                                        <select  multiple class="form-control custom-select mb-3" id="act" name="act">
+                                            <option value="bafing">héritage</option>
+							                <option value="bafing">dont</option>
+							                <option value="bafing">pret</option>
+							                <option value="bafing">achat</option>
+							                <option value="bafing">Location</option>
+                                        </select>
                                     </div>
-                                    <div class="container mt-4">
-                                        <div id="villages">
-                                            <!-- Les champs de saisie des cités des villages regroupés seront ajoutés ici -->
+                                </div>
+                                <div class="container mt-4">
+                                    <div id="villages">
+                                        <!-- Les champs de saisie des cités des villages regroupés seront ajoutés ici -->
                                     </div>
-                                        <div class="form-row mb-3">
-                                            <button type="button" id="add-village" class="btn btn-success">+</button>
-                                        </div>
+                                    <div class="form-row mb-3">
+                                        <button type="button" id="add-village" class="btn btn-success">+</button>
                                     </div>
-                                    <div class="container mt-4">
-                                        <div id="limite_vilage_litige">
-                                            <!-- Les champs de saisie de limites, villages en litige seront ajoutés ici -->
-                                        </div>
-                                        <div class="form-row mb-3">
-                                            <button type="button" id="add-limite_vilage_litige" class="btn btn-success">+</button>
-                                        </div>
+                                </div>
+                                <div class="container mt-4">
+                                    <div id="neighboring-villages">
+                                        <!-- Les champs de saisie pour citer les villages voisins seront ajoutés ici -->
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-12 mb-3">
-                                        <label for="validationDefaultUsername">complément</label>
-                                        <div class="input-group">
-                                            <textarea class="form-control" rows="5" cols="100" id="comment"></textarea>
-                                        </div>
+                                    <div class="form-row mb-3">
+                                        <button type="button" id="add-neighboring-village" class="btn btn-success">+</button>
                                     </div>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                            <label for="validationDefaultUsername">Lieu de résidence Déclarant</label>
+                                            <div class="input-group">
+                                             <textarea class="form-control" rows="5" id="comment"></textarea>
+                                            </div>
+                                        </div>
+
+
+
                             </form>
                         </div>
                     </div>

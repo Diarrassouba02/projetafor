@@ -540,7 +540,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 villageInput.type = "text";
                 villageInput.name = `village_${limite_vilage_litigeCount}`;
                 villageInput.placeholder = "Village voisin";
-                villageInput.className = "form-control speech-input";
+                villageInput.className = "form-control";
                 villageDiv.appendChild(villageInput);
 
                 const limiteDiv = document.createElement("div");
@@ -549,7 +549,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 limiteInput.type = "text";
                 limiteInput.name = `limite_${limite_vilage_litigeCount}`;
                 limiteInput.placeholder = "Limite";
-                limiteInput.className = "form-control speech-input";
+                limiteInput.className = "form-control";
                 limiteDiv.appendChild(limiteInput);
 
                 const zoneLitigeeDiv = document.createElement("div");
@@ -558,7 +558,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 zoneLitigeeInput.type = "text";
                 zoneLitigeeInput.name = `zoneLitigee_${limite_vilage_litigeCount}`;
                 zoneLitigeeInput.placeholder = "Zone litigée";
-                zoneLitigeeInput.className = "form-control speech-input";
+                zoneLitigeeInput.className = "form-control";
                 zoneLitigeeDiv.appendChild(zoneLitigeeInput);
 
                 const removeButtonDiv = document.createElement("div");
@@ -580,7 +580,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 limite_vilage_litigeCount++;
-            setupSpeechInput();
             }
 
             // Appeler la fonction pour afficher par défaut les champs pour une limite, un village en litige

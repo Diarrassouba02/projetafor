@@ -444,7 +444,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 ancientSiteMotifInput.type = "text";
                 ancientSiteMotifInput.id = `ancientSiteMotif_${ancientSiteCount}`;
                 ancientSiteMotifInput.placeholder = "Motif";
-                ancientSiteMotifInput.className = "form-control ";
+                ancientSiteMotifInput.className = "form-control speech-input";
                 ancientSiteMotifDiv.appendChild(ancientSiteMotifInput);
 
                 const removeAncientSiteButtonDiv = document.createElement("div");
@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 villageNameInput.type = "text";
                 villageNameInput.id = `villageName_${villageCount}`;
                 villageNameInput.placeholder = "Citer les Villages Regroupés pour Créer ce Village";
-                villageNameInput.className = "form-control speech-input";
+                villageNameInput.className = "form-control";
                 villageNameDiv.appendChild(villageNameInput);
 
                 const removeVillageButtonDiv = document.createElement("div");
@@ -513,7 +513,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 villageCount++;
-            setupSpeechInput();
             }
 
             // Appeler la fonction pour afficher par défaut les champs pour une cité des villages regroupés
@@ -524,67 +523,46 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-            const limite_vilage_litigeContainer = document.getElementById("limite_vilage_litige");
-            const addLimite_vilage_litigeButton = document.getElementById("add-limite_vilage_litige");
+ document.addEventListener("DOMContentLoaded", function() {
+            const neighboringVillagesContainer = document.getElementById("neighboring-villages");
+            const addNeighboringVillageButton = document.getElementById("add-neighboring-village");
 
-            let limite_vilage_litigeCount = 0;
+            let neighboringVillageCount = 0;
 
-            function createLimite_vilage_litigeInputs() {
-                const limite_vilage_litigeDiv = document.createElement("div");
-                limite_vilage_litigeDiv.className = "form-row mb-3";
+            function createNeighboringVillageInputs() {
+                const neighboringVillageDiv = document.createElement("div");
+                neighboringVillageDiv.className = "form-row mb-3";
 
-                const villageDiv = document.createElement("div");
-                villageDiv.className = "col-md-3";
-                const villageInput = document.createElement("input");
-                villageInput.type = "text";
-                villageInput.name = `village_${limite_vilage_litigeCount}`;
-                villageInput.placeholder = "Village voisin";
-                villageInput.className = "form-control speech-input";
-                villageDiv.appendChild(villageInput);
+                const neighboringVillageNameDiv = document.createElement("div");
+                neighboringVillageNameDiv.className = "col-md-8";
+                const neighboringVillageNameInput = document.createElement("input");
+                neighboringVillageNameInput.type = "text";
+                neighboringVillageNameInput.id = `neighboringVillageName_${neighboringVillageCount}`;
+                neighboringVillageNameInput.placeholder = "Citer les Villages Voisins";
+                neighboringVillageNameInput.className = "form-control";
+                neighboringVillageNameDiv.appendChild(neighboringVillageNameInput);
 
-                const limiteDiv = document.createElement("div");
-                limiteDiv.className = "col-md-3";
-                const limiteInput = document.createElement("input");
-                limiteInput.type = "text";
-                limiteInput.name = `limite_${limite_vilage_litigeCount}`;
-                limiteInput.placeholder = "Limite";
-                limiteInput.className = "form-control speech-input";
-                limiteDiv.appendChild(limiteInput);
+                const removeNeighboringVillageButtonDiv = document.createElement("div");
+                removeNeighboringVillageButtonDiv.className = "col-md-8";
+                const removeNeighboringVillageButton = document.createElement("button");
+                removeNeighboringVillageButton.type = "button";
+                removeNeighboringVillageButton.textContent = "-";
+                removeNeighboringVillageButton.className = "btn btn-danger remove-successor";
+                removeNeighboringVillageButtonDiv.appendChild(removeNeighboringVillageButton);
 
-                const zoneLitigeeDiv = document.createElement("div");
-                zoneLitigeeDiv.className = "col-md-3";
-                const zoneLitigeeInput = document.createElement("input");
-                zoneLitigeeInput.type = "text";
-                zoneLitigeeInput.name = `zoneLitigee_${limite_vilage_litigeCount}`;
-                zoneLitigeeInput.placeholder = "Zone litigée";
-                zoneLitigeeInput.className = "form-control speech-input";
-                zoneLitigeeDiv.appendChild(zoneLitigeeInput);
+                neighboringVillageDiv.appendChild(neighboringVillageNameDiv);
+                neighboringVillageDiv.appendChild(removeNeighboringVillageButtonDiv);
+                neighboringVillagesContainer.appendChild(neighboringVillageDiv);
 
-                const removeButtonDiv = document.createElement("div");
-                removeButtonDiv.className = "col-md-3";
-                const removeButton = document.createElement("button");
-                removeButton.type = "button";
-                removeButton.textContent = "-";
-                removeButton.className = "btn btn-danger remove-successor";
-                removeButtonDiv.appendChild(removeButton);
-
-                limite_vilage_litigeDiv.appendChild(villageDiv);
-                limite_vilage_litigeDiv.appendChild(limiteDiv);
-                limite_vilage_litigeDiv.appendChild(zoneLitigeeDiv);
-                limite_vilage_litigeDiv.appendChild(removeButtonDiv);
-                limite_vilage_litigeContainer.appendChild(limite_vilage_litigeDiv);
-
-                removeButton.addEventListener("click", function() {
-                    limite_vilage_litigeContainer.removeChild(limite_vilage_litigeDiv);
+                removeNeighboringVillageButton.addEventListener("click", function() {
+                    neighboringVillagesContainer.removeChild(neighboringVillageDiv);
                 });
 
-                limite_vilage_litigeCount++;
-            setupSpeechInput();
+                neighboringVillageCount++;
             }
 
-            // Appeler la fonction pour afficher par défaut les champs pour une limite, un village en litige
-            createLimite_vilage_litigeInputs();
+            // Appeler la fonction pour afficher par défaut les champs pour citer les villages voisins
+            createNeighboringVillageInputs();
 
-            addLimite_vilage_litigeButton.addEventListener("click", createLimite_vilage_litigeInputs);
+            addNeighboringVillageButton.addEventListener("click", createNeighboringVillageInputs);
         });

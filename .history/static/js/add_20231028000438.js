@@ -417,6 +417,63 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+ document.addEventListener("DOMContentLoaded", function() {
+            const ancientSitesContainer = document.getElementById("ancient-sites");
+            const addAncientSiteButton = document.getElementById("add-ancient-site");
+
+            let ancientSiteCount = 0;
+
+            function createAncientSiteInputs() {
+                const ancientSiteDiv = document.createElement("div");
+                ancientSiteDiv.className = "form-row mb-3";
+
+                const ancientSiteNameDiv = document.createElement("div");
+                ancientSiteNameDiv.className = "col-md-3";
+                const ancientSiteNameInput = document.createElement("input");
+                ancientSiteNameInput.type = "text";
+                ancientSiteNameInput.id = `ancientSiteName_${ancientSiteCount}`;
+                ancientSiteNameInput.placeholder = "Ancient Site";
+                ancientSiteNameInput.className = "form-control";
+                ancientSiteNameDiv.appendChild(ancientSiteNameInput);
+
+                const ancientSiteMotifDiv = document.createElement("div");
+                ancientSiteMotifDiv.className = "col-md-3";
+                const ancientSiteMotifInput = document.createElement("input");
+                ancientSiteMotifInput.type = "text";
+                ancientSiteMotifInput.id = `ancientSiteMotif_${ancientSiteCount}`;
+                ancientSiteMotifInput.placeholder = "Motif";
+                ancientSiteMotifInput.className = "form-control";
+                ancientSiteMotifDiv.appendChild(ancientSiteMotifInput);
+
+                const removeAncientSiteButtonDiv = document.createElement("div");
+                removeAncientSiteButtonDiv.className = "col-md-3";
+                const removeAncientSiteButton = document.createElement("button");
+                removeAncientSiteButton.type = "button";
+                removeAncientSiteButton.textContent = "-";
+                removeAncientSiteButton.className = "btn btn-danger remove-successor";
+                removeAncientSiteButtonDiv.appendChild(removeAncientSiteButton);
+
+                ancientSiteDiv.appendChild(ancientSiteNameDiv);
+                ancientSiteDiv.appendChild(ancientSiteMotifDiv);
+                ancientSiteDiv.appendChild(removeAncientSiteButtonDiv);
+                ancientSitesContainer.appendChild(ancientSiteDiv);
+
+                removeAncientSiteButton.addEventListener("click", function() {
+                    ancientSitesContainer.removeChild(ancientSiteDiv);
+                });
+
+                ancientSiteCount++;
+              setupSpeechInput();
+            }
+
+            // Appeler la fonction pour afficher par défaut les champs pour un ancien site
+            createAncientSiteInputs();
+
+            addAncientSiteButton.addEventListener("click", createAncientSiteInputs);
+        });
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -444,7 +501,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 ancientSiteMotifInput.type = "text";
                 ancientSiteMotifInput.id = `ancientSiteMotif_${ancientSiteCount}`;
                 ancientSiteMotifInput.placeholder = "Motif";
-                ancientSiteMotifInput.className = "form-control ";
+                ancientSiteMotifInput.className = "form-control speech-input";
                 ancientSiteMotifDiv.appendChild(ancientSiteMotifInput);
 
                 const removeAncientSiteButtonDiv = document.createElement("div");
@@ -477,114 +534,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
- document.addEventListener("DOMContentLoaded", function() {
-            const villagesContainer = document.getElementById("villages");
-            const addVillageButton = document.getElementById("add-village");
-
-            let villageCount = 0;
-
-            function createVillageInputs() {
-                const villageDiv = document.createElement("div");
-                villageDiv.className = "form-row mb-3";
-
-                const villageNameDiv = document.createElement("div");
-                villageNameDiv.className = "col-md-9";
-                const villageNameInput = document.createElement("input");
-                villageNameInput.type = "text";
-                villageNameInput.id = `villageName_${villageCount}`;
-                villageNameInput.placeholder = "Citer les Villages Regroupés pour Créer ce Village";
-                villageNameInput.className = "form-control speech-input";
-                villageNameDiv.appendChild(villageNameInput);
-
-                const removeVillageButtonDiv = document.createElement("div");
-                removeVillageButtonDiv.className = "col-md-19";
-                const removeVillageButton = document.createElement("button");
-                removeVillageButton.type = "button";
-                removeVillageButton.textContent = "-";
-                removeVillageButton.className = "btn btn-danger remove-successor";
-                removeVillageButtonDiv.appendChild(removeVillageButton);
-
-                villageDiv.appendChild(villageNameDiv);
-                villageDiv.appendChild(removeVillageButtonDiv);
-                villagesContainer.appendChild(villageDiv);
-
-                removeVillageButton.addEventListener("click", function() {
-                    villagesContainer.removeChild(villageDiv);
-                });
-
-                villageCount++;
-            setupSpeechInput();
-            }
-
-            // Appeler la fonction pour afficher par défaut les champs pour une cité des villages regroupés
-            createVillageInputs();
-
-            addVillageButton.addEventListener("click", createVillageInputs);
-        });
 
 
-
-document.addEventListener("DOMContentLoaded", function() {
-            const limite_vilage_litigeContainer = document.getElementById("limite_vilage_litige");
-            const addLimite_vilage_litigeButton = document.getElementById("add-limite_vilage_litige");
-
-            let limite_vilage_litigeCount = 0;
-
-            function createLimite_vilage_litigeInputs() {
-                const limite_vilage_litigeDiv = document.createElement("div");
-                limite_vilage_litigeDiv.className = "form-row mb-3";
-
-                const villageDiv = document.createElement("div");
-                villageDiv.className = "col-md-3";
-                const villageInput = document.createElement("input");
-                villageInput.type = "text";
-                villageInput.name = `village_${limite_vilage_litigeCount}`;
-                villageInput.placeholder = "Village voisin";
-                villageInput.className = "form-control speech-input";
-                villageDiv.appendChild(villageInput);
-
-                const limiteDiv = document.createElement("div");
-                limiteDiv.className = "col-md-3";
-                const limiteInput = document.createElement("input");
-                limiteInput.type = "text";
-                limiteInput.name = `limite_${limite_vilage_litigeCount}`;
-                limiteInput.placeholder = "Limite";
-                limiteInput.className = "form-control speech-input";
-                limiteDiv.appendChild(limiteInput);
-
-                const zoneLitigeeDiv = document.createElement("div");
-                zoneLitigeeDiv.className = "col-md-3";
-                const zoneLitigeeInput = document.createElement("input");
-                zoneLitigeeInput.type = "text";
-                zoneLitigeeInput.name = `zoneLitigee_${limite_vilage_litigeCount}`;
-                zoneLitigeeInput.placeholder = "Zone litigée";
-                zoneLitigeeInput.className = "form-control speech-input";
-                zoneLitigeeDiv.appendChild(zoneLitigeeInput);
-
-                const removeButtonDiv = document.createElement("div");
-                removeButtonDiv.className = "col-md-3";
-                const removeButton = document.createElement("button");
-                removeButton.type = "button";
-                removeButton.textContent = "-";
-                removeButton.className = "btn btn-danger remove-successor";
-                removeButtonDiv.appendChild(removeButton);
-
-                limite_vilage_litigeDiv.appendChild(villageDiv);
-                limite_vilage_litigeDiv.appendChild(limiteDiv);
-                limite_vilage_litigeDiv.appendChild(zoneLitigeeDiv);
-                limite_vilage_litigeDiv.appendChild(removeButtonDiv);
-                limite_vilage_litigeContainer.appendChild(limite_vilage_litigeDiv);
-
-                removeButton.addEventListener("click", function() {
-                    limite_vilage_litigeContainer.removeChild(limite_vilage_litigeDiv);
-                });
-
-                limite_vilage_litigeCount++;
-            setupSpeechInput();
-            }
-
-            // Appeler la fonction pour afficher par défaut les champs pour une limite, un village en litige
-            createLimite_vilage_litigeInputs();
-
-            addLimite_vilage_litigeButton.addEventListener("click", createLimite_vilage_litigeInputs);
-        });
