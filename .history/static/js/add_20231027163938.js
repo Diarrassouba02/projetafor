@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 campementNameInput.type = "text";
                 campementNameInput.id = `campementName_${campementCount}`;
                 campementNameInput.placeholder = "Campement du village";
-                campementNameInput.className = "form-control speech-input";
+                campementNameInput.className = "form-control";
                 campementNameDiv.appendChild(campementNameInput);
 
                 const campementPeupleDiv = document.createElement("div");
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 campementPeupleInput.type = "text";
                 campementPeupleInput.id = `campementPeuple_${campementCount}`;
                 campementPeupleInput.placeholder = "Peuple";
-                campementPeupleInput.className = "form-control speech-input";
+                campementPeupleInput.className = "form-control";
                 campementPeupleDiv.appendChild(campementPeupleInput);
 
                 const campementOrigineDiv = document.createElement("div");
@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 campementOrigineInput.type = "text";
                 campementOrigineInput.id = `campementOrigine_${campementCount}`;
                 campementOrigineInput.placeholder = "Origine";
-                campementOrigineInput.className = "form-control speech-input";
+                campementOrigineInput.className = "form-control";
                 campementOrigineDiv.appendChild(campementOrigineInput);
 
                 const removeCampementButtonDiv = document.createElement("div");
@@ -347,19 +347,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 campementCount++;
-            setupSpeechInput();
             }
 
             // Appeler la fonction pour afficher par défaut les champs pour un campement
             createCampementInputs();
-
 
             addCampementButton.addEventListener("click", createCampementInputs);
         });
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
+ document.addEventListener("DOMContentLoaded", function() {
             const sitesContainer = document.getElementById("sites");
             const addSiteButton = document.getElementById("add-site");
 
@@ -375,7 +373,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 siteNameInput.type = "text";
                 siteNameInput.id = `siteName_${siteCount}`;
                 siteNameInput.placeholder = "Site d'adoration";
-                siteNameInput.className = "form-control speech-input";
+                siteNameInput.className = "form-control";
                 siteNameDiv.appendChild(siteNameInput);
 
                 const localisationDiv = document.createElement("div");
@@ -384,7 +382,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 localisationInput.type = "text";
                 localisationInput.id = `localisation_${siteCount}`;
                 localisationInput.placeholder = "Localisation";
-                localisationInput.className = "form-control speech-input";
+                localisationInput.className = "form-control";
                 localisationDiv.appendChild(localisationInput);
 
                 const removeSiteButtonDiv = document.createElement("div");
@@ -405,131 +403,84 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 siteCount++;
-            setupSpeechInput();
             }
 
             // Appeler la fonction pour afficher par défaut les champs pour un site d'adoration
             createSiteInputs();
-
 
             addSiteButton.addEventListener("click", createSiteInputs);
         });
 
 
 
+
+
+
+
+
+
  document.addEventListener("DOMContentLoaded", function() {
-            const ancientSitesContainer = document.getElementById("ancient-sites");
-            const addAncientSiteButton = document.getElementById("add-ancient-site");
+            const form = document.querySelector("form");
+            const anciensSitesContainer = document.getElementById("anciens-sites");
+            const addAncienSiteButton = document.getElementById("add-ancien-site");
+            const ancienSiteCountInput = document.getElementById("ancien_site_count");
 
-            let ancientSiteCount = 0;
+            let ancienSiteCount = 0;
 
-            function createAncientSiteInputs() {
-                const ancientSiteDiv = document.createElement("div");
-                ancientSiteDiv.className = "form-row mb-3";
+            function createAncienSiteInputs() {
+                const ancienSiteDiv = document.createElement("div");
+                ancienSiteDiv.className = "ancien-site";
 
-                const ancientSiteNameDiv = document.createElement("div");
-                ancientSiteNameDiv.className = "col-md-3";
-                const ancientSiteNameInput = document.createElement("input");
-                ancientSiteNameInput.type = "text";
-                ancientSiteNameInput.id = `ancientSiteName_${ancientSiteCount}`;
-                ancientSiteNameInput.placeholder = "Ancient Site";
-                ancientSiteNameInput.className = "form-control";
-                ancientSiteNameDiv.appendChild(ancientSiteNameInput);
+                const nomLabel = document.createElement("label");
+                nomLabel.className = "ancien-site-label";
+                nomLabel.textContent = "Ancien Site";
 
-                const ancientSiteMotifDiv = document.createElement("div");
-                ancientSiteMotifDiv.className = "col-md-3";
-                const ancientSiteMotifInput = document.createElement("input");
-                ancientSiteMotifInput.type = "text";
-                ancientSiteMotifInput.id = `ancientSiteMotif_${ancientSiteCount}`;
-                ancientSiteMotifInput.placeholder = "Motif";
-                ancientSiteMotifInput.className = "form-control";
-                ancientSiteMotifDiv.appendChild(ancientSiteMotifInput);
+                const nomInput = document.createElement("input");
+                nomInput.type = "text";
+                nomInput.name = `ancien_site_${ancienSiteCount}`;
+                nomInput.className = "ancien-site-input";
 
-                const removeAncientSiteButtonDiv = document.createElement("div");
-                removeAncientSiteButtonDiv.className = "col-md-3";
-                const removeAncientSiteButton = document.createElement("button");
-                removeAncientSiteButton.type = "button";
-                removeAncientSiteButton.textContent = "-";
-                removeAncientSiteButton.className = "btn btn-danger remove-successor";
-                removeAncientSiteButtonDiv.appendChild(removeAncientSiteButton);
+                const motifLabel = document.createElement("label");
+                motifLabel.className = "ancien-site-label";
+                motifLabel.textContent = "Motif";
 
-                ancientSiteDiv.appendChild(ancientSiteNameDiv);
-                ancientSiteDiv.appendChild(ancientSiteMotifDiv);
-                ancientSiteDiv.appendChild(removeAncientSiteButtonDiv);
-                ancientSitesContainer.appendChild(ancientSiteDiv);
+                const motifInput = document.createElement("input");
+                motifInput.type = "text";
+                motifInput.name = `motif_${ancienSiteCount}`;
+                motifInput.className = "ancien-site-input";
 
-                removeAncientSiteButton.addEventListener("click", function() {
-                    ancientSitesContainer.removeChild(ancientSiteDiv);
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "remove-ancien-site";
+
+                ancienSiteDiv.appendChild(nomLabel);
+                ancienSiteDiv.appendChild(nomInput);
+                ancienSiteDiv.appendChild(motifLabel);
+                ancienSiteDiv.appendChild(motifInput);
+                ancienSiteDiv.appendChild(removeButton);
+                anciensSitesContainer.appendChild(ancienSiteDiv);
+
+                removeButton.addEventListener("click", function() {
+                    anciensSitesContainer.removeChild(ancienSiteDiv);
+                    ancienSiteCount--;
+                    updateAncienSiteCount();
                 });
 
-                ancientSiteCount++;
-              setupSpeechInput();
+                ancienSiteCount++;
+                updateAncienSiteCount();
             }
 
-            // Appeler la fonction pour afficher par défaut les champs pour un ancien site
-            createAncientSiteInputs();
-
-            addAncientSiteButton.addEventListener("click", createAncientSiteInputs);
-        });
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-            const ancientSitesContainer = document.getElementById("ancient-sites");
-            const addAncientSiteButton = document.getElementById("add-ancient-site");
-
-            let ancientSiteCount = 0;
-
-            function createAncientSiteInputs() {
-                const ancientSiteDiv = document.createElement("div");
-                ancientSiteDiv.className = "form-row mb-3";
-
-                const ancientSiteNameDiv = document.createElement("div");
-                ancientSiteNameDiv.className = "col-md-3";
-                const ancientSiteNameInput = document.createElement("input");
-                ancientSiteNameInput.type = "text";
-                ancientSiteNameInput.id = `ancientSiteName_${ancientSiteCount}`;
-                ancientSiteNameInput.placeholder = "Ancient Site";
-                ancientSiteNameInput.className = "form-control speech-input";
-                ancientSiteNameDiv.appendChild(ancientSiteNameInput);
-
-                const ancientSiteMotifDiv = document.createElement("div");
-                ancientSiteMotifDiv.className = "col-md-3";
-                const ancientSiteMotifInput = document.createElement("input");
-                ancientSiteMotifInput.type = "text";
-                ancientSiteMotifInput.id = `ancientSiteMotif_${ancientSiteCount}`;
-                ancientSiteMotifInput.placeholder = "Motif";
-                ancientSiteMotifInput.className = "form-control speech-input";
-                ancientSiteMotifDiv.appendChild(ancientSiteMotifInput);
-
-                const removeAncientSiteButtonDiv = document.createElement("div");
-                removeAncientSiteButtonDiv.className = "col-md-3";
-                const removeAncientSiteButton = document.createElement("button");
-                removeAncientSiteButton.type = "button";
-                removeAncientSiteButton.textContent = "-";
-                removeAncientSiteButton.className = "btn btn-danger remove-successor";
-                removeAncientSiteButtonDiv.appendChild(removeAncientSiteButton);
-
-                ancientSiteDiv.appendChild(ancientSiteNameDiv);
-                ancientSiteDiv.appendChild(ancientSiteMotifDiv);
-                ancientSiteDiv.appendChild(removeAncientSiteButtonDiv);
-                ancientSitesContainer.appendChild(ancientSiteDiv);
-
-                removeAncientSiteButton.addEventListener("click", function() {
-                    ancientSitesContainer.removeChild(ancientSiteDiv);
-                });
-
-                ancientSiteCount++;
-            setupSpeechInput();
+            function updateAncienSiteCount() {
+                ancienSiteCountInput.value = ancienSiteCount;
             }
 
-            // Appeler la fonction pour afficher par défaut les champs pour un ancien site
-            createAncientSiteInputs();
+            // Appeler la fonction pour afficher un champ pour un ancien site par défaut
+            createAncienSiteInputs();
 
-            addAncientSiteButton.addEventListener("click", createAncientSiteInputs);
+            addAncienSiteButton.addEventListener("click", createAncienSiteInputs);
         });
+
 
 
 

@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 ancientSiteNameInput.type = "text";
                 ancientSiteNameInput.id = `ancientSiteName_${ancientSiteCount}`;
                 ancientSiteNameInput.placeholder = "Ancient Site";
-                ancientSiteNameInput.className = "form-control speech-input";
+                ancientSiteNameInput.className = "form-control";
                 ancientSiteNameDiv.appendChild(ancientSiteNameInput);
 
                 const ancientSiteMotifDiv = document.createElement("div");
@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 ancientSiteMotifInput.type = "text";
                 ancientSiteMotifInput.id = `ancientSiteMotif_${ancientSiteCount}`;
                 ancientSiteMotifInput.placeholder = "Motif";
-                ancientSiteMotifInput.className = "form-control speech-input";
+                ancientSiteMotifInput.className = "form-control";
                 ancientSiteMotifDiv.appendChild(ancientSiteMotifInput);
 
                 const removeAncientSiteButtonDiv = document.createElement("div");
@@ -522,7 +522,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 ancientSiteCount++;
-            setupSpeechInput();
             }
 
             // Appeler la fonction pour afficher par défaut les champs pour un ancien site

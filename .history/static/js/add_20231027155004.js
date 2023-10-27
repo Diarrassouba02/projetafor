@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 campementNameInput.type = "text";
                 campementNameInput.id = `campementName_${campementCount}`;
                 campementNameInput.placeholder = "Campement du village";
-                campementNameInput.className = "form-control speech-input";
+                campementNameInput.className = "form-control";
                 campementNameDiv.appendChild(campementNameInput);
 
                 const campementPeupleDiv = document.createElement("div");
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 campementPeupleInput.type = "text";
                 campementPeupleInput.id = `campementPeuple_${campementCount}`;
                 campementPeupleInput.placeholder = "Peuple";
-                campementPeupleInput.className = "form-control speech-input";
+                campementPeupleInput.className = "form-control";
                 campementPeupleDiv.appendChild(campementPeupleInput);
 
                 const campementOrigineDiv = document.createElement("div");
@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 campementOrigineInput.type = "text";
                 campementOrigineInput.id = `campementOrigine_${campementCount}`;
                 campementOrigineInput.placeholder = "Origine";
-                campementOrigineInput.className = "form-control speech-input";
+                campementOrigineInput.className = "form-control";
                 campementOrigineDiv.appendChild(campementOrigineInput);
 
                 const removeCampementButtonDiv = document.createElement("div");
@@ -347,189 +347,295 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 campementCount++;
-            setupSpeechInput();
             }
 
             // Appeler la fonction pour afficher par défaut les champs pour un campement
             createCampementInputs();
-
 
             addCampementButton.addEventListener("click", createCampementInputs);
         });
 
 
 
+
+
 document.addEventListener("DOMContentLoaded", function() {
-            const sitesContainer = document.getElementById("sites");
-            const addSiteButton = document.getElementById("add-site");
+            const form = document.querySelector("form");
+            const nordsContainer = document.getElementById("nords");
+            const addNordButton = document.getElementById("add-nord");
+            const nordCountInput = document.getElementById("nord_count");
 
-            let siteCount = 0;
+            let nordCount = 0;
 
-            function createSiteInputs() {
-                const siteDiv = document.createElement("div");
-                siteDiv.className = "form-row mb-3";
+            function createNordInputs() {
+                const nordDiv = document.createElement("div");
+                nordDiv.className = "nord";
 
-                const siteNameDiv = document.createElement("div");
-                siteNameDiv.className = "col-md-3";
-                const siteNameInput = document.createElement("input");
-                siteNameInput.type = "text";
-                siteNameInput.id = `siteName_${siteCount}`;
-                siteNameInput.placeholder = "Site d'adoration";
-                siteNameInput.className = "form-control speech-input";
-                siteNameDiv.appendChild(siteNameInput);
+                const nomLabel = document.createElement("label");
+                nomLabel.className = "nord-label";
+                nomLabel.textContent = "Nord";
 
-                const localisationDiv = document.createElement("div");
-                localisationDiv.className = "col-md-3";
-                const localisationInput = document.createElement("input");
-                localisationInput.type = "text";
-                localisationInput.id = `localisation_${siteCount}`;
-                localisationInput.placeholder = "Localisation";
-                localisationInput.className = "form-control speech-input";
-                localisationDiv.appendChild(localisationInput);
+                const nomInput = document.createElement("input");
+                nomInput.type = "text";
+                nomInput.name = `nord_${nordCount}`;
+                nomInput.className = "nord-input";
 
-                const removeSiteButtonDiv = document.createElement("div");
-                removeSiteButtonDiv.className = "col-md-3";
-                const removeSiteButton = document.createElement("button");
-                removeSiteButton.type = "button";
-                removeSiteButton.textContent = "-";
-                removeSiteButton.className = "btn btn-danger remove-successor";
-                removeSiteButtonDiv.appendChild(removeSiteButton);
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "remove-nord";
 
-                siteDiv.appendChild(siteNameDiv);
-                siteDiv.appendChild(localisationDiv);
-                siteDiv.appendChild(removeSiteButtonDiv);
-                sitesContainer.appendChild(siteDiv);
+                nordDiv.appendChild(nomLabel);
+                nordDiv.appendChild(nomInput);
+                nordDiv.appendChild(removeButton);
+                nordsContainer.appendChild(nordDiv);
 
-                removeSiteButton.addEventListener("click", function() {
-                    sitesContainer.removeChild(siteDiv);
+                removeButton.addEventListener("click", function() {
+                    nordsContainer.removeChild(nordDiv);
+                    nordCount--;
+                    updateNordCount();
                 });
 
-                siteCount++;
-            setupSpeechInput();
+                nordCount++;
+                updateNordCount();
             }
 
-            // Appeler la fonction pour afficher par défaut les champs pour un site d'adoration
-            createSiteInputs();
+            function updateNordCount() {
+                nordCountInput.value = nordCount;
+            }
 
+            // Appeler la fonction pour afficher un champ pour un nord par défaut
+            createNordInputs();
 
-            addSiteButton.addEventListener("click", createSiteInputs);
+            addNordButton.addEventListener("click", createNordInputs);
         });
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            const ouestsContainer = document.getElementById("ouests");
+            const addOuestButton = document.getElementById("add-ouest");
+            const ouestCountInput = document.getElementById("ouest_count");
+
+            let ouestCount = 0;
+
+            function createOuestInputs() {
+                const ouestDiv = document.createElement("div");
+                ouestDiv.className = "ouest";
+
+                const nomLabel = document.createElement("label");
+                nomLabel.className = "ouest-label";
+                nomLabel.textContent = "Ouest";
+
+                const nomInput = document.createElement("input");
+                nomInput.type = "text";
+                nomInput.name = `ouest_${ouestCount}`;
+                nomInput.className = "ouest-input";
+
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "remove-ouest";
+
+                ouestDiv.appendChild(nomLabel);
+                ouestDiv.appendChild(nomInput);
+                ouestDiv.appendChild(removeButton);
+                ouestsContainer.appendChild(ouestDiv);
+
+                removeButton.addEventListener("click", function() {
+                    ouestsContainer.removeChild(ouestDiv);
+                    ouestCount--;
+                    updateOuestCount();
+                });
+
+                ouestCount++;
+                updateOuestCount();
+            }
+
+            function updateOuestCount() {
+                ouestCountInput.value = ouestCount;
+            }
+
+            // Appeler la fonction pour afficher un champ pour un ouest par défaut
+            createOuestInputs();
+
+            addOuestButton.addEventListener("click", createOuestInputs);
+        });
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            const estsContainer = document.getElementById("ests");
+            const addEstButton = document.getElementById("add-est");
+            const estCountInput = document.getElementById("est_count");
+
+            let estCount = 0;
+
+            function createEstInputs() {
+                const estDiv = document.createElement("div");
+                estDiv.className = "est";
+
+                const nomLabel = document.createElement("label");
+                nomLabel.className = "est-label";
+                nomLabel.textContent = "Est";
+
+                const nomInput = document.createElement("input");
+                nomInput.type = "text";
+                nomInput.name = `est_${estCount}`;
+                nomInput.className = "est-input";
+
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "remove-est";
+
+                estDiv.appendChild(nomLabel);
+                estDiv.appendChild(nomInput);
+                estDiv.appendChild(removeButton);
+                estsContainer.appendChild(estDiv);
+
+                removeButton.addEventListener("click", function() {
+                    estsContainer.removeChild(estDiv);
+                    estCount--;
+                    updateEstCount();
+                });
+
+                estCount++;
+                updateEstCount();
+            }
+
+            function updateEstCount() {
+                estCountInput.value = estCount;
+            }
+
+            // Appeler la fonction pour afficher un champ pour un est par défaut
+            createEstInputs();
+
+            addEstButton.addEventListener("click", createEstInputs);
+        });
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            const centresContainer = document.getElementById("centres");
+            const addCentreButton = document.getElementById("add-centre");
+            const centreCountInput = document.getElementById("centre_count");
+
+            let centreCount = 0;
+
+            function createCentreInputs() {
+                const centreDiv = document.createElement("div");
+                centreDiv.className = "centre";
+
+                const nomLabel = document.createElement("label");
+                nomLabel.className = "centre-label";
+                nomLabel.textContent = "Centre";
+
+                const nomInput = document.createElement("input");
+                nomInput.type = "text";
+                nomInput.name = `centre_${centreCount}`;
+                nomInput.className = "centre-input";
+
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "remove-centre";
+
+                centreDiv.appendChild(nomLabel);
+                centreDiv.appendChild(nomInput);
+                centreDiv.appendChild(removeButton);
+                centresContainer.appendChild(centreDiv);
+
+                removeButton.addEventListener("click", function() {
+                    centresContainer.removeChild(centreDiv);
+                    centreCount--;
+                    updateCentreCount();
+                });
+
+                centreCount++;
+                updateCentreCount();
+            }
+
+            function updateCentreCount() {
+                centreCountInput.value = centreCount;
+            }
+
+            // Appeler la fonction pour afficher un champ pour un centre par défaut
+            createCentreInputs();
+
+            addCentreButton.addEventListener("click", createCentreInputs);
+        });
+
+
 
 
 
  document.addEventListener("DOMContentLoaded", function() {
-            const ancientSitesContainer = document.getElementById("ancient-sites");
-            const addAncientSiteButton = document.getElementById("add-ancient-site");
+            const form = document.querySelector("form");
+            const anciensSitesContainer = document.getElementById("anciens-sites");
+            const addAncienSiteButton = document.getElementById("add-ancien-site");
+            const ancienSiteCountInput = document.getElementById("ancien_site_count");
 
-            let ancientSiteCount = 0;
+            let ancienSiteCount = 0;
 
-            function createAncientSiteInputs() {
-                const ancientSiteDiv = document.createElement("div");
-                ancientSiteDiv.className = "form-row mb-3";
+            function createAncienSiteInputs() {
+                const ancienSiteDiv = document.createElement("div");
+                ancienSiteDiv.className = "ancien-site";
 
-                const ancientSiteNameDiv = document.createElement("div");
-                ancientSiteNameDiv.className = "col-md-3";
-                const ancientSiteNameInput = document.createElement("input");
-                ancientSiteNameInput.type = "text";
-                ancientSiteNameInput.id = `ancientSiteName_${ancientSiteCount}`;
-                ancientSiteNameInput.placeholder = "Ancient Site";
-                ancientSiteNameInput.className = "form-control";
-                ancientSiteNameDiv.appendChild(ancientSiteNameInput);
+                const nomLabel = document.createElement("label");
+                nomLabel.className = "ancien-site-label";
+                nomLabel.textContent = "Ancien Site";
 
-                const ancientSiteMotifDiv = document.createElement("div");
-                ancientSiteMotifDiv.className = "col-md-3";
-                const ancientSiteMotifInput = document.createElement("input");
-                ancientSiteMotifInput.type = "text";
-                ancientSiteMotifInput.id = `ancientSiteMotif_${ancientSiteCount}`;
-                ancientSiteMotifInput.placeholder = "Motif";
-                ancientSiteMotifInput.className = "form-control";
-                ancientSiteMotifDiv.appendChild(ancientSiteMotifInput);
+                const nomInput = document.createElement("input");
+                nomInput.type = "text";
+                nomInput.name = `ancien_site_${ancienSiteCount}`;
+                nomInput.className = "ancien-site-input";
 
-                const removeAncientSiteButtonDiv = document.createElement("div");
-                removeAncientSiteButtonDiv.className = "col-md-3";
-                const removeAncientSiteButton = document.createElement("button");
-                removeAncientSiteButton.type = "button";
-                removeAncientSiteButton.textContent = "-";
-                removeAncientSiteButton.className = "btn btn-danger remove-successor";
-                removeAncientSiteButtonDiv.appendChild(removeAncientSiteButton);
+                const motifLabel = document.createElement("label");
+                motifLabel.className = "ancien-site-label";
+                motifLabel.textContent = "Motif";
 
-                ancientSiteDiv.appendChild(ancientSiteNameDiv);
-                ancientSiteDiv.appendChild(ancientSiteMotifDiv);
-                ancientSiteDiv.appendChild(removeAncientSiteButtonDiv);
-                ancientSitesContainer.appendChild(ancientSiteDiv);
+                const motifInput = document.createElement("input");
+                motifInput.type = "text";
+                motifInput.name = `motif_${ancienSiteCount}`;
+                motifInput.className = "ancien-site-input";
 
-                removeAncientSiteButton.addEventListener("click", function() {
-                    ancientSitesContainer.removeChild(ancientSiteDiv);
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "remove-ancien-site";
+
+                ancienSiteDiv.appendChild(nomLabel);
+                ancienSiteDiv.appendChild(nomInput);
+                ancienSiteDiv.appendChild(motifLabel);
+                ancienSiteDiv.appendChild(motifInput);
+                ancienSiteDiv.appendChild(removeButton);
+                anciensSitesContainer.appendChild(ancienSiteDiv);
+
+                removeButton.addEventListener("click", function() {
+                    anciensSitesContainer.removeChild(ancienSiteDiv);
+                    ancienSiteCount--;
+                    updateAncienSiteCount();
                 });
 
-                ancientSiteCount++;
-              setupSpeechInput();
+                ancienSiteCount++;
+                updateAncienSiteCount();
             }
 
-            // Appeler la fonction pour afficher par défaut les champs pour un ancien site
-            createAncientSiteInputs();
-
-            addAncientSiteButton.addEventListener("click", createAncientSiteInputs);
-        });
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-            const ancientSitesContainer = document.getElementById("ancient-sites");
-            const addAncientSiteButton = document.getElementById("add-ancient-site");
-
-            let ancientSiteCount = 0;
-
-            function createAncientSiteInputs() {
-                const ancientSiteDiv = document.createElement("div");
-                ancientSiteDiv.className = "form-row mb-3";
-
-                const ancientSiteNameDiv = document.createElement("div");
-                ancientSiteNameDiv.className = "col-md-3";
-                const ancientSiteNameInput = document.createElement("input");
-                ancientSiteNameInput.type = "text";
-                ancientSiteNameInput.id = `ancientSiteName_${ancientSiteCount}`;
-                ancientSiteNameInput.placeholder = "Ancient Site";
-                ancientSiteNameInput.className = "form-control speech-input";
-                ancientSiteNameDiv.appendChild(ancientSiteNameInput);
-
-                const ancientSiteMotifDiv = document.createElement("div");
-                ancientSiteMotifDiv.className = "col-md-3";
-                const ancientSiteMotifInput = document.createElement("input");
-                ancientSiteMotifInput.type = "text";
-                ancientSiteMotifInput.id = `ancientSiteMotif_${ancientSiteCount}`;
-                ancientSiteMotifInput.placeholder = "Motif";
-                ancientSiteMotifInput.className = "form-control speech-input";
-                ancientSiteMotifDiv.appendChild(ancientSiteMotifInput);
-
-                const removeAncientSiteButtonDiv = document.createElement("div");
-                removeAncientSiteButtonDiv.className = "col-md-3";
-                const removeAncientSiteButton = document.createElement("button");
-                removeAncientSiteButton.type = "button";
-                removeAncientSiteButton.textContent = "-";
-                removeAncientSiteButton.className = "btn btn-danger remove-successor";
-                removeAncientSiteButtonDiv.appendChild(removeAncientSiteButton);
-
-                ancientSiteDiv.appendChild(ancientSiteNameDiv);
-                ancientSiteDiv.appendChild(ancientSiteMotifDiv);
-                ancientSiteDiv.appendChild(removeAncientSiteButtonDiv);
-                ancientSitesContainer.appendChild(ancientSiteDiv);
-
-                removeAncientSiteButton.addEventListener("click", function() {
-                    ancientSitesContainer.removeChild(ancientSiteDiv);
-                });
-
-                ancientSiteCount++;
-            setupSpeechInput();
+            function updateAncienSiteCount() {
+                ancienSiteCountInput.value = ancienSiteCount;
             }
 
-            // Appeler la fonction pour afficher par défaut les champs pour un ancien site
-            createAncientSiteInputs();
+            // Appeler la fonction pour afficher un champ pour un ancien site par défaut
+            createAncienSiteInputs();
 
-            addAncientSiteButton.addEventListener("click", createAncientSiteInputs);
+            addAncienSiteButton.addEventListener("click", createAncienSiteInputs);
         });
+
 
 
 

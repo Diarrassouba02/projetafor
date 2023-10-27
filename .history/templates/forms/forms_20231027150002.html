@@ -237,77 +237,82 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="container mt-4">
-                                        <div id="campements">
-                                            <!-- Les champs de saisie des campements seront ajoutés ici -->
-                                        </div>
-                                        <div class="form-row mb-3">
-                                            <button type="button" id="add-campement" class="btn btn-success">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="container mt-4">
-                                        <div id="sites">
-                                              <!-- Les champs de saisie des sites d'adoration seront ajoutés ici -->
-                                        </div>
-                                        <div class="form-row mb-3">
-                                          <button type="button" id="add-site" class="btn btn-success">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="container mt-4">
-                                        <div id="ancient-sites">
-                                            <!-- Les champs de saisie des anciens sites seront ajoutés ici -->
-                                        </div>
-                                        <div class="form-row mb-3">
-                                            <button type="button" id="add-ancient-site" class="btn btn-success">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                     <div class="col-md-3 mb-3">
-                     <label for="ville">Mise à la disposition?</label>
-                    <select  class="custom-select mb-3" id="act" name="act">
-                      <option value="bafing">héritage</option>
-							        <option value="bafing">dont</option>
-							        <option value="bafing">pret</option>
-							        <option value="bafing">achat</option>
-							        <option value="bafing">Location</option>
-                    </select>
-                  </div>
-                                    </div>
 
 
 
-
-                   <div class="col-md-3 mb-3">
-                     <label for="ville">Chef de terre?</label>
-                    <select  class="custom-select mb-3" id="act" name="act">
-                      <option value="bafing">oui</option>
-							        <option value="bafing">non</option>
-                    </select>
-                  </div>
-
-
-
-
-
-                                     <div class="col-md-3 mb-3">
-                     <label for="ville">Mise à la disposition?</label>
-                    <select  class="custom-select mb-3" id="act" name="act">
-                      <option value="bafing">héritage</option>
-							        <option value="bafing">dont</option>
-							        <option value="bafing">pret</option>
-							        <option value="bafing">achat</option>
-							        <option value="bafing">Location</option>
-                    </select>
-                  </div>
-
-
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <div class="container mt-4">
+        <form id="campement-form">
+            <div id="campements">
+                <!-- Les champs de saisie des campements seront ajoutés ici -->
             </div>
-        </div>
+            <div class="form-row mb-3">
+                <button type="button" id="add-campement" class="btn btn-success">+</button>
+                <button type="submit" class="btn btn-primary ml-2">Envoyer</button>
+            </div>
+        </form>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const campementsContainer = document.getElementById("campements");
+            const addCampementButton = document.getElementById("add-campement");
+
+            let campementCount = 0;
+
+            function createCampementInputs() {
+                const campementDiv = document.createElement("div");
+                campementDiv.className = "form-row mb-3";
+
+                const campementNameDiv = document.createElement("div");
+                campementNameDiv.className = "col-md-6"; // Utilisez une colonne de longueur 6
+                const campementNameInput = document.createElement("input");
+                campementNameInput.type = "text";
+                campementNameInput.name = `campementName_${campementCount}`;
+                campementNameInput.placeholder = "Campement";
+                campementNameInput.className = "form-control";
+                campementNameDiv.appendChild(campementNameInput);
+
+                const removeButtonDiv = document.createElement("div");
+                removeButtonDiv.className = "col-md-6"; // Utilisez une colonne de longueur 6
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "btn btn-danger remove-campement";
+                removeButtonDiv.appendChild(removeButton);
+
+                campementDiv.appendChild(campementNameDiv);
+                campementDiv.appendChild(removeButtonDiv);
+                campementsContainer.appendChild(campementDiv);
+
+                removeButton.addEventListener("click", function() {
+                    campementsContainer.removeChild(campementDiv);
+                });
+
+                campementCount++;
+            }
+
+            // Appeler la fonction pour afficher par défaut les champs pour un campement
+            createCampementInputs();
+
+            addCampementButton.addEventListener("click", createCampementInputs);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+								</form>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+          </div>
+     </div>
 </div>
 {% endblock content %}
