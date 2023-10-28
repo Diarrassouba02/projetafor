@@ -68,10 +68,3 @@ def formulairemanuscrit(request):
     else:
         messages.error(request, 'Le formulaire n\'a pas été soumis avec succès')
         return render(request, 'forms/forms.html')
-
-
-
-
-
-def formulairetranscription(request):
-    return render(request,'forms/transcription/transcription.html')

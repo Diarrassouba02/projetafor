@@ -74,4 +74,4 @@ def formulairemanuscrit(request):
 
 
 def formulairetranscription(request):
-    return render(request,'forms/transcription/transcription.html')
+    return redirect('index')

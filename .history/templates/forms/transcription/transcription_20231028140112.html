@@ -39,7 +39,7 @@
 						</div>
               <div class="card-body">
 
-              <form action="{% url 'formulairetranscription' %}" method="POST" enctype="multipart/form-data">
+              <form action="" method="POST" enctype="multipart/form-data">
                              {% csrf_token %}
 
 
@@ -51,10 +51,7 @@
                                   <button type="button" id="add-successor" class="btn btn-success">+</button>
                               </div>
                            </div>
-                              <div class="card-action">
-							            <button class="btn btn-success">Submit</button>
-							            <button class="btn btn-danger">Cancel</button>
-						            </div>
+
                           </form>
 
 {% endblock content %}
