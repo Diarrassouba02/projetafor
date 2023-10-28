@@ -11,48 +11,21 @@ def index(request):
 # Forms
 def formulairemanuscrit(request):
     if request.method == 'POST':
-        successor_count = int(request.POST.get('successor_count', 0))
-        line_count = int(request.POST.get('line_count', 0))
-        campement_count = int(request.POST.get('campement_count', 0))
+        successorCount = int(request.POST.get('successorCount', 0))
         successors_data = []  # Créez une liste
-        lines_data = []
-        campements_data = []
 
-        for i in range( successor_count):
+        for i in range(successorCount):
             name = request.POST.get(f'name_{i}')
             first_name = request.POST.get(f'first_name_{i}')
-            accession_date = request.POST.get(f'accessiondate_{i}')
+            accession_date = request.POST.get(f'accession_date_{i}')
 
             # Ajoutez les données de chaque successeur à la liste
             successor_data = {
-                'nom': name,
-                'prénom': first_name,
+                'name': name,
+                'first_name': first_name,
                 'accession_date': accession_date
             }
             successors_data.append(successor_data)
-
-        for i in range(line_count):
-            name = request.POST.get(f'lineName_{i}')
-            order = request.POST.get(f'lineOrder_{i}')
-            line_data = {
-                'nom_lignage': name,
-                "ordre": order,
-            }
-            lines_data.append(line_data)
-
-        for i in range(campement_count):
-            name = request.POST.get(f'campementName_{i}')
-            peuple = request.POST.get(f'campementPeuple_{i}')
-            origine = request.POST.get(f'campementOrigine_{i}')
-
-            campement_data = {
-                'nom': name,
-                'peuple': peuple,
-                'origine': origine,
-            }
-            campements_data.append(campement_data)
-
-            print(campement_data)
 
         nom_region = request.POST.get('region')
         nom_departement = request.POST.get('departement')
@@ -76,10 +49,6 @@ def formulairemanuscrit(request):
         accord_passe=request.POST.get('accord')
         lien=request.POST.get('lien')
         epoque_installation=request.POST.get('epoque')
-        dateoff=request.POST.get('dateoff')
-        autoriteoff=request.POST.get('nomaut')
-        acte_creation=request.POST.get('act')
-
         a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
                      sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
                      nom_declarant=nom_declarant, prenon_declarant=prenon_declarant,
@@ -90,12 +59,9 @@ def formulairemanuscrit(request):
                      origine_fondateur=origine_fondateur, activite_fondateur=activite_fondateur,
                      lieu_inhimationf=lieu_inhimationf, succeseur_nom_prenon_date=successors_data,
                      nomenq=nomenq,prenomenq=prenomenq,personne_trouve=personne_trouve,lien=lien,
-                     accord_passe=accord_passe,epoque_installation=epoque_installation,
-                     nomlignage=lines_data,dateoff=dateoff, autoriteoff= autoriteoff,
-                     acte_creation=acte_creation,campement_nom_origine=campements_data)
-
+                     accord_passe=accord_passe,epoque_installation=epoque_installation)
         a.save()
-        print(campements_data)
+        print(successorCount)
 
         messages.success(request, 'Le formulaire a été soumis avec succès')
         return redirect('index')
@@ -110,6 +76,23 @@ def formulairemanuscrit(request):
 
 
 def formulairetranscription(request):
+    if request.method == 'POST':
+        # Récupérez les données du formulaire
+        successor_count = int(request.POST.get('successor_count', 0))
+
+        # Parcourez les données des successeurs
+        for i in range(successor_count):
+            name = request.POST.get(f'name_{i}')
+            first_name = request.POST.get(f'firstName_{i}')
+            accession_date = request.POST.get(f'accessionDate_{i}')
+            print(name)
+            print(accession_date)
+            print(first_name)
 
 
+        # Redirigez l'utilisateur vers une page de confirmation ou une autre page
+
+        return redirect('index')
+
+    # Si la méthode n'est pas POST, affichez le formulaire
     return render(request, 'forms/transcription/transcription.html')

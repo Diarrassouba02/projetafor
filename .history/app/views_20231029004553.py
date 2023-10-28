@@ -13,10 +13,8 @@ def formulairemanuscrit(request):
     if request.method == 'POST':
         successor_count = int(request.POST.get('successor_count', 0))
         line_count = int(request.POST.get('line_count', 0))
-        campement_count = int(request.POST.get('campement_count', 0))
         successors_data = []  # Créez une liste
         lines_data = []
-        campements_data = []
 
         for i in range( successor_count):
             name = request.POST.get(f'name_{i}')
@@ -39,20 +37,6 @@ def formulairemanuscrit(request):
                 "ordre": order,
             }
             lines_data.append(line_data)
-
-        for i in range(campement_count):
-            name = request.POST.get(f'campementName_{i}')
-            peuple = request.POST.get(f'campementPeuple_{i}')
-            origine = request.POST.get(f'campementOrigine_{i}')
-
-            campement_data = {
-                'nom': name,
-                'peuple': peuple,
-                'origine': origine,
-            }
-            campements_data.append(campement_data)
-
-            print(campement_data)
 
         nom_region = request.POST.get('region')
         nom_departement = request.POST.get('departement')
@@ -92,10 +76,10 @@ def formulairemanuscrit(request):
                      nomenq=nomenq,prenomenq=prenomenq,personne_trouve=personne_trouve,lien=lien,
                      accord_passe=accord_passe,epoque_installation=epoque_installation,
                      nomlignage=lines_data,dateoff=dateoff, autoriteoff= autoriteoff,
-                     acte_creation=acte_creation,campement_nom_origine=campements_data)
+                     acte_creation=acte_creation)
 
         a.save()
-        print(campements_data)
+        print(lines_data)
 
         messages.success(request, 'Le formulaire a été soumis avec succès')
         return redirect('index')

@@ -163,206 +163,136 @@ function setupSpeechInput() {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const successorsContainer = document.getElementById("successors");
-    const addSuccessorButton = document.getElementById("add-successor");
-    const successorCountInput = document.getElementById("successor_count");
 
-    let successorCount = 0;
 
-    function createSuccessorInputs() {
-        const successorDiv = document.createElement("div");
-        successorDiv.className = "form-row mb-3";
 
-        const nameDiv = document.createElement("div");
-        nameDiv.className = "col-md-3";
-        const nameInput = document.createElement("input");
-        nameInput.type = "text";
-        nameInput.name = `name_${successorCount}`;
-        nameInput.placeholder = "Nom du successeur";
-        nameInput.className = "form-control speech-input";
-        nameDiv.appendChild(nameInput);
 
-        const firstNameDiv = document.createElement("div");
-        firstNameDiv.className = "col-md-3";
-        const firstNameInput = document.createElement("input");
-        firstNameInput.type = "text";
-        firstNameInput.name = `first_name_${successorCount}`;
-        firstNameInput.placeholder = "Prénom du successeur";
-        firstNameInput.className = "form-control speech-input";
-        firstNameDiv.appendChild(firstNameInput);
 
-        const accessionDateDiv = document.createElement("div");
-        accessionDateDiv.className = "col-md-3";
-        const accessionDateInput = document.createElement("input");
-        accessionDateInput.type = "date";
-        accessionDateInput.name = `accessiondate_${successorCount}`;
-        accessionDateInput.placeholder = "date d'accession";
-        accessionDateInput.className = "form-control";
-        accessionDateDiv.appendChild(accessionDateInput);
+ document.addEventListener("DOMContentLoaded", function() {
+            const linesContainer = document.getElementById("lines");
+            const addLineButton = document.getElementById("add-line");
 
-        const removeButtonDiv = document.createElement("div");
-        removeButtonDiv.className = "col-md-3";
-        const removeButton = document.createElement("button");
-        removeButton.type = "button";
-        removeButton.textContent = "-";
-        removeButton.className = "btn btn-danger remove-successor";
-        removeButtonDiv.appendChild(removeButton);
+            let lineCount = 0;
 
-        successorDiv.appendChild(nameDiv);
-        successorDiv.appendChild(firstNameDiv);
-        successorDiv.appendChild(accessionDateDiv);
-        successorDiv.appendChild(removeButtonDiv);
-        successorsContainer.appendChild(successorDiv);
+            function createLineInputs() {
+                const lineDiv = document.createElement("div");
+                lineDiv.className = "form-row mb-3";
 
-        removeButton.addEventListener("click", function() {
-            successorsContainer.removeChild(successorDiv);
-            successorCount--; // Mettez à jour le compteur lors de la suppression
-            successorCountInput.value = successorCount; // Mettez à jour la valeur du champ caché
+                const nameDiv = document.createElement("div");
+                nameDiv.className = "col-md-4"; // Utilisez une colonne de longueur 4
+                const nameInput = document.createElement("input");
+                nameInput.type = "text";
+                nameInput.name = `lineName_${lineCount}`;
+                nameInput.placeholder = "Nom de la lignée";
+                nameInput.className = "form-control speech-input";
+                nameDiv.appendChild(nameInput);
+
+                const orderDiv = document.createElement("div");
+                orderDiv.className = "col-md-4"; // Utilisez une colonne de longueur 4
+                const orderInput = document.createElement("input");
+                orderInput.type = "number";
+                orderInput.name = `lineOrder_${lineCount}`;
+                orderInput.placeholder = "Ordre d'arrivée";
+                orderInput.className = "form-control";
+                orderDiv.appendChild(orderInput);
+
+                const removeButtonDiv = document.createElement("div");
+                removeButtonDiv.className = "col-md-4"; // Utilisez une colonne de longueur 4
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "btn btn-danger remove-line";
+                removeButtonDiv.appendChild(removeButton);
+
+                lineDiv.appendChild(nameDiv);
+                lineDiv.appendChild(orderDiv);
+                lineDiv.appendChild(removeButtonDiv);
+                linesContainer.appendChild(lineDiv);
+
+                removeButton.addEventListener("click", function() {
+                    linesContainer.removeChild(lineDiv);
+                });
+
+                lineCount++;
+                setupSpeechInput();
+            }
+
+            // Appeler la fonction pour afficher par défaut les champs pour une lignée
+            createLineInputs();
+
+            addLineButton.addEventListener("click", createLineInputs);
         });
 
-        successorCountInput.value = ++successorCount; // Mettez à jour la valeur du champ caché après chaque ajout
-        setupSpeechInput();
 
-
-    }
-
-    // Appeler la fonction pour afficher par défaut les champs pour un successeur
-    createSuccessorInputs();
-
-    addSuccessorButton.addEventListener("click", createSuccessorInputs);
-});
 
 
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    const linesContainer = document.getElementById("lines");
-    const addLineButton = document.getElementById("add-line");
-    const lineCountInput = document.getElementById("line_count");
+            const campementsContainer = document.getElementById("campements");
+            const addCampementButton = document.getElementById("add-campement");
 
-    let lineCount = 0;
+            let campementCount = 0;
 
-    function createLineInputs() {
-        const lineDiv = document.createElement("div");
-        lineDiv.className = "form-row mb-3";
+            function createCampementInputs() {
+                const campementDiv = document.createElement("div");
+                campementDiv.className = "form-row mb-3";
 
-        const nameDiv = document.createElement("div");
-        nameDiv.className = "col-md-4";
-        const nameInput = document.createElement("input");
-        nameInput.type = "text";
-        nameInput.name = `lineName_${lineCount}`;
-        nameInput.placeholder = "Nom de la lignée";
-        nameInput.className = "form-control speech-input";
-        nameDiv.appendChild(nameInput);
+                const campementNameDiv = document.createElement("div");
+                campementNameDiv.className = "col-md-3";
+                const campementNameInput = document.createElement("input");
+                campementNameInput.type = "text";
+                campementNameInput.id = `campementName_${campementCount}`;
+                campementNameInput.placeholder = "Campement du village";
+                campementNameInput.className = "form-control speech-input";
+                campementNameDiv.appendChild(campementNameInput);
 
-        const orderDiv = document.createElement("div");
-        orderDiv.className = "col-md-4";
-        const orderInput = document.createElement("input");
-        orderInput.type = "number";
-        orderInput.name = `lineOrder_${lineCount}`;
-        orderInput.placeholder = "Ordre d'arrivée";
-        orderInput.className = "form-control";
-        orderDiv.appendChild(orderInput);
+                const campementPeupleDiv = document.createElement("div");
+                campementPeupleDiv.className = "col-md-3";
+                const campementPeupleInput = document.createElement("input");
+                campementPeupleInput.type = "text";
+                campementPeupleInput.id = `campementPeuple_${campementCount}`;
+                campementPeupleInput.placeholder = "Peuple";
+                campementPeupleInput.className = "form-control speech-input";
+                campementPeupleDiv.appendChild(campementPeupleInput);
 
-        const removeButtonDiv = document.createElement("div");
-        removeButtonDiv.className = "col-md-4";
-        const removeButton = document.createElement("button");
-        removeButton.type = "button";
-        removeButton.textContent = "-";
-        removeButton.className = "btn btn-danger remove-line";
-        removeButtonDiv.appendChild(removeButton);
+                const campementOrigineDiv = document.createElement("div");
+                campementOrigineDiv.className = "col-md-3";
+                const campementOrigineInput = document.createElement("input");
+                campementOrigineInput.type = "text";
+                campementOrigineInput.id = `campementOrigine_${campementCount}`;
+                campementOrigineInput.placeholder = "Origine";
+                campementOrigineInput.className = "form-control speech-input";
+                campementOrigineDiv.appendChild(campementOrigineInput);
 
-        lineDiv.appendChild(nameDiv);
-        lineDiv.appendChild(orderDiv);
-        lineDiv.appendChild(removeButtonDiv);
-        linesContainer.appendChild(lineDiv);
+                const removeCampementButtonDiv = document.createElement("div");
+                removeCampementButtonDiv.className = "col-md-3";
+                const removeCampementButton = document.createElement("button");
+                removeCampementButton.type = "button";
+                removeCampementButton.textContent = "-";
+                removeCampementButton.className = "btn btn-danger remove-successor";
+                removeCampementButtonDiv.appendChild(removeCampementButton);
 
-        removeButton.addEventListener("click", function() {
-            linesContainer.removeChild(lineDiv);
-            lineCount--; // Mettez à jour le compteur lors de la suppression
-            lineCountInput.value = lineCount; // Mettez à jour la valeur du champ caché
+                campementDiv.appendChild(campementNameDiv);
+                campementDiv.appendChild(campementPeupleDiv);
+                campementDiv.appendChild(campementOrigineDiv);
+                campementDiv.appendChild(removeCampementButtonDiv);
+                campementsContainer.appendChild(campementDiv);
+
+                removeCampementButton.addEventListener("click", function() {
+                    campementsContainer.removeChild(campementDiv);
+                });
+
+                campementCount++;
+            setupSpeechInput();
+            }
+
+            // Appeler la fonction pour afficher par défaut les champs pour un campement
+            createCampementInputs();
+
+
+            addCampementButton.addEventListener("click", createCampementInputs);
         });
-
-        lineCountInput.value = ++lineCount; // Mettez à jour la valeur du champ caché après chaque ajout
-        setupSpeechInput();
-    }
-
-    // Appeler la fonction pour afficher par défaut les champs pour une lignée
-    createLineInputs();
-
-    addLineButton.addEventListener("click", createLineInputs);
-});
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    const campementsContainer = document.getElementById("campements");
-    const addCampementButton = document.getElementById("add-campement");
-    const campementCountInput = document.getElementById("campement_count");
-
-    let campementCount = 0;
-
-    function createCampementInputs() {
-        const campementDiv = document.createElement("div");
-        campementDiv.className = "form-row mb-3";
-
-        const campementNameDiv = document.createElement("div");
-        campementNameDiv.className = "col-md-3";
-        const campementNameInput = document.createElement("input");
-        campementNameInput.type = "text";
-        campementNameInput.name = `campementName_${campementCount}`;
-        campementNameInput.placeholder = "Campement du village";
-        campementNameInput.className = "form-control speech-input";
-        campementNameDiv.appendChild(campementNameInput);
-
-        const campementPeupleDiv = document.createElement("div");
-        campementPeupleDiv.className = "col-md-3";
-        const campementPeupleInput = document.createElement("input");
-        campementPeupleInput.type = "text";
-        campementPeupleInput.name = `campementPeuple_${campementCount}`;
-        campementPeupleInput.placeholder = "Peuple";
-        campementPeupleInput.className = "form-control speech-input";
-        campementPeupleDiv.appendChild(campementPeupleInput);
-
-        const campementOrigineDiv = document.createElement("div");
-        campementOrigineDiv.className = "col-md-3";
-        const campementOrigineInput = document.createElement("input");
-        campementOrigineInput.type = "text";
-        campementOrigineInput.name = `campementOrigine_${campementCount}`;
-        campementOrigineInput.placeholder = "Origine";
-        campementOrigineInput.className = "form-control speech-input";
-        campementOrigineDiv.appendChild(campementOrigineInput);
-
-        const removeCampementButtonDiv = document.createElement("div");
-        removeCampementButtonDiv.className = "col-md-3";
-        const removeCampementButton = document.createElement("button");
-        removeCampementButton.type = "button";
-        removeCampementButton.textContent = "-";
-        removeCampementButton.className = "btn btn-danger remove-campement";
-        removeCampementButtonDiv.appendChild(removeCampementButton);
-
-        campementDiv.appendChild(campementNameDiv);
-        campementDiv.appendChild(campementPeupleDiv);
-        campementDiv.appendChild(campementOrigineDiv);
-        campementDiv.appendChild(removeCampementButtonDiv);
-        campementsContainer.appendChild(campementDiv);
-
-        removeCampementButton.addEventListener("click", function() {
-            campementsContainer.removeChild(campementDiv);
-            campementCount--; // Mettez à jour le compteur lors de la suppression
-            campementCountInput.value = campementCount; // Mettez à jour la valeur du champ caché
-        });
-
-        campementCountInput.value = ++campementCount; // Mettez à jour la valeur du champ caché après chaque ajout
-        setupSpeechInput();
-    }
-
-    // Appeler la fonction pour afficher par défaut les champs pour un campement
-    createCampementInputs();
-
-    addCampementButton.addEventListener("click", createCampementInputs);
-});
-
 
 
 

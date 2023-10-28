@@ -52,8 +52,6 @@ def formulairemanuscrit(request):
             }
             campements_data.append(campement_data)
 
-            print(campement_data)
-
         nom_region = request.POST.get('region')
         nom_departement = request.POST.get('departement')
         sous_prefecture = request.POST.get('sous_prefecture')
@@ -92,7 +90,7 @@ def formulairemanuscrit(request):
                      nomenq=nomenq,prenomenq=prenomenq,personne_trouve=personne_trouve,lien=lien,
                      accord_passe=accord_passe,epoque_installation=epoque_installation,
                      nomlignage=lines_data,dateoff=dateoff, autoriteoff= autoriteoff,
-                     acte_creation=acte_creation,campement_nom_origine=campements_data)
+                     acte_creation=acte_creation)
 
         a.save()
         print(campements_data)

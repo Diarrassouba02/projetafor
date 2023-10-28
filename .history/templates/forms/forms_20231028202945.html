@@ -45,7 +45,7 @@
                                      <div class="form-row">
                                          <div class="col-md-4 mb-3">
                                              <label for="pays">Choisissez une région :</label>
-                                             <select class="custom-select mb-3" id="pays" name="region"  >
+                                             <select class="custom-select mb-3" id="pays" name="region"  required>
                                                     <option value="abidjan">District autonome d'Abidjan</option>
                                                     <option value="tiassa">Agnéby-Tiassa</option>
                                                     <option value="bafing">Bafing</option>
@@ -64,12 +64,12 @@
 										    </div>
 										    <div class="col-md-4 mb-3">
                                                 <label for="ville">Choisissez un Département :</label>
-                                                <select  class="custom-select mb-3" id="departement" name="departement" >
+                                                <select  class="custom-select mb-3" id="departement" name="departement" required>
                                                 </select>
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <label for="quartier">Choisissez une sous préfecture :</label>
-                                                <select class="custom-select mb-3" id="quartier" name="sous_prefecture" >
+                                                <select class="custom-select mb-3" id="quartier" name="sous_prefecture" required>
                                                 </select>
                                             </div>
                                      </div>
@@ -77,25 +77,25 @@
                                             <div class="col-md-3 mb-3">
                                                 <label for="validationDefaultUsername">Nom de l'enqueteur</label>
                                                 <div class="input-group">
-                                                    <input id="nomenq" type="text" class="form-control  speech-input" name="nomenq" >
+                                                    <input id="nomenq" type="text" class="form-control  speech-input" name="nomenq" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label for="validationDefaultUsername">Prénom de l'enqueteur</label>
                                                 <div class="input-group">
-                                                    <input id="name1" type="text" class="form-control speech-input" name="prenomenq" >
+                                                    <input id="name1" type="text" class="form-control speech-input" name="prenomenq" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label for="validationDefaultUsername">nom du village</label>
                                                 <div class="input-group">
-                                                     <input id="name1" type="text" class="form-control speech-input" name="village" >
+                                                     <input id="name1" type="text" class="form-control speech-input" name="village" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label for="validationDefaultUsername">Signification</label>
                                                 <div class="input-group">
-                                                    <input type="text" name="signification" class="form-control speech-input" id="signification" placeholder="" >
+                                                    <input type="text" name="signification" class="form-control speech-input" id="signification" placeholder="" required>
                                                 </div>
                                             </div>
                                      </div>
@@ -103,25 +103,25 @@
                                           <div class="col-md-3 mb-3">
                                                <label for="validationDefaultUsername">Nom Déclarant</label>
                                                <div class="input-group">
-                                                   <input name="nomdec" type="text" class="form-control speech-input" id="nomdec" placeholder="" >
+                                                   <input name="nomdec" type="text" class="form-control speech-input" id="nomdec" placeholder="" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label for="validationDefaultUsername">Prénom Déclarant</label>
                                                 <div class="input-group">
-                                                    <input type="text" name="prenomdec" class="form-control speech-input" id="prenomdec" placeholder="" >
+                                                    <input type="text" name="prenomdec" class="form-control speech-input" id="prenomdec" placeholder="" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label for="validationDefaultUsername">Qualité Déclarant</label>
                                                 <div class="input-group">
-                                                    <input type="text" name="qualitedec" class="form-control speech-input" id="nondec" placeholder="" >
+                                                    <input type="text" name="qualitedec" class="form-control speech-input" id="nondec" placeholder="" required>
                                                  </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label for="validationDefaultUsername">Date de naissance déclarant</label>
                                                 <div class="input-group">
-                                                    <input type="date" name="datedec" class="form-control" id="datedec" >
+                                                    <input type="date" name="datedec" class="form-control" id="datedec" required>
                                                 </div>
                                             </div>
                                      </div>
@@ -129,25 +129,25 @@
                                         <div class="col-md-3 mb-3">
                                                 <label for="validationDefaultUsername">Lieu de naissance Déclarant</label>
                                             <div class="input-group">
-                                                <input type="text" name="lieundec" class="form-control speech-input" id="lieundec" >
+                                                <input type="text" name="lieundec" class="form-control speech-input" id="lieundec" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefaultUsername">Lieu de résidence Déclarant</label>
                                             <div class="input-group">
-                                                <input type="text" name="lieudec" class="form-control speech-input" id="lieudec" >
+                                                <input type="text" name="lieudec" class="form-control speech-input" id="lieudec" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefaultUsername">Non fondateur</label>
                                             <div class="input-group">
-                                                <input type="text" name="nomf" class="form-control speech-input" id="nomf" >
+                                                <input type="text" name="nomf" class="form-control speech-input" id="nomf" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefaultUsername">Prénom fondateur</label>
                                             <div class="input-group">
-                                                <input type="text" name="prenomf" class="form-control speech-input" id="prenomf" >
+                                                <input type="text" name="prenomf" class="form-control speech-input" id="prenomf" required>
                                             </div>
                                         </div>
                                      </div>
@@ -155,24 +155,24 @@
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefaultUsername">Activitées fondateur</label>
                                             <div class="input-group">
-                                                <input type="text" name="activitef" class="form-control speech-input" id="activitef" >
+                                                <input type="text" name="activitef" class="form-control speech-input" id="activitef" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefaultUsername">Lieu d'inhumation</label>
                                             <div class="input-group">
-                                                <input type="text" name="lieuinf" class="form-control speech-input" id="lieuinf" >
+                                                <input type="text" name="lieuinf" class="form-control speech-input" id="lieuinf" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationDefaultUsername">Origine fondateur</label>
                                             <div class="input-group">
-                                                <input type="text" name="originef" class="form-control speech-input" id="originef" >
+                                                <input type="text" name="originef" class="form-control speech-input" id="originef" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="ville">Personnes Trouvée sur les Lieux:</label>
-                                            <select  class="custom-select mb-3" id="personne_trouve" name="personne_trouve">
+                                            <select  class="custom-select mb-3" id="personne_trouve" name="personne_trouve" required>
                                                 <option value="Village">Village</option>
 							                    <option value="groupement de personne">Groupement De Personne</option>
 							                    <option value="Aucune">Aucune</option>
@@ -182,7 +182,7 @@
                                      <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                             <label for="ville">A t'il passé des accords:</label>
-                                            <select  class="custom-select mb-3" id="accord" name="accord" >
+                                            <select  class="custom-select mb-3" id="accord" name="accord" required>
                                                 <option value="Oui">oui</option>
 							                    <option value="Non">non</option>
                                             </select>
@@ -190,67 +190,62 @@
                                         <div class="col-md-4 mb-3">
                                             <label for="validationDefaultUsername">Lien avec personnes trouvées</label>
                                             <div class="input-group">
-                                                <input type="text" name="lien" class="form-control speech-input" id="personne" >
+                                                <input type="text" name="lien" class="form-control speech-input" id="personne" required>
                                              </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationDefaultUsername">époque d'installation</label>
                                             <div class="input-group">
-                                                 <input type="text" name="epoque" class="form-control speech-input" id="epoque" >
+                                                 <input type="text" name="epoque" class="form-control speech-input" id="epoque" required>
                                               </div>
                                         </div>
                                     </div>
                                     <div class="container mt-4">
                                         <div id="successors">
-                                            <!-- Les champs de saisie des successeurs seront ajoutés ici -->
+                                          <!-- Les champs de saisie des successeurs seront ajoutés ici -->
                                         </div>
                                         <div class="form-row mb-3">
                                             <button type="button" id="add-successor" class="btn btn-success">+</button>
+                                            <input type="hidden" name="successor_count" id="successor_count" value="0">
                                         </div>
-                                    </div>
-                                              <!-- Champ caché pour stocker le nombre de successeurs -->
-                                    <input type="hidden" name="successor_count" id="successor_count" value="0">
+                                     </div>
                                     <div class="container mt-4">
                                         <div id="lines">
-                                            <!-- Les champs de saisie des lignées seront ajoutés ici -->
+                                        <!-- Les champs de saisie des lignées seront ajoutés ici -->
                                         </div>
                                         <div class="form-row mb-3">
                                             <button type="button" id="add-line" class="btn btn-success">+</button>
                                         </div>
                                     </div>
-                                           <!-- Champ caché pour stocker le nombre de lignées -->
-                                    <input type="hidden" name="line_count" id="line_count" value="0">
                                     <div class="form-row">
                                         <div class="col-md-4 mb-3">
                                             <label for="validationDefaultUsername">période officialissation</label>
                                             <div class="input-group">
-                                                <input type="text" name="dateoff" class="form-control speech-input" id="dateof" >
+                                                <input type="text" name="dateoff" class="form-control speech-input" id="dateof" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationDefaultUsername">Nom de l'auritée d'officialissation</label>
                                             <div class="input-group">
-                                                <input type="text" name="nomaut" class="form-control speech-input" id="nomaut" >
+                                                <input type="text" name="nomaut" class="form-control speech-input" id="dateof" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="ville">L'acte de création?</label>
                                             <select  class="custom-select mb-3" id="act" name="act">
-                                                <option value="oui">oui</option>
-							                    <option value="non">non</option>
+                                                <option value="bafing">oui</option>
+							                    <option value="bafin">non</option>
                                             </select>
                                         </div>
                                     </div>
-                                   <div class="container mt-4">
+                                    <div class="container mt-4">
                                         <div id="campements">
                                             <!-- Les champs de saisie des campements seront ajoutés ici -->
                                         </div>
                                         <div class="form-row mb-3">
-                                             <button type="button" id="add-campement" class="btn btn-success">+</button>
+                                            <button type="button" id="add-campement" class="btn btn-success">+</button>
                                         </div>
                                     </div>
-                                    <!-- Champ caché pour stocker le nombre de campements -->
-                                        <input type="hidden" name="campement_count" id="campement_count" value="0">
                                     <div class="container mt-4">
                                         <div id="sites">
                                               <!-- Les champs de saisie des sites d'adoration seront ajoutés ici -->
@@ -280,19 +275,19 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                         <label for="ville">Chef de terre?</label>
-                                        <select  class="custom-select mb-3" id="" name="">
+                                        <select  class="custom-select mb-3" id="act" name="act">
                                             <option value="bafing">oui</option>
 							                <option value="bafing">non</option>
                                         </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="ville">Mise à la disposition?</label>
-                                            <select  multiple class="form-control custom-select mb-3" id="disposition" name="disposition">
-                                                 <option value="Héritage">héritage</option>
-							                     <option value="dont">dont</option>
-							                     <option value="Pret">pret</option>
-							                     <option value="Achat">achat</option>
-							                     <option value="Location">Location</option>
+                                            <select  multiple class="form-control custom-select mb-3" id="act" name="act">
+                                                 <option value="bafing">héritage</option>
+							                     <option value="bafing">dont</option>
+							                     <option value="bafing">pret</option>
+							                     <option value="bafing">achat</option>
+							                     <option value="bafing">Location</option>
                                             </select>                                    </div>
                                         </div>
                                     </div>

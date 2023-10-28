@@ -109,7 +109,7 @@ class Histoire(models.Model):
     dateoff=models.CharField(max_length=200)
     autoriteoff=models.CharField(max_length=200)
     acte_creation=models.CharField(max_length=200)
-    campement_nom_origine=models.CharField(max_length=900)
+    #campement_nom_origine=MyPairListField()
     #ouest_ado=models.CharField(max_length=200)
     #cnord_ado=models.CharField(max_length=200)
     #est_ado=models.CharField(max_length=200)
