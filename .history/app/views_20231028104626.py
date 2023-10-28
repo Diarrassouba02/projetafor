@@ -31,11 +31,9 @@ def formulairemanuscrit(request):
         nom_departement = request.POST.get('departement')
         sous_prefecture = request.POST.get('sous_prefecture')
         nomenq=request.POST.get('nomenq')
-        prenomenq=request.POST.get('prenomenq')
-        nom_village = request.POST.get('village')
-        signification=request.POST.get('signification')
         nom_declarant = request.POST.get('nomdec')
         prenon_declarant = request.POST.get('prenomdec')
+        nom_village = request.POST.get('village')
         qualite_declarant = request.POST.get('qualitedec')
         date_naissance_declarant = request.POST.get('datedec')
         lieu_naissance_declarant = request.POST.get('lieundec')
@@ -43,25 +41,20 @@ def formulairemanuscrit(request):
         nom_fondateur = request.POST.get('nomf')
         prenom_fondateur = request.POST.get('prenomf')
         activite_fondateur = request.POST.get('activitef')
-        lieu_inhimationf = request.POST.get('lieuinf')
         origine_fondateur = request.POST.get('originef')
-        personne_trouve=request.POST.get('personne_trouve')
-        accord_passe=request.POST.get('accord')
-        lien=request.POST.get('lien')
-        epoque_installation=request.POST.get('epoque')
+        lieu_inhimationf = request.POST.get('lieuinf')
         a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
-                     sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
+                     sous_prefecture=sous_prefecture, nom_village=nom_village,
                      nom_declarant=nom_declarant, prenon_declarant=prenon_declarant,
                      qualite_declarant=qualite_declarant, date_naissance_declarant=date_naissance_declarant,
                      lieu_naissance_declarant=lieu_naissance_declarant,
                      lieu_residence_declarant=lieu_residence_declarant,
                      nom_fondateur=nom_fondateur, prenom_fondateur=prenom_fondateur,
                      origine_fondateur=origine_fondateur, activite_fondateur=activite_fondateur,
-                     lieu_inhimationf=lieu_inhimationf, succeseur_nom_prenon_date=successors_data,
-                     nomenq=nomenq,prenomenq=prenomenq,personne_trouve=personne_trouve,lien=lien,
-                     accord_passe=accord_passe,epoque_installation=epoque_installation)
+                     lieu_inhimationf=lieu_inhimationf, succeseur_nom_prenon_date=successors_data)
         a.save()
-        print(successor_count)
+        for data in successors_data:
+            print(data)
 
         messages.success(request, 'Le formulaire a été soumis avec succès')
         return redirect('index')

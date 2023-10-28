@@ -59,9 +59,10 @@ def formulairemanuscrit(request):
                      origine_fondateur=origine_fondateur, activite_fondateur=activite_fondateur,
                      lieu_inhimationf=lieu_inhimationf, succeseur_nom_prenon_date=successors_data,
                      nomenq=nomenq,prenomenq=prenomenq,personne_trouve=personne_trouve,lien=lien,
-                     accord_passe=accord_passe,epoque_installation=epoque_installation)
+                     accord_passe=accord_passe)
         a.save()
-        print(successor_count)
+        for data in successors_data:
+            print(data)
 
         messages.success(request, 'Le formulaire a été soumis avec succès')
         return redirect('index')

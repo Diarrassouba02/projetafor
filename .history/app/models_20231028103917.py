@@ -86,7 +86,7 @@ class Histoire(models.Model):
     nom_departement=models.CharField(max_length=200)
     sous_prefecture=models.CharField(max_length=200)
     nomenq=models.CharField(max_length=200)
-    prenomenq=models.CharField(max_length=200)
+    prénomenq=models.CharField(max_length=200)
     nom_village=models.CharField(max_length=200)
     signification=models.TextField()
     nom_declarant=models.CharField(max_length=200)
@@ -95,6 +95,10 @@ class Histoire(models.Model):
     date_naissance_declarant=models.DateField()
     lieu_naissance_declarant=models.CharField(max_length=200)
     lieu_residence_declarant=models.CharField(max_length=200)
+    #CHOIX=(("groupement de personne","groupement de personne"),("village","village"),
+    #("campement","campement"),("aucune","aucune"))
+
+
     nom_fondateur=models.CharField(max_length=200)
     prenom_fondateur=models.CharField(max_length=200)
     activite_fondateur=models.CharField(blank=True,max_length=200)

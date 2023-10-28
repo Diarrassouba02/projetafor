@@ -95,6 +95,10 @@ class Histoire(models.Model):
     date_naissance_declarant=models.DateField()
     lieu_naissance_declarant=models.CharField(max_length=200)
     lieu_residence_declarant=models.CharField(max_length=200)
+    #CHOIX=(("groupement de personne","groupement de personne"),("village","village"),
+    #("campement","campement"),("aucune","aucune"))
+
+
     nom_fondateur=models.CharField(max_length=200)
     prenom_fondateur=models.CharField(max_length=200)
     activite_fondateur=models.CharField(blank=True,max_length=200)
