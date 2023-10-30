@@ -16,14 +16,14 @@ def formulairemanuscrit(request):
         campement_count = int(request.POST.get('campement_count', 0))
         site_count = int(request.POST.get('site_count', 0))
         ancient_site_count = int(request.POST.get('ancient_site_count', 0))
-        village_count = int(request.POST.get('village_count', 0))
+        village_count = int(request.POST.get('village_count', 0));
         limite_village_litige_count = int(request.POST.get('limite_village_litige_count', 0))
         successors_data = []  # Créez une liste
         lines_data = []
         campements_data = []
         sites_data = []
         ancient_sites_data = []
-        village_data = []
+        villages_data = []
         limite_village_litige_data = []
 
         for i in range( successor_count):
@@ -81,8 +81,13 @@ def formulairemanuscrit(request):
 
 
         for i in range(village_count):
-            village_name = request.POST.get(f'villageName_{i}')
-            village_data.append(village_name)
+            name = request.POST.get(f'villageName_{i}')
+            village_data = {
+                'name': name,
+            }
+            villages_data.append(village_data)
+            print(village_data)
+
 
         for i in range(limite_village_litige_count):
             village = request.POST.get(f'village_{i}')
@@ -138,13 +143,12 @@ def formulairemanuscrit(request):
                      acte_creation=acte_creation,campement_nom_origine=campements_data,
                      site_adoration=sites_data,ancien_site=ancient_sites_data,
                      mode_accès_terre=mode_accès_terre,chef_terre=chef_terre,
-                     mode_mise_a_diposition=mode_mise_a_diposition,groupement_liste=village_data,
+                     mode_mise_a_diposition=mode_mise_a_diposition,groupement_liste=villages_data,
                      limite_litige_village=limite_village_litige_data,complement=complement)
 
 
         a.save()
-        print(village_data)
-        print(village_count)
+        print(limite_village_litige_data)
 
         messages.success(request, 'Le formulaire a été soumis avec succès')
         return redirect('index')

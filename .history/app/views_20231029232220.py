@@ -93,17 +93,17 @@ def formulairemanuscrit(request):
                 'limite': limite,
                 'zone_litigee': zone_litigee,
             })
-
+        complement=request.POST.get ('complement')
         nom_region = request.POST.get('region')
         nom_departement = request.POST.get('departement')
         sous_prefecture = request.POST.get('sous_prefecture')
         nomenq=request.POST.get('nomenq')
         prenomenq=request.POST.get('prenomenq')
         nom_village = request.POST.get('village')
-        signification=request.POST.get('signification')
-        nom_declarant = request.POST.get('nomdec')
-        prenon_declarant = request.POST.get('prenomdec')
-        qualite_declarant = request.POST.get('qualitedec')
+       # signification=request.POST.get('signification')
+        #nom_declarant = request.POST.get('nomdec')
+        #prenon_declarant = request.POST.get('prenomdec')
+        #qualite_declarant = request.POST.get('qualitedec')
         date_naissance_declarant = request.POST.get('datedec')
         lieu_naissance_declarant = request.POST.get('lieundec')
         lieu_residence_declarant = request.POST.get('lieudec')
@@ -122,11 +122,11 @@ def formulairemanuscrit(request):
         mode_accès_terre=request.POST.get('mode')
         chef_terre=request.POST.get('chef')
         mode_mise_a_diposition=request.POST.get('disposition')
-        complement=request.POST.get ('complement')
+
         a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
-                     sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
-                     nom_declarant=nom_declarant, prenon_declarant=prenon_declarant,
-                     qualite_declarant=qualite_declarant, date_naissance_declarant=date_naissance_declarant,
+                     sous_prefecture=sous_prefecture, nom_village=nom_village
+
+                     , date_naissance_declarant=date_naissance_declarant,
                      lieu_naissance_declarant=lieu_naissance_declarant,
                      lieu_residence_declarant=lieu_residence_declarant,
                      nom_fondateur=nom_fondateur, prenom_fondateur=prenom_fondateur,

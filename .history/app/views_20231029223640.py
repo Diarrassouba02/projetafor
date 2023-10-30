@@ -138,7 +138,7 @@ def formulairemanuscrit(request):
                      acte_creation=acte_creation,campement_nom_origine=campements_data,
                      site_adoration=sites_data,ancien_site=ancient_sites_data,
                      mode_accès_terre=mode_accès_terre,chef_terre=chef_terre,
-                     mode_mise_a_diposition=mode_mise_a_diposition,groupement_liste=village_data,
+                     mode_mise_a_diposition=mode_mise_a_diposition,groupement_liste=villages_data,
                      limite_litige_village=limite_village_litige_data,complement=complement)
 
 

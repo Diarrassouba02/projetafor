@@ -115,7 +115,7 @@ class Histoire(models.Model):
     mode_accès_terre=models.TextField()
     chef_terre=models.CharField(max_length=50)
     mode_mise_a_diposition=models.CharField(max_length=200)
-    groupement_liste=models.CharField(max_length=900)
+    groupement_liste=models.CharField(max_length=200)
     limite_litige_village=models.CharField(max_length=300)
     complement=models.TextField()
     objects = models.DjongoManager()

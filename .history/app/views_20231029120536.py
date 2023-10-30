@@ -23,7 +23,7 @@ def formulairemanuscrit(request):
         campements_data = []
         sites_data = []
         ancient_sites_data = []
-        village_data = []
+        villages_data = []
         limite_village_litige_data = []
 
         for i in range( successor_count):
@@ -81,8 +81,13 @@ def formulairemanuscrit(request):
 
 
         for i in range(village_count):
-            village_name = request.POST.get(f'villageName_{i}')
-            village_data.append(village_name)
+            name = request.POST.get(f'villageName_{i}')
+            village_data = {
+                'groupe_village': name,
+            }
+            villages_data.append(village_data)
+            print(village_data)
+
 
         for i in range(limite_village_litige_count):
             village = request.POST.get(f'village_{i}')
@@ -122,7 +127,7 @@ def formulairemanuscrit(request):
         mode_accès_terre=request.POST.get('mode')
         chef_terre=request.POST.get('chef')
         mode_mise_a_diposition=request.POST.get('disposition')
-        complement=request.POST.get ('complement')
+        complement=request.POST.get('complement')
         a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
                      sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
                      nom_declarant=nom_declarant, prenon_declarant=prenon_declarant,
@@ -138,13 +143,12 @@ def formulairemanuscrit(request):
                      acte_creation=acte_creation,campement_nom_origine=campements_data,
                      site_adoration=sites_data,ancien_site=ancient_sites_data,
                      mode_accès_terre=mode_accès_terre,chef_terre=chef_terre,
-                     mode_mise_a_diposition=mode_mise_a_diposition,groupement_liste=village_data,
+                     mode_mise_a_diposition=mode_mise_a_diposition,groupement_liste=villages_data,
                      limite_litige_village=limite_village_litige_data,complement=complement)
 
 
         a.save()
-        print(village_data)
-        print(village_count)
+        print(limite_village_litige_data)
 
         messages.success(request, 'Le formulaire a été soumis avec succès')
         return redirect('index')

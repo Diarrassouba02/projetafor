@@ -496,7 +496,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let villageCount = 0;
 
     function createVillageInputs() {
-        "use strict";
         const villageDiv = document.createElement("div");
         villageDiv.className = "form-row mb-3";
 
@@ -514,7 +513,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const removeVillageButton = document.createElement("button");
         removeVillageButton.type = "button";
         removeVillageButton.textContent = "-";
-        removeVillageButton.className = "btn btn-danger remove-village"; // Correction ici
+        removeVillageButton.className = "btn btn-danger remove-village";
         removeVillageButtonDiv.appendChild(removeVillageButton);
 
         villageDiv.appendChild(villageNameDiv);
@@ -523,13 +522,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
         removeVillageButton.addEventListener("click", function() {
             villagesContainer.removeChild(villageDiv);
-            villageCount--;
-            villageCountInput.value = villageCount;
+            villageCount--; // Mettez à jour le compteur lors de la suppression
+            villageCountInput.value = villageCount; // Mettez à jour la valeur du champ caché
         });
 
-        villageCountInput.value = ++villageCount;
+        villageCountInput.value = ++villageCount; // Mettez à jour la valeur du champ caché après chaque ajout
+        setupSpeechInput();
     }
 
+    // Appeler la fonction pour afficher par défaut les champs pour une cité des villages regroupés
     createVillageInputs();
 
     addVillageButton.addEventListener("click", createVillageInputs);
@@ -539,71 +540,68 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
 document.addEventListener("DOMContentLoaded", function() {
-    "use strict";
-    const limiteVillageLitigeContainer = document.getElementById("limite_village_litige");
-    const addLimiteVillageLitigeButton = document.getElementById("add-limite-village-litige");
-    const limiteVillageLitigeCountInput = document.getElementById("limite_village_litige_count");
+            const limite_vilage_litigeContainer = document.getElementById("limite_vilage_litige");
+            const addLimite_vilage_litigeButton = document.getElementById("add-limite_vilage_litige");
 
-    let limiteVillageLitigeCount = 0;
+            let limite_vilage_litigeCount = 0;
 
-    function createLimiteVillageLitigeInputs() {
-        const limiteVillageLitigeDiv = document.createElement("div");
-        limiteVillageLitigeDiv.className = "form-row mb-3";
+            function createLimite_vilage_litigeInputs() {
+                const limite_vilage_litigeDiv = document.createElement("div");
+                limite_vilage_litigeDiv.className = "form-row mb-3";
 
-        const villageDiv = document.createElement("div");
-        villageDiv.className = "col-md-3";
-        const villageInput = document.createElement("input");
-        villageInput.type = "text";
-        villageInput.name = `village_${limiteVillageLitigeCount}`;
-        villageInput.placeholder = "Village voisin";
-        villageInput.className = "form-control speech-input";
-        villageDiv.appendChild(villageInput);
+                const villageDiv = document.createElement("div");
+                villageDiv.className = "col-md-3";
+                const villageInput = document.createElement("input");
+                villageInput.type = "text";
+                villageInput.name = `village_${limite_vilage_litigeCount}`;
+                villageInput.placeholder = "Village voisin";
+                villageInput.className = "form-control speech-input";
+                villageDiv.appendChild(villageInput);
 
-        const limiteDiv = document.createElement("div");
-        limiteDiv.className = "col-md-3";
-        const limiteInput = document.createElement("input");
-        limiteInput.type = "text";
-        limiteInput.name = `limite_${limiteVillageLitigeCount}`;
-        limiteInput.placeholder = "Limite";
-        limiteInput.className = "form-control speech-input";
-        limiteDiv.appendChild(limiteInput);
+                const limiteDiv = document.createElement("div");
+                limiteDiv.className = "col-md-3";
+                const limiteInput = document.createElement("input");
+                limiteInput.type = "text";
+                limiteInput.name = `limite_${limite_vilage_litigeCount}`;
+                limiteInput.placeholder = "Limite";
+                limiteInput.className = "form-control speech-input";
+                limiteDiv.appendChild(limiteInput);
 
-        const zoneLitigeeDiv = document.createElement("div");
-        zoneLitigeeDiv.className = "col-md-3";
-        const zoneLitigeeInput = document.createElement("input");
-        zoneLitigeeInput.type = "text";
-        zoneLitigeeInput.name = `zoneLitigee_${limiteVillageLitigeCount}`;
-        zoneLitigeeInput.placeholder = "Zone litigée";
-        zoneLitigeeInput.className = "form-control speech-input";
-        zoneLitigeeDiv.appendChild(zoneLitigeeInput);
+                const zoneLitigeeDiv = document.createElement("div");
+                zoneLitigeeDiv.className = "col-md-3";
+                const zoneLitigeeInput = document.createElement("input");
+                zoneLitigeeInput.type = "text";
+                zoneLitigeeInput.name = `zoneLitigee_${limite_vilage_litigeCount}`;
+                zoneLitigeeInput.placeholder = "Zone litigée";
+                zoneLitigeeInput.className = "form-control speech-input";
+                zoneLitigeeDiv.appendChild(zoneLitigeeInput);
 
-        const removeButtonDiv = document.createElement("div");
-        removeButtonDiv.className = "col-md-3";
-        const removeButton = document.createElement("button");
-        removeButton.type = "button";
-        removeButton.textContent = "-";
-        removeButton.className = "btn btn-danger remove-successor";
-        removeButtonDiv.appendChild(removeButton);
+                const removeButtonDiv = document.createElement("div");
+                removeButtonDiv.className = "col-md-3";
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "-";
+                removeButton.className = "btn btn-danger remove-successor";
+                removeButtonDiv.appendChild(removeButton);
 
-        limiteVillageLitigeDiv.appendChild(villageDiv);
-        limiteVillageLitigeDiv.appendChild(limiteDiv);
-        limiteVillageLitigeDiv.appendChild(zoneLitigeeDiv);
-        limiteVillageLitigeDiv.appendChild(removeButtonDiv);
-        limiteVillageLitigeContainer.appendChild(limiteVillageLitigeDiv);
+                limite_vilage_litigeDiv.appendChild(villageDiv);
+                limite_vilage_litigeDiv.appendChild(limiteDiv);
+                limite_vilage_litigeDiv.appendChild(zoneLitigeeDiv);
+                limite_vilage_litigeDiv.appendChild(removeButtonDiv);
+                limite_vilage_litigeContainer.appendChild(limite_vilage_litigeDiv);
 
-        removeButton.addEventListener("click", function() {
-            limiteVillageLitigeContainer.removeChild(limiteVillageLitigeDiv);
-            limiteVillageLitigeCount--; // Mettez à jour le compteur lors de la suppression
-            limiteVillageLitigeCountInput.value = limiteVillageLitigeCount; // Mettez à jour la valeur du champ caché
+                removeButton.addEventListener("click", function() {
+                    limite_vilage_litigeContainer.removeChild(limite_vilage_litigeDiv);
+                });
+
+                limite_vilage_litigeCount++;
+            setupSpeechInput();
+            }
+
+            // Appeler la fonction pour afficher par défaut les champs pour une limite, un village en litige
+            createLimite_vilage_litigeInputs();
+
+            addLimite_vilage_litigeButton.addEventListener("click", createLimite_vilage_litigeInputs);
         });
-
-        limiteVillageLitigeCountInput.value = ++limiteVillageLitigeCount; // Mettez à jour la valeur du champ caché après chaque ajout
-        setupSpeechInput();
-    }
-
-    // Appeler la fonction pour afficher par défaut les champs pour une limite, un village en litige
-    createLimiteVillageLitigeInputs();
-
-    addLimiteVillageLitigeButton.addEventListener("click", createLimiteVillageLitigeInputs);
-});

@@ -496,25 +496,24 @@ document.addEventListener("DOMContentLoaded", function() {
     let villageCount = 0;
 
     function createVillageInputs() {
-        "use strict";
         const villageDiv = document.createElement("div");
         villageDiv.className = "form-row mb-3";
 
         const villageNameDiv = document.createElement("div");
-        villageNameDiv.className = "col-md-9";
+        villageNameDiv.className = "col-md-4";
         const villageNameInput = document.createElement("input");
         villageNameInput.type = "text";
-        villageNameInput.name = `villageName_${villageCount}`;
-        villageNameInput.placeholder = "Citer les Villages Regroupés pour Créer ce Village";
+        villageNameInput.name = `villageName_${villageCount}`; // Utilisez le nouvel attribut 'name' avec un nouveau ID
+        villageNameInput.placeholder = "Regroupement de Village";
         villageNameInput.className = "form-control speech-input";
         villageNameDiv.appendChild(villageNameInput);
 
         const removeVillageButtonDiv = document.createElement("div");
-        removeVillageButtonDiv.className = "col-md-3";
+        removeVillageButtonDiv.className = "col-md-4";
         const removeVillageButton = document.createElement("button");
         removeVillageButton.type = "button";
         removeVillageButton.textContent = "-";
-        removeVillageButton.className = "btn btn-danger remove-village"; // Correction ici
+        removeVillageButton.className = "btn btn-danger remove-village";
         removeVillageButtonDiv.appendChild(removeVillageButton);
 
         villageDiv.appendChild(villageNameDiv);
@@ -523,13 +522,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         removeVillageButton.addEventListener("click", function() {
             villagesContainer.removeChild(villageDiv);
-            villageCount--;
-            villageCountInput.value = villageCount;
+            villageCount--; // Mettez à jour le compteur lors de la suppression
+            villageCountInput.value = villageCount; // Mettez à jour la valeur du champ caché
         });
 
-        villageCountInput.value = ++villageCount;
+        villageCountInput.value = ++villageCount; // Mettez à jour la valeur du champ caché après chaque ajout
     }
 
+    // Appeler la fonction pour afficher par défaut les champs pour un regroupement de village
     createVillageInputs();
 
     addVillageButton.addEventListener("click", createVillageInputs);
@@ -537,10 +537,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
-
 document.addEventListener("DOMContentLoaded", function() {
-    "use strict";
     const limiteVillageLitigeContainer = document.getElementById("limite_village_litige");
     const addLimiteVillageLitigeButton = document.getElementById("add-limite-village-litige");
     const limiteVillageLitigeCountInput = document.getElementById("limite_village_litige_count");

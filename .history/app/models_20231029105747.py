@@ -113,9 +113,19 @@ class Histoire(models.Model):
     site_adoration=models.CharField(max_length=900)
     ancien_site=models.CharField(max_length=900)
     mode_accès_terre=models.TextField()
-    chef_terre=models.CharField(max_length=50)
-    mode_mise_a_diposition=models.CharField(max_length=200)
-    groupement_liste=models.CharField(max_length=900)
-    limite_litige_village=models.CharField(max_length=300)
-    complement=models.TextField()
+    chef_terre_terre=models.CharField(max_length=50)
+    #mode_mise_a_diposition=models.CharField(max_length=200)
+
+
+
+
+    #groupement_liste=MyListField()
+    #list_village_voisin=MyListField()
+    #état_litige=models.BooleanField()
+    #limite_ouest=models.CharField(max_length=200)
+    #limite_nord=models.CharField(max_length=200)
+    #limite_sud=models.CharField(max_length=200)
+    #limite_est=models.CharField(max_length=200)
+    #libellé_litige=models.TextField()
+    #complement=models.TextField()
     objects = models.DjongoManager()

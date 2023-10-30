@@ -496,7 +496,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let villageCount = 0;
 
     function createVillageInputs() {
-        "use strict";
         const villageDiv = document.createElement("div");
         villageDiv.className = "form-row mb-3";
 
@@ -540,7 +539,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    "use strict";
     const limiteVillageLitigeContainer = document.getElementById("limite_village_litige");
     const addLimiteVillageLitigeButton = document.getElementById("add-limite-village-litige");
     const limiteVillageLitigeCountInput = document.getElementById("limite_village_litige_count");
