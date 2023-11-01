@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+  <hr>
+<div class="container " style="background-image:url({% static 'images/5.jpg' %});)">
+    <div class="row justify-content-center">
+      <div class="col-md-4 mt-5 mb-3 bg-light rounded" >
+        <h2 class="text-center font-weight-bold text-primary">Connexion</h2>
+        <hr class="bg-light">
+        <h5 class="text-center text-success"></h5>
+        <form action="" method="post" id="form-box" class="p-2">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" name="nom" class="form-control" placeholder="Nom" required>
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" name="prenon" class="form-control" placeholder="Prénom" required>
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input type="email" name="email" class="form-control" placeholder="Enter votre mail" required>
+          </div>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-unlock-alt aria-hidden="true""></i></span>
+            </div>
+            <input type="password" name="subject" class="form-control" placeholder="mot de passe" required>
+          </div>
+          <div class="form-group">
+            <input type="submit" name="submit" id="submit" class="btn btn-primary btn-block" value="Send">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock content %}
