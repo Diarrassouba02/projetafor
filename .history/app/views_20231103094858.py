@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate,logout
 
 
 
-@login_required(login_url='connection')
+@login_required
 def index(request):
     histoire= Histoire.objects.all().count()
     contex={"histoire":histoire}
@@ -179,13 +179,12 @@ def connection(request):
         user =authenticate(request, password=password,username=username)
         if user is not None and user.is_active:
             auth.login(request, user)
-            if  user.is_superuser and user.is_staff  :
+            if  user.is_superuser and user.is_staff :
                 return redirect('index')
             else:
                 return redirect('formulairemanuscrit')
         else:
-            error_message = "Nom d'utilisateur ou/et mot de passe incorrect."
-            return render(request,'forms/transcription/transcription.html',{'message':error_message})
+            return render(request,'forms/transcription/transcription.html')
     else:
         return render(request,'forms/transcription/transcription.html',context)
 

@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate,logout
 
 
 
-@login_required(login_url='connection')
+@login_required
 def index(request):
     histoire= Histoire.objects.all().count()
     contex={"histoire":histoire}
