@@ -26,7 +26,7 @@ $.notify({
 		from: "bottom",
 		align: "right"
 	},
-	time: 3000,
+	time: 1000,
 });
 
 // JQVmap
