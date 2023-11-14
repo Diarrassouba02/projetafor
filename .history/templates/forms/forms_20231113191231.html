@@ -80,7 +80,9 @@
                                     <select class="custom-select" id="village"  name="village">
                                         <option value="">Sélectionnez un village</option>
                                              <!-- Ajoutez ici les options du village dynamiquement si nécessaire -->
+                                         <option value="autre">Autre village</option>
                                      </select>
+                                     <input type="text" class="form-control mt-2" id="autreVillage" name="autreVillage" placeholder="Saisissez le nom du nouveau village" style="display: none;">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Signification</label>
@@ -337,6 +339,21 @@
 
 
  <script>
+
+
+
+  function checkIfOther() {
+        var selectBox = document.getElementById("village");
+        var autreVillageInput = document.getElementById("autreVillage");
+
+        // Affiche le champ de texte uniquement si "Autre village" est sélectionné
+        autreVillageInput.style.display = selectBox.value === "autre" ? "block" : "none";
+    }
+
+
+
+
+
     const regionsData = {
       District_Autonome_Abidjan: {
         departments: ["Abidjan"],

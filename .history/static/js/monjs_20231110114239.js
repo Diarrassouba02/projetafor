@@ -173,3 +173,73 @@
 
 
 
+ const regionsData = {
+      abidjan: {
+        departments: ["Abobo", "Yopougon", "Cocody"],
+        subPrefectures: {
+          Abobo: ["Abobo-Doumé", "Abobo-Sagbé"],
+          Yopougon: ["Yopougon-Attié"],
+          Cocody: ["Cocody-Angré", "Cocody-Plateau"]
+        },
+        villages: {
+          "Abobo-Doumé": ["Village 1", "Village 2"],
+          "Abobo-Sagbé": ["Village 3", "Village 4"],
+          "Yopougon-Attié": ["Village 5", "Village 6"],
+          "Cocody-Angré": ["Village 7", "Village 8"],
+          "Cocody-Plateau": ["Village 9", "Village 10"]
+        }
+      },
+      bouake: {
+        // Définir les données pour Bouaké
+      },
+      yamoussoukro: {
+        // Définir les données pour Yamoussoukro
+      },
+      sanpedro: {
+        // Définir les données pour San Pedro
+      }
+    };
+
+    const regionSelect = document.getElementById("region");
+    const departmentSelect = document.getElementById("department");
+    const subPrefectureSelect = document.getElementById("subPrefecture");
+    const villageSelect = document.getElementById("village");
+
+    function updateDepartments() {
+      const selectedRegion = regionSelect.value;
+      const departments = regionsData[selectedRegion].departments;
+      fillSelect(departmentSelect, departments);
+      updateSubPrefectures();
+    }
+
+    function updateSubPrefectures() {
+      const selectedRegion = regionSelect.value;
+      const selectedDepartment = departmentSelect.value;
+      const subPrefectures = regionsData[selectedRegion].subPrefectures[selectedDepartment];
+      fillSelect(subPrefectureSelect, subPrefectures);
+      updateVillages();
+    }
+
+    function updateVillages() {
+      const selectedRegion = regionSelect.value;
+      const selectedDepartment = departmentSelect.value;
+      const selectedSubPrefecture = subPrefectureSelect.value;
+      const villages = regionsData[selectedRegion].villages[selectedSubPrefecture];
+      fillSelect(villageSelect, villages);
+    }
+
+    function fillSelect(selectElement, options) {
+      // Supprimer les options actuelles
+      selectElement.innerHTML = "";
+
+      // Ajouter les nouvelles options
+      options.forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        selectElement.add(optionElement);
+      });
+    }
+
+    // Initialiser les départements au chargement de la page
+    updateDepartments();

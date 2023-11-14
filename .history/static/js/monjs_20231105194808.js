@@ -172,4 +172,90 @@
 
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    var regionSelect = document.getElementById("region");
+    var departementSelect = document.getElementById("departement");
+    var sousPrefectureSelect = document.getElementById("sous_prefecture");
+    var villageSelect = document.getElementById("village");
 
+    var regionsData = {
+        // Vos données sur les régions ici
+    };
+
+    var departementsData = {
+        // Vos données sur les départements ici
+    };
+
+    var sousPrefecturesData = {
+        // Vos données sur les sous-préfectures ici
+    };
+
+    var villagesData = {
+        // Vos données sur les villages ici
+    };
+
+    function mettreAJourRegions() {
+        regionSelect.innerHTML = "<option value=''>Sélectionnez une région</option>";
+        departementSelect.innerHTML = "<option value=''>Sélectionnez un département</option>";
+        sousPrefectureSelect.innerHTML = "<option value=''>Sélectionnez une sous-préfecture</option>";
+        villageSelect.innerHTML = "<option value=''>Sélectionnez un village</option>";
+
+        for (var region in regionsData) {
+            var optionRegion = document.createElement("option");
+            optionRegion.value = region;
+            optionRegion.text = region.charAt(0).toUpperCase() + region.slice(1);
+            regionSelect.appendChild(optionRegion);
+        }
+    }
+
+    function mettreAJourDepartements() {
+        var regionSelectionnee = regionSelect.value;
+        departementSelect.innerHTML = "<option value=''>Sélectionnez un département</option>";
+        sousPrefectureSelect.innerHTML = "<option value=''>Sélectionnez une sous-préfecture</option>";
+        villageSelect.innerHTML = "<option value=''>Sélectionnez un village</option>";
+
+        if (regionSelectionnee in departementsData) {
+            departementsData[regionSelectionnee].forEach(function(departement) {
+                var optionDepartement = document.createElement("option");
+                optionDepartement.value = departement;
+                optionDepartement.text = departement;
+                departementSelect.appendChild(optionDepartement);
+            });
+        }
+    }
+
+    function mettreAJourSousPrefectures() {
+        var departementSelectionne = departementSelect.value;
+        sousPrefectureSelect.innerHTML = "<option value=''>Sélectionnez une sous-préfecture</option>";
+        villageSelect.innerHTML = "<option value=''>Sélectionnez un village</option>";
+
+        if (departementSelectionne in sousPrefecturesData) {
+            sousPrefecturesData[departementSelectionne].forEach(function(sousPrefecture) {
+                var optionSousPrefecture = document.createElement("option");
+                optionSousPrefecture.value = sousPrefecture;
+                optionSousPrefecture.text = sousPrefecture;
+                sousPrefectureSelect.appendChild(optionSousPrefecture);
+            });
+        }
+    }
+
+    function mettreAJourVillages() {
+        var sousPrefectureSelectionnee = sousPrefectureSelect.value;
+        villageSelect.innerHTML = "<option value=''>Sélectionnez un village</option>";
+
+        if (sousPrefectureSelectionnee in villagesData) {
+            villagesData[sousPrefectureSelectionnee].forEach(function(village) {
+                var optionVillage = document.createElement("option");
+                optionVillage.value = village;
+                optionVillage.textContent = village;
+                villageSelect.appendChild(optionVillage);
+            });
+        }
+    }
+
+    regionSelect.addEventListener("change", mettreAJourDepartements);
+    departementSelect.addEventListener("change", mettreAJourSousPrefectures);
+    sousPrefectureSelect.addEventListener("change", mettreAJourVillages);
+
+    mettreAJourRegions();
+});

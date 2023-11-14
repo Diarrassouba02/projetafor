@@ -426,6 +426,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const ancientSitesContainer = document.getElementById("ancient-sites");
     const addAncientSiteButton = document.getElementById("add-ancient-site");
@@ -526,7 +528,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         villageCountInput.value = ++villageCount;
-        setupSpeechInput();
     }
 
     createVillageInputs();
@@ -539,6 +540,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    "use strict";
     const limiteVillageLitigeContainer = document.getElementById("limite_village_litige");
     const addLimiteVillageLitigeButton = document.getElementById("add-limite-village-litige");
     const limiteVillageLitigeCountInput = document.getElementById("limite_village_litige_count");

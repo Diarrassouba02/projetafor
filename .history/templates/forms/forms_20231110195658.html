@@ -39,12 +39,7 @@
                                     <select class="custom-select" id="region" name="region" onchange="updateDepartments()">
                                         <option value="District_Autonome_Abidjan">District Autonome d'Abidjan</option>
                                         <option value="District_Autonome_Yamoussoukro">District Autonome de Yamoussoukro</option>
-                                        <option value="Agnéby_Tiassa">Agnéby-Tiassa</option>
-                                        <option value="sanpedro">San Pedro</option>
-                                        <option value="sanpedro">San Pedro</option>
-                                        <option value="sanpedro">San Pedro</option>
-                                        <option value="sanpedro">San Pedro</option>
-                                        <option value="sanpedro">San Pedro</option>
+                                        <option value="yamoussoukro">Yamoussoukro</option>
                                         <option value="sanpedro">San Pedro</option>
                                     </select>
 								</div>
@@ -363,67 +358,16 @@
 
         }
       },
-
+                                        <option value=">District Autonome de Yamoussoukro</option>
       District_Autonome_Yamoussoukro: {
-        departments: ["Yamoussoukro","Attiegouakro"],
-        subPrefectures:{
-        Yamoussoukro: ["Yamoussoukro","Kossou"],
-        Attiegouakro:["Lolobo","Attiegouakro"],
-
-        },
-         villages:{
-         "Attiegouakro":["Ahondo", "Attiégouakro", "Gofabo", "Kacou-Broukro", "Mahounou-Nanafoué", "Abokouamékro", "Aka-Yaokro", "Labokro", "Koimoi-Dibikro", "Morokinkro", "Tokoré-Yaokro"],
-         "Lolobo":["Drékro", "Fassou", "Konan-Koffikro", "Lolobo", "N'Dèbo", "N'Dènou", "Akimou-Yaokro", "Allangoua", "Assanou", "M'Gbessou", "N'Gbékro", "N'Guessankro", "N'Zéré", "Ouffouédiekro", "Aguibri", "Diaman-Sakassou", "Koriakro", "Ménou", "Sakiaré", "Tounzouébo"],
-         "Kossou": ["Allai-Yaokro", "Amonkro", "Angossè", "Attrénou", "Bocabo", "Kossou", "Toumbokro", "Gogokro", "Yobouékro", "Zatta", "Zougounou"],
-         "Yamoussoukro":["Abouakouassikro", "Aboukro", "Akpessékro", "Bèzro", "Bonzi", "Dougounoukouadiokro", "Kami", "Kpoussoussou", "Logbakro", "Nanan", "N'Dakonankro", "N'Gattakro", "Sahabo", "Séman", "Yamoussoukro", "Kongouanou", "Mahounou-Akoué", "Suibonou", "Ténikro", "Yobouébo-Gbélissou", "Abakro", "Duokro", "Kroukroubo", "Subiakro", "Anoumangoua", "Djamalabo", "Fondi", "Gourominankro", "Morofè", "N'Gokro", "N'Zuessy", "Zambakro"],
-         }
-
-
+        departments: ["Yamoussoukro"],
       },
-      Agnéby_Tiassa: {
-      departments: ["Taabo","Agboville","Tiassalé","Sikensi"],
-      subPrefectures:{
-        Taabo:["Pacobo","Taabo"],
-        Agboville:["Aboude", "Ananguie", "Agboville", "Attobrou", "Azaguié", "Céchi", "Grand-Morié", "Guessiguié", "Loviguié", "Oress-Krobou", "Rubino"],
-        Tiassalé:["Gbolouville", "Morokro", "N’Douci", "Tiassalé"],
-        Sikensi: ["Gomon", "Sikensi"],
-
-
-        },
-        villages:{
-         "Pacobo":["Adikouassikro", "Ahérémou 1", "Ahouakro", "N'Da-Gnamien", "Pacobo", "Singrobo"],
-         "Taabo":["Ahondo", "Kokoti-Kouamékro", "Kotiessou", "N'Dénou", "Taabo", "Taabo village", "Ahérémou 2", "Ahouati", "Amani Ménou", "Katiénou", "Léléblé", "Sahoua", "Sokrogbo", "Tokohiri", "Zougoussi"],
-         "Aboude": ["Aboudé-Kouassikro", "Aboudé-Mandéké", "Kouadjakro"],
-         "nanguie":  ["Achi-Brou ho", "Adahi Kassikro", "Adamaho", "Aké-Douanier", "Ananguié", "Ananguié-Aukoho", "Arrikoho", "Balet ho", "Essegnon"],
-         "Agboville":["Adahou", "Agboville", "Ango", "Babiahan", "Banguié 1", "Bonikro", "Ery-Makouguié 1", "Ery-Makouguié 2",
-                     "Gbalékro", "Grand-Moutcho", "Laoguié", "N'Chompo", "Offoriguié", "Boka Oho", "Ehouéguié", "Grand-Yapo",
-                     "Offa", "Offompo", "Ouanguié", "Petit-Yapo", "Yapo-Gare", "Yapo-Kpa"] ,
-         "Attobrou":["Attobrou", "Boguié", "Copa", "Séguié", "Yadio"],
-         "Azaguié": ["Abbé-Bégnini", "Azaguié-Ahoua", "Azaguié-Gare", "Achiékoi", "Azaguié-Makouguié", "Azaguié-M'Bromé", "Donkoi"],
-         "Céchi":["Amani-N'Guessankro", "Banguié 2", "Bédé-N'Goran-M'Po", "Céchi", "Kouamékro", "Mitichi", "Trénou"],
-         "Grand-Morié":["Agouahin", "Arraguié", "Grand-Morié", "Lapo", "Mafou", "M'Battra", "M'Bérié", "Okouguié"],
-         "Guessiguié": ["Aké-Béfiat", "Allahin", "Attéhou", "Dingbè", "Elévi", "Guessiguié 1", "Guessiguié 2", "Kassiguié", "M'Brou", "Odoguié", "Ottopé 1", "Ottopé 2"],
-         "Loviguié":["Anno", "Gbessé", "Loviguié 1", "Loviguié 2", "Wahin"],
-         "Oress-Krobou": ["Oress-Krobou"],
-         "Rubino": ["Adomokro", "Dey-Oboguié", "Kamabrou", "Rubino", "Ségbévi", "Allany", "Amangbeu", "Brou-M'Po", "Gouabo", "Kédjempo", "Kotchi-M'Po", "Ouélézoué"],
-         "Gbolouville": ["Akalékro", "Akoungou", "Amani Kouamékro", "Botindé", "Broubrou", "Ehuakré", "Gbolouville", "Irobo"],
-         "Morokro":  ["Adomkro", "Affikro", "Affounvassou", "Ahiroa", "Amanikro", "Diallokro", "Ehouman Koffikro", "Kassasso", "Kondiébouma", "Koyékro", "Kravasso", "Moofoué", "Morokro", "Trochu"],
-         "N’Douci": ["Abevé", "Attiguéhi", "Batéra", "Bodo", "Boussoukro", "Djahakro", "Kanga-Nianzé", "Kodimasso", "N'Douci", "Niamazra", "Nianda", "Offa"],
-         "Tiassalé":["Broukro", "Dibykro", "Komenan-Gbéi", "Niamoué", "Taboitien", "Tiassalé/Tiassalékro", "Ahua", "Akoudjé", "Assinzè", "Elosso", "Gnankan-Gnankanso", "Gnanzobly", "Kouadio-Yaokro", "Mafia", "M'Brimbo", "Nanan Yassouakro", "N'Zianouan", "Sindressou", "Sokrogbo Carrefour", "Tollakro"] ,
-         "Gomon": ["Gomon", "Sahuyé", "Sahuyé-Carrière", "Yaobou"],
-         "Sikensi": ["Badasso", "Bakanou B", "Bécédi", "Brafouéby", "Ellibou", "Katadji", "Sikensi", "Abiéhou", "Bakanou A", "Soukou-Obou"],
-
-
-           }
-
+      yamoussoukro: {
+        // Définir les données pour Yamoussoukro
       },
       sanpedro: {
-
-      },
-
-    Kakpin :{
-    },
-
+        // Définir les données pour San Pedro
+      }
     };
 
     const regionSelect = document.getElementById("region");
