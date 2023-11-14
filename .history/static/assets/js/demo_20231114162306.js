@@ -17,8 +17,8 @@ Circles.create({
 
 //Notify
 $.notify({
-	icon: '',
-	title: '',
+	icon: 'flaticon-alarm-1',
+	title: 'Atlantis Lite',
 	message: "AFOR Dashboard COTE D'IVOIRE",
 },{
 	type: 'info',

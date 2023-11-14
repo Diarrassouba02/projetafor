@@ -271,6 +271,12 @@
 							            <option value="Achat">achat</option>
 							            <option value="Location">Location</option>
                                     </select>
+                                     <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="customModeAddon">Autre</span>
+        </div>
+        <input type="text" id="customMode" name="customMode" class="form-control" style="display: none;" placeholder="Saisir votre propre champ">
+    </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="terre_terre">Chef de terre?</label>
@@ -329,6 +335,7 @@
         </div>
     </div>
 </div>
+
 
 
 
@@ -469,4 +476,24 @@
     // Initialiser les départements au chargement de la page
     updateDepartments();
   </script>
+
+
+  <script>
+    function checkCustomInput() {
+        var modeSelect = document.getElementById("mode");
+        var customInput = document.getElementById("customMode");
+
+        if (modeSelect.value === "Custom") {
+            customInput.style.display = "block";
+            customInput.required = true;
+        } else {
+            customInput.style.display = "none";
+            customInput.required = false;
+        }
+    }
+</script>
+
+
+
+
 {% endblock content %}
