@@ -127,7 +127,7 @@ def formulairemanuscrit(request):
         dateoff=request.POST.get('dateoff')
         autoriteoff=request.POST.get('nomaut')
         acte_creation=request.POST.get('act')
-        mode_accès_terre=request.POST.getlist('mode')
+        mode_accès_terre=request.GET.getlist('mode')
         chef_terre=request.POST.get('chef')
         mode_mise_a_diposition=request.POST.getlist('disposition')
         complement=request.POST.get ('complement')
@@ -151,8 +151,7 @@ def formulairemanuscrit(request):
 
 
         a.save()
-        print(mode_accès_terre)
-
+        print(mode_mise_a_diposition)
 
 
         messages.success(request, 'Le formulaire a été soumis avec succès')

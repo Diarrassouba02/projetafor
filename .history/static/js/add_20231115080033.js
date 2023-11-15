@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const villagetrouveNameInput = document.createElement("input");
         villagetrouveNameInput.type = "text";
         villagetrouveNameInput.name = `villagetrouveName_${villagetrouveCount}`;
-        villagetrouveNameInput.placeholder = "Citer les village trouvés sur les lieus";
+        villagetrouveNameInput.placeholder = "Citer les Villages Trouvés pour Créer ce Villagetrouve";
         villagetrouveNameInput.className = "form-control speech-input";
         villagetrouveNameDiv.appendChild(villagetrouveNameInput);
 
@@ -445,8 +445,8 @@ document.addEventListener("DOMContentLoaded", function() {
         removeCampementButton.className = "btn btn-danger remove-campement";
         removeCampementButtonDiv.appendChild(removeCampementButton);
 
-        campementDiv.appendChild(campementPeupleDiv);
         campementDiv.appendChild(campementNameDiv);
+        campementDiv.appendChild(campementPeupleDiv);
         campementDiv.appendChild(campementOrigineDiv);
         campementDiv.appendChild(removeCampementButtonDiv);
         campementsContainer.appendChild(campementDiv);

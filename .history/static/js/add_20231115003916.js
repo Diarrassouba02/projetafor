@@ -236,58 +236,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const villagetrouveContainer = document.getElementById("villagetrouves");
-    const addVillagetrouveButton = document.getElementById("add-villagetrouve");
-    const villagetrouveCountInput = document.getElementById("villagetrouve_count");
-
-    let villagetrouveCount = 0;
-
-    function createVillagetrouveInputs() {
-        const villagetrouveDiv = document.createElement("div");
-        villagetrouveDiv.className = "form-row mb-3";
-
-        const villagetrouveNameDiv = document.createElement("div");
-        villagetrouveNameDiv.className = "col-md-3";
-        const villagetrouveNameInput = document.createElement("input");
-        villagetrouveNameInput.type = "text";
-        villagetrouveNameInput.name = `villagetrouveName_${villagetrouveCount}`;
-        villagetrouveNameInput.placeholder = "Citer les Villages Trouvés pour Créer ce Villagetrouve";
-        villagetrouveNameInput.className = "form-control speech-input";
-        villagetrouveNameDiv.appendChild(villagetrouveNameInput);
-
-        const removeVillagetrouveButtonDiv = document.createElement("div");
-        removeVillagetrouveButtonDiv.className = "col-md-3";
-        const removeVillagetrouveButton = document.createElement("button");
-        removeVillagetrouveButton.type = "button";
-        removeVillagetrouveButton.textContent = "-";
-        removeVillagetrouveButton.className = "btn btn-danger remove-villagetrouve";
-        removeVillagetrouveButtonDiv.appendChild(removeVillagetrouveButton);
-
-        villagetrouveDiv.appendChild(villagetrouveNameDiv);
-        villagetrouveDiv.appendChild(removeVillagetrouveButtonDiv);
-        villagetrouveContainer.appendChild(villagetrouveDiv);
-
-        removeVillagetrouveButton.addEventListener("click", function() {
-            villagetrouveContainer.removeChild(villagetrouveDiv);
-            villagetrouveCount--;
-            villagetrouveCountInput.value = villagetrouveCount;
-        });
-
-        villagetrouveCountInput.value = ++villagetrouveCount;
-
-    }
-
-    createVillagetrouveInputs();
-
-    addVillagetrouveButton.addEventListener("click", createVillagetrouveInputs);
-});
-
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const villagetrouveContainer = document.getElementById("villagetrouves");
@@ -305,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const villagetrouveNameInput = document.createElement("input");
         villagetrouveNameInput.type = "text";
         villagetrouveNameInput.name = `villagetrouveName_${villagetrouveCount}`;
-        villagetrouveNameInput.placeholder = "Citer les village trouvés sur les lieus";
+        villagetrouveNameInput.placeholder = "Citer les Villages Trouvés pour Créer ce Villagetrouve";
         villagetrouveNameInput.className = "form-control speech-input";
         villagetrouveNameDiv.appendChild(villagetrouveNameInput);
 
@@ -445,8 +393,8 @@ document.addEventListener("DOMContentLoaded", function() {
         removeCampementButton.className = "btn btn-danger remove-campement";
         removeCampementButtonDiv.appendChild(removeCampementButton);
 
-        campementDiv.appendChild(campementPeupleDiv);
         campementDiv.appendChild(campementNameDiv);
+        campementDiv.appendChild(campementPeupleDiv);
         campementDiv.appendChild(campementOrigineDiv);
         campementDiv.appendChild(removeCampementButtonDiv);
         campementsContainer.appendChild(campementDiv);

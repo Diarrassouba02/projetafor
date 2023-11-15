@@ -127,9 +127,9 @@ def formulairemanuscrit(request):
         dateoff=request.POST.get('dateoff')
         autoriteoff=request.POST.get('nomaut')
         acte_creation=request.POST.get('act')
-        mode_accès_terre=request.POST.getlist('mode')
+        mode_accès_terre=request.GET.getlist('mode')
         chef_terre=request.POST.get('chef')
-        mode_mise_a_diposition=request.POST.getlist('disposition')
+        mode_mise_a_diposition=request.POST.get('disposition')
         complement=request.POST.get ('complement')
         a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
                      sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
@@ -151,9 +151,8 @@ def formulairemanuscrit(request):
 
 
         a.save()
-        print(mode_accès_terre)
-
-
+        print(village_data)
+        print(village_count)
 
         messages.success(request, 'Le formulaire a été soumis avec succès')
         return redirect('index')

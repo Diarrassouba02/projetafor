@@ -50,8 +50,8 @@
 								</div>
 								<div class="col-md-4 mb-3">
                                 <label for="department">Département :</label>
-                                <select class="custom-select" name="department" id="department" onchange="updateSubPrefectures()">
-                                        <!-- Options seront mises à jour dynamiquement -->
+                                <select class="custom-select" name="departement" id="departement" onchange="updateSubPrefectures()">
+                                                <option value="">Choisissez le department</option><!-- Options seront mises à jour dynamiquement -->
                                 </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -166,7 +166,6 @@
                                         <option value="Village">Village</option>
 							            <option value="groupement de personne">Groupement De Personne</option>
 							            <option value="Aucune">Aucune</option>
-							            <option value="Campement">Campement</option>
                                     </select>
                                 </div>
                             </div>
@@ -204,7 +203,6 @@
                                 </div>
                             </div>
                             <div class="container mt-4">
-                                        <label for="validationDefaultUsername">Nom,prénom et date d'installatio des successeurs</label>
                                 <div id="successors">
                                 <!-- Les champs de saisie des successeurs seront ajoutés ici -->
                                 </div>
@@ -215,7 +213,6 @@
                             <!-- Champ caché pour stocker le nombre de successeurs -->
                             <input type="hidden" name="successor_count" id="successor_count" value="0">
                             <div class="container mt-4">
-                                      <label for="validationDefaultUsername">Lignage  et son ordre d'arrivé</label>
                                 <div id="lines">
                                 <!-- Les champs de saisie des lignées seront ajoutés ici -->
                                 </div>
@@ -263,7 +260,6 @@
                                 </div>
                             </div>
                             <div class="container mt-4">
-                                      <label for="validationDefaultUsername">Citer les peules des campements ensuite précisé le campement et l'origine de ces peuples</label>
                                 <div id="campements">
                                 <!-- Les champs de saisie des campements seront ajoutés ici -->
                                 </div>
@@ -274,7 +270,6 @@
                             <!-- Champ caché pour stocker le nombre de campements -->
                             <input type="hidden" name="campement_count" id="campement_count" value="0">
                             <div class="container mt-4">
-                                   <label for="validationDefaultUsername">site d'adoration ensuite la localisation</label>
                                 <div id="sites">
                                 <!-- Les champs de saisie des sites d'adoration seront ajoutés ici -->
                                 </div>
@@ -285,7 +280,6 @@
                             <!-- Champ caché pour stocker le nombre de sites d'adoration -->
                             <input type="hidden" name="site_count" id="site_count" value="0">
                             <div class="container mt-4">
-                                       <label for="validationDefaultUsername">Encients sites et le motif du départ </label>
                                 <div id="ancient-sites">
                                 <!-- Les champs de saisie des anciens sites seront ajoutés ici -->
                                 </div>
@@ -297,7 +291,7 @@
                             <input type="hidden" name="ancient_site_count" id="ancient_site_count" value="0">
                             <div class="form-row">
                                 <div class="col-md-3 mb-3">
-                                <label for="mode_accès_terre">Mode d'accès à la terre?</label>
+                                <label for="ville">Mode d'accès à la terre?</label>
                                     <select  multiple class="form-control custom-select mb-3" id="mode" name="mode">
                                         <option value="Héritage">héritage</option>
 							            <option value="Dont">dont</option>
@@ -317,7 +311,7 @@
                                 <label for="ville">Mise à la disposition?</label>
                                     <select  multiple class="form-control custom-select mb-3" id="disposition" name="disposition">
                                         <option value="Héritage">héritage</option>
-							            <option value="Dont">dont</option>
+							            <option value="dont">dont</option>
 							            <option value="Prêt ">prêt </option>
 							            <option value="Achat">achat</option>
 							            <option value="Location">Location</option>
@@ -325,7 +319,6 @@
                                 </div>
                             </div>
                             <div class="container mt-4">
-                                   <label for="validationDefaultUsername">Citer les villages régroupés pour former le village actuel</label>
                                 <div id="villages">
                                 <!-- Les champs de saisie des cités des villages regroupés seront ajoutés ici -->
                                 </div>
@@ -336,7 +329,6 @@
                             <!-- Champ caché pour stocker le nombre de cités des villages regroupés -->
                             <input type="hidden" name="village_count" id="village_count" value="0">
                             <div class="container mt-4">
-                                       <label for="validationDefaultUsername">Citer les villages voisins et leur limites avec le village actuel précisé s'il y'a des zones de litiges</label>
                                 <div id="limite_village_litige">
                                 <!-- Les champs de saisie de limites, villages en litige seront ajoutés ici -->
                                 </div>
