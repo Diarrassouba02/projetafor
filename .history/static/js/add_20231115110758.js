@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", function() {
         villagetrouveDiv.className = "form-row mb-3";
 
         const villagetrouveNameDiv = document.createElement("div");
-        villagetrouveNameDiv.className = "col-md-9";
+        villagetrouveNameDiv.className = "col-md-6";
         const villagetrouveNameInput = document.createElement("input");
         villagetrouveNameInput.type = "text";
         villagetrouveNameInput.name = `villagetrouveName_${villagetrouveCount}`;

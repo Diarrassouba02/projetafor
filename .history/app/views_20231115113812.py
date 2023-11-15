@@ -18,7 +18,7 @@ def index(request):
 
 @login_required
 def formulairemanuscrit(request):
-    if  request.method == 'POST':
+    if request.method == 'POST':
         successor_count = int(request.POST.get('successor_count', 0))
         villagetrouve_count= int(request.POST.get('villagetrouve_count', 0))
         line_count = int(request.POST.get('line_count', 0))
@@ -137,8 +137,7 @@ def formulairemanuscrit(request):
         chef_terre=request.POST.get('chef')
         mode_mise_a_diposition=request.POST.getlist('disposition')
         complement=request.POST.get ('complement')
-        if sous_prefecture is not None and  nom_village is not None:
-            a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
+        a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
                      sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
                      nom_declarant=nom_declarant, prenon_declarant=prenon_declarant,
                      qualite_declarant=qualite_declarant, date_naissance_declarant=date_naissance_declarant,
@@ -158,15 +157,16 @@ def formulairemanuscrit(request):
                      groupement_trouve=village_trouve_data)
 
 
+        a.save()
+        print(village_trouve_data)
 
-            a.save()
-            messages.success(request, 'Le formulaire a été soumis avec succès')
-            return redirect('index')
-        else:
-             messages.error(request,'Le village exite déja ou vous avez oublée un champ')
-             return redirect(request, 'formulairemanuscrit')
+
+
+        messages.success(request, 'Le formulaire a été soumis avec succès')
+        return redirect('index')
     else:
-         return redirect('formulairemanuscrit')
+        messages.error(request, 'Le formulaire n\'a pas été soumis avec succès')
+        return render(request, 'forms/forms.html')
 
 
 

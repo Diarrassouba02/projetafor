@@ -165,8 +165,6 @@ def formulairemanuscrit(request):
         else:
              messages.error(request,'Le village exite déja ou vous avez oublée un champ')
              return redirect(request, 'formulairemanuscrit')
-    else:
-         return redirect('formulairemanuscrit')
 
 
 

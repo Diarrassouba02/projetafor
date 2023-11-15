@@ -248,16 +248,16 @@ document.addEventListener("DOMContentLoaded", function() {
         villagetrouveDiv.className = "form-row mb-3";
 
         const villagetrouveNameDiv = document.createElement("div");
-        villagetrouveNameDiv.className = "col-md-9";
+        villagetrouveNameDiv.className = "col-md-3";
         const villagetrouveNameInput = document.createElement("input");
         villagetrouveNameInput.type = "text";
         villagetrouveNameInput.name = `villagetrouveName_${villagetrouveCount}`;
-        villagetrouveNameInput.placeholder = "Citer les Villages/campement ou groupement de personnes  Trouvés si possible";
+        villagetrouveNameInput.placeholder = "Citer les Villages Trouvés";
         villagetrouveNameInput.className = "form-control speech-input";
         villagetrouveNameDiv.appendChild(villagetrouveNameInput);
 
         const removeVillagetrouveButtonDiv = document.createElement("div");
-        removeVillagetrouveButtonDiv.className = "col-md-3";
+        removeVillagetrouveButtonDiv.className = "col-md-2";
         const removeVillagetrouveButton = document.createElement("button");
         removeVillagetrouveButton.type = "button";
         removeVillagetrouveButton.textContent = "-";
