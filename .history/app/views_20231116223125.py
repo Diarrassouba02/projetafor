@@ -141,8 +141,9 @@ def formulairemanuscrit(request):
         complement=request.POST.get ('complement')
         for histoire in histoires:
             if sous_prefecture==histoire.sous_prefecture and nom_village==histoire.nom_village:
-                messages.error(request, 'village déja enregistré')
-                return render(request, 'forms/forms.html')
+                mess="le village à été déja enregistré"
+                messages.error(request, 'Registration fail, try again later')
+                return render(request, 'forms/forms.html',{'mess':mess})
         a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
                      sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
                      nom_declarant=nom_declarant, prenon_declarant=prenon_declarant,
@@ -165,8 +166,8 @@ def formulairemanuscrit(request):
 
 
         a.save()
-        messages.success(request, "village enregistré avec succès")
-        return redirect('formulairemanuscrit')
+        messages.success(request, 'Le formulaire a été soumis avec succès')
+        return redirect('index')
     else:
         return render(request, 'forms/forms.html')
 

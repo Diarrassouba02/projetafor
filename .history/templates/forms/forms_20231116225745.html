@@ -28,34 +28,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-						<div class="card-title"> Commençez toujours par une lettre majuscule</div>
-
-
-
-						                  <div class="d-flex justify-content-center">
-    {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                {% if message.tags == 'success' %}
-                    <a class="alert alert-success" style="color: green;"> {{ message }}</a>
-                {% elif message.tags == 'error' %}
-                    <a class="alert alert-danger" style="color: red;"> {{ message }}</a>
-                {% else %}
-                    <a class="alert" style="color: black;"> {{ message }}</a>
-                {% endif %}
-            {% endfor %}
-        </div>
-    {% endif %}
-</div>
-
-
-
-
-
-
-
-
-
+						<div class="card-title">Veillez remplire le formulaire en commençant toujours par une lettre majuscule</div>
 					</div>
                     <div class="card-body">
                         <form action="{% url 'formulairemanuscrit' %}" method="POST" enctype="multipart/form-data">
@@ -93,13 +66,13 @@
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Nom de l'enqueteur</label>
                                     <div class="input-group">
-                                        <input id="nomenq" type="text" class="form-control  speech-input" name="nomenq" required>
+                                        <input id="nomenq" type="text" class="form-control  speech-input" name="nomenq" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Prénom de l'enqueteur</label>
                                     <div class="input-group">
-                                        <input id="name1" type="text" class="form-control speech-input" name="prenomenq" required>
+                                        <input id="name1" type="text" class="form-control speech-input" name="prenomenq" >
                                     </div>
                                 </div>
 								<div class="col-md-3 mb-3">
@@ -112,7 +85,7 @@
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Signification</label>
                                     <div class="input-group">
-                                        <textarea type="text" name="signification" class="form-control speech-input" id="signification" placeholder="" required></textarea>
+                                        <input type="text" name="signification" class="form-control speech-input" id="signification" placeholder="" >
                                     </div>
                                 </div>
                             </div>
@@ -120,19 +93,19 @@
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Nom Déclarant</label>
                                     <div class="input-group">
-                                        <input name="nomdec" type="text" class="form-control speech-input" id="nomdec" placeholder="" required>
+                                        <input name="nomdec" type="text" class="form-control speech-input" id="nomdec" placeholder="" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Prénom Déclarant</label>
                                     <div class="input-group">
-                                        <input type="text" name="prenomdec" class="form-control speech-input" id="prenomdec" placeholder="" required>
+                                        <input type="text" name="prenomdec" class="form-control speech-input" id="prenomdec" placeholder="" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Qualité Déclarant</label>
                                     <div class="input-group">
-                                        <input type="text" name="qualitedec" class="form-control speech-input" id="nondec" placeholder="" required>
+                                        <input type="text" name="qualitedec" class="form-control speech-input" id="nondec" placeholder="" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
@@ -146,25 +119,25 @@
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Lieu de naissance Déclarant</label>
                                     <div class="input-group">
-                                        <input type="text" name="lieundec" class="form-control speech-input" id="lieundec" required>
+                                        <input type="text" name="lieundec" class="form-control speech-input" id="lieundec" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Lieu de résidence Déclarant</label>
                                     <div class="input-group">
-                                        <input type="text" name="lieudec" class="form-control speech-input" id="lieudec" required>
+                                        <input type="text" name="lieudec" class="form-control speech-input" id="lieudec" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Non fondateur</label>
                                     <div class="input-group">
-                                        <input type="text" name="nomf" class="form-control speech-input" id="nomf" required>
+                                        <input type="text" name="nomf" class="form-control speech-input" id="nomf" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Prénom fondateur</label>
                                     <div class="input-group">
-                                        <input type="text" name="prenomf" class="form-control speech-input" id="prenomf" required>
+                                        <input type="text" name="prenomf" class="form-control speech-input" id="prenomf" >
                                     </div>
                                 </div>
                             </div>
@@ -172,19 +145,19 @@
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Activitées fondateur</label>
                                     <div class="input-group">
-                                        <input type="text" name="activitef" class="form-control speech-input" id="activitef" required>
+                                        <input type="text" name="activitef" class="form-control speech-input" id="activitef" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Lieu d'inhumation</label>
                                     <div class="input-group">
-                                        <input type="text" name="lieuinf" class="form-control speech-input" id="lieuinf" required>
+                                        <input type="text" name="lieuinf" class="form-control speech-input" id="lieuinf" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Origine fondateur</label>
                                     <div class="input-group">
-                                        <input type="text" name="originef" class="form-control speech-input" id="originef" required>
+                                        <input type="text" name="originef" class="form-control speech-input" id="originef" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
@@ -228,7 +201,7 @@
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">époque d'installation</label>
                                     <div class="input-group">
-                                        <input type="text" name="epoque" class="form-control speech-input" list="epoque" required>
+                                        <input type="text" name="epoque" class="form-control speech-input" list="epoque" >
                                         <datalist id="epoque">
                                             <option value="1962">
                                             <option value="1963">
@@ -265,7 +238,7 @@
                                 <div class="col-md-4 mb-3">
                                 <label for="validationDefaultUsername">période officialissation</label>
                                     <div class="input-group">
-                                        <input type="text" name="dateoff" class="form-control speech-input" list="dateof" required>
+                                        <input type="text" name="dateoff" class="form-control speech-input" list="dateof" >
                                         <datalist id="dateof">
                                             <option value="1962">
                                             <option value="1963">
@@ -278,7 +251,7 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="validationDefaultUsername">Nom de l'auritée d'officialissation</label>
                                     <div class="input-group">
-                                        <input type="text" name="nomaut" class="form-control speech-input" list="nomaut" required>
+                                        <input type="text" name="nomaut" class="form-control speech-input" list="nomaut" >
                                         <datalist id="nomaut">
                                             <option value="Administration du territoire">
                                             <option value="ARSO">
@@ -393,13 +366,23 @@
 
 
 
+                            <div class="d-flex justify-content-center">
+              {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
 
+                    <a class="alert alert-success" style="color:red;"> {{ message }}</a>
+
+                {% endfor %}
+            </div>
+            {% endif %}
+              </div>
 
 
 
                             <div class="card-action">
-							    <button class="btn btn-success">enregistrez</button>
-                                <a href="{% url 'index' %}" class="btn btn-danger">Accueil</a>
+							    <button class="btn btn-success">Submit</button>
+							    <button class="btn btn-danger">Cancel</button>
 						    </div>
 						</form>
                     </div>
