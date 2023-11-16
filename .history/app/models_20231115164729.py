@@ -118,6 +118,6 @@ class Histoire(models.Model):
     mode_mise_a_diposition=models.CharField(max_length=200)
     groupement_liste=models.CharField(max_length=900)
     limite_litige_village=models.CharField(max_length=300)
-    #fichier=models.ImageField(upload_to=fichier)
+    fichier=models.ImageField(upload_to=fichier)
     complement=models.TextField()
     objects = models.DjongoManager()

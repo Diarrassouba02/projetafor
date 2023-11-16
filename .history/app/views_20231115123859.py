@@ -18,8 +18,6 @@ def index(request):
 
 @login_required
 def formulairemanuscrit(request):
-    histoires= Histoire.objects.all()
-    contexte={"histoires":histoires}
     if  request.method == 'POST':
         successor_count = int(request.POST.get('successor_count', 0))
         villagetrouve_count= int(request.POST.get('villagetrouve_count', 0))
@@ -139,7 +137,8 @@ def formulairemanuscrit(request):
         chef_terre=request.POST.get('chef')
         mode_mise_a_diposition=request.POST.getlist('disposition')
         complement=request.POST.get ('complement')
-        a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
+        if sous_prefecture is not None and  nom_village is not None:
+            a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
                      sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
                      nom_declarant=nom_declarant, prenon_declarant=prenon_declarant,
                      qualite_declarant=qualite_declarant, date_naissance_declarant=date_naissance_declarant,
@@ -160,12 +159,12 @@ def formulairemanuscrit(request):
 
 
 
-        a.save()
-        messages.success(request, 'Le formulaire a été soumis avec succès')
-        return redirect('index')
-    else:
-        messages.error(request, 'le village exite déja ou vous avez omis un champs')
-        return render(request, 'forms/forms.html')
+            a.save()
+            messages.success(request, 'Le formulaire a été soumis avec succès')
+            return redirect('index')
+        else:
+             messages.error(request,'Le village exite déja ou vous avez oublée un champ')
+             return render(request, 'forms/forms.html')
 
 
 

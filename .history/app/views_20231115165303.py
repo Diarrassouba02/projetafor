@@ -18,8 +18,6 @@ def index(request):
 
 @login_required
 def formulairemanuscrit(request):
-    histoires= Histoire.objects.all()
-    contexte={"histoires":histoires}
     if  request.method == 'POST':
         successor_count = int(request.POST.get('successor_count', 0))
         villagetrouve_count= int(request.POST.get('villagetrouve_count', 0))
@@ -165,7 +163,7 @@ def formulairemanuscrit(request):
         return redirect('index')
     else:
         messages.error(request, 'le village exite déja ou vous avez omis un champs')
-        return render(request, 'forms/forms.html')
+        return redirect(request, 'formulairemanuscrit')
 
 
 
