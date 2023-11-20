@@ -1,0 +1,108 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search..." id="searchInput">
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Column 1</th>
+          <th scope="col">Column 2</th>
+          <th scope="col">Column 3</th>
+          <th scope="col">Column 4</th>
+          <th scope="col">Column 5</th>
+          <th scope="col">Column 6</th>
+          <th scope="col">Column 7 (Detail)</th>
+          <th scope="col">Column 8 (Modifier)</th>
+          <th scope="col">Column 9 (Supprimer)</th>
+          <th scope="col">Column 10 (Tirez le PV)</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        <!-- Table rows go here -->
+        <tr>
+          <th scope="row">1</th>
+          <td>New York</td>
+          <td>USA</td>
+          <td>Column 3 Data</td>
+          <td>Column 4 Data</td>
+          <td>Column 5 Data</td>
+          <td>Column 6 Data</td>
+          <td><button class="btn btn-info">Detail</button></td>
+          <td><button class="btn btn-warning">Modifier</button></td>
+          <td><button class="btn btn-danger">Supprimer</button></td>
+          <td><button class="btn btn-success">Tirez le PV</button></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Paris</td>
+          <td>France</td>
+          <td>Column 3 Data</td>
+          <td>Column 4 Data</td>
+          <td>Column 5 Data</td>
+          <td>Column 6 Data</td>
+          <td><button class="btn btn-info">Detail</button></td>
+          <td><button class="btn btn-warning">Modifier</button></td>
+          <td><button class="btn btn-danger">Supprimer</button></td>
+          <td><button class="btn btn-success">Tirez le PV</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Your additional scripts go here -->
+
+<script>
+  // Function to filter table rows based on search input
+  function searchTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1]; // Change the index to match the column you want to search
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+  // Attach the search function to the input event
+  document.getElementById("searchInput").addEventListener("input", searchTable);
+</script>
+
+{% endblock extrajs %}
+</body>
