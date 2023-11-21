@@ -48,6 +48,14 @@
     {% endif %}
 </div>
 
+
+
+
+
+
+
+
+
 					</div>
                     <div class="card-body">
                         <form action="{% url 'formulairemanuscrit' %}" method="POST" enctype="multipart/form-data">
@@ -62,7 +70,7 @@
                                         <option value="Bafing">Bafing</option>
                                         <option value="Bagoué">Bagoué</option>
                                         <option value="Bélier">Bélier</option>
-                                        <option value="Béré">Béré</option>
+                                        <option value=""></option>
                                         <option value=""></option>
                                         <option value=""></option>
                                     </select>
@@ -94,22 +102,13 @@
                                         <input id="name1" type="text" class="form-control speech-input" name="prenomenq" required>
                                     </div>
                                 </div>
-
-
-
-<div class="col-md-3 mb-3">
-    <label for="village">Choisissez un village :</label>
-    <select class="custom-select" id="village"  name="village">
-        <option value="">Sélectionnez un village</option>
-        <!-- Les options du village seront ajoutées dynamiquement ici via JavaScript -->
-    </select>
-</div>
-
-
-
-
-
-
+								<div class="col-md-3 mb-3">
+                                    <label for="village">Choisissez un village :</label>
+                                    <select class="custom-select" id="village"  name="village">
+                                        <option value="">Sélectionnez un village</option>
+                                             <!-- Ajoutez ici les options du village dynamiquement si nécessaire -->
+                                     </select>
+                                </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Signification</label>
                                     <div class="input-group">
@@ -394,7 +393,7 @@
 
                             <div class="card-action">
 							    <button class="btn btn-success">enregistrez</button>
-                                <a href="{% url 'datah' %}" class="btn btn-danger">voir les données</a>
+                                <a href="{% url 'index' %}" class="btn btn-danger">Accueil</a>
 						    </div>
 						</form>
                     </div>
@@ -631,7 +630,7 @@
         "Djékanou":["Abouakakro 1", "Assoikro", "Bringakro", "Djékanou", "Lalièkro",
                     "Mougnan", "Tafissou", "Yaokouadiokro", "Yobouébo", "Alluiminankro", "Angbavia"],
 
-        "ABéréngoda":["Angonda", "Assafou", "Djangoménou", "Gbakroukro", "Gbofia", "Kétékré-Bonikro",
+        "Angoda":["Angonda", "Assafou", "Djangoménou", "Gbakroukro", "Gbofia", "Kétékré-Bonikro",
     "Koffidjèkro", "Konan Kokorékro", "Lomo-Nord", "Mougokro", "N'Guessankro"],
     "Kokoumbo":["Kimoukro", "Kokumbo", "Kplessou", "Makankouamékro", "Niamkey-Konankro",
                "N'Zabonou", "Ahouékro", "Akroukro", "Assinzè", "Bériaboukro", "Gbogbobo",
@@ -649,49 +648,10 @@
 
     },
 
-   Béré:{
-          departments:["Kounahiri","Dianra","Mankono"],
-          subPrefectures:{
-            Dianra:["Dianra","Dianra-Village"],
-            Kounahiri :["Kongasso","Kounahiri"],
-            Mankono:["Bouandougou","Mankono","Marandalah","Sarhala","Tiéningboué"],
-
-          },
-
-    villages:{
-          "Dianra":['Dianra', 'Fila-Faraba', 'Gbatosso', 'Katiali', 'Lenguédougou', 'Samoukaha',
-                      'Séfigué', 'Cissédougou', 'Dalagbè', 'Diarradougou', 'Diembé', 'Gbondiélé',
-                      'Gbongougo 1', 'Gbongougo 2', 'Gominasso', 'Korotou', 'Lalogo', 'Locolo',
-                      'Manadougou', 'Ouahiéré', 'Sienkounon', 'Solifono', 'Yérétiélé'],
-  "Dianra-Village":['Balladougou', 'Bébédougou', 'Dianra-Village', 'Djénéni', 'Faraba',
-                     'Kafégué', 'Kan-Sokoura', 'Kodjodougou', 'Lessoumasso', 'Maghan', 'N\'Guissidougou',
-                     'Nondjoni', 'Pétérikaha', 'Sononzo', 'Sononzo-Sokoura', 'Tamafrou', 'Tienvolokaha',
-                     'Tomikro', 'Toutey'],
-  "Kongasso": ['Fouanga', 'Kavagouma', 'Kongasso', 'Tiénigbé', 'Tofesso', 'Bambalouma',
-                'Bouaka', 'Bourounon', 'Gbaziasso', 'Gbéma', 'Guéasso', 'Kabakoro',
-                  'Korokopla', 'Kounadidougou', 'Tialouma', 'Togbasso', 'Toubalo', 'Tulé'],
-  "Kounahiri":[],
 
 
-
-
-    }
-
-
-
+   Kakpin :{
     },
-
-
-
-    Kakpin :{
-
-
-    },
-
-
-
-
-
     };
 
     const regionSelect = document.getElementById("region");
