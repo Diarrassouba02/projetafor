@@ -30,7 +30,7 @@ class Histoire(models.Model):
     personne_trouve=models.CharField(max_length=200)
     groupement_trouve=models.CharField(max_length=200)
     accord_passe=models.CharField(max_length=200)
-    lien=models.TextField(blank=True)
+    lien=models.TextField()
     epoque_installation=models.TextField()
     succeseur_nom_prenon_date=models.CharField(max_length=900)
     nomlignage=models.CharField(max_length=900)
