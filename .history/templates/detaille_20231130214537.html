@@ -1,0 +1,996 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+	<div class="content">
+		<div class="page-inner">
+			<!-- Card -->
+			<h4 class="page-title">Les détails du village {{ histoire.nom_village  }}</h4>
+			<div class="row">
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-success card-round">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-placeholder"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Région</p>
+										<h4 class="card-title">{{ histoire.nom_region }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-warning card-round">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-placeholder"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Département</p>
+										<h4 class="card-title">{{ histoire.nom_departement }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-success card-round">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-signs-3"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Sous préfecture</p>
+										<h4 class="card-title">{{ histoire.sous_prefecture }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-secondary card-round">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-success"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Act de création</p>
+										<h4 class="card-title">{{ histoire.acte_creation }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Card With Icon States Color -->
+			<div class="row">
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-clock-1 text-warning"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Date d'installation</p>
+										<h4 class="card-title"> {{ histoire.epoque_installation }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-user text-success"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Autorité d'officialisation</p>
+										<h4 class="card-title">{{ histoire.autoriteoff }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-clock-1 text-danger"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Date officialisation</p>
+										<h4 class="card-title">{{ histoire.dateoff}}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-interface-2 text-primary"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Mode d'accès terre</p>
+										<h4 class="card-title">	{% for i in histoire.mode_accès_terre %} {{ i }} {% endfor %}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Card With Icon States Background -->
+			<div class="row">
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body ">
+							<div class="row align-items-center">
+								<div class="col-icon">
+									<div class="icon-big text-center icon-primary bubble-shadow-small">
+										<i class="flaticon-interface-2"></i>
+									</div>
+								</div>
+								<div class="col col-stats ml-3 ml-sm-0">
+									<div class="numbers">
+										<p class="card-category">Mise à disposion terre</p>
+										<h4 class="card-title">{% for i in histoire.mode_mise_a_diposition  %} {{ i }} {% endfor %}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-icon">
+									<div class="icon-big text-center icon-info bubble-shadow-small">
+										<i class="flaticon-user"></i>
+									</div>
+								</div>
+								<div class="col col-stats ml-3 ml-sm-0">
+									<div class="numbers">
+										<p class="card-category">Fondateur</p>
+										<h4 class="card-title">{{ histoire.nom_fondateur }}  {{histoire.prenom_fondateur }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-icon">
+									<div class="icon-big text-center icon-success bubble-shadow-small">
+										<i class="flaticon-share-1"></i>
+									</div>
+								</div>
+								<div class="col col-stats ml-3 ml-sm-0">
+									<div class="numbers">
+										<p class="card-category">Origine Fondateur</p>
+										<h4 class="card-title">{{ histoire.origine_fondateur }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-icon">
+									<div class="icon-big text-center icon-secondary bubble-shadow-small">
+										<i class="flaticon-user"></i>
+									</div>
+								</div>
+								<div class="col col-stats ml-3 ml-sm-0">
+									<div class="numbers">
+										<p class="card-category">Activitées du fondateur</p>
+										<h4 class="card-title">{{ histoire.activite_fondateur }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Row Card No Padding -->
+			<div class="row row-card-no-pd">
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-user text-warning"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category"> Lieu d'inhumation fondateur</p>
+										<h4 class="card-title">{{ histoire.lieu_inhimationf }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-user text-success"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Personnes trouvées sur les lieux par le fondateur</p>
+										<h4 class="card-title">{{ histoire.personne_trouve }}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-error text-danger"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">y'a t'il un chef de terre?</p>
+										<h4 class="card-title">{{ histoire.chef_terre }}</h4>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="flaticon-twitter text-primary"></i>
+									</div>
+								</div>
+								<div class="col-7 col-stats">
+									<div class="numbers">
+										<p class="card-category">Lien entre le fondateur et les personnes trouvées</p>
+										 {% if histoire.lien  %}
+										<h4 class="card-title">{{ histoire.lien }}</h4>
+										{% else %}
+											<h4 class="card-title"> Pas de lien</h4>
+											{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+			<div class="row">
+
+
+
+				<div class="col-12 col-sm-6 col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<div>
+									<h5><b>Liste des groupements trouvés par le fondateur(village,campement...) </b></h5>
+									<hr>
+									{% for i in histoire.groupement_trouve  %}
+									      {% if i.groupement  %}
+									   <div>{{ i.groupement }}</div>
+									     {% else %}
+									      <div>Aucun</div>
+									   {% endif %}
+									    {% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-12 col-sm-6 col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<div>
+									<h5><b>A t'il passé des accords avec les personnes trouvée?</b></h5>
+									<p class="text-muted">{{ histoire.accord_passe }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-sm-6 col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<div>
+									<h5><b>Les successeurs</b></h5>
+								</div>
+								<h3 class="text-info fw-bold">{{ histoire.succeseur_nom_prenon_date|length }}</h3>
+							</div>
+							<hr>
+      <table class="table-responsive-sm">
+        <thead>
+          <tr>
+              <th scope="col">Nom Prénom</th>
+             <th scope="col">date d'accession</th>
+          </tr>
+        </thead>
+      <tbody>
+     	      {% for i in histoire.succeseur_nom_prenon_date  %}
+         <tr>
+             <td>{{ i.nom }}  {{ i.prénom }}</td>
+                 {% if i.accession_date  %}
+             <td>{{ i.accession_date }} </td>
+                      {% else %}
+             <td> inconnu </td>
+                {% endif %}
+          </tr>
+               {% endfor %}
+      </tbody>
+     </table>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-12 col-sm-6 col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<div>
+									<h5><b>Combien de lignagnes se réclamant d'un ancêtre commun?</b></h5>
+								</div>
+								<h3 class="text-secondary fw-bold">{{ histoire.nomlignage|length }}</h3>
+							</div>
+							<hr>
+
+
+						<table class="table-responsive-sm">
+                               <thead>
+                                 <tr>
+                              <th scope="col">Lignages</th>
+                                <th scope="col">Ordre d'arrivé</th>
+                             </tr>
+                            </thead>
+                            <tbody>
+     	                      {% for i in histoire.nomlignage  %}
+                                   <tr>
+                               <td>{{ i.nom_lignage }} </td>
+                                {% if i.ordre  %}
+                                    <td>{{ i.ordre }} </td>
+                                    {% else %}
+                                      <td> inconnu </td>
+                                    {% endif %}
+                                        </tr>
+                                  {% endfor %}
+                                   </tbody>
+                            </table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card card-secondary">
+						<div class="card-body skew-shadow">
+							<h3>Les campements du village leurs peuples et origines de ses peuples</h3>
+							<hr>
+
+                               <table class="table-responsive">
+                              <thead>
+                                   <tr>
+                                     <th scope="col">Campements</th>
+                                     <th scope="col">Peuples</th>
+                                      <th scope="col">origines</th>
+                                   </tr>
+                                </thead>
+                               <tbody>
+
+                                {% if i.succeseur_nom_prenon_date  %}
+     	                          {% for i in histoire.succeseur_nom_prenon_date  %}
+                              <tr>
+
+                                  <td>{{ i.nom }} </td>
+                                      <td>{{ i.peuple }} </td>
+
+                                  <td> {{ i.origine }}</td>
+                                  {% endfor %}
+                                  {% else %}
+                                    <td> Le village n'as pas de campement </td>
+                                     {% endif %}
+                                 </tr>
+
+                          </tbody>
+                         </table>
+
+
+
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card card-dark bg-secondary-gradient">
+						<div class="card-body bubble-shadow">
+							<h3>Les sites d'adorations</h3>
+							<hr>
+
+                            <table class="table-responsive-sm">
+                               <thead>
+                                 <tr>
+                              <th scope="col">Nom site</th>
+                                <th scope="col">Position</th>
+                             </tr>
+                            </thead>
+                            <tbody>
+                            {% if histoire.site_adoration  %}
+     	                      {% for i in histoire.site_adoration  %}
+                                   <tr>
+                               <td>{{ i.name }} </td>
+
+                                    <td class='accordion-info-mb-3'>{{ i.localisation }} </td>
+                                       {% endfor %}
+                                    {% else %}
+                                      <td> Pas de site d'adoration </td>
+                                    {% endif %}
+                                </tr>
+
+                                   </tbody>
+                            </table>
+
+
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card card-dark bg-secondary2">
+						<div class="card-body curves-shadow">
+							<h3>Anciens Sites du Village</h3>
+							<hr>
+
+
+
+
+                            <table class="table-responsive-sm">
+                               <thead>
+                                 <tr>
+                              <th scope="col">Anciens sites</th>
+							  <th scope="col">Motifs</th>
+                             </tr>
+                            </thead>
+                            <tbody>
+                            {% if histoire.ancien_site  %}
+     	                      {% for i in histoire.ancien_site  %}
+                                   <tr>
+                               <td>{{ i.name }} </td>
+
+                                    <td class='accordion-info-mb-3'>{{ i.motif }} </td>
+                                       {% endfor %}
+                                    {% else %}
+                                      <td> Pas d'ancien site </td>
+                                    {% endif %}
+                                </tr>
+                                   </tbody>
+                             </table>
+
+
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card card-dark bg-secondary-gradient">
+						<div class="card-body skew-shadow">
+							<h3>Signification non du village</h3>
+							<p>{{histoire.signification }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card card-dark bg-secondary-gradient">
+						<div class="card-body bubble-shadow">
+							<h3>Détails du déclarant</h3>
+							<div>   Nom: {{ histoire.nom_declarant}}</div>
+							<div>Prénom: {{ histoire.prenon_declarant }}</div>
+							<div>Qualité: {{ histoire.qualite_declarant}}</div>
+							<div>Date de naissance: {{ histoire.date_naissance_declarant}}</div>
+							<div>Lieu de naissance: {{ histoire.lieu_naissance_declarant}}</div>
+							<div>Lieu de résidence: {{ histoire.lieu_residence_declarant}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card card-dark bg-secondary-gradient">
+						<div class="card-body curves-shadow">
+							<h3>Complémént</h3>
+							<div>Nom: {{ histoire.complement }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+			<div class="row justify-content-center align-items-center mb-1">
+				<div class="col-md-3 pl-md-0">
+					<div class="card card-pricing">
+						<div class="card-header">
+							<h4 class="card-title">Villages régroupés pour former ce village </h4>
+
+						</div>
+						<div class="card-body">
+							<ul class="specification-list">
+								<li>
+									<span class="name-specification">Customizer</span>
+									<span class="status-specification">14 days trial</span>
+									<span class="status-specification">14 days trial</span>
+								</li>
+								<li>
+									<span class="name-specification">Chat History</span>
+									<span class="status-specification">No</span>
+								</li>
+								<li>
+									<span class="name-specification">Statistics</span>
+									<span class="status-specification">14 days trial</span>
+								</li>
+								<li>
+									<span class="name-specification">Support</span>
+									<span class="status-specification">Yes</span>
+								</li>
+								<li>
+									<span class="name-specification">Live Support</span>
+									<span class="status-specification">No</span>
+								</li>
+							</ul>
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-primary btn-block"><b>Get Started</b></button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 pl-md-0 pr-md-0">
+					<div class="card card-pricing card-pricing-focus card-primary">
+						<div class="card-header">
+							<h4 class="card-title">Professional</h4>
+							<div class="card-price">
+								<span class="price">$35</span>
+								<span class="text">/mo</span>
+							</div>
+						</div>
+						<div class="card-body">
+							<ul class="specification-list">
+								<li>
+									<span class="name-specification">Customizer</span>
+									<span class="status-specification">Yes</span>
+								</li>
+								<li>
+									<span class="name-specification">Chat History</span>
+									<span class="status-specification">3 Month</span>
+								</li>
+								<li>
+									<span class="name-specification">Statistics</span>
+									<span class="status-specification">3 Month</span>
+								</li>
+								<li>
+									<span class="name-specification">Support</span>
+									<span class="status-specification">Yes</span>
+								</li>
+								<li>
+									<span class="name-specification">Live Support</span>
+									<span class="status-specification">Yes</span>
+								</li>
+							</ul>
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-light btn-block"><b>Get Started</b></button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 pr-md-0">
+					<div class="card card-pricing">
+						<div class="card-header">
+							<h4 class="card-title">Team</h4>
+							<div class="card-price">
+								<span class="price">$75</span>
+								<span class="text">/mo</span>
+							</div>
+						</div>
+						<div class="card-body">
+							<ul class="specification-list">
+								<li>
+									<span class="name-specification">Customizer</span>
+									<span class="status-specification">Yes</span>
+								</li>
+								<li>
+									<span class="name-specification">Chat History</span>
+									<span class="status-specification">1 Year</span>
+								</li>
+								<li>
+									<span class="name-specification">Statistics</span>
+									<span class="status-specification">1 Year</span>
+								</li>
+								<li>
+									<span class="name-specification">Support</span>
+									<span class="status-specification">Yes</span>
+								</li>
+								<li>
+									<span class="name-specification">Live Support</span>
+									<span class="status-specification">Yes</span>
+								</li>
+							</ul>
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-primary btn-block"><b>Get Started</b></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h4 class="page-title">Pricing 2</h4>
+			<div class="row justify-content-center align-items-center mb-5">
+				<div class="col-md-3 pl-md-0">
+					<div class="card-pricing2 card-success">
+						<div class="pricing-header">
+							<h3 class="fw-bold">Standard</h3>
+							<span class="sub-title">Lorem ipsum</span>
+						</div>
+						<div class="price-value">
+							<div class="value">
+								<span class="currency">$</span>
+								<span class="amount">10.<span>99</span></span>
+								<span class="month">/month</span>
+							</div>
+						</div>
+						<ul class="pricing-content">
+							<li>50GB Disk Space</li>
+							<li>50 Email Accounts</li>
+							<li>50GB Monthly Bandwidth</li>
+							<li class="disable">10 Subdomains</li>
+							<li class="disable">15 Domains</li>
+						</ul>
+						<a href="#" class="btn btn-success btn-border btn-lg w-75 fw-bold mb-3">Sign up</a>
+					</div>
+				</div>
+				<div class="col-md-3 pl-md-0 pr-md-0">
+					<div class="card-pricing2 card-primary">
+						<div class="pricing-header">
+							<h3 class="fw-bold">Business</h3>
+							<span class="sub-title">Lorem ipsum</span>
+						</div>
+						<div class="price-value">
+							<div class="value">
+								<span class="currency">$</span>
+								<span class="amount">20.<span>99</span></span>
+								<span class="month">/month</span>
+							</div>
+						</div>
+						<ul class="pricing-content">
+							<li>60GB Disk Space</li>
+							<li>60 Email Accounts</li>
+							<li>60GB Monthly Bandwidth</li>
+							<li>15 Subdomains</li>
+							<li class="disable">20 Domains</li>
+						</ul>
+						<a href="#" class="btn btn-primary btn-border btn-lg w-75 fw-bold mb-3">Sign up</a>
+					</div>
+				</div>
+				<div class="col-md-3 pr-md-0">
+					<div class="card-pricing2 card-secondary">
+						<div class="pricing-header">
+							<h3 class="fw-bold">Premium</h3>
+							<span class="sub-title">Lorem ipsum</span>
+						</div>
+						<div class="price-value">
+							<div class="value">
+								<span class="currency">$</span>
+								<span class="amount">30.<span>99</span></span>
+								<span class="month">/month</span>
+							</div>
+						</div>
+						<ul class="pricing-content">
+							<li>70GB Disk Space</li>
+							<li>70 Email Accounts</li>
+							<li>70GB Monthly Bandwidth</li>
+							<li>20 Subdomains</li>
+							<li>25 Domains</li>
+						</ul>
+						<a href="#" class="btn btn-secondary btn-border btn-lg w-75 fw-bold mb-3">Sign up</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Customized Card -->
+			<h4 class="page-title">Customized Card</h4>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card card-info card-annoucement card-round">
+						<div class="card-body text-center">
+							<div class="card-opening">Welcome Rian,</div>
+							<div class="card-desc">
+								Congrats and best wishes for success in your brand new life!
+								I knew that you would do this!
+							</div>
+							<div class="card-detail">
+								<div class="btn btn-light btn-rounded">View Detail</div>
+							</div>
+						</div>
+					</div>
+					<div class="card card-round">
+						<div class="card-body">
+							<div class="card-title fw-mediumbold">Suggested People</div>
+							<div class="card-list">
+								<div class="item-list">
+									<div class="avatar">
+										<img src="{% static 'assets/img/jm_denis.jpg' %}" alt="..." class="avatar-img rounded-circle">
+									</div>
+									<div class="info-user ml-3">
+										<div class="username">Jimmy Denis</div>
+										<div class="status">Graphic Designer</div>
+									</div>
+									<button class="btn btn-icon btn-primary btn-round btn-xs">
+										<i class="fa fa-plus"></i>
+									</button>
+								</div>
+								<div class="item-list">
+									<div class="avatar">
+										<img src="{% static 'assets/img/chadengle.jpg' %}" alt="..." class="avatar-img rounded-circle">
+									</div>
+									<div class="info-user ml-3">
+										<div class="username">Chad</div>
+										<div class="status">CEO Zeleaf</div>
+									</div>
+									<button class="btn btn-icon btn-primary btn-round btn-xs">
+										<i class="fa fa-plus"></i>
+									</button>
+								</div>
+								<div class="item-list">
+									<div class="avatar">
+										<img src="{% static 'assets/img/talha.jpg' %}" alt="..." class="avatar-img rounded-circle">
+									</div>
+									<div class="info-user ml-3">
+										<div class="username">Talha</div>
+										<div class="status">Front End Designer</div>
+									</div>
+									<button class="btn btn-icon btn-primary btn-round btn-xs">
+										<i class="fa fa-plus"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card card-post card-round">
+						<img class="card-img-top" src="{% static 'assets/img/blogpost.jpg' %}" alt="Card image cap">
+						<div class="card-body">
+							<div class="d-flex">
+								<div class="avatar">
+									<img src="{% static 'assets/img/profile2.jpg' %}" alt="..." class="avatar-img rounded-circle">
+								</div>
+								<div class="info-post ml-2">
+									<p class="username">Joko Subianto</p>
+									<p class="date text-muted">20 Jan 18</p>
+								</div>
+							</div>
+							<div class="separator-solid"></div>
+							<p class="card-category text-info mb-1"><a href="#">Design</a></p>
+							<h3 class="card-title">
+								<a href="#">
+									Best Design Resources This Week
+								</a>
+							</h3>
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<a href="#" class="btn btn-primary btn-rounded btn-sm">Read More</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card card-profile">
+						<div class="card-header" style="background-image: url('/assets/img/blogpost.jpg')">
+							<div class="profile-picture">
+								<div class="avatar avatar-xl">
+									<img src="{% static 'assets/img/profile.jpg' %}" alt="..." class="avatar-img rounded-circle">
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="user-profile text-center">
+								<div class="name">Hizrian, 19</div>
+								<div class="job">Frontend Developer</div>
+								<div class="desc">A man who hates loneliness</div>
+								<div class="social-media">
+									<a class="btn btn-info btn-twitter btn-sm btn-link" href="#">
+										<span class="btn-label just-icon"><i class="flaticon-twitter"></i> </span>
+									</a>
+									<a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+										<span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span>
+									</a>
+									<a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#">
+										<span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span>
+									</a>
+									<a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+										<span class="btn-label just-icon"><i class="flaticon-dribbble"></i> </span>
+									</a>
+								</div>
+								<div class="view-profile">
+									<a href="#" class="btn btn-secondary btn-block">View Full Profile</a>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="row user-stats text-center">
+								<div class="col">
+									<div class="number">125</div>
+									<div class="title">Post</div>
+								</div>
+								<div class="col">
+									<div class="number">25K</div>
+									<div class="title">Followers</div>
+								</div>
+								<div class="col">
+									<div class="number">134</div>
+									<div class="title">Following</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
+{% block extrajs %}
+	<script>
+		$('#lineChart').sparkline([102,109,120,99,110,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#177dff',
+			fillColor: 'rgba(23, 125, 255, 0.14)'
+		});
+
+		$('#lineChart2').sparkline([99,125,122,105,110,124,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#f3545d',
+			fillColor: 'rgba(243, 84, 93, .14)'
+		});
+
+		$('#lineChart3').sparkline([105,103,123,100,95,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#ffa534',
+			fillColor: 'rgba(255, 165, 52, .14)'
+		});
+
+		$('#lineChart4').sparkline([102,109,120,99,110,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+
+		$('#lineChart5').sparkline([99,125,122,105,110,124,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+
+		$('#lineChart6').sparkline([105,103,123,100,95,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+	</script>
+{% endblock extrajs %}
+
