@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-l3lt=06g2u89$ffcya9w&dfoi3_o3s(p&w4aeo*$-r35qq5#f$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =True
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-
-
+    'reportlab',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +130,13 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
 #STATIC_ROOT = 'staticfiles'
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
 
 
 #STATICFILES_DIRS = (
