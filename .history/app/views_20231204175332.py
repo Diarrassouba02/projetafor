@@ -1,13 +1,22 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
+from django.templatetags.static import static
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth.decorators import login_required
 from .models import Histoire
 from django.contrib import messages,auth
 from django.contrib.auth import authenticate,logout
+import ast,io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.utils import ImageReader
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import cm
+from PIL import Image
 
 
 
-
-@login_required
+@login_required(login_url='connection')
 def index(request):
     histoire= Histoire.objects.all().count()
     contex={"histoire":histoire}
@@ -18,8 +27,11 @@ def index(request):
 
 @login_required
 def formulairemanuscrit(request):
-    if request.method == 'POST':
+    histoires= Histoire.objects.all()
+    contexte={"histoires":histoires}
+    if  request.method == 'POST':
         successor_count = int(request.POST.get('successor_count', 0))
+        villagetrouve_count= int(request.POST.get('villagetrouve_count', 0))
         line_count = int(request.POST.get('line_count', 0))
         campement_count = int(request.POST.get('campement_count', 0))
         site_count = int(request.POST.get('site_count', 0))
@@ -33,6 +45,7 @@ def formulairemanuscrit(request):
         ancient_sites_data = []
         village_data = []
         limite_village_litige_data = []
+        village_trouve_data=[]
 
         for i in range( successor_count):
             name = request.POST.get(f'name_{i}')
@@ -102,8 +115,12 @@ def formulairemanuscrit(request):
                 'zone_litigee': zone_litigee,
             })
 
+        for i in range(villagetrouve_count):
+            groupement_trouve=request.POST.get(f'villagetrouveName_{i}')
+            village_trouve_data.append({'groupement':groupement_trouve})
+
         nom_region = request.POST.get('region')
-        nom_departement = request.POST.get('departement')
+        nom_departement = request.POST.get('department')
         sous_prefecture = request.POST.get('sous_prefecture')
         nomenq=request.POST.get('nomenq')
         prenomenq=request.POST.get('prenomenq')
@@ -127,10 +144,14 @@ def formulairemanuscrit(request):
         dateoff=request.POST.get('dateoff')
         autoriteoff=request.POST.get('nomaut')
         acte_creation=request.POST.get('act')
-        mode_accès_terre=request.POST.get('mode')
+        mode_accès_terre=request.POST.getlist('mode')
         chef_terre=request.POST.get('chef')
-        mode_mise_a_diposition=request.POST.get('disposition')
+        mode_mise_a_diposition=request.POST.getlist('disposition')
         complement=request.POST.get ('complement')
+        for histoire in histoires:
+            if sous_prefecture==histoire.sous_prefecture and nom_village==histoire.nom_village:
+                messages.error(request, 'village déja enregistré')
+                return render(request, 'forms/forms.html')
         a = Histoire(nom_region=nom_region, nom_departement=nom_departement,
                      sous_prefecture=sous_prefecture, nom_village=nom_village,signification=signification,
                      nom_declarant=nom_declarant, prenon_declarant=prenon_declarant,
@@ -147,17 +168,15 @@ def formulairemanuscrit(request):
                      site_adoration=sites_data,ancien_site=ancient_sites_data,
                      mode_accès_terre=mode_accès_terre,chef_terre=chef_terre,
                      mode_mise_a_diposition=mode_mise_a_diposition,groupement_liste=village_data,
-                     limite_litige_village=limite_village_litige_data,complement=complement)
+                     limite_litige_village=limite_village_litige_data,complement=complement,
+                     groupement_trouve=village_trouve_data)
+
 
 
         a.save()
-        print(village_data)
-        print(village_count)
-
-        messages.success(request, 'Le formulaire a été soumis avec succès')
-        return redirect('index')
+        messages.success(request, "village enregistré avec succès")
+        return redirect('formulairemanuscrit')
     else:
-        messages.error(request, 'Le formulaire n\'a pas été soumis avec succès')
         return render(request, 'forms/forms.html')
 
 
@@ -189,11 +208,71 @@ def connection(request):
     else:
         return render(request,'forms/transcription/transcription.html',context)
 
-
 # Tables
 
 
 @login_required
 def datatables(request):
-    return render(request, 'tables/datatables.html')
+    histoires= Histoire.objects.all()
 
+    for histoire in histoires:
+        histoire.mode_accès_terre=ast.literal_eval(histoire.mode_accès_terre)
+        histoire.mode_mise_a_diposition=ast.literal_eval(histoire.mode_mise_a_diposition)
+        histoire.limite_litige_village
+        contexte={"histoires":histoires}
+    return render(request, 'tables/datatables.html',contexte)
+
+def detaille(request,pk):
+    histoire=Histoire.objects.get(id=pk)
+    histoire.mode_mise_a_diposition=ast.literal_eval(histoire.mode_mise_a_diposition)
+    histoire.mode_accès_terre=ast.literal_eval(histoire.mode_accès_terre)
+    histoire.succeseur_nom_prenon_date=ast.literal_eval(histoire.succeseur_nom_prenon_date)
+    histoire.limite_litige_village=ast.literal_eval(histoire.limite_litige_village)
+    histoire.groupement_trouve=ast.literal_eval(histoire.groupement_trouve)
+    histoire.nomlignage=ast.literal_eval(histoire.nomlignage)
+    histoire.site_adoration=ast.literal_eval(histoire.site_adoration)
+    histoire.ancien_site=ast.literal_eval(histoire.ancien_site)
+    histoire.groupement_liste=ast.literal_eval(histoire.groupement_liste)
+    contexte={"histoire":histoire}
+
+    return render(request, 'detaille.html',contexte)
+
+
+#Genération du rapport pdf
+
+def rapport_pdf(request, pk):
+    histoire=Histoire.objects.get(id=pk)
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=A4, bottomup=0)
+    image_path = "static/images/repuplique.jpg"
+    image = Image.open(image_path)
+    image = image.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+    image_buf = io.BytesIO()
+    image.save(image_buf, format='JPEG')
+    c.setFont("Helvetica", 12)
+    text_lines = [
+        "MINISTERE DE L'AGRICULTURE",
+        "ET DU DEVELOPPEMENT RURAL"
+    ]
+
+    text_lines1=[
+    f"1. Direction Régionale:  {histoire.nom_region}",
+    f"2. Direction Départementale:  {histoire.nom_departement}",
+    f"3. CGFR de la Sous-Préfecture:  {histoire.sous_prefecture}",
+    f"4. CVGFR du village:  {histoire.nom_village}"]
+
+    text1=c.beginText()
+    text1.setTextOrigin(1*cm,250)
+    for line in text_lines:
+        text1.textLine(line)
+    c.drawText(text1)
+    text2=c.beginText()
+    text2.setTextOrigin(1*cm,290)
+    for line in text_lines1:
+        text2.textLine(line)
+    c.drawText(text2)
+    c.drawImage(ImageReader(image_buf),(A4[0] - 250) / 2,2*cm,width=250, height=150)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+    return FileResponse(buf, as_attachment=True, filename='proces_verbale.pdf')
