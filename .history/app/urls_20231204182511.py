@@ -9,7 +9,8 @@ urlpatterns = [
     path('formulairemanuscrit/',views.formulairemanuscrit,name='formulairemanuscrit'),
     path("datah", views.datatables, name="datah"),
     path('logout', views.logout_view, name='logout'),
-
+    path('detail<str:pk>', views.detaille, name='detail'),
+    path('rapport<str:pk>', views.rapport_pdf, name='rapport'),
 
     ]
 
