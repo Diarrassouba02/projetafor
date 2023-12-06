@@ -265,22 +265,20 @@ def rapport_pdf(request, pk):
 
 
 
-    liste2=[                      "PROCES-VERBAL",
-        "DE RECUEIL DE L'HISTORIQUE DE LA CONSTITUTION DU TERRITOIRE DU VILLAGE" ,
-        "DE"]
-
-
-
+    rect_x = A4[0] - 1*cm
+    rect_y = 290
+    rect_width = 250
+    rect_height = len(text_lines1) * cm
 
 
 
     text1=c.beginText()
-    text1.setTextOrigin(1*cm,250)
+    text1.setTextOrigin(1.5*cm,250)
     for line in text_lines:
         text1.textLine(line)
     c.drawText(text1)
     text2=c.beginText()
-    text2.setTextOrigin(1.2*cm,290)
+    text2.setTextOrigin(1*cm,290)
 
 
     for line in text_lines1:
@@ -288,7 +286,7 @@ def rapport_pdf(request, pk):
 
     #c.setStrokeColor(colors.white)
     #c.setFillColor(colors.white)
-    c.rect(1*cm, 9.7*cm,540, 2.3*cm)
+    c.rect(1*cm, 9.7*cm,540, 1*cm)
 
 
     c.drawText(text2)

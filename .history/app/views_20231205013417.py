@@ -257,6 +257,11 @@ def rapport_pdf(request, pk):
         "ET DU DEVELOPPEMENT RURAL"
     ]
 
+
+
+
+
+
     text_lines1=[
     f"1. Direction Régionale:  {histoire.nom_region}",
     f"2. Direction Départementale:  {histoire.nom_departement}",
@@ -265,12 +270,10 @@ def rapport_pdf(request, pk):
 
 
 
-    liste2=[                      "PROCES-VERBAL",
-        "DE RECUEIL DE L'HISTORIQUE DE LA CONSTITUTION DU TERRITOIRE DU VILLAGE" ,
-        "DE"]
-
-
-
+    rect_x = A4[0] - 1*cm
+    rect_y = 290
+    rect_width = 250
+    rect_height = 4 * len(text_lines1) * cm
 
 
 
@@ -280,15 +283,13 @@ def rapport_pdf(request, pk):
         text1.textLine(line)
     c.drawText(text1)
     text2=c.beginText()
-    text2.setTextOrigin(1.2*cm,290)
-
-
+    text2.setTextOrigin(1*cm,290)
     for line in text_lines1:
         text2.textLine(line)
 
-    #c.setStrokeColor(colors.white)
-    #c.setFillColor(colors.white)
-    c.rect(1*cm, 9.7*cm,540, 2.3*cm)
+    c.setStrokeColor(colors.black)
+    c.setFillColor(colors.white)
+    c.rect(rect_x, rect_y, rect_width, rect_height, fill=True)
 
 
     c.drawText(text2)

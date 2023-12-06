@@ -265,12 +265,10 @@ def rapport_pdf(request, pk):
 
 
 
-    liste2=[                      "PROCES-VERBAL",
-        "DE RECUEIL DE L'HISTORIQUE DE LA CONSTITUTION DU TERRITOIRE DU VILLAGE" ,
-        "DE"]
-
-
-
+    rect_x = A4[0] - 1*cm
+    rect_y = 290
+    rect_width = 250
+    rect_height = len(text_lines1) * cm
 
 
 
@@ -288,7 +286,7 @@ def rapport_pdf(request, pk):
 
     #c.setStrokeColor(colors.white)
     #c.setFillColor(colors.white)
-    c.rect(1*cm, 9.7*cm,540, 2.3*cm)
+    c.rect(1*cm, 9.7*cm,540, 4*cm)
 
 
     c.drawText(text2)

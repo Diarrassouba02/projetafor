@@ -594,38 +594,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="card card-dark bg-secondary-gradient">
-						<div class="card-body curves-shadow">
-							<h3>Complémént</h3>
-							<div>Nom: {{ histoire.complement }}</div>
-						</div>
-					</div>
-				</div>
-			</div>
 
 
 
-
-
-
-
-               <div class="row">
-				<div class="col-md-4">
-					<div class="card card-dark bg-secondary-gradient">
-						<div class="card-body skew-shadow">
-							<h3>Villages régroupés pour former ce village</h3>
-							{% if histoire.groupement_liste.0  %}
-     	                      {% for i in histoire.groupement_liste  %}
-							<p>{{histoire.groupement_liste }}</p>
-							    {% endfor %}
-                                    {% else %}
-                                    <p>Ce village ne provient de groupement</p>
-                                    {% endif %}
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
+                                    <div class="col-md-4">
 					<div class="card card-dark bg-secondary-gradient">
 						<div class="card-body bubble-shadow">
 							<h3>Limites et litiges avec les villages voisins </h3>
@@ -669,6 +641,57 @@
 						</div>
 					</div>
 				</div>
+
+
+
+
+
+
+
+
+				
+			</div>
+
+
+
+
+
+
+
+               <div class="row">
+				<div class="col-md-4">
+					<div class="card card-dark bg-secondary-gradient">
+						<div class="card-body skew-shadow">
+							<h3>Villages régroupés pour former ce village</h3>
+							{% if histoire.groupement_liste.0  %}
+     	                      {% for i in histoire.groupement_liste  %}
+							<p>{{histoire.groupement_liste }}</p>
+							    {% endfor %}
+                                    {% else %}
+                                    <p>Ce village ne provient de groupement</p>
+                                    {% endif %}
+						</div>
+					</div>
+				</div>
+				
+
+
+                                 <div class="col-md-4">
+					<div class="card card-dark bg-secondary-gradient">
+						<div class="card-body curves-shadow">
+							<h3>Complémént</h3>
+							<div>Nom: {{ histoire.complement }}</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
 				<div class="col-md-4">
 					<div class="card card-dark bg-secondary-gradient">
 						<div class="card-body curves-shadow">
