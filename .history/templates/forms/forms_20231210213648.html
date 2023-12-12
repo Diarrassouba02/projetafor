@@ -1,0 +1,1986 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Formulaire des histoires</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+		        </li>
+		        <li class="separator">
+		            <i class="flaticon-right-arrow"></i>
+		        </li>
+		            <li class="nav-item">
+		                Proces-verbale
+			        </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+						<div class="card-title"> Commençez toujours par une lettre majuscule</div>
+
+						                  <div class="d-flex justify-content-center">
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <a class="alert alert-success" style="color: green;"> {{ message }}</a>
+                {% elif message.tags == 'error' %}
+                    <a class="alert alert-danger" style="color: red;"> {{ message }}</a>
+                {% else %}
+                    <a class="alert" style="color: black;"> {{ message }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+					</div>
+                    <div class="card-body">
+                        <form action="{% url 'formulairemanuscrit' %}" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                <label for="region">Choisissez une région :</label>
+                                    <select class="custom-select" id="region" name="region" onchange="updateDepartments()">
+                                        <option value="District_Abidjan">District Autonome d'Abidjan</option>
+                                        <option value="District_Yamoussoukro">District Autonome de Yamoussoukro</option>
+                                        <option value="Agnéby_Tiassa">Agnéby-Tiassa</option>
+                                        <option value="Bafing">Bafing</option>
+                                        <option value="Bagoué">Bagoué</option>
+                                        <option value="Bélier">Bélier</option>
+                                        <option value="Béré">Béré</option>
+                                        <option value="Bounkani">Bounkani</option>
+                                        <option value="Cavally">Cavally</option>
+                                        <option value="Folon">Folon</option>
+                                        <option value="Gbêkê">Gbêkê</option>
+                                        <option value="Gbôkle">Gbôkle</option>
+                                        <option value="Gôh">Gôh</option>
+                                        <option value="Gontougo">Gontougo</option>
+                                        <option value="Grands_Ponts">Grands-Ponts</option>
+                                        <option value="Guémon">Guémon</option>
+                                        <option value="Hambol">Hambol</option>
+                                        <option value="Haut_Sassandra">Haut-Sassandra</option>
+                                        <option value="Iffou">Iffou</option>
+                                        <option value="Kabadougou">Kabadougou</option>
+                                        <option value="Indénié_Djuablin">Indénié-Djuablin</option>
+                                        <option value="Lôh_Djiboua">Lôh-Djiboua</option>
+                                        <option value="La_Mé">La Mé</option>
+                                        <option value="Moronou">Moronou</option>
+                                        <option value="Nawa">Nawa</option>
+                                        <option value="N_Zi">N'Zi</option>
+                                        <option value="">Gbêkê</option>
+                                        <option value="">Gbêkê</option>
+                                        <option value="">Gbêkê</option>
+                                        <option value="">Gbêkê</option>
+                                        <option value="">Gbêkê</option>
+                                        <option value="">Gbêkê</option>
+                                        <option value="">Gbêkê</option>
+                                    </select>
+								</div>
+								<div class="col-md-4 mb-3">
+                                <label for="department">Département :</label>
+                                <select class="custom-select" name="department" id="department" onchange="updateSubPrefectures()">
+                                        <!-- Options seront mises à jour dynamiquement -->
+                                </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                <label for="quartier">Choisissez une sous préfecture :</label>
+                                    <select class="custom-select" name="sous_prefecture"  id="subPrefecture" onchange="updateVillages()">
+                                    <option value="">Sélectionnez une sous_préfecture</option>
+                                     <!-- Options seront mises à jour dynamiquement -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Nom de l'enqueteur</label>
+                                    <div class="input-group">
+                                        <input id="nomenq" type="text" class="form-control  speech-input" name="nomenq" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Prénom de l'enqueteur</label>
+                                    <div class="input-group">
+                                        <input id="name1" type="text" class="form-control speech-input" name="prenomenq" required>
+                                    </div>
+                                </div>
+
+
+
+<div class="col-md-3 mb-3">
+    <label for="village">Choisissez un village :</label>
+    <select class="custom-select" id="village"  name="village">
+        <option value="">Sélectionnez un village</option>
+        <!-- Les options du village seront ajoutées dynamiquement ici via JavaScript -->
+    </select>
+</div>
+
+
+
+
+
+
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Signification</label>
+                                    <div class="input-group">
+                                        <textarea type="text" name="signification" class="form-control speech-input" id="signification" placeholder="" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Nom Déclarant</label>
+                                    <div class="input-group">
+                                        <input name="nomdec" type="text" class="form-control speech-input" id="nomdec" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Prénom Déclarant</label>
+                                    <div class="input-group">
+                                        <input type="text" name="prenomdec" class="form-control speech-input" id="prenomdec" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Qualité Déclarant</label>
+                                    <div class="input-group">
+                                        <input type="text" name="qualitedec" class="form-control speech-input" id="nondec" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Date de naissance déclarant</label>
+                                    <div class="input-group">
+                                        <input type="date" name="datedec" class="form-control" id="datedec" required="False">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Lieu de naissance Déclarant</label>
+                                    <div class="input-group">
+                                        <input type="text" name="lieundec" class="form-control speech-input" id="lieundec" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Lieu de résidence Déclarant</label>
+                                    <div class="input-group">
+                                        <input type="text" name="lieudec" class="form-control speech-input" id="lieudec" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Non fondateur</label>
+                                    <div class="input-group">
+                                        <input type="text" name="nomf" class="form-control speech-input" id="nomf" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Prénom fondateur</label>
+                                    <div class="input-group">
+                                        <input type="text" name="prenomf" class="form-control speech-input" id="prenomf" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Activitées fondateur</label>
+                                    <div class="input-group">
+                                        <input type="text" name="activitef" class="form-control speech-input" id="activitef" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Lieu d'inhumation</label>
+                                    <div class="input-group">
+                                        <input type="text" name="lieuinf" class="form-control speech-input" id="lieuinf" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Origine fondateur</label>
+                                    <div class="input-group">
+                                        <input type="text" name="originef" class="form-control speech-input" id="originef" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="ville">Personnes Trouvée sur les Lieux:</label>
+                                    <select  class="custom-select mb-3" id="personne_trouve" name="personne_trouve">
+                                        <option value="Village">Village</option>
+							            <option value="groupement de personne">Groupement De Personne</option>
+							            <option value="Aucune">Aucune</option>
+							            <option value="Campement">Campement</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="form-row">
+                        <div class="container mt-4">
+                                   <label for="ville">citer si possible les villages/campement/ou groupement de personne trouvés sur les lieux :</label>
+                           <div id="villagetrouves">
+                            <!-- Les champs de saisie des cités des villagetrouves regroupés seront ajoutés ici -->
+                            </div>
+                          <div class="form-row mb-3">
+                            <button type="button" id="add-villagetrouve" class="btn btn-success">+</button>
+                         </div>
+                         <input type="hidden" id="villagetrouve_count" name="villagetrouve_count" value="0">
+                         </div>
+
+
+
+
+                                <div class="col-md-3 mb-3">
+                                <label for="ville">A t'il passé des accords:</label>
+                                    <select  class="custom-select mb-3" id="accord" name="accord" >
+                                        <option value="Oui">oui</option>
+							            <option value="Non">non</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">Lien avec personnes trouvées</label>
+                                    <div class="input-group">
+                                        <input type="text" name="lien" class="form-control speech-input" id="personne" >
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="validationDefaultUsername">époque d'installation</label>
+                                    <div class="input-group">
+                                        <input type="text" name="epoque" class="form-control speech-input" list="epoque" required>
+                                        <datalist id="epoque">
+                                            <option value="1962">
+                                            <option value="1963">
+                                            <option value="Avant l'époque coloniale">
+                                            <option value="1945">
+                                            <option value="1950">
+                                        </datalist>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container mt-4">
+                                        <label for="validationDefaultUsername">Nom,prénom et date d'installatio des successeurs</label>
+                                <div id="successors">
+                                <!-- Les champs de saisie des successeurs seront ajoutés ici -->
+                                </div>
+                                <div class="form-row mb-3">
+                                    <button type="button" id="add-successor" class="btn btn-success">+</button>
+                                </div>
+                            </div>
+                            <!-- Champ caché pour stocker le nombre de successeurs -->
+                            <input type="hidden" name="successor_count" id="successor_count" value="0">
+                            <div class="container mt-4">
+                                      <label for="validationDefaultUsername">Lignage  et son ordre d'arrivé</label>
+                                <div id="lines">
+                                <!-- Les champs de saisie des lignées seront ajoutés ici -->
+                                </div>
+                                <div class="form-row mb-3">
+                                    <button type="button" id="add-line" class="btn btn-success">+</button>
+                                </div>
+                            </div>
+                            <!-- Champ caché pour stocker le nombre de lignées -->
+                            <input type="hidden" name="line_count" id="line_count" value="0">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                <label for="validationDefaultUsername">période officialissation</label>
+                                    <div class="input-group">
+                                        <input type="text" name="dateoff" class="form-control speech-input" list="dateof" required>
+                                        <datalist id="dateof">
+                                            <option value="1962">
+                                            <option value="1963">
+                                            <option value="Pendant l'époque coloniale">
+                                             <option value="Avant l'époque coloniale">
+                                            <option value="1945">
+                                            <option value="1950">
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationDefaultUsername">Nom de l'auritée d'officialissation</label>
+                                    <div class="input-group">
+                                        <input type="text" name="nomaut" class="form-control speech-input" list="nomaut" required>
+                                        <datalist id="nomaut">
+                                            <option value="Administration du territoire">
+                                            <option value="ARSO">
+                                            <option value="AVB">
+                                            <option value="Le Gouverneur Angolvan">
+                                            <option value=" Le Sous-préfet Diallo Souleyman">
+                                            <option value="Le capitaine Marchand (Kptibo)">
+                                            <option value="Le Sous-préfet Aka Alphonse">
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                <label for="ville">L'acte de création?</label>
+                                    <select  class="custom-select mb-3" id="act" name="act">
+                                        <option value="oui">oui</option>
+							            <option value="non">non</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container mt-4">
+                                      <label for="validationDefaultUsername">Citer les peules des campements ensuite précisé le campement et l'origine de ces peuples</label>
+                                <div id="campements">
+                                <!-- Les champs de saisie des campements seront ajoutés ici -->
+                                </div>
+                                <div class="form-row mb-3">
+                                    <button type="button" id="add-campement" class="btn btn-success">+</button>
+                                </div>
+                            </div>
+                            <!-- Champ caché pour stocker le nombre de campements -->
+                            <input type="hidden" name="campement_count" id="campement_count" value="0">
+                            <div class="container mt-4">
+                                   <label for="validationDefaultUsername">Site d'adoration ensuite la localisation</label>
+                                <div id="sites">
+                                <!-- Les champs de saisie des sites d'adoration seront ajoutés ici -->
+                                </div>
+                                <div class="form-row mb-3">
+                                    <button type="button" id="add-site" class="btn btn-success">+</button>
+                                </div>
+                            </div>
+                            <!-- Champ caché pour stocker le nombre de sites d'adoration -->
+                            <input type="hidden" name="site_count" id="site_count" value="0">
+                            <div class="container mt-4">
+                                       <label for="validationDefaultUsername">Anciens sites et le motif du départ </label>
+                                <div id="ancient-sites">
+                                <!-- Les champs de saisie des anciens sites seront ajoutés ici -->
+                                </div>
+                                <div class="form-row mb-3">
+                                    <button type="button" id="add-ancient-site" class="btn btn-success">+</button>
+                                </div>
+                            </div>
+                            <!-- Champ caché pour stocker le nombre d'anciens sites -->
+                            <input type="hidden" name="ancient_site_count" id="ancient_site_count" value="0">
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                <label for="mode_accès_terre">Mode d'accès à la terre?</label>
+                                    <select  multiple class="form-control custom-select mb-3" id="mode" name="mode">
+                                        <option value="Héritage">héritage</option>
+							            <option value="Dont">dont</option>
+							            <option value="Prêt ">prêt </option>
+							            <option value="Achat">achat</option>
+							            <option value="Location">Location</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="terre_terre">Chef de terre?</label>
+                                    <select  class="custom-select mb-3" id="chef" name="chef">
+                                        <option value="oui">oui</option>
+							            <option value="non">non</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                <label for="ville">Mise à la disposition?</label>
+                                    <select  multiple class="form-control custom-select mb-3" id="disposition" name="disposition">
+                                        <option value="Héritage">héritage</option>
+							            <option value="Dont">dont</option>
+							            <option value="Prêt ">prêt </option>
+							            <option value="Achat">achat</option>
+							            <option value="Location">Location</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container mt-4">
+                                   <label for="validationDefaultUsername">Citer les villages régroupés pour former le village actuel</label>
+                                <div id="villages">
+                                <!-- Les champs de saisie des cités des villages regroupés seront ajoutés ici -->
+                                </div>
+                                <div class="form-row mb-3">
+                                    <button type="button" id="add-village" class="btn btn-success">+</button>
+                                </div>
+                            </div>
+                            <!-- Champ caché pour stocker le nombre de cités des villages regroupés -->
+                            <input type="hidden" name="village_count" id="village_count" value="0">
+                            <div class="container mt-4">
+                                       <label for="validationDefaultUsername">Citer les villages voisins et leur limites avec le village actuel précisé s'il y'a des zones de litiges</label>
+                                <div id="limite_village_litige">
+                                <!-- Les champs de saisie de limites, villages en litige seront ajoutés ici -->
+                                </div>
+                                <div class="form-row mb-3">
+                                    <button type="button" id="add-limite-village-litige" class="btn btn-success">+</button>
+                                </div>
+                            </div>
+                            <!-- Champ caché pour stocker le nombre de limites de villages en litige -->
+                            <input type="hidden" name="limite_village_litige_count" id="limite_village_litige_count" value="0">
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                <label for="validationDefaultUsername">Complément</label>
+                                    <div class="input-group">
+                                        <textarea class="form-control speech-input" placeholder="parler maintenant" rows="5" cols="40" name="complement"lang="fr"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-action">
+							    <button class="btn btn-success">enregistrez</button>
+                                <a href="{% url 'datah' %}" class="btn btn-danger">voir les données</a>
+						    </div>
+						</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script>
+    const regionsData = {
+      District_Abidjan: {
+        departments: ["Abidjan"],
+        subPrefectures: {
+          Abidjan: ["Anyama","Abobo","Adjame","Attecoube","Bingerville","Songon","Cocody","Koumassi","Marcory","Plateau","Port-Bouet","Treichville","Yopougon"],
+
+
+        },
+        villages: {
+          "Anyama":["Anyama", "Akéïkoi", "Abbé-Broukoi 1", "Abbé-Broukoi 2", "Anyama-Adjamé", "Anyama-Ahouabo", "Anyama-Zossonkoi", "Azaguié-Blida", "Christiankoi 1", "Christiankoi 2", "Ebimpé", "Thomasset", "Yapokoi", "Adattié", "Akoupé-Zeudji", "Allokoi", "Adonkoi 1", "Adonkoi 2", "Attinguié", "M'Bonoua", "M'Brago 1", "M'Brago 2", "Adaromé", "M'Pody"],
+          "Abobo": ['Abèbroukoi', 'Abobo-Baoulé', 'Abobo-té', 'Agbèkoi','Agnissankoi', 'Anonkoua-Kouté', 'Djibi', 'N\'Guessankoi'],
+          "Adjame": ["Adjamèmin"],
+          "Attecoube": ['Abidjan-Agban', 'Abidjan-Agban', 'Abidjan-Agban','Abidjan-Agban', 'Abidjan-Agban'],
+          "Bingerville":["Abatta", "Achokoi", "Adjamé-Bingerville", "Adjin", "Akandjè", "Akouai-Agban", "Akouai-Santai", "Akouédo-Attié", "Akoyaté", "Anan", "Angorankoi", "Bingerville", "Koffikro", "Sébia-Yao", "Brégbo", "Elokaté", "Elokato", "M'Batto-Bouaké"],
+          "Songon": ["Abadjin-Bimbresso", "Abadjin-Doumé", "Abadjin-Kouté", "Audouin-Beugretto", "Audouin-Assadin", "Ayéwahi", "Djèpoté", "Djèpoto", "Djèpoto Israel", "Godoumin", "M'Brathé-Attié", "Songon-Agban", "Songon-Agban- Attié 1", "Songon-Agban- Attié 2", "Songon-Dagbé", "Songon-Kassemblé", "Songon-M'Brathé", "Songon-Té", "Abiaté 2", "Bago", "Guébo 1", "Guébo 2", "Kossihouen", "Nonkouagon"],
+          "Cocody": ["Abèbroukoi", "Abobo-Baoulé", "Abobo-té", "Agbèkoi", "Agnissankoi", "Anonkoua-Kouté", "Djibi", "N'Guessankoi"],
+          "Koumassi": [],
+          "Marcory": ["Abia-Abéti", "Abia-Koumassi", "Anoumambo"],
+          "Plateau": [],
+          "Port-Bouet": ["Abia-Gnambo", "Abouabou", "Adjahui-Coubè", "Amangouakoi", "Mafiblé I", "Mafiblé II", "Vridi Ako"],
+          "Treichville": [],
+          "Yopougon":["Adiopodoumin/Adiopodoumé", "Andokoi", "Azito", "Banco 1", "Banco 2", "Béago", "Mambokoi", "Niangon-Adjèmin", "Niangon-Attié", "Niangon-Lokoa", "Yatsèkoi", "Yopougon-Attié", "Yopougon-Kouté", "Yopougon-Santè"],
+
+
+        }
+      },
+
+      District_Yamoussoukro: {
+        departments: ["Yamoussoukro","Attiegouakro"],
+        subPrefectures:{
+        Yamoussoukro: ["Yamoussoukro","Kossou"],
+        Attiegouakro:["Lolobo","Attiegouakro"],
+
+        },
+         villages:{
+         "Attiegouakro":["Ahondo", "Attiégouakro", "Gofabo", "Kacou-Broukro", "Mahounou-Nanafoué", "Abokouamékro", "Aka-Yaokro", "Labokro", "Koimoi-Dibikro", "Morokinkro", "Tokoré-Yaokro"],
+         "Lolobo":["Drékro", "Fassou", "Konan-Koffikro", "Lolobo", "N'Dèbo", "N'Dènou", "Akimou-Yaokro", "Allangoua", "Assanou", "M'Gbessou", "N'Gbékro", "N'Guessankro", "N'Zéré", "Ouffouédiekro", "Aguibri", "Diaman-Sakassou", "Koriakro", "Ménou", "Sakiaré", "Tounzouébo"],
+         "Kossou": ["Allai-Yaokro", "Amonkro", "Angossè", "Attrénou", "Bocabo", "Kossou", "Toumbokro", "Gogokro", "Yobouékro", "Zatta", "Zougounou"],
+         "Yamoussoukro":["Abouakouassikro", "Aboukro", "Akpessékro", "Bèzro", "Bonzi", "Dougounoukouadiokro", "Kami", "Kpoussoussou", "Logbakro", "Nanan", "N'Dakonankro", "N'Gattakro", "Sahabo", "Séman", "Yamoussoukro", "Kongouanou", "Mahounou-Akoué", "Suibonou", "Ténikro", "Yobouébo-Gbélissou", "Abakro", "Duokro", "Kroukroubo", "Subiakro", "Anoumangoua", "Djamalabo", "Fondi", "Gourominankro", "Morofè", "N'Gokro", "N'Zuessy", "Zambakro"],
+         }
+
+
+      },
+      Agnéby_Tiassa: {
+      departments: ["Taabo","Agboville","Tiassalé","Sikensi"],
+      subPrefectures:{
+        Taabo:["Pacobo","Taabo"],
+        Agboville:["Aboude", "Ananguie", "Agboville", "Attobrou", "Azaguié", "Céchi", "Grand-Morié", "Guessiguié", "Loviguié", "Oress-Krobou", "Rubino"],
+        Tiassalé:["Gbolouville", "Morokro", "N’Douci", "Tiassalé"],
+        Sikensi: ["Gomon", "Sikensi"],
+
+
+        },
+        villages:{
+         "Pacobo":["Adikouassikro", "Ahérémou 1", "Ahouakro", "N'Da-Gnamien", "Pacobo", "Singrobo"],
+         "Taabo":["Ahondo", "Kokoti-Kouamékro", "Kotiessou", "N'Dénou", "Taabo", "Taabo village", "Ahérémou 2", "Ahouati", "Amani Ménou", "Katiénou", "Léléblé", "Sahoua", "Sokrogbo", "Tokohiri", "Zougoussi"],
+         "Aboude": ["Aboudé-Kouassikro", "Aboudé-Mandéké", "Kouadjakro"],
+         "nanguie":  ["Achi-Brou ho", "Adahi Kassikro", "Adamaho", "Aké-Douanier", "Ananguié", "Ananguié-Aukoho", "Arrikoho", "Balet ho", "Essegnon"],
+         "Agboville":["Adahou", "Agboville", "Ango", "Babiahan", "Banguié 1", "Bonikro", "Ery-Makouguié 1", "Ery-Makouguié 2",
+                     "Gbalékro", "Grand-Moutcho", "Laoguié", "N'Chompo", "Offoriguié", "Boka Oho", "Ehouéguié", "Grand-Yapo",
+                     "Offa", "Offompo", "Ouanguié", "Petit-Yapo", "Yapo-Gare", "Yapo-Kpa"] ,
+         "Attobrou":["Attobrou", "Boguié", "Copa", "Séguié", "Yadio"],
+         "Azaguié": ["Abbé-Bégnini", "Azaguié-Ahoua", "Azaguié-Gare", "Achiékoi", "Azaguié-Makouguié", "Azaguié-M'Bromé", "Donkoi"],
+         "Céchi":["Amani-N'Guessankro", "Banguié 2", "Bédé-N'Goran-M'Po", "Céchi", "Kouamékro", "Mitichi", "Trénou"],
+         "Grand-Morié":["Agouahin", "Arraguié", "Grand-Morié", "Lapo", "Mafou", "M'Battra", "M'Bérié", "Okouguié"],
+         "Guessiguié": ["Aké-Béfiat", "Allahin", "Attéhou", "Dingbè", "Elévi", "Guessiguié 1", "Guessiguié 2", "Kassiguié", "M'Brou", "Odoguié", "Ottopé 1", "Ottopé 2"],
+         "Loviguié":["Anno", "Gbessé", "Loviguié 1", "Loviguié 2", "Wahin"],
+         "Oress-Krobou": ["Oress-Krobou"],
+         "Rubino": ["Adomokro", "Dey-Oboguié", "Kamabrou", "Rubino", "Ségbévi", "Allany", "Amangbeu", "Brou-M'Po", "Gouabo", "Kédjempo", "Kotchi-M'Po", "Ouélézoué"],
+         "Gbolouville": ["Akalékro", "Akoungou", "Amani Kouamékro", "Botindé", "Broubrou", "Ehuakré", "Gbolouville", "Irobo"],
+         "Morokro":  ["Adomkro", "Affikro", "Affounvassou", "Ahiroa", "Amanikro", "Diallokro", "Ehouman Koffikro", "Kassasso", "Kondiébouma", "Koyékro", "Kravasso", "Moofoué", "Morokro", "Trochu"],
+         "N’Douci": ["Abevé", "Attiguéhi", "Batéra", "Bodo", "Boussoukro", "Djahakro", "Kanga-Nianzé", "Kodimasso", "N'Douci", "Niamazra", "Nianda", "Offa"],
+         "Tiassalé":["Broukro", "Dibykro", "Komenan-Gbéi", "Niamoué", "Taboitien", "Tiassalé/Tiassalékro", "Ahua", "Akoudjé", "Assinzè", "Elosso", "Gnankan-Gnankanso", "Gnanzobly", "Kouadio-Yaokro", "Mafia", "M'Brimbo", "Nanan Yassouakro", "N'Zianouan", "Sindressou", "Sokrogbo Carrefour", "Tollakro"] ,
+         "Gomon": ["Gomon", "Sahuyé", "Sahuyé-Carrière", "Yaobou"],
+         "Sikensi": ["Badasso", "Bakanou B", "Bécédi", "Brafouéby", "Ellibou", "Katadji", "Sikensi", "Abiéhou", "Bakanou A", "Soukou-Obou"],
+
+
+           }
+
+      },
+      Bafing: {
+      departments: ["Koro","Ouaninou","Touba"],
+      subPrefectures:{
+           Koro:["Booko", "Borotou", "Koro", "Mahandougou", "Niokosso"],
+       Ouaninou: ["Gbelo", "Gouekan", "Koonan", "Ouaninou", "Saboudougou","Santa"],
+          Touba:["Dioman", "Foungbesso", "Guintéguéla", "Touba"],
+
+      },
+
+      villages:{
+          "Booko":[
+                    "Booko", "Dienguéré", "Dougbè", "Farako-Moambasso", "Kessienko",
+                    "Méfandougou", "Mémadougou 1", "Niamandougou", "Sagbanikoro", "Toranou",
+                    "Banadougou", "Blamadougou", "Diabissédougou", "Diala", "Mofouinso",
+                    "Ourossanisso", "Sokoro-Kessienko", "Tiémokodougou", "Tienlo", "Booro-Kessienko",
+                    "Brimala", "Douagbesso", "Féna-Barala", "Koffina", "Konsasso-Massala",
+                    "Lahomodougou", "Massala-Barala", "Massala-Sokourani", "Ouayèrè", "Sémodougou",
+                    "Séna", "Somana", "Tiana", "Badala", "Kaala", "Kessesso", "Konsasso-Sokourala",
+                    "Moako-Booko", "Moambasso", "Sessinko", "Silakoro-Moambasso", "Silakoro-Sokourala", "Tounzi"],
+
+        "Borotou":["Borotou", "Ouassiko", "Sékodougou 1", "Bambadougou", "Bilalo", "Moyendougou", "Niamoutou", "Tiékoronidougou", "Vakorodougou", "Zoumassadougou"],
+        "Koro":["Farako-Koro", "Gouaké", "Koro", "Lakomandougou", "Massala-Koro", "Moako-Koro", "Touresso", "Vabouesso", "Yakorodougou", "Booro-Borotou", "Borotou-Koro", "Bountou", "Fokandougou", "Kalassi 2", "Kountiguisso", "Miambondougou", "Morifinso", "Nibillo", "Sanankoro", "Windou-Koro"],
+        "Mahandougou":["Barabarasso", "Barala-Soba", "Blandougou", "Bonangoro", "Bonigoué", "Koningouélo 1", "Koningouélo 2", "Mahandougou", "Modougou", "Niendougou", "Ourossoungoro"],
+        "Niokosso": ["Barazan", "Bini", "Desséné", "Kalassi 1", "Karamotiédougou", "Massabouédougou", "Niokosso", "Sézendougou", "Silafresso", "Touresso", "Vacabadougou", "Vafindougou"],
+        "Gbelo": ["Banadjéna", "Banangoro", "Booni-Gbélo", "Gbango", "Gbèlo", "Gouan", "Gouatoulo", "Kossafinizo", "Mandougou", "Sahouéla", "Sesso", "Sidougou-Ouondonon", "Sifié-Mahou", "Sinigoro", "Têko", "Toufinga", "Yamafasso"],
+        "Gouekan":["Gbédéma", "Gouékan", "N'Gohisso", "Oualou-Gouékan", "Sodiman", "Sougouékan", "Toubako-Gouékan", "Vayasso"],
+        "Koonan":["Bayola", "Koonan", "Monzonan", "Soula", "Fouana", "Golla", "Massédougou", "Missadougou","Sékodougou", "Sialou", "Ténémassa", "Togbadougou", "Vassamadougou", "Yaffè"],
+        "Ouaninou":[
+                     "Binvè", "Férentella", "Ganhoué", "Konigoro 1", "Kozéma", "Lahidougou", "Oualou-Ganhoué", "Ouaninou", "Sèfina",
+                     "Silakoro-Ganhoué", "Sinkoro", "Tirikoro", "Toubako-Ganhoué", "Toutié", "Konigoro 2", "Babadougou", "Bassam",
+                     "Bayola", "Békosso", "Bondounlo", "Bounda", "Faala", "Goloutoulo", "Goloutounvè", "Gooko", "Guê", "Koungbèkoro",
+                     "Méhidougou", "Ohidougou", "Ouintoulo", "Sakofè", "Sanandougou", "Sérifoula", "Sidougou-Ganhoué", "Tiahoué",
+                     "Tiékomandougou", "Tiénivè", "Tika", "Toulo", "Vacérisso"],
+        "Saboudougou":["Gomandougou", "Kpoho 1", "Ouéna", "Saboudougou", "Sogbessèdougou", "Zodoufouma"],
+        "Santa":["Drodougou", "Gbagbadougou", "Gondodougou", "Gouékro", "Kossagui", "Kpoho 2", "Kpoho 3", "Nianlé","Santa", "Séfesso", "Zabanagoro"],
+        "Dioman": ["Bengoro-Dioman", "Boula-Dioman", "Diesso-Dioman", "Dioman", "Fouala", "Gagnasso", "Gatasso", "Gbéka",
+                  "Gbotola-Dioman", "Guénimanzo", "Kouesso", "Kouroukoro-Dioman", "Lawasso 1", "Longana", "Mamouesso", "Saala-Dioman",
+                  "Saala-Guénimanzo", "Sogbosso 1", "Taako", "Touko", "Toulo", "Yengoro"],
+        "Foungbesso":["Bafingdalla", "Bakandesso", "Baniga", "Bémasso", "Boutisso", "Dépanon", "Dolla", "Douasso",
+                      "Fouénan", "Foungbesso", "Gasso", "Goh", "Gouana", "Gouékolo 1", "Gouékolo 2", "Gouéla-Gouana",
+                      "Koungo", "Landué", "Lawasso 2", "Mamouesso", "Massasso", "N'Gamonso", "Niéna-Fouénan", "Ohisso",
+                      "Singosso 1", "Singosso 2", "Sogbéni", "Sogbosso 2", "Sokourala-Gouana", "Souatiesso", "Tiéfinisso",
+                      "Tiékourasso", "Tiémanso", "Tiémonisso", "Tirikoro", "Vahibasso", "Wagnangoro", "Yaala-Fouénan", "Yamatoullo", "Zouandesso"],
+        "Guintéguéla": ["Banzi", "Faman", "Guintéguéla", "Kongorana", "Konima", "Tienfou", "Vacerrisso", "Bahadala", "Bontoma", "Bonzo", "Doh", "Fénan", "Gbétéma", "Gouana", "Gouralo",
+                         "Kaako", "Kolon", "Madialo", "Ouébasso", "Sorotoma"],
+        "Touba": ["Fobédougou", "Kamassella", "Kohidougou", "Kouroukoro-Kamassella", "Mahana", "Mimballa",
+                 "N'Golodougou", "Orossanisso", "Saala-Kamassella", "Sanakoro", "Sékodougou", "Siano", "Touba",
+                 "Toubako-Kamassella", "Yo", "Bangofè", "Bengoro-Tienko", "Bénigoro", "Bianko", "Boola",
+                 "Booni", "Bouindala", "Fahimasso", "Gbanadougou", "Godofouna", "Gouéla-Tienko", "Londanan",
+                 "Madina", "Morigbèdougou", "Silakoro", "Sokourala-Mahou", "Tiasso", "Tiékourasso-Tienko",
+                 "Tienko", "Toa", "Touéla", "Yaala-Touba", "Yatienso", "Zaala", "Zoh"],
+      }
+
+
+      },
+
+      Bagoué:{
+        departments:["Boundiali","Kouto","Tengréla"],
+        subPrefectures:{
+              Boundiali:["Baya", "Boundiali", "Ganaoni", "Kasséré", "Siempurgo"],
+               Kouto:["Blességué", "Gbon", "Kolia", "Kouto", "Sianhala"],
+            Tengréla:["Débété", "Kanakono", "Papara", "Tengréla"],
+        },
+
+       villages:{
+             "Baya":["Baya", "Kofré", "Koundin", "Nongana", "Toungboli", "Yélé"],
+             "Boundiali": ["Boundiali", "Gnagnon", "Nondara", "Samorosso", "Tombougou", "Diogo", "Farandougou", "Gbando", "Gbémou", "Guinguéréni", "Kaniéné", "Kébi", "M'Bia", "N'Dara", "Niguédougou", "Ouazomon", "Sélého", "Sokoura"],
+             "Ganaoni":["Bolondo", "Djigbè", "Ganaoni", "Kambiala", "Karakpo", "Katiali", "Kounoumon", "Mirimiri", "Niempurgué", "Pahatogo", "Sissédougou", "Sisséplé", "Ziédougou"],
+             "Kasséré":["Kasséré", "Pinvoro", "Pongafré", "Sionfan", "Blagounon", "Gbalo", "Lafi", "Landiougou", "Sienré", "Tiasso", "Tomba"],
+             "Siempurgo": ["Bongama", "Fodio", "Fonondara", "Kanitélégué", "Katiendé", "Katiéré", "Mouhouélé", "Nangbolokaha", "Naoulékaha", "Nitiakaha", "Nonkparakaha", "Pindio", "Pononkaha", "Poundiou", "Siempurgo", "Sogo", "Tiangaloro", "Yama"],
+             "Blességué":["Blességué", "Bougoula", "Gbini", "Kakorogo", "Portio", "Sanaoulé", "Singo", "Tianna", "Tiogo"],
+             "Gbon":["Gbon", "Dendrasso", "Gbambiasso", "Mahalé", "Nibrini", "Ninioro", "Pouniakélé", "Tounvré", "Ziasso"],
+             "Kolia":["Kolia", "Dabakaha", "Blédiéméné", "Douhokaha", "Fahankaha", "Katanra", "Kodiaga", "Koro", "Kpafonon", "Monongo"],
+             "Kouto": ["Boyo", "Kouto", "Samorossoba", "Timboroni", "Nimbiasso", "Ouomon", "Tabakoroni", "Tindara", "Tioro", "Wora", "Zaguinasso"],
+             "Sianhala":["Kélégbala", "Mougnini", "N'Déou", "N'Douasso", "Sianhala", "Tinasso", "Zanasso 1", "Zanasso 2"],
+             "Débété":["Béniasso", "Débété", "Kouroukoro", "Nianrangba", "Sirakoro"],
+             "Kanakono":["Kanakono", "Lomara", "Popo", "Pourou", "Sissengué", "Zanikaha"],
+             "Papara":["Basso", "Doubasso", "Iribasso", "Kapégué", "Kokari", "Kolonza", "Koulousson", "Papara", "Tiongoli", "Zanasso", "Ziékoundougou"],
+             "Tengréla":["Danzourou", "Daraniani", "Djoguinasso", "Flabougou", "Kotou", "Maniasso", "M'Basso", "Naniasso", "Nigouni",
+                          "Sorokoumo", "Tamania", "Tengréla", "Tialaka", "Tiendérimé", "Zélesso", "Bolona", "Bougoula", "Diamankani", "Dougba",
+                          "Féni", "Fimbiasso", "M'Bélé", "Missasso", "Néguépié", "San", "Tiébi", "Tiempa"],
+
+       }
+
+    },
+
+
+   Bélier:{
+        departments:["Didiévi","Tiébissou","Djékanou","Toumodi"],
+        subPrefectures:{
+            Didiévi:["Boli", "Didiévi", "Molonou-Blé", "Raviart", "Tié-N'Diékro"],
+            Tiébissou:["Lomokankro", "Molonou", "Tiébissou", "Yakpabo-Sakassou"],
+            Djékanou:["Bonikro","Djékanou"],
+            Toumodi: ["Angoda", "Kokoumbo", "Kpouébo", "Toumodi"],
+        },
+
+        villages:{
+        "Boli": ["Adjébo", "Aka-Kouamékro", "Allanikro", "Andokoi-Kouamékro", "Boli", "Bondoukou", "Grodiékro", "Kongobo", "Labo", "Takikro","Abo Kouadiokro","Agro Kouadiokro"],
+        "Didiévi":["Ahougnanou", "Allokokro", "Attien-Kouassikro", "Broukro-Totokro 1", "Broukro-Totokro 2",
+                     "Didiébou-Dioula", "Didiévi", "Kouakou-Koffikro", "Kouamé-Akaffoukro", "Kouassi-Kprékro",
+                     "Koukoun-Zogrékro", "Krayabo", "Langui-Kouadiokro", "N'Da-Akissikro", "Attékro",
+                     "Anouazè-Okabo", "Bodo", "Groyakro", "Kangrassou", "Kondrokro-Djassanou",
+                     "N'Zikpri-Sessékro", "Yalombi-Kouassikro", "Yoboua-Allanikro"],
+        "Molonou-Blé": ["Assé-Blendoukro", "Boté-N'Din", "Boungué", "Golikro-Molonou", "Kokro-Kouassikro",
+                        "Konansuikro", "Kotoblinoi", "Kouadio-Gbangakro", "Lékissou", "Lékissou-Kaabo",
+                        "Molonou-Blé", "N'Drikro", "N'Guessankro", "Sakri", "Somélakro", "Aka-Djémélékro",
+                        "Akaffoukro", "Allialikro", "Assankro", "Assouakro", "Ayengrébo", "Bossi",
+                        "Diamankro", "Golikro-Srè", "Kouamé-Akoikro", "Kpacobo-Konankro", "Kpolessou",
+                        "Krou-Okoukro", "Mafé", "M'Bam", "N'Gom", "N'Guyakro", "Okoubonou", "Polonou",
+                        "Sarakakro", "Tahoussou", "Yaakro"],
+        "Raviart":["Angan-Koffikro", "Fitahissou", "Kouakoukro", "Kouassi-Kongokro", "Manan-Yaokro","N'Da-N'Guessankro", "N'Gban-Kassé", "Offouet-Kouadiokro", "Raviart", "Sawa"],
+        "Tié-N'Diékro": ["Anougbré-kouadiokro","Assihué (Bendé-Tanoukro+Landonou+Salékro)", "Attiégouakro", "Djamankro", "Kongoli-Kouamékro",
+                         "Kouamé-Konankro", "N'Djè", "Tié-N'Diékro", "Yao-Loukoukro", "Yobouéblessou", "Kpèbo",
+                          "Ouffouékro", "Yao-Blékro"],
+
+        "Lomokankro": ["Aboblakro", "Amienkro", "Assé-N'Gattakro", "Assoko Yao Djèkro", "Atchien Koffikro", "Bakro-Sakassou",
+                         "Bondoukou", "Bongobo", "Bouégbessou", "Bouékro", "Djahakro", "Gogokro", "Koffi N'Gorankro", "Koua-Kouassikro",
+                         "Kouassi-Afflékro", "Kpodjou-Kpangbassou", "Lomokankro", "Lougbéli", "N'Gangoro-Attoutou", "N'Gatta-N'Guessanblékro",
+                         "N'Zissiessou", "Passanou", "Wawakro"],
+        "Molonou": ["Abé", "Abrika", "Aman-Salékro", "Amanzi", "Assuikro", "Do-Sakassou", "Grogro", "Koffi Agrokro",
+                   "Komorossou", "Konan Kuikro", "Konankro", "Kondrobo", "Molonou", "N'Dénou", "Niamienkro", "Ya-Dibikro", "Yuakré"],
+        "Tiébissou":["Bofia","Bomizambo", "Golibo", "Koffi-Kouassikro", "Kondé-Yaokro", "Koubi", "N'Gangoro Nanafouè", "Propronou",
+                     "Taki-Salékro", "Tiébissou", "Affoué-Kokorékro", "Ahitou-Kongonou", "Ahougnassou-Allahou", "Ahougnassou-N'Drikro",
+                        "Ahougnassou-N'Gbanou", "Ahoumouan-Kouamékro", "Akoi-N'Dénou", "Alahou", "Alahou-Koffikro", "Allaha-Koffikro",
+                     "Assabonou", "Assé-Djèkro", "Assé-M'Bo", "Assé-N'Gou", "Ayaprikro", "Bopri", "Djangokro", "Djézoukro",
+                      "Duibo", "Kaabo", "Kpato-Djamalabo", "M'Bouédio", "Mékoinkro", "Minambo", "N'Gattadolikro", "N'Gokro",
+                       "Tollabonou", "Totokro", "Yao-Golikro"],
+        "Yakpabo-Sakassou":["Abigui", "Adikro", "Apangokro", "Assamoikro", "Assoko-N'Guessankro", "Boniankro", "Galébo", "Kanango",
+                             "Konan-Kékérékro", "Kongokro", "Kossou", "Miné-Kouadiokro", "N'Goimbo", "Ninkro", "Pranoi",
+                             "Yakpabo-Kpangbassou", "Yakpabo-Sakassou", "Yao Do Kouassikro", "Yobouébo"],
+        "Bonikro": ["Abouakakro 2", "Assékouamékro", "Bonikro", "Gbohua", "N'Dakououassikro", "N'Kloïdjo", "Tollakro"],
+        "Djékanou":["Abouakakro 1", "Assoikro", "Bringakro", "Djékanou", "Lalièkro",
+                    "Mougnan", "Tafissou", "Yaokouadiokro", "Yobouébo", "Alluiminankro", "Angbavia"],
+
+        "ABéréngoda":["Angonda", "Assafou", "Djangoménou", "Gbakroukro", "Gbofia", "Kétékré-Bonikro",
+    "Koffidjèkro", "Konan Kokorékro", "Lomo-Nord", "Mougokro", "N'Guessankro"],
+    "Kokoumbo":["Kimoukro", "Kokumbo", "Kplessou", "Makankouamékro", "Niamkey-Konankro",
+               "N'Zabonou", "Ahouékro", "Akroukro", "Assinzè", "Bériaboukro", "Gbogbobo",
+                "Gbonti", "Kassékro", "Kondokro", "Langossou", "N'Dakro", "N'Guessanbakro",
+                "Oko", "Pêhkouassikro", "Sérémé"],
+    "Kpouébo":["Adaou", "Akakro-N'gban", "Assakra", "Dida-Blé", "Dida-Kouadiokro",
+                "Dida-N'Glossou", "Dida-Yaokro", "Kalékoua", "Kpouèbo", "Moronou", "Oussou"],
+    "Toumodi":[    "Abli-Aloukro", "Abli-Bonikro", "Agbagnassou", "Akouékouadiokro", "Bendressou",
+              "Blé", "Diékèkro", "Kahankro", "Ouaouakro", "Pokoukro", "Toto-Kouassikro",
+                "Toumodi / Toumodikro", "Zahakro", "Akakro N'Zikpri", "Akunvikro", "Anikro",
+                 "Assounvouè", "Bony Akoissikro/Bofrebo", "Comékro", "Dougba", "Kadjokro",
+                "Kouamé-Bonou", "Lahourébo", "Lomo-Sud", "Loukou-Yaokro", "N'Doukahakro",
+                "Sakassou", "Tontonou", "Tontonou-Koffikro", "Yobouébo"],
+        }
+
+    },
+
+   Béré:{
+          departments:["Kounahiri","Dianra","Mankono"],
+          subPrefectures:{
+            Dianra:["Dianra","Dianra-Village"],
+            Kounahiri :["Kongasso","Kounahiri"],
+            Mankono:["Bouandougou","Mankono","Marandalah","Sarhala","Tiéningboué"],
+
+          },
+
+    villages:{
+          "Dianra":['Dianra', 'Fila-Faraba', 'Gbatosso', 'Katiali', 'Lenguédougou', 'Samoukaha',
+                      'Séfigué', 'Cissédougou', 'Dalagbè', 'Diarradougou', 'Diembé', 'Gbondiélé',
+                      'Gbongougo 1', 'Gbongougo 2', 'Gominasso', 'Korotou', 'Lalogo', 'Locolo',
+                      'Manadougou', 'Ouahiéré', 'Sienkounon', 'Solifono', 'Yérétiélé'],
+
+  "Dianra-Village":['Balladougou', 'Bébédougou', 'Dianra-Village', 'Djénéni', 'Faraba',
+                     'Kafégué', 'Kan-Sokoura', 'Kodjodougou', 'Lessoumasso', 'Maghan', 'N\'Guissidougou',
+                     'Nondjoni', 'Pétérikaha', 'Sononzo', 'Sononzo-Sokoura', 'Tamafrou', 'Tienvolokaha',
+                     'Tomikro', 'Toutey'],
+
+  "Kongasso": ['Fouanga', 'Kavagouma', 'Kongasso', 'Tiénigbé', 'Tofesso', 'Bambalouma',
+                'Bouaka', 'Bourounon', 'Gbaziasso', 'Gbéma', 'Guéasso', 'Kabakoro',
+                  'Korokopla', 'Kounadidougou', 'Tialouma', 'Togbasso', 'Toubalo', 'Tulé'],
+
+  "Kounahiri": ["Bomassapla", "Gbéhoua", "Gbotopla", "Golipla", "Kounahiri", "Souroukousso",
+            "Agbaou", "Asséyaokro", "Bahitipla", "Bakopla", "Balépla", "Bapla", "Bassapla",
+            "Blipla", "Borébo", "Boyaokro", "Dorodipla", "Fassapla", "Féliapla", "Foutounou",
+            "Gbétépla", "Grahipla", "Kominapla", "Kouatta", "Léasso", "Séklénipla", "Sogbéni",
+            "Sokoro", "Soukourougban", "Tianda", "Trafesso", "Yoman kouahipla"],
+"Bouandougou":["Babadougou", "Bada", "Baradougou Dierré", "Baradougou-Diemba", "Bouandougou",
+                        "Diétiguisso", "Diorodougou", "Fourougbankoro", "Guesso Bonosso", "Kamoro",
+                        "Kpalé", "Ligbisso", "Linguékoro", "Lokpasso", "Lolo", "Ménéménétou", "Nakara",
+                        "Okoudougou", "Safodougou", "Tabakoro", "Tabakoro-Dioulasso", "Takanazo-Moussosso"],
+
+"Mankono":["Borohouléma", "Diénédjan", "Dobadougou", "Gbangana", "Gbanviélo", "Karamokola",
+                       "Kogolo", "Konotou", "Madian", "Mankono", "Oussougoula", "Sokourala", "Soungasso",
+                       "Brahima", "Dantogo", "Dawala", "Fizanlouma", "Gona", "Kouloukouloukoro", "Kounadidougou",
+                       "Maniékoro", "Samorosso", "Sokoro", "Tiéma", "Tomono", "Tondolo", "Touloukoro"],
+
+"Marandalah":["Bobosso-Tiénigbé", "Borozomba", "Brokodallan", "Dandougou", "Diédougou", "Dikodougou",
+                        "Farakoro", "Kankanazo", "Kouassidougou", "Kougbèré", "Kpesso", "Marandallah",
+                        "N'Gbankoundougou", "Niankabi", "Nonkoundougou", "Ouérébo", "Sanankoro", "Satama",
+                        "Souanso", "Tabakoro Diemba", "Téguépé", "Tiassédougou", "Tioumoudougou"],
+
+"Sarhala":["Bamanasso", "Bougounou", "Filasso", "Fizankoro", "Kodoum", "Madina", "Ménéni 2",
+                       "Sarhala", "Banangoro", "Biélou Carrefour", "Bikassi", "Diarala", "Djémédougou",
+                       "Kandiédougou", "Ménéni 1", "Missidougou", "Missirikoro", "Niarana", "Paniko",
+                       "Siriho","Somokoro", "Tabakoro"],
+
+"Tiéningboué":["Bagao", "Bonosso", "Mondougou", "Niangourala-Kamagaté", "Niantibo", "Tiéfindougou",
+                       "Tiéningboué", "Barandakoro", "Dabakalatou", "Dangbasso", "Diakobou", "Dialakoro",
+                       "Gbingoro", "Gouéko", "Kalifadougou", "Kamarala", "Kobadallah", "Kokouna", "Koromabla",
+                       "Kouakoudougou", "N'Guessédougou", "Niangourala-Tiéné", "Ninakiri", "Notiéna", "Ouédallah",
+                       "Pokoundougou", "Pokoutou", "Soundougoutou", "Sounoukana", "Tangola"],
+
+
+
+   }
+},
+
+
+
+    Bounkani:{
+         departments:["Bouna","Doropo","Nassian","Téhini"],
+         subPrefectures:{
+            Bouna:["Bouko", "Bouna", "Ondefidouo", "Youndouo"],
+            Doropo:["Danoa", "Doropo", "Kalamon", "Niamoue"],
+            Nassian:["Bogofa", "Kakpin", "Kotouba", "Nassian", "Sominassé"],
+            Téhini:["Gogo", "Téhini", "Tougbo"],
+         },
+
+          villages:{
+                   "Bouko":[
+    "Bidandouo", "Bidjédouo", "Biéligninadouo", "Bieltadouo", "Bilayo", "Bipadouo", "Bipirédouo",
+    "Bissamdouo", "Bognira", "Bokadouo", "Bomandouo", "Borigandouo 1", "Borigandouo 2", "Bouko",
+    "Dabira", "Dabordouo", "Dahadouo", "Dandédouo", "Darga", "Daridion", "Dasseyo 1", "Déadrédouo",
+    "Dèbrodouo", "Dibordouo", "Dinabadouo", "Dinérémoro", "Diokordouo", "Ditchoudouo", "Djamaladouo",
+    "Djanérédouo", "Djélékodouo", "Fatanadouo", "Filièdouo", "Gnadouo", "Inadouo", "Kando", "Kelfara",
+    "Kelmita", "Kérantédouo", "Kergbodouo", "Kerpidouo", "Kokadouo", "Kolindouo", "Kolontira",
+    "Konondouo", "Kouédidouo", "Kouémidouo", "Koyaladouo", "Kpiko", "Krikpadouo", "Loumpèdouo",
+    "Malandouo", "Mankildouo", "Mihadouo", "Moulèdouo", "Nabihièdouo", "Nadiodi", "Nakoudouo",
+    "Namidouo", "Nodebdouo", "Noproudouo", "Nossouondouo", "N'séméra", "Ounankodouo", "Panzagani",
+    "Pétounondouo", "Sébinandouo", "Séfahiridouo", "Sépridouo", "Sindénandouo", "Tchatchardouo",
+    "Tchédidouo", "Tchitchidouo", "Tèdjildouo", "Tékouédouo", "Titchadouo", "Wamidouo", "Watchadouo",
+    "Yanérédouo", "Yendadouo", "Yonordouo", "Zazoudouo", "Zorongo"],
+
+    "Bouna":[
+    "Assiédouo", "Assoum 1", "Bikounérédouo", "Binguitédouo", "Bissori-tchogbolo", "Bouna", "Bromankoté", "Délédouo",
+    "Djémitédouo", "Gbalamoulédouo", "Nakirdouo", "Tchanodouo", "Ankoromi", "Assoum 2", "Bahintédouo", "Balodouo", "Bandouo",
+    "Bania", "Béoumpédouo", "Bibieldouo", "Bieldedouo", "Bihénandouo", "Bihitédouo", "Bikohidouo", "Binodouo", "Blikaodi",
+    "Bossou", "Botou", "Dabio", "Dadjodouo", "Dagbétéon", "Dagnamadouo", "Dakoundouo", "Damanadouo", "Danakourdouo",
+    "Dapidouo", "Daritéon", "Daritéon", "Davadjo", "Dipridouo", "Djébieltéon", "Djédo", "Djégbonaudouo", "Djenkadouo",
+    "Djindrétéhon", "Djoratéon", "Dongartéon", "Donkpédouo", "Fanérédouo", "Fangadouo", "Filtibdouo", "Findré", "Galso",
+    "Gbadjoudouo", "Gbodouo", "Gborognora", "Gbotogbo", "Gnaté", "Gniembétédouo", "Gnindiondouo", "Gompar", "Goungounkpé",
+    "Guéhinkatéon", "Himbié", "Holiertéon", "Honsontédouo", "Iperdouo", "Itourdouo", "Kakadouo", "Kamyaldouo", "Kassoptédouo",
+    "Kerbo 1", "Kergbodouo", "Kissopdouo", "Kobétédouo", "Koflandé", "Kokpingué", "Kondidouo", "Konguidouo", "Konkoratéon",
+    "Konkpédouo", "Kouakoudouo", "Kouédouo", "Kouénéra", "Koulboundouo", "Koulperdouo", "Kourbini", "Koussanadouo", "Lankara",
+    "Lékparédouo", "Logorobi", "Lokardouo", "Louguilèdouo", "Louloundouo", "Mamardouo", "Massioution", "Méninkon", "Minatéon",
+    "Naguidouo", "Naladouo", "Namidouo", "Niandégué", "Nianlongo", "Nofildouo", "Notadouo", "Ollodouo", "Ounanfagnondouo",
+    "Ounankoudouo", "Pélédouo", "Pidibouo", "Pinodouo", "Polédouo", "Pouan", "Properdouo", "Samantou", "Sanguinanri", "Sépadouo",
+    "Sepatédouo", "Serpar", "Sétondouo", "Sibieltédouo", "Siétadouo", "Siliétéon", "Sinkitédouo", "Sipridouo 1", "Sipritéon 1",
+    "Sipritéon 2", "Siraodi", "Sitébidouo", "Sonlartéon", "Sonouhodouo", "Sopitétéon", "Sotitédouo", "Sypaldouo", "Tamé-koulda",
+    "Tantama", "Tchabieldouo", "Tchapertéon", "Tchatiédouo", "Tchomidouo", "Tchourandouo", "Tègbè", "Ténabo", "Ténintéon",
+    "Tididouo", "Tiéssaba", "Tiltéon", "Tohotéhon", "Topène", "Vargbo", "Vigoli", "Vonkoro", "Wabidjidouo", "Wadaradouo",
+    "Wayorodouo", "Wirédouo", "Woulirtéon", "Yalo", "Yantéon", "Yeunondouo", "Yodidouo"],
+
+    "Ondefidouo":[
+    "Djimborotédouo", "Kermatédouo", "Kinéta", "Kissarédouo", "Kontodouo", "Kounandouo", "Kpokpokouédouo", "Léomidouo",
+    "Lindi", "Ondéfidouo", "Opountédouo", "Piayé", "Polédouo", "Sépidouo", "Sitédouo", "Siyalédouo", "Tchalarédouo",
+    "Tchatiédouo", "Téfatédouo", "Tessodouo", "Todjirédouo"],
+
+    "Youndouo":[
+    "Bidjébdouo", "Bilarétédouo", "Dabieldou", "Dihintédouo", "Dipétédouo", "Diwodouo", "Fapirédouo", "Fotifdouo",
+    "Gamgodouo", "Gangodouo", "Gommé", "Haltiendouo", "Ibodouo", "Kartoudouo", "Kawétédouo", "Kipihindouo", "kontounondouo",
+    "Koulkantédouo", "Tantoudouo", "Tiboultédouo", "Tilpirédouo", "Yatiédouo", "Youndouo"],
+
+    "Danoa":[
+    "Aliboubou", "Bahianan", "Baloumdouo", "Bédidouo", "Behinguinandouo", "Bilbieldouo", "Bohidanan",
+    "Dakpologuidouo", "Dandédouo", "Danoa", "Dinhira", "Djamaladouo", "Djormidouo", "Djorontchira",
+    "Galbadi 1", "Galbadi 2", "Gnonssiéra", "Kalfodouo", "Kimantédouo", "Koulibila", "Kourbira",
+    "Kpargbara", "Lagbo", "Lonkora", "N'kanora", "Onkitédouo", "Ouanandjidouo", "Ousséla", "Pédjo",
+    "Politchonan", "Sagba", "Sanao", "Sansandouo", "Séoudouo", "Sètchèdouo", "Singuétadouo", "Tchirimbela",
+    "Tchopana", "Tidandouo", "Timibora", "Timikouédouo", "Timikouédouo 2", "Timikouédouo 3", "Tinkana",
+    "Troudouo", "Wolidouo", "Wouadaradouo"],
+
+    "Doropo":[
+    "Babadjou", "Bidjinadouo", "Bingora", "Dabéli", "Dabonkiro 1", "Dabonkiro 2", "Dabonkiro 3", "Dabonkiro 4",
+    "Doropo", "Kakota", "Kalambourou", "Kamassama", "Karwedouo", "Kinandouo", "Kobilou", "Koumatan", "Kountoumbi",
+    "Létcharé", "Nominéré", "Péou", "Poua", "Tchantibi 1", "Tchantibi 2", "Tchartchara", "Tchormidouo", "Timbiéla",
+    "Tingo", "Tingo Yalo", "Tinkalamon", "Toboura 2", "Yolonkora", "Yolontchèra", "Angaye", "Babaldouo", "Baltan",
+    "Banié", "Batéfigui", "Bénimbara", "Bielfi-letchard", "Biélpindouogbé", "Brotto", "Dakpolongui 1", "Dakpolongui 2",
+    "Dambélessi", "Danagnara", "Déko 1", "Ditounégnadouo 1", "Djilmitédouo", "Doundouo", "Douogbé-Guidré", "Gangatta",
+    "Gbasséra", "Gborodouo", "Holara", "Houpounindouo", "Kapari", "Kiamouno", "Kirkpadouo", "Kodo", "Kodo-bissankoué",
+    "Koguiénou", "koiton", "Kopitédouo", "Koudinadouo", "Kourénou", "Koutiana", "Kpaldouo", "Kpilimitédouo", "Lankio",
+    "Latrougo", "Lintéra", "Miakoura", "Nakélé", "Natantchohiè", "Niando-Tinkoi", "Niona", "Nodjodouo", "Nofardouo",
+    "Nogatédouo", "Nounkouwouridouo", "Oulomperdouo", "Parankoyédouo", "Ponorodouo", "Proura", "Sangbanari", "Sékodouo",
+    "Sèkodouo", "Sémadouo", "Sénandi 1", "Sénandi 2", "Sokorolaye", "Sonforodouo", "Takpobira", "Tangbadouo", "Tesso",
+    "Tibinandouo", "Tibroti", "Tinlou", "Tintiouri", "Tioboulonao", "Toboura", "Tonforonan", "Totobi", "Varalé", "Wadara",
+    "Youternérédouo"],
+
+    "Kalamon":[
+    "Biégnon", "Binandouo", "Bissankoi", "Dékodouo", "Fafoudouo", "Gbonkodouo", "Goala", "Gobétan", "Gogombro",
+    "Héréouèdouo", "Kahitédouo", "Kalamon", "Kéramira", "Lassouri", "Loukoura", "Pénouodouo", "Ponisséo", "Talo",
+    "Tirodouo", "Tonguidouo", "Tonotolidouo"],
+
+    "Niamoue":[
+    "Ansorpe", "Béguétimi 1", "Béguétimi 2", "Déridouo", "Ditounégnadouo 2", "Djéguérigué", "Djorkpèrèdouo 1",
+    "Djorkpèrèdouo 2", "Donafara", "Dorovitan", "Fangadouo", "Filédouo", "Flinkordouo", "Garanko", "Gbana", "Gbeltan",
+    "Gnopardouo", "Hébérédouo", "Kalangbapo", "Kéremperdouo", "Koro", "Kossanadouo", "Kounyaladouo", "Kounzié",
+    "Kpoladouo", "Lépritédouo", "Mampère", "Mité", "Napindouo", "Noguirdouo", "Sai", "Sayébou", "Sikparédouo", "Sobaka",
+    "Solperdouo", "Tcharsopoute", "Tchergardouo", "Tchiassonédouo", "Tchohitédouo", "Tiempira", "Woussodouo", "Yollombora",
+    "Bélentourou", "Bétédouo", "Bidigué", "Binandouo", "Binédouo", "Bitiédouo", "Djidré Tinlo", "Filguitédouo",
+    "Gbonkolou", "Guarihoussié", "Kelbidouo", "Kerdadouo", "Kienti", "Kiéro", "Kokpérénaan", "Konapé", "Koundrédouo",
+    "Kourkémiri", "Lantanga", "Linki", "Mananko-Binin", "Nampéli", "Natibidouo", "Niamoué", "Nokpadouo", "Nomi-bourié",
+    "Poltédouo", "Saédi", "Yalliédouo"],
+
+    "Bogofa":["Farako", "Gbodé", "Gouméré"],
+
+    "Kakpin":["Banvayo", "Dédi", "Gansé", "Gbougoulaye", "Kakpin", "Kapé", "Solokaye", "Zamou"],
+
+    "Kotouba":["Allanikro", "Digba", "Kotouba", "Lambira", "Mango", "Ouakorididjo", "Prime", "Saboukpa", "Sèwè"],
+
+    "Nassian":["Angobila", "Anvéyo", "Bondoyo", "Kalabo", "Landé", "Longongara", "Nassian", "Parhadi", "Poum", "Sindé", "Toungbo",
+    "Yaga", "Dépingo", "Talahini", "Tienguélé"],
+
+    "Sominassé":["Boudou", "Brovilla", "Kiramissé", "Kromabira", "Lagbayo", "Sigbagui", "Siriki-Bango", "Sominassé"],
+
+    "Gogo":[
+    "Banvayo", "Barriéré", "Bati-Lindé", "Batiyal", "Bielmi Simité", "Binguétan", "Boki", "Bounougbara", "Danfo",
+    "Difita", "Dihinaper-Boba", "Gogo", "Goré-Sémité", "Goré-Tonti", "Gouléguétan", "Gourétonkoré", "Govitan",
+    "Guilégnora", "Handa", "Hêdinawiri", "Hempami", "Kiélo-Kérenko", "Kiéro", "Kintipa", "Kivé", "Kohodé", "Koroho",
+    "Kouissiéra", "Kprovitan", "Lagbo", "Minitcho", "Nata-Tiokpolo", "Negan", "Nota-Kuro", "Omikaye", "Poumigué",
+    "Sankaoura", "Sénako", "Sinérédouo", "Soronvié", "Soudana", "Tara", "Tchotchorotcho", "Tiébitienko", "Touramé",
+    "Trikongo", "Vinvérana"],
+
+    "Téhini":[
+    "Féki", "Gogo-saga", "kinani", "Kointa", "Samidana", "Sanganamé", "Téhini", "Tiobiéli", "Tripano", "Vontcho",
+    "Amendi", "Bako", "Bana-yalfou", "Biguilaye", "Dabila", "Dikoyé Kiello", "Dikoyé Sétrou", "Gangané", "Hagnon",
+    "Himarédouo", "Korbo", "Kouébonou", "Kpandjao", "Mampère 2", "Méguidan", "Méhidan", "Ségui-Hénamiko", "Takoye Hénaté",
+    "Tiaparga", "Tinguira","Togolokaye"],
+
+    "Tougbo":[
+    "Batédi-nord", "Batédi-yal", "Bavé", "Bembéla", "Bolé", "Gnagbata", "Kalana-bawé", "Kouloumita", "Lénagnora",
+    "Lorogbo", "Midana", "Moro-moro", "Ouango-fitini", "Saota-Sokoura", "Tougbo", "Toungbaniré", "Touta"]
+    }
+},
+
+
+    Cavally:{
+             departments: ["Bloléquin","Guiglo","Taï","Toulépleu"],
+      subPrefectures:{
+        Bloléquin:["Bloléquin", "Diboké", "Doké", "Tinhou", "Zéaglo"],
+        Guiglo:["Bedy-Goazon", "Guiglo", "Kaade", "Nizahon"],
+        Taï:["Taï","Zagne"],
+        Toulépleu:["Bakoubly", "Meo", "Nezobly", "Péhé", "Tiobly", "Toulépleu"],
+
+        },
+        villages:{
+        "Bloléquin":[
+        "Blédi-Diéya", "Bloléquin", "Goya", "Guéya", "Médibly", "Yoya","Diouya-Dokin","Kéibly"],
+        "Diboké":["Diboké", "Oulaï-Taibly", "Zilébli"],
+        "Doké":[
+        "Bably-Vaya", "Diéya", "Doké", "Ganhia", "Guibobly", "Ké-Bouébo", "Oulaï-kpably", "Pohan-Badouébly", "Zomplou"],
+        "Tinhou":[
+        "Dédjean", "Koadéguézon", "Petit-Guiglo", "Tinhou", "Tuambly", "Zou-Yahi"],
+        "Zéaglo":[
+        "Béoué", "Douandrou", "Pohan", "Zéaglo", "Ziglo"],
+        "Bedy-Goazon":[
+        "Bédy-Goazon", "Douédy-Guézon", "Zébly"],
+        "Guiglo":[
+        "Domobly", "Glopaoudy", "Goya 1", "Goya 2", "Guiglo", "Kati", "Mona", "Nedrou", "Yaoudé", "Zouan",
+        "Ditroudra-Béoué", "Kridy", "Nounoubaye", "Paris-Léona", "Petit-Guiglo", "Pona", "Troya", "Zro"],
+        "Kaade":[
+        "Béoua", "Guézon", "Guinkin", "Kaadé", "Niouldé", "Troya 2"],
+        "Nizahon":["Béablo", "Béhébo", "Nizahon 1", "Nizahon 2"],
+        "Taï":[
+        "Daobly", "Gouléako 1", "Gouléako 2", "Paulé-Oula", "Ponan", "Tai/Taï village", "Diéro-Oula", "Port-Gentil",
+        "Sakré", "Sioblo-Oula", "Tiéolé-Oula", "Ziriglo"],
+        "Zagne":[
+        "Djidoubaye", "Gahably", "Goulégui-Béoué", "Kéibly", "Tienkoula", "Vodélobly", "Zagné", "Zaipobly"],
+        "Bakoubly":[
+        "Bakoubli", "Kambli", "Kouyabli", "Pantroya", "Poyabli", "Séibli"],
+        "Meo":[
+        "Bohobli", "Diai", "Douhozon", "Grié 1", "Grié 2", "Méo", "Pahoubli", "Panhoulo", "Sahoubli"],
+        "Nezobly":[
+        "Kahibli", "Klaon", "Kpably", "Nézobly", "Tiabolébly 1", "Touaplébli", "Toyébli", "Zaïgbopleu"],
+        "Péhé":[
+        "Bohibli", "Dénan", "Diaïbli", "Glakon-Bloc", "Kpobli-Douozé", "Mayoubli", "Pantrokin", "Péhé", "Tahibli"],
+        "Tiobly":[
+        "Bawombli", "Bazobli", "Douoguibly", "Guéya", "Guéyédé", "Klobli",
+        "Ouloto-Zrébli", "Péhékanhouébli", "Péhékanhouébli-Barrage", "Tiobly"],
+        "Toulépleu":[
+        "Bakpahi","Cèbly", "Diollé", "Doho", "Grêpleu", "Guiellé", "Koarho",
+        "Sahibli","Seizaïbly", "Tambly", "Toulépleu", "Ziombly", "Ziouébly", "Zoguiné", "Zoutouho"],
+
+
+        }
+    },
+
+
+    Folon:{departments:["Kaniasso","Minignan"],
+        subPrefectures:{
+        Kaniasso:["Goulia", "Kaniasso", "Mahandiana-Sokourani"],
+        Minignan:["Kimbirila-Nord", "Minignan", "Sokoro", "Tienko"],
+
+        },
+        villages:{
+        "Goulia":[
+        "Goulia", "Kamélézo", "Kohoma", "M'Béblala", "Niarala",
+        "Samakona", "Bogodougou", "Gouendo", "Koba", "Kouroulingué",
+        "Linguékoro", "Manadoun", "Missila", "N'Golondié", "Sangouani",
+        "Sokouraba", "Tahara", "Tienni", "Touroudio"],
+        "Kaniasso":[
+        "Kaniasso", "Koro-Oulé", "Siola", "Banankoro", "Boumbala",
+        "Fiéla", "Karala", "Nafadougou", "Sananférédougou", "Tiéla",
+        "Touba", "Ziémougoula"],
+        "Mahandiana-Sokourani":[
+        "Fanfala", "Gbéguéni", "Gouéya", "Mafindougou", "Mahandiana-Sobala", "Mahandiana-Sokourani",
+        "Missiridougou", "Ouassangalasso", "Ouelli", "Sémé", "Tokala", "Wahiré", "Zambla", "Zesso"],
+        "Kimbirila-Nord":[
+        "Kimbirila-Nord", "Konéla", "Lélé", "Naguina", "Sanzanou", "Tiéfenzo"],
+        "Minignan":[
+                    "Diandéguéla", "Minignan", "Bougoussa", "Djérila", "Djirila Bada",
+                    "Djonrozo", "Fanhanla", "Gouenzou", "Koriani", "Linguékoro",
+                    "Niamina", "Sambadougou", "Sokouraba", "Somotou", "Tienny"],
+        "Sokoro":["Keningouara", "Madina", "Nabagala", "Sokoro", "Tiemba"],
+        "Tienko":["Kéhi", "Kémissiga", "Koliko", "Kouban", "Mazéla", "M'Bana", "Tienko", "Bokouna", "Diolola", "Kabangoué", "Kongohila 1", "Kotoula", "Missamahana"],
+
+
+        }
+
+    },
+
+
+
+     Gbêkê:{departments:["Béoumi","Botro","Bouaké","Sakassou"],
+        subPrefectures:{
+        Béoumi:["Ando-Kékrénou", "Béoumi", "Bodokro", "Kondrobo", "Lolobo", "Marabadiassa", "N'Guessankro"],
+        Botro:["Botro", "Diabo", "Krofoinsou", "Languibonou"],
+        Bouaké:["Bouaké-Ville", "Bouaké-SP", "Bounda", "Brobo", "Djébonoua", "Mamini"],
+        Sakassou:["Ayaou-Sran", "Dibri-Assirikro", "Sakassou", "Toumodi-Sakassou"]
+        },
+        villages:{"Ando-Kékrénou":["Agonassou 1", "Agonassou 2", "Ando", "Bonikro", "Dékréta", "Djamala-N'Zué", "Kékrénou",
+                  "Kénéfoué", "Kouadio-Sakassou", "Kouébo-Kan", "Kpalébo", "Linguébo", "Mandanou", "Mangré-Dan",
+                  "Sokpa", "Tiessou", "Tiessou-Démakro"],
+        "Béoumi":["Akadiafoué", "Assengou", "Assenzé", "Bélakro", "Béoumi", "Diacohou", "Kongonoussou", "Kongossou",
+        "Konsou", "N'Dèbo", "N'Dori-Sakassou", "N'Gotran", "Niambrun", "N'Zuéda", "Ouaouassi",
+        "Ouaouassi-Démakro", "Solo", "Souafouè-Dan", "Souafouè-Kan", "Tiendébo", "Tounzuébo", "Zédé-Kan",
+        "Abayansi", "Abouakro", "Affotobo", "Aka-Yaokro", "Assakra", "Assèkro", "Diéviessou", "Fari-M'Babo",
+        "Fitabro", "Golikro", "Gouarébo", "Kaabo", "Kongobo", "Koubébo-Dan", "Koumambo", "Mangré-Kan", "Monébo",
+        "N'Zoupri", "Ouaouassi-M'Babo", "Ouengrè", "Sanhouty", "Saoulétié", "Yoboué-N'Zué", "Zèdè-Bossi",
+        "zèdè-Dianhoun", "Zédé-Kpambassou", "Zédé-N'Drébo", "Zédé-Tiesso"],
+        "Bodokro":["Abikro", "Agba-Kouassikro", "Agbanou-Djoukoukro", "Ahokokro", "Aka-Koffikro", "Alloukrou-Yakro",
+        "Angoua-Kouamékro", "Appobinou", "Babroukro", "Bodokro", "Bouakro", "Dibiékro", "Dibinou", "Kokotikro",
+        "Kolikro-Ahoungnanou", "Konankro", "Kongossou-N'Dri-Koffikro", "Kouakou-Bakakro", "Péténou", "Akoumiakro",
+        "Allékro", "Angbékro", "Assakro", "Goli-Kpangbassou", "Guienzoukro", "Kongodjan", "Kouakoukro",
+        "N'Dakro", "N'Dri-Kouakoukro", "Pli-Akakro", "Safoukro", "Samoïkro", "Tionankansi", "Zangokro"],
+        "Kondrobo":["Ancien Bourébo", "Bourébo", "Kandè-Kan", "Kendè-Dan", "Kokoflè", "Kondrobo", "Kouassi-Kouamékro",
+        "Koyarabo", "Roussè", "Totokro"],
+        "Lolobo":["Agbanou", "Ahounzé", "Ahouzé-Kouadiokro", "Alloko-Sakassou", "Appani-Mangouakro", "Assékro",
+        "Diéribanouan", "Drimbo", "Kongola", "Kuindjanda", "Lolobo", "N'Zengouanou"],
+        "Marabadiassa":["Adohoussou", "Allokokro", "Blimplo", "Goli-Maya", "Mangoua-Okoukro", "Marabadjassa", "Messoukro",
+        "Plikro", "Toudjan 1", "Toudjan 2"],
+        "N'Guessankro":["Adjokro", "Agbayansi", "Ahoulikro", "Angouakro", "Kissikro", "Konanblékro", "Kongokro",
+        "Kongossou-Kouadiokro", "Kongoti", "Kouadio-Finkro", "Minambo", "Myan-Gokro", "N'Guessankro",
+        "Ouangali", "Plibo"],
+        "Botro":["Abey-Ahougnassou", "Abey-Kouadiokro", "Adjébounou", "Baméla", "Botro", "Démakro", "Dila-Broukro",
+        "Dila-Kouakoukro", "Djédou-Ahounzè", "Djédou-Kpli", "Komo", "Koukroutié", "Koumambo", "Kpli-Yébouessou",
+        "M'Gbokouakoukro", "N'Douakro", "Takra-Adiékro", "Takra-Kongodjan", "Takra-Mangouakro", "Totokro",
+        "Zagbla", "Zanikro", "Dilakro", "Pinikro", "Pokou-Yaokro", "Tionankro"],
+        "Diabo":["Adjékro", "Agbakro", "Diabo", "Djaha Andokro", "Groh", "Kitipo", "Kokokro", "Konan Kpinkro",
+        "Kondoubo", "Kouassi Golikro", "Langbo", "Messoukro", "N'Doumoukro", "N'Gattakro", "N'Guessan Kouamékro",
+        "Sélakro", "Sinzékro", "Soussoubo", "Télébokan", "Télébokpli", "Tikakro", "Yomien-Kouadiokro", "Adjonou",
+        "Allakro", "Ballékro", "Délakro"],
+        "Krofoinsou":["Gossoli-Konankro", "Konanblékro", "Kouabouhansou", "Kouakou Krémékro", "Krofoinsou", "Langama",
+        "Lougbonou-Totokrakro", "Namouékoungba", "N'Gatta Koffikro", "N'Gatta-Kongouékro", "N'Gorankro",
+        "N'Guessan-Kankro", "Plahankro", "Pliké-Somolo", "Pliké-Totokro", "Tiéviessou"],
+        "Languibonou":["Abolé Kouassikro", "Abolikro", "Akproabo", "Andokro Kouakou", "Angokoun Kpangbassou", "Angoua Yaokro",
+        "Aougnanfoutou", "Assan Kouassikro", "Assiéblénou", "Assinzé", "Bouakro", "Boukébo", "Gbangaoukan",
+        "Gbangaoupri", "Gbéhéké", "Golikro", "Katokossou", "Kimoukro", "Klémékro", "Kondéhinou", "Kouadio Bonou",
+        "Kouakoublékro", "Kouamé Yaokro", "Languibonou", "Languikro", "Lokanoua", "Lossinkro", "Ouessenzué",
+        "Sahébo", "Sangrobo", "Saoundi", "Yrassuénou"],
+        "Bouaké-Ville":["Abidji", "Aboua-Angankro", "Adiambri-Koffikro", "Adissakassou", "Affouékro", "Agbagnassou",
+        "Agoua-Kongokro", "Akanzakro", "Akpessé", "Alloko-Yaokro", "Allomabo", "Andokro", "Angakro",
+        "Angamblé-Konankro", "Assémoublakro", "Assengoukan", "Assengoukpli", "Assoumayaokro",
+        "Attienkonankro", "Bendè-Kouassikro", "Boblénou", "Bouakro", "Boukébo", "Gbangaoukan",
+        "Gbangaoupri", "Gbéhéké", "Golikro", "Katokossou", "Kimoukro", "Klémékro", "Kondéhinou",
+        "Kouadio Bonou", "Kouakoublékro", "Kouamé Yaokro", "Languibonou", "Languikro", "Lokanoua",
+        "Lossinkro", "Ouessenzué", "Sahébo", "Sangrobo", "Saoundi", "Yrassuénou", "Assoumakro",
+        "Abokro", "Adiékankro", "Afounvansou", "Ahougnansou", "Ahoussi-Takikro", "Akafou Kouadiokro",
+        "Akakro", "Akawa", "Akpatoukro", "Akpla Assoumankro", "Akpokro", "Akrou-Kouadiokro", "Allokokro",
+        "Allomanou", "Amanibo", "Amanikro", "Amanikro", "Ando-Sakassou", "Angouatanokro", "Anko-Prikro",
+        "Assan Kouadiokro", "Assandrè", "Assandrékro", "Assouakro", "Attienkro", "Bamoro-Gare",
+        "Bamoro-Village", "Banco", "Besséri-Takikro", "Bobo", "Broukro", "Diahounou", "Diby-Gbèkèkro",
+        "Fari-Oko", "Foro-Foro-Djigbé", "Gbessékro", "Gloubouèkro", "Gnankoukro", "Godokro", "Kamonoukro",
+        "Kanankro", "Kanoukro", "Karo-Gblobo", "Klongbonouan", "Klosrambo", "Koffi Konankro", "Koffikro",
+        "Kogonibo", "Kokangbakro", "Koliakro", "Konankankro", "Konankro-Mizron", "Konan-N'Guessankro",
+        "Kondounou", "Korandi", "Kotia-Koffikro", "Kouabo", "Kouadio-Assèkro", "Kouakou-Miankro",
+        "Kouakro-Mizron", "Kouame-Assékro", "Kprikro", "Lama-Amanikro", "Lattéman-Koffikro", "Lokanou",
+        "Mahounou", "Mamianou", "M'Brakro", "M'Brakro-Dranouan", "M'Brenzué", "Mlan-Kouassikro", "N'dènou",
+        "N'Doua-Kouamékro", "Nénangoukro", "N'Gattakro", "N'Gatta-Sakassou", "N'Guessankro", "Niamoutiékro",
+        "Nimbo", "N'Valikro", "Oko-N'dranouan", "Oliénou", "Pépressou-Amanikro", "Pinikro", "Pokoukro",
+        "Sibirikro", "Sokolo", "Sottikro", "Taki-Kouamékro", "Tchimou-Assékro", "Tiéplé", "Tiérékro",
+        "Tolakouadiokro", "Toungbakro", "Toungbossou", "Wasrassou", "Yangara", "Yeboué Kouadiokro", "Yébouékro"],
+        "Bouaké-SP":["avoir"],
+        "Bounda":["Assèkankro", "Bopri", "Bouakro", "Bounda", "Kouadianikro", "Kouakou-Kouadiokro", "Kpindikro",
+        "Langba-Bokohou", "Languira", "N'Doumou Kouassikro", "Pronou", "Sokouamékro", "Yapikro", "Yéguébo"],
+        "Brobo":["Abouakro", "Akrougbangbokro", "Attrokro", "Badio-Kouamékro", "Bangassou", "Bongrabo", "Brobo",
+        "Broukro", "Djamala-Koffikro", "Djamalakro", "Kissabo", "Koffi-Koffikro", "Konan-Suikro",
+        "Kouassi-Attinkro", "Prikro", "Sakassou", "Sinanvessou"],
+        "Djébonoua":["Ablékro", "Adjékro", "Adjouassou", "Afferi-Sénango-Konankro", "Akpuibo", "Aougnansou", "Assengou",
+        "Assiélou-Broukonankro", "Assouakro", "Attakro", "Attohou", "Béhoukro", "Blédi", "Bouakro",
+        "Gblessou", "Gomo", "Kannouan", "Koffikro", "Kondoukro", "Konzo", "Kouadio-Prikro", "Kouakou-Oussoukro",
+        "Kouaprikro", "Kouassiblé-Djèkro", "Logbakro", "Lokassou", "Mébo", "N'Djébonouan", "N'Djébonouan Village",
+        "N'Douakro", "Pétessou", "Plango", "Sarakakro", "Sémoukro", "Sessékro", "Tanou Sakassou",
+        "Tola-Tanoukro", "Batokro", "Kankonou", "Katiénou", "Koblénouan", "Lengbré", "Niangban", "Okassou",
+        "Saa Pokou Andokro", "Toungbokro"],
+        "Mamini":["Abouokro", "Adikro", "Adikro-Foundi", "Ahounzankro", "Alloukro", "Ayabo", "Bobokro",
+        "Boka-Kouamékro", "Bokassi", "Fétékro", "Frondobo", "Kanguiérénou", "Kirakro", "Kouakro",
+        "Koubékro", "Kpékékro", "Mamini", "N'Dokro", "Saminikro", "Sarakakro", "Somélassou", "Takassou",
+        "Takikro", "Tanou-Broukro", "Tiébissou", "Yao-Amoinkro", "Zougban"],
+        "Ayaou-Sran":["Ayaou-Sokpa", "Sran-Bélakro", "Sran-Bondossou"],
+        "Dibri-Assirikro":["Bakadjassou", "Béla-Ahoukro", "Bonda", "Bondoukou-Kpli", "Dibri-Asrikro", "Dila", "Djongonouan",
+        "Foto-Kouamékro", "Gbani-Fêtênouan", "Gbani-Kokorénou", "Gbani-Kongossou", "Gbani-Kouamékro",
+        "Gbani-Ya-Sakassou", "Gogonouan", "Gohounouan", "Golibo", "Kokoni-Sakassou", "Komokonouan",
+        "Kpètessou", "Latani-Akanzakro", "Latani-Kouassiakakro", "Maméla-Kpli 1", "Maméla-Kpli 2", "Mébo",
+        "Moloukro", "N'Dakro", "N'Gbandobonou", "N'Guessan Pokoukro", "Ouassou", "Sanguiékro",
+        "Sola-Ahougnanou", "Sola-Boni-Broukro", "Suibonou", "Tengbé", "Ya-Assèkro"],
+        "Sakassou":["Adjo-Blessou", "Adjougouansou", "Agbanou", "Ahouè-Broukro", "Ahouè-Kansi", "Ahouè-N'Zissiessou",
+        "Ahougnansou", "Ahoundjo", "Andobo-Alluibo", "Andobo-Kpangbassou", "Andofoué-Bonou",
+        "Assabou-Djédjékro", "Assabou-Kouassikro", "Assabou-Kpandji-Yaokro", "Assafou-N'Zengouanou",
+        "Attiakro", "Aya Sakassou", "Bowali", "Fonvonou-N'Gbandobo", "Gnamiembo", "Goliblénou",
+        "Goli-Pokoukro", "Kahakro", "Kanango-Ahobè", "Kangré", "Koffikro", "Kohounkro", "Konankro",
+        "Koubénou", "Kpanigokro", "Kpatanou", "Kpétèbonou", "Longbo-N'Gattakro", "Mahounou-Kongodja",
+        "Mahounou-Kouakoukro", "Mahounou-Krofouinsou", "Mahounou-N'Zuessi", "Mangofi", "N'Gbédjo-Kongodja",
+        "N'Zokossou-Alloukro", "Odiahé", "Sakassou", "Sando", "Singoli", "Tayamoinkro", "Yablassou",
+        "Yablassou Koffikro", "Aboussou", "Adjékro", "Agokro", "Akété", "Akété-Djabo", "Akrétia",
+        "Alloko-Djékro", "Ando-Blé", "Ando-Dougba", "Ando-Simbo", "Ando-Zumé", "Angossé", "Assandrè",
+        "Assounvouè-Beugrénou", "Blékro-Nianda", "Broukro", "Fonvonou-Attienkro", "Kanango-Kpli",
+        "Kanango-Pokoukro", "Kanouan", "Kloko-Sakassou", "Kokoyalè", "Konanmoukro", "Kondrobo",
+        "Kouassi-Klokro", "Koumélé", "Kpato", "Lomo-Pô-kouassikro", "Lomo-Soukpèbo", "Mandéké-Kahabo",
+        "Mandéké-Kpon-Kouakoukro", "N'Da-Okoukro", "Ninkoumanou", "Pondossou", "Sokobo",
+        "Souafoué-Djacohou", "Souafouè-Djahan", "Souafoué-Djéhou", "Souafouè-Kouékro", "Ya-Kouakoukro"],
+        "Toumodi-Sakassou":["Kongo", "Toumodi-Sakassou"],
+
+
+        }
+    },
+
+    Gbôkle:{departments:["Fresco","Sassandra"],
+        subPrefectures:{
+            Fresco:["Dahiri", "Fresco", "Gbagbam"],
+            Sassandra:["Dakpadou", "Grihiri", "Lobakuya", "Medon", "Sago", "Sassandra"],
+
+        },
+        villages:{
+            "Dahiri":["Dahiri", "Goménébéri", "Okromodou", "Zéribéri"],
+            "Fresco":["Bohico", "Fresco", "Zakaréko", "Zégban 1", "Zégban 2", "Ancien Fresco", "Bolorouko", "Dassioko", "Kosso", "Zuzuoko"],
+            "Gbagbam":["Gbagbam", "Lobogrou", "Yobéri"],
+            "Dakpadou":["Béyo", "Bolo V1", "Bolo V2", "Bolo V3", "Dakpadou", "Gboville", "Kokolopozo", "Lédjan Pk31", "Madinatchè", "Niapidou", "Sadiadougou", "Safa-Manois", "Tchématché", "Yao-Appelakro"],
+            "Grihiri":["Boutoubré 1", "Boutoubré 2", "Grihiri", "Kouaté", "Lohiri-Sofoci", "Zaébré"],
+            "Lobakuya":["Balokuya", "Bréguiagui", "Karago", "Kérayo", "Labakuya", "Lobakuya", "Sahoua"],
+            "Medon":["Garoubré", "Gréguibré", "Inahiri", "Médon"],
+            "Sago":["Adébem", "Badiéboué", "Gnago 1", "Gnago 2",
+            "Gnamienkro-Lohiri", "Gnégrouboué", "Gobroko", "Godjiboué",
+            "Guédikpo", "Kpata-Abidou", "Lohiri-Godié", "Manaboué", "N'Guessankro",
+            "Sago", "Tétidou", "Tiazalé", "Trikpoko", "Zégréboué"],
+            "Sassandra":["Bassa", "Batélébré 1", "Brodjé", "Cocoplage",
+            "Dabéda", "Gaoulou", "Gapé", "Grand-Dréwin", "Lébléko",
+            "Lékidou", "Misséhi", "Niani", "Niézéko", "Sassandra",
+            "Siampaho", "Vodiéko", "Akakro", "Arokpa", "Dagbégo 1",
+            "Dagbégo 2", "Gloplou", "Godé", "Goviadou", "Guédio-Guédio",
+            "Kadrokpa 1", "Kadrokpa 2", "Latéko", "Lipoyo", "Lohiri-Néyau",
+            "Lossan-Kouamékro", "Louga", "Niabably", "Niabayo", "Niéga",
+            "Pauly-Brousse", "Pauly-Chantier", "Pauly-Plage", "Sialoukro"]
+
+        }
+    },
+
+    Gôh:{departments:["Gagnoa","Oumé"],
+          subPrefectures:{
+            Gagnoa:["Bayota", "Dahiepa-Kehi", "Dignago", "Dougroupalegnaoa",
+            "Doukouyo", "Gagnoa", "Galebre-Galébouo", "Gnagbodougnoa", "Guibéroua",
+            "Ouragahio", "Sérihio", "Yopohue"],
+            Oumé:["Diégonéfla", "Guépahouo", "Oumé", "Tonla"],
+          },
+
+    villages:{
+        "Bayota":["Balayo", "Bayota", "Blouzon", "Boboloua", "Brihi", "Gbigbikou", "Logouata", "Nékéidé", "Solokou", "Téhiri", "Tiégbahi",
+        "Yazermé", "Zahibohio", "Zigbohouri"],
+        "Dahiepa-Kehi":["Badiépa", "Bayékou-Bassi", "Dahiépa-Kéhi", "Djédjédigbépa", "Dobrépa-Koussépa", "Kéhi-Gbahi", "Magbéhigouépa", "Pissékou", "Zégrépa"],
+        "Dignago":["Bagasséhoa", "Dignago", "Dribouo", "Gazahio", "Gbeugréhoa", "Lébré", "Otéhoa"],
+        "Dougroupalegnaoa":["Boussoupalégnoa", "Dikouéhipalégnoa", "Djatégnoa", "Djérégoué", "Dodjagnoa", "Donhio Maléhio", "Dougroupalégnoa", "Gbadjié", "Gnalégribouo", "Guiguia", "Kobrégnoa",
+        "Mahibouo", "Niarihio", "Olibribouo", "Sakua"],
+        "Doukouyo":["Bamo 1", "Daliguépalégnoa", "Doukouyo", "Guéyo-Bamo",
+        "Oupohio"],
+        "Gagnoa":[
+        "Daliguépa", "Gagnoa (Afridoukou,Babré,Barouhio,Garahio)", "Gnahio-Dégoué",
+        "Godiabré", "Guessihio", "Mahidio", "Moko", "Ony-Babré", "Ony-Tabré",
+        "Ahizabré", "Atonihio", "Bobia", "Bognoa", "Bogrégnoa", "Dagodio", "Dahopa",
+        "Diabouo", "Digbeugnoa", "Dobé", "Grébré", "Guéménédou", "Guibouo", "Kabia",
+        "Kakrédou", "Kobouo", "Kripahio", "Lélébrékoua", "Logobia", "Mabouo", "Maguéhio",
+        "Maguiahio", "Mahinadopa", "Ménékré", "Noaguihio", "Obodroupa", "Ourépa", "Payopa",
+        "Sogrobognoa", "Tchédjélet", "Tipadipa", "Titiékou", "Todiognoa", "Toutoubré",
+        "Zigopa", "Zokrobouo"],
+        "Galebre-Galébouo":["Galébré", "Gbogouahio", "Gnigbawa", "Kosséhoa", "Onahio"],
+        "Gnagbodougnoa":["Abohio", "Dalilié", "Dodougnoa", "Gnagbodougnoa", "Gnamagnoa", "Godélilié", "Kragbalilié"],
+        "Guibéroua":["Bassi", "Bilahio", "Guézem", "Guibéroua", "Kabéhoa", "Kpogrobouo",
+        "Krissérahio", "Lébam", "Niaprahio", "Takoa", "Basséhoa", "Bélam", "Béliéhoa",
+        "Briéhoa", "Djétéhoa", "Grand-Zia", "Konahio", "Ondjahio", "Zadiahio", "Zakoa",
+        "Ziriwa", "Zohoa", "Zoukoubré"],
+        "Ouragahio":["Bodocipa", "Broudoumé", "Gnaliépa", "Karahi", "Kpapékou", "Krogbopa",
+        "Mama", "Oundjibipa", "Ouragahio", "Siégouékou", "Zébizékou", "Biakou",
+        "Drayo-Dagnoa", "Izambré", "Kokouezo", "Nazia", "Tiépa"],
+        "Sérihio":["Brokohio", "Gnatroa", "Inagbéhio", "Sérihio", "Valoua", "Wanéwa"],
+        "Yopohue":["Bahompa", "Boko", "Didia", "Nagadoukou", "Sané-Gazé", "Yopohué", "Ziplignan"],
+        "Diégonéfla":["Diégonéfla", "Gnandi-Boménéda", "Goudi-Boboda", "Badié",
+        "Bidié", "Bronda", "Dédi", "Gouéda", "Lahouda", "Niéboda", "Tiégba"],
+        "Guépahouo":["Bodiba", "Digbohouo", "Donsohouo", "Douagbo", "Guépahouo", "Sakahouo"],
+        "Oumé":["Akroufla", "Brozan", "Dougbafla", "Gnanoufla", "Kéita", "Loukoukro",
+        "Oumé", "Benkro", "Doka", "Doukouya", "Gabia", "Gobia", "Goulikao", "Kappa",
+        "Kouaméfla", "Louha", "Yohouda", "Zangué"],
+        "Tonla":["Bléanianda", "Blékoua", "Boessovoda", "Bokéda",
+        "Booda", "Dondi", "Gboménéda", "Tonla", "Zaddi"]
+
+    }
+
+    },
+
+    Gontougo:{departments:["Bondoukou","Koun_Fao","Sandégué","Tanda","Transua"],
+          subPrefectures:{
+            Bondoukou:["Appimandou", "Pinda-Boroko", "Bondo", "Bondoukou",
+                      "Gouméré", "Laoud-Iba", "Sapli-Sépingo", "Sorobango", "Tabagne"
+                      , "Tagadi", "Taoudi", "Yezimala"],
+            Koun_Fao:["Boahia", "Kokomian", "Kouassi-Dattékro", "Koun-Fao",
+                     "Tankéssé", "Tienkoikro"],
+            Sandégué:["Bandakagni-Tomora", "Dimandougou", "Sandégué", "Yorobodi"],
+            Tanda:["Amanvi", "Diamba", "Tanda", "Tchedio"],
+            Transua:["Assuéfry", "Kouassi-Niaguini", "Transua"],
+          },
+
+    villages:{"Appimandou":["Appimandoum", "Bohi", "Kikiwéré", "Kinkua", "Krébio-Adoumkrom",
+             "Krébio-Domiambra", "Krébio-Kessié", "Mananzo", "Zanzan 1", "Zanzan 2"],
+             "Pinda-Boroko":["Doumassi", "Dua-Kouamé", "Kanassé", "Méty", "Pinda-Boroko",
+             "Sécrébango"],
+             "Bondo":["Banti", "Bilikéhi", "Biniméré", "Biraoudi", "Bondo", "Déba",
+            "Donvagne", "Gorongui", "Gotia", "Hangoti", "Houmakpin", "Kpanan", "Kpanayo",
+            "Lédi", "Néguéré-Nagaré", "Zolongo"],
+       "Bondoukou":[
+                  "Abéma", "Bondoukou", "Goli", "Motiamo", "Ouélékéi",
+                  "Sanguéi", "Soko", "Affouavamé", "Assiman", "Assouangui",
+                  "Bidio-Lolohui", "Boromba", "Gahimi", "Gbagnagassié", "Gbaki",
+                  "Gbodem", "Gbokoré-Pinango", "Guimini", "Kiendi-Ba", "Kouassi-N'Dawa",
+                  "Méré", "Nagabaré-Gboko", "Pougouvagne", "Sabi", "Sama", "Séréoudé",
+                  "Simbilibi", "Sipa", "Sogobo", "Songori", "Témogossié"],
+       "Gouméré":[
+                 "Attram", "Batéan", "Bouadam", "Bouatia", "Boudy",
+                 "Dakoua", "Djom", "Gboko-Bidigo", "Gouméré", "Hérébo",
+                 "Karako", "Koboko", "Koffiékro", "Kouffouo", "Malaga-Lolohui",
+                 "Mantoukoua", "Nagnongo", "Nakahoua", "Nassan", "Siago"],
+       "Laoud-Iba":[
+    "Bozangui", "Bracodi", "Brogodon", "Darikoussou", "Djimprédouo",
+    "Fakala", "Flakièdougou", "Gbagbao", "Gbanan", "Gbanhui", "Gnangomami",
+    "Gondo", "Kohui", "Laoudi-Ba", "Laoudi-Gan", "Pétèye", "Salèye",
+    "Sanguéta", "Sianli", "Tchéfrodouo", "Tiémokodougou", "Torossanguéhi",
+    "Yayégo", "Yérékayé-Oualogo", "Zadéi"],
+       "Sapli-Sépingo":["Dagboloyo", "Djobri", "Gbréda", "Sapli", "Savagne", "Sépingo"],
+       "Sorobango":[
+    "Borokponko", "Danguira", "Débango", "Kanguélé", "Kiendi-Huisséré",
+    "Kiendi-Woléogo", "Kouafo-Akidom", "Mantoukoua-Woléogo", "Nafambéni",
+    "Nao", "Ouolobidi", "Pélégodi", "Sanguiébo", "Sianhodi", "Siékouaye",
+    "Sogola", "Sorobango", "Tambi", "Wawè", "Zagala"],
+       "Tabagne":[
+    "Amodi", "Amoitini", "Bini-Kobenan", "Damé", "Dédi", "Dingbi", "Gbané",
+    "Gnomangon", "Iguéla-Pinango", "Kalom", "Kotio", "Kouafo-Ahinifié",
+    "Kouassi-Kouman", "Magam", "Sapia", "Tabagne", "Wakiala", "Yaokokoroko",
+    "Zéré"],
+       "Tagadi": ["Bandolé", "Kamala", "Kohodio", "Marahui", "Poukoubè", "Sangabili", "Tagadi"],
+       "Taoudi":["Dinaoudi", "Kémédi", "Kiramissé", "Landaye", "Lénangaré", "Marahui-Ahinifié",
+       "Nagabaré-Zelma", "Sadiahui","Sakpatrou", "Taoudi", "Yérékayé-Koko", "Zépo"],
+       "Yezimala":["Ampounou", "Gankro", "Kogora", "Sananga", "Savagnéré", "Wangalé", "Yézimala"],
+       "Boahia":["Abokosso", "Boahia", "Dabokitira", "Daboyaokro", "Doumorossi", "Kodjinan",
+       "Morsankro", "N'Dakro", "Yaobilékro"],
+       "Kokomian":["Bossignamienkro", "Ifo", "Koffi-Badoukro", "Kokomian", "N'Goumissa",
+       "Petit-Abengourou","Sogoyaokro", "Takikro", "Warèkro"],
+       "Kouassi-Dattékro":["Afféry", "Kouassi-Datékro", "Ouroutara",
+       "Sénandé", "Yakassé-Bini", "Abongui-Morokro", "Abongui-Tiékoniyaokro",
+       "Amapo Kouassikro", "Comoékro", "Djoro-Djoro", "Essiantoua", "Kodonan-Bovouanso",
+       "Koffikokorèkro", "Kokoyakro", "Komambo", "Kotronou", "Kouadjakro", "Kouakou-Djinankro",
+       "Kouakro-Bovouanso", "Kouassibilékro", "Missoumihian 1", "Missoumihian 2",
+       "Nambo-Dongbo", "Tiéfoumboura", "Yaokro", "Yaotrokro"],
+       "Koun-Fao":["Dodoassué", "Koria", "Kouakoukrakro", "Koun-Abronso", "Koun-Adégoun",
+       "Koun-Ahounzi", "Koun-Fao", "Même", "N'Gorato", "Abokro-Damé",
+       "Adoukro", "Akrassikro", "Anonkikro", "Assindi", "Brayé", "Brindoukro",
+       "Djatokro", "Dokanou", "Kangakro", "Kotogwanda", "Ouatté", "Petit Abidjan",
+       "Tanokoffikro", "Tienkouassikro", "Worokro", "Yabrasso",
+       "Yao Badoukro", "Yébouakro", "Yomankro-Boahia"],
+       "Tankéssé":["Akroidokikro", "Adjéikro", "Akasso", "Assempanayé",
+       "Attakouadiokro", "Broukro-Banouan", "Dihinibo", "Koffikokorékro",
+       "Kotokou-Ayéra", "Kouassi-Badoukro", "N'Dakro", "Ouangui", "Pambariba",
+       "Pengakro", "Petit-Bondoukou", "Petit-Bouaké", "Tankessé", "Yaokro",
+       "Yoboué-Bouman"],
+       "Tienkoikro":["Akakobénankro", "Allikouassué", "Assuamakro",
+       "Atakro", "Broffouédou", "Déimba", "Kobenan-Bango", "Kodjinan",
+       "M'Békouadiokro", "N'Guessan-Brindoukro", "Presso", "Tanokouamékro",
+       "Tienkoikro"],
+       "Bandakagni-Tomora":["Bandakagni-Tomora", "Doutiguidougou",
+       "Kouadio-Koto", "Kouassidougou", "Namassi", "Tiéoulékro"],
+       "Dimandougou":["Diézué", "Dimandougou", "Gbangourman", "Kamélé",
+       "Kimassi", "Logotan", "Yangbesso"],
+       "Sandégué":["Kassoumdougou", "Kouakoukankro", "Madam", "Sandégué",
+       "Bandakagni-Sokoura", "Daridougou", "Gbangbo", "Kiéti",
+       "Logondé", "Pala", "Sanguéhi", "Talahini-Sokoura", "Talahini-Tomora"],
+       "Yorobodi":["Awaikro", "Daléwaré", "Kobenagalé", "Kondorodougou", "Massadougou",
+       "Sanlo", "Téko", "Tokanga", "Yorobodi"],
+       "Amanvi":["Adjiéibango", "Amanvi", "Bracodi", "Dabilayo", "Diassampa", "Fissa", "Kandena",
+       "Lotognio", "Sogovagne", "Sogui", "Tégowouni"],
+       "Diamba":["Adjoumanibango", "Adoubango", "Aka-Yao", "Assoumanbango",
+       "Bassapounou", "Bouko", "Diamba", "Djazabango", "Domambango",
+       "Gbabango", "Kanton", "Kouadiobango", "Kouamébonikro", "Kouménagaré",
+       "Néma", "N'Graoua", "Pala", "Siagni", "Yaobango"],
+       "Tanda":["Ahibango", "Bakoutié-Yao-Fiéni", "Béléoulé", "Bokoré",
+       "Sépé", "Sokouadou", "Tanda", "Tangamourou", "Téhui", "Tèko",
+       "Toundiani", "Yanvo", "Abokouma", "Amata", "Assafo", "Brouko",
+       "Dibibango", "Djani-Yao", "Fodja", "Guiendé", "Iguéla", "Karabegné",
+       "Kiétan", "Kongodjan", "Korobo", "Koroko 2", "Korokobango",
+       "Korokofoumassa", "Kwatoutou", "Lécocodi", "Lomo", "Nagafou",
+       "Nao", "Yaobouo"],
+       "Tchedio":["Aguina", "Bossoumara", "Djandoubango", "Djanifikro",
+       "Essikro", "Gondia", "Guiméré", "Lamoli", "Sékrébango", "Siasso",
+       "Siengui-Sogo", "Tchèdio"],
+       "Assuéfry":["Abokro", "Adandia", "Adièmra", "Adiopènan",
+       "Amonkobénankro", "Assuamakro", "Assuéfry", "Bouakro", "Datékro",
+       "Hiango", "Kassabi", "Kékréni", "Kotokuini", "Kouam-Dari",
+       "Kouassi-Séranou", "Mantoukoua", "Mérékou", "N'Gam", "Siédja",
+       "Yomankro", "Bakoutié-Foumassa", "Bossomkuikro", "Dadiassé",
+       "Kotokoua", "Yakassé-Akidom", "Yao Dongokro", "Yomian"],
+       "Kouassi-Niaguini":["Assuakô", "Arrosua", "Assuatifi", "Baoulékoffikro",
+       "Dadiassé-Abrikokro", "Essi-Kouakoukro", "Kouadio-Dongokro",
+       "Kouadjo-Kissikro", "Kouassia-Niaguini", "Kroupikro", "N'Zuassé",
+       "Signahalé", "Yao-Nango"],
+       "Transua":["Ahuitiesso", "Akossuam", "Assuétia-Banon", "Assuétia-Kessé",
+       "Attokom", "Bénanon", "Bissassé", "Kassan", "Koihinikro", "Kouakoutanokro",
+       "Krébio-Akoinkro", "Mantimandja", "Marassué", "Niambékéré",
+       "Nioumassi", "Poko-Sikassua", "Priti 2", "Taakrom",
+       "Tounvokro-Attékétian", "Transua", "Yaokumkro", "Krakro",
+       "Priti 1", "Soromani", "N'Détiesso-Sokoura", "Amorofikro",
+       "Diédou", "Kangassua", "Kromokrom", "Pambasso", "Tanokouassikro"]
+
+    }
+    },
+
+
+    Grands_Ponts:{departments:["Dabou","Grand_Lahou","Jacqueville"],
+         subPrefectures:{
+            Dabou:["Dabou", "Lopou", "Toupah"],
+            Grand_Lahou:["Ahouanou", "Bacanda", "Ebounou", "Grand-Lahou", "Toukouzou"],
+            Jacqueville:["Attoutou", "Jacqueville"],
+
+         },
+
+          villages:{
+          "Dabou":["Agnéby", "Armébé", "Dabou", "Débrimou", "Gbougbo", "Kpass",
+          "Layou", "N'Gatty", "Akradio", "Bodou", "Bonn", "Bouboury", "Mopoyem",
+          "Orbaff", "Tiaha", "Vieil-Aklodj", "Yassap A", "Yassap B"],
+          "Lopou": ["Adangba-Eby", "Agnimangbo", "Ahouya", "Akakro", "Kotokodji",
+          "Kroufian", "Lopou", "N'Doumikro", "Nouvel-Ousrou", "Vieil-Ousrou", "Yomidji",
+          "Youhoulil"],
+          "Toupah":["Agbaille", "Cosrou", "Ira", "Kaka", "Kpandah", "Niamiambo",
+          "Niguinanou", "Okpoyou", "Petit-Badien", "Toupah", "Vieux-Badien"],
+          "Ahouanou":["Ahouanou", "Ahougnanfoutou", "Baoulesso", "Dongbo", "Nianda",
+          "Palmindustrie Tamabo Nord", "Palmindustrie Tamabo Sud", "Tamabo"],
+          "Bacanda":["Adjékonankro", "Agnikro", "Bacanda", "Botindin", "Gbédjénou",
+          "Godesso", "Siékro", "Tagbanasso"],
+          "Ebounou":["Adjadon", "Adjadon V2", "Adjadon V3", "Allékédon", "Badadon",
+          "Beugrédon", "Dibou", "Dokpodon", "Ebonou", "Essonam", "Gréguibéry",
+          "Kokou", "Krokrom", "Zagbalébé"],
+          "Grand-Lahou":["Bétesso", "Grand-Lahou", "N'Zida-Zoukouboli",
+          "Palmci Dioulabougou", "Palmci Yocoboué", "Ahounianssou",
+          "Belleville", "Braffédon", "Djidjikro", "Groguida", "Groguida V1",
+          "Katchékan", "Katchékpli", "Lahou-Kpanda", "Liboli", "Likpilassié",
+          "Mackey", "Nandibo 1", "Nandibo 2", "Tiéviessou", "Tiéviéssou Phci", "Tioko"],
+          "Toukouzou":["Amessan N'Guessandon", "Djatéket", "Noumouzou", "Toukouzou"],
+          "Attoutou":["Abraco", "Abraniamiambo", "Allaba", "Attoutou A", "Attoutou B",
+          "Bapo", "Gboyo", "Irobo", "Koko", "Kouassikro", "Nigui-Assoko", "Nigui-Saff",
+          "Taboth", "Téfrédji", "Tiagba", "Tiémien"],
+          "Jacqueville":["Abréby", "Addah", "Adessé", "Adjacoutié", "Adjué",
+          "Adoukro", "Adoumangan", "Ahua", "Akrou", "Avadivry", "Avagou",
+          "Bahuama", "Couvé", "Djacé", "Gbéhiri", "Grand-Jack", "Jacqueville",
+          "Kraffy", "M'bokrou", "Miangoussou", "Mougognini", "N'Djem", "Sassako-Bégnini",
+          "Taboutou","Wah"],
+
+          }
+    },
+    Guémon :{departments:["Bangolo","Duékoué","Facobly","Kouibly"],
+         subPrefectures:{
+            Bangolo:["Bangolo", "Beoue-Zibiao", "Bléniméouin", "Diéouzon", "Gohouo-Zagna",
+            "Guinglo-Tahouaké", "Kahin-Zarabaon", "Zéo", "Zou"],
+            Duékoué:["Bagohouo", "Duékoué", "Gbapleu", "Guézon","Guehibly"],
+            Facobly :["Facobly", "Guézon", "Koua", "Sémien", "Tieny-Seably"],
+            Kouibly:["Kouibly", "Nidrou", "Ouyably-Gnondrou", "Totrodrou"],
+
+         },
+
+          villages:{"Bangolo": ["Bangolo", "Bangolo-Kahen", "Bangolo-Zonfaély",
+          "Béon-Gohouo", "Béoué-Zagna", "Binao", "Dah", "Ganzon", "Gouégui",
+          "Grand Pin", "Guéhouo", "Guézon-Zagna", "Guinglo-Zagna", "Kahen-Zagna",
+          "Péhai-Zagna", "Petit Pin", "Séba", "Tahoubly-Gaé", "Tiembly-Gloplou",
+          "Yabligué", "Yabli-Guinglo", "Zibabo-Yéblo"],
+          "Beoue-Zibiao": ["Béoué-Zibiao", "Blédi", "Boho 1", "Boho 2", "Diahondi",
+          "Diapléan", "Diourouzon", "Gaoya", "Gloplou", "Gohouo-Zibiao", "Goya",
+          "Guékpé", "Guiri", "Plohouin", "Zibo", "Ziondrou"],
+          "Bléniméouin":["Bléniméouin", "Diébly", "Zaodrou"],
+          "Diéouzon":["Baibly", "Bouobly", "Diéouzon", "Douékpé", "Gonié-Tahouaké", "Sébazon"],
+          "Gohouo-Zagna":["Glodé", "Gohouo-Zagna", "Tié-Iné-Zagna"],
+          "Guinglo-Tahouaké":["Bangolo-Tahouaké", "Guézon-Tahouaké", "Guinglo-Tahouaké", "Zétrozon"],
+          "Kahin-Zarabaon":[
+          "Banguiéhi", "Gloubly", "Kahin-Zarabaon", "Koulouan",
+          "Péhê-Zarabaon", "Pinhou", "Tié-Iné Zarabaon"],
+          "Zéo":["Béoua-Zibiao", "Diéou", "Douandrou 1", "Douandrou 2",
+          "Goénié", "Kahi", "Kouisra", "Ponan", "Zéo"],
+          "Zou":["Bably", "Béoua-Zarabaon", "Blotilé", "Diédrou", "Douanzéré",
+          "Gan", "Gohouo-Zarabaon", "Gouétilé", "Koulaéoué", "Phing", "Tionlé",
+          "Zérégbo", "Zodry", "Zou"],
+          "Bagohouo":["Bagohouo", "Guinglo-Zia", "Lédjéhan", "Nidrou", "Pona-Vahi",
+          "Sibably", "Yrozon"],
+          "Duékoué":["Bahé-Blahon", "Bahoubli", "Blody", "Dahoua", "Duékoué", "Fengolo",
+          "Guitrozon", "Niambly", "Petit-Duékoué", "Pinhou", "Toa-Zéo", "Diahouin",
+          "Doumouyadougou", "Flampleu", "Glaou", "Lokosso", "Tissongnénin", "Toguéï"],
+          "Gbapleu":["Gbapleu", "Krazandougou", "Ouattaradougou"],
+          "Guézon":["Dibobli", "Gahably", "Gréikro", "Guessabo-Guéré", "Guézon",
+          "Konédougou", "Nanady", "Pona-Ouinlo", "Tahably-Glodéhé",
+          "Tien-Oula", "Tobly-Bangolo"],
+          "Guehibly":["Bahé-Sébon", "Delobly", "Diéhiba", "Diourouzon", "Gozon", "Guéhiébly",
+          "Guinglo-Sropan", "Séhoun-Guiglo"],
+          "Facobly":["Douimbly", "Facobly", "Gbodrou", "Kaokossably", "Kébly",
+          "Kiriao", "Koléa", "Kontrou", "Mangboébly", "Mayébly", "Souébly",
+          "Takouaébly", "Téïsson", "Tiédrou", "Tiessan", "Zouatta 1", "Zouatta 2"],
+          "Guézon":["Douédy", "Gbézio", "Guézon", "Kloplou", "Séambly", "Soakpé"],
+          "Koua":["Flansobly", "Klangbolably", "Koua", "Tiébly"],
+          "Sémien":["Bibita", "Kanébly", "Séambly", "Sémien", "Taobly"],
+          "Tieny-Seably":["Béoué", "Gbadrou", "Kaédrou", "Sandrou", "Séably", "Tiény", "Zé", "Ziondrou"],
+          "Kouibly":["Batiébly", "Bouébly", "Diébambobly", "Gnoahé", "Kouibly", "Séably",
+          "Siébly", "Tacourably", "Tobly", "Trodrou", "Guézon-Gbéan 1", "Guézon-Gbéan 2",
+          "Guinglo-Gbéan", "Kéiténably", "Kéklobly", "Kessably", "Touandrou-Gbéan"],
+          "Nidrou":["Diotrou", "Nidrou", "Oulayably", "Pané", "Piandrou", "Sahidrou", "Trokpadrou"],
+          "Ouyably-Gnondrou":["Gbéibly", "Douagué", "Gnondrou", "Koulayéré", "Makaïbly",
+          "Ouyably", "Pagnébly", "Piébly 1", "Piébly 2", "Pombly", "Taobly", "Tuéwo"],
+          "Totrodrou":["Baou 1", "Baou 2", "Béoué 1", "Béoué 2", "Datouzon",
+          "Guézon-Kirou", "Guinglo-Ville", "Guinglo-Zia", "Kordrou", "Nénady-Kirou",
+          "Nénady-Tébao 1", "Nénady-Tébao 2", "Totrodrou", "Touandrou-Kirou"]
+          }
+    },
+
+    Hambol:{departments:["Dabakala","Katiola","Niakaramadougou"],
+         subPrefectures:{
+            Dabakala:["Bassawa", "Boniérédougou", "Dabakala", "Foumbolo", "Niemene",
+            "Satama-Sokoro", "Satama-Sokoura", "Sokala-Sobara", "Tiendene-Bambarasso",
+            "Yaossedougou"],
+            Katiola:["Fronan", "Katiola", "Timbé"],
+            Niakaramadougou:["Arikokaha", "Badikaha", "Niakaramadougou", "Niédiékaha",
+            "Tafiré", "Tortiya"]
+         },
+
+          villages:{"Bassawa":[
+                    "Bassawa", "Kongodjan", "Namagnondougou", "Bobosso", "Diembressédougou",
+                    "Douadiori", "Gbaméguédougou", "Karagono-Sobara", "Kombalasso", "Kouloumiera",
+                    "Ligboro", "Lissolo-Sobara", "M'Bornon", "Namahounondougou", "Ouorognagbélé",
+                    "Sangbélédougou", "Sawariko", "Sirakoro", "Téplégnédougou", "Tonfoin", "Wandrana", "Yeyaradougou"],
+                    "Boniérédougou":[
+                    "Bakoro Séoula", "Bakoro Sobara", "Boniérédougou", "Bounadougou",
+                    "Broubrou Dioulasso", "Kahatadougou", "Karpélé", "Kayoulo",
+                    "Kokolo", "Koundodougou", "Loniéné", "Oualéguéra",
+                    "Palagadougou", "Souleymanekaha", "Tiékélédougou", "Tienguindougou",
+                    "Tossiondougou", "Yéoulesso", "Bokala Noumousso", "Bokala-Niampondougou",
+                    "Dienguesso", "Gboly Carrefour", "Kofila", "Kohouara", "Kohouara-Sokoura",
+                    "Naholo-Sobara", "Pagala", "Pessandougou", "Pinsolodougou","Segbèrè", "Sendé",
+                    "Souayeri"],
+                    "Dabakala":[
+                    "Darala", "Diamakara", "Dyendana-Sokoro", "Dyendana-Sokoura",
+                    "Fangoli-Sokoro", "Fangoli-Sokoura", "Farakoro", "Fénessiguédougou",
+                    "Gbadougou", "Kafiné Noumousso", "Kafiné-Bambarasso",
+                    "Kafoudougou Bambarasso", "Kafoudougou Dioulasso", "Kagbonon",
+                    "Kanguérasso", "Kaniéméné", "Kawolo-Dioulasso", "Kawolo-Kongodian",
+                    "Kawolo-Konotara", "Kawolo-Mangorosso", "Kawolo-Sanankoro",
+                    "Kawolo-Sobara", "Kotokoun", "Kpana-Kalo", "Kpana-Mangorosso",
+                    "Kpana-Ouélasso", "Lafigué", "Lépolessédougou",
+                    "Natéré-Bambarasso", "Natéré-Dioulasso", "Ouandarama",
+                    "Ouandaraman Bambarasso", "Ouandaraman Dioulasso", "Panagana",
+                    "Pataparidougou", "Safolo", "Samassogosso", "Sandiougoula",
+                    "Sébolo", "Sokorogo", "Tétindougou", "Timbéguélé",
+                    "Tissélé Noumousso", "Tolédougou", "Tonfoin 2", "Tongbédougou",
+                    "Torro-Léwéra", "Triguédougou"],
+                    "Foumbolo":[
+                    "Bala", "Djolo", "Foumbolo", "Kaléguéra", "Kaniéné",
+                    "Kapélé-Sokoro", "Kapolokoro", "Kassemblé", "Kassoungbonon",
+                    "Littiari", "Niangourougbonon", "Sarala", "Findéné",
+                    "Kapélé Sokoura", "Kolo", "Landédougou", "Nambayérédougou",
+                    "Nandjélé-Ségbéré", "Nassoulo", "Sendré-Sokoro",
+                    "Sendré-Sokoura", "Tahogora", "Tiobolo"],
+                    "Niemene":[
+                    "Kognannan", "Lagbora", "Lahogora", "Niéméné",
+                    "Ponon", "Sitiolo", "Souroukoudougou", "Takana Dioulasso",
+                    "Tindikan Sofona", "Tinguédougou"],
+                    "Satama-Sokoro":[
+                    "Djakora", "Gbamakro", "N'Guessankro", "Satama-Sokoro",
+                    "Ségnéné", "Balanzié", "Boroyaradougou", "Diaradougou",
+                    "Gbamélédougou", "Katidougou", "Kogbèra", "Kombara-Bambarasso",
+                    "Kombara-Mangrosso", "Lafigbogo"],
+                    "Satama-Sokoura":["Mamidougou", "Morifidougou", "Ourognagbélé", "Satama-Sokoura",
+                    "Kétiébou", "Kokoumba", "Kongokro", "Kouroukono Dioulasso", "Messarandougou", "Sendékou"],
+                    "Sokala-Sobara":["Dendjougoudougou", "Dyendagana", "Faboudougou", "Kadiéoulé-Lolézo",
+                    "Kadiéoulé-Sobara", "Kadiéoulé-Sourdian", "Kongobanadougou", "M'Borla-Bambarasso",
+                    "M'Borla-Dioulasso", "N'Gorla", "Ouasségbogo", "Sokala-Djélisso", "Sokala-Sobara",
+                    "Soungbonon-Bambarasso", "Soungbonon-Dioulasso"],
+                    "Tiendene-Bambarasso":["Bangolo", "Bidiala-Sobara", "Bobosso", "Goumbodougou",
+                    "Kaniéguéma", "Kossaba", "Nakala", "Sorolo", "Tédiala-Bambarasso",
+                    "Tédiala-Noumousso", "Tendéné-Bambarasso", "Toupé", "Wendèné"],
+                    "Yaossedougou":["Babadougou", "Bindolo Wasségbogo", "Dingasso",
+                    "Gbérékoro Bambarasso", "Gbérékoro Noumousso", "Lassogoro", "N'Dokariendougou",
+                    "Tindaoulé", "Yaossédougou"],
+                    "Fronan":["Fronan", "Darakokaha", "Kanangonon", "Naplékaha", "Ouanadiékaha",
+                    "Tafolo", "Takala", "Tiengala"],
+                    "Katiola":["Foro-Foro", "Katiola (Kationon 1, Kationon 2, Nandjéplékaha, Pédiakaha)", "Kowara", "Kpéfélé",
+                    "Logbonou", "N'Dana", "Nikolo", "Tiédiarikaha", "Touro Gare"],
+                    "Timbé":["Attienkaha", "Kabolo", "Kafigué", "Kassemé",
+                    "Koffissiokaha", "Ourougbankaha", "Timbé", "Toumboho", "Yékolo"],
+                    "Arikokaha":["Niangbo", "Arikokaha", "Badiokaha", "Fononkaha", "Loho",
+                    "Nangoniékaha"],
+                    "Badikaha":["Badikaha", "Djébélékaha", "Kafébélékaha", "Kouroukouna", "Kouroukouna-Gare", "Kpakounakaha", "Naboukalakaha", "Pangalakaha",
+                    "Sucaf Ci Village 1", "Sucaf Ci Village 2", "Sucaf Ci Village 3", "Sucaf Cité Usine", "Tiengarakaha"],
+                    "Niakaramadougou":["Niakara", "Angolokaha", "Folofonkaha", "Kafiné", "Kanawolo", "Kiohan",
+                    "Latokaha", "Longo", "Ouréguékaha", "Pékaha", "Pétionnara", "Pétonkaha", "Sérigbokaha", "Sinkaha", "Timorokaha"],
+                    "Niédiékaha":["Doussoulokaha", "Kolokaha", "Koulokaha", "Nambanakaha",
+                    "Niédékaha", "Niérétenkaha", "Sépikaha"],
+                    "Tafiré":["Koulokakaha", "N'Golodougou", "Tafiré", "Tiélétanakaha", "Korlokaha",
+                    "Ségbélékaha", "Sélilékaha", "Takpalakaha"],
+                    "Tortiya":["Kationron", "Ténindiéri", "Tortiya", "Allasso", "Gninlnafolokaha",
+                    "Lotialga", "Nabédjakaha", "Sangadjokaha", "Songorokaha", "Zanakaha", "Zouaéri"]
+          }
+    },
+
+
+    Haut_Sassandra:{departments:["Daloa","Issia","Vavoua","Zoukougbeu"],
+         subPrefectures:{
+            Daloa:["Bédiala", "Daloa", "Gadouan", "Gboguhé", "Gonaté", "Zaïbo"],
+            Issia:["Boguedia", "Iboguhé", "Issia", "Nahio", "Namane", "Saïoua", "Tapeguia"],
+            Vavoua:["Bazra-Nattis", "Danano", "Dania", "Kétro-Bassam", "Séitifla", "Vavoua"],
+            Zoukougbeu:["Domangbeu", "Gregbeu", "Guessabo", "Zoukougbeu"],
+
+         },
+
+          villages:{"Bédiala":["Baïfla", "Banoufla", "Bédiala", "Bialata", "Faazra",
+                "Gnanagonfla", "Goinzra", "Golikro", "Nanoufla", "Ourouta-Thon", "Bandiahi",
+                "Bèfla", "Brohouta 1", "Brohouta 2", "Gouénoufla", "Gouriniani", "Koinzra",
+                "Ourouta-Kouhon", "Luénoufla"],
+                "Daloa":["Balouzon 1", "Balouzon 2", "Daloa", "Dérahouan", "Gbokora",
+                "Gogoguhé", "Sapia", "Tagoura", "Zaguiguia", "Békipréa", "Bla",
+                "Boboua-Bahouan", "Bolia", "Brizéboua", "Dagbaboua", "Débéguhé",
+                "Digba", "Gaboua", "Gbalagoua", "Gbétitapéa", "Gbeuliville", "Guédéguhé",
+                "Guéya", "Labia", "Lobia", "Madoguhé", "Niouboua", "Séria", "Tahiraguhé",
+                "Tapéguhé", "Tazibouo", "Tchébloguhé", "Toroguhé", "Wandaguhé", "Zah",
+                "Zakaria", "Zakoua", "Zaragoua", "Zépréguhé", "Zokoguhé-Didéguhé"],
+                "Gadouan":["Bébouo-Sibouo", "Bidiahouan", "Gadouan", "Kribléguhé-Kpamizon",
+                "Niamayo", "Zagoréta", "Zaliohouan"],
+                "Gboguhé":["Baléa 1", "Baléa 2", "B-Koukoguhé", "Brakaguhé", "Brohouan",
+                "Gbiéguhé", "Gboguhé", "Gokra", "Guédékipréa", "Guédiboua", "Kékégoza",
+                "Koréa 2", "Krikoréa 1", "Krikoréa 2", "Liguéguhé", "Zoboua", "Batéguédia 1",
+                "Batéguédia 2", "Digbapia", "Sébraguhé", "Ziguédia", "Gosséa", "Kéibla",
+                "Loboguiguia", "Bribouo", "Doboua", "Kibouo", "Kramoua", "Koréa 1",
+                "Noumousséria 1", "Noumousséria 2", "Noumousséria 3", "Yokoréa", "Zobéa",
+                "Zahia", "Zébra", "Zétodigba"],
+                "Gonaté":["Bégafla", "Gonaté", "Séifla", "Sétréfla", "Zéréfla"],
+                "Zaïbo":["Boboniessoko", "Gamina", "Zaïbo"],
+                "Boguedia":["Badouboua", "Békora", "Bézibouo", "Biga", "Bissaguhé",
+                "Boguédia", "Gogoguhé", "Guéfra", "Labazoubia", "Lagozoan", "Liga",
+                "Makua", "Massa", "Mimia 1", "Mimia 2", "Zaguédia", "Zokrodépié", "Zuzua"],
+                "Iboguhé":["Aboka", "Békié", "Béliéguhé", "Bokaréguhé", "Dadéguhé",
+                "Guéyéguhé", "Iboguhé", "Kéliéguhé", "Kéraoréguhé", "Nianabéhi",
+                "Séliéguhé", "Tapéguhé", "Zédéguhé"],
+                "Issia":["Batrouan", "Bazaga", "Bémadi", "Bobréguhé", "Dépa", "Gapoloroguhé",
+                "Gbétigogoua", "Goda", "Issia (Frazidia, Mousségogoua)", "Korédidia",
+                "Koukolaguha", "Lagozouzoua", "Nioboguhé", "Ouandia", "Pézoan", "Zéréguhé",
+                "Zobia", "Zogba", "Besseréguhé", "Bitapia", "Bolia", "Borotapia", "Brokoua",
+                "Dobia", "Dohouan", "Godoguhé", "Gogouaguhé", "Guibouo", "Irogogoua", "Kiprégogoua",
+                "Korékipra", "Laboua 1", "Louria", "Ouandia-Séria", "Séréguhé", "Séréguhé-Blanoguhé",
+                "Tassouroubouo", "Tétia"],
+                "Nahio":["Bogbam", "Kridakozahio", "Nahio", "Nakiahio", "Takouahio",
+                "Tézié", "Zézahio"],
+                "Namane":["Balahio", "Béhibouo", "Dalia", "Diassa", "Digbeuguhé",
+                "Drékua", "Gahononguhé", "Gazibouo", "Golihoa", "Kéréguhé"],
+                "Saïoua":["Balam", "Bogouloboua", "Bolia", "Dahira", "Digbam",
+                "Diloboua", "Godoua", "Grovéhio", "Korébouo", "Loukouahio",
+                "Magoudiboua", "Niakia", "Niébélahio", "Ouandahio",
+                "Saioua (Guébia,Madoua)", "Zikibouo", "Broma", "Dagourahio",
+                "Dérahio", "Gabia", "Gazéhio", "Korézouzoua", "Krizabahio", "Louoboua",
+                "Niaourahio", "Zadihoa"],
+                "Tapeguia":["Luéhouan", "Luéhouan 2", "Maboguhé", "Madia", "Namané",
+                "Sabréguhé", "Sédibia", "Tapéa", "Tapéguia", "Zakroguhé"],
+                "Bazra-Nattis":["Bazra Nattis", "Brouafla Nattis", "Déragon",
+                "Goulaonfla", "Gouriella", "Ténéféro", "Tiahouo", "Toutouman",
+                "Trafla Nattis", "Vrouo 1", "Vrouo 2", "Yuala"],
+                "Danano":["Bandiahi", "Bazra Gottron", "Bénoufla", "Bita",
+                "Bodouasso", "Botifla", "Dananon", "Dèzra", "Dimata", "Dubasso",
+                "Gouétifla", "Gozi", "Kouénoufla", "Pata", "Sénoufla", "Sobédoufla",
+                "Trafla-Gottron", "Yogonon"],
+                "Dania":["Bagouri", "Bohinou", "Dania", "Fionkon", "Gbabo", "Gbéhibly",
+                "Monoko-Zohi", "Pélézi", "Vaou", "Zoukouboué"],
+                "Kétro-Bassam":["Brouafla Kouya", "Dédiafla", "Kétro", "Kétro Bassam", "Kouléyo"],
+                "Séitifla":["Ancien Prozi", "Bahiry", "Biénoufla", "Bohifla", "Daouo",
+                "Diafla", "Doufla", "Goïzra", "Kouénoufla-Don", "Mignoré", "Néouléfla",
+                "Prozi 1", "Séitifla", "Vaafla", "Yala", "Yorédoula", "Zala"],
+                "Vavoua":["Bouhitafla", "Déma", "Gatifla", "Gouabafla", "Séboufla",
+                "Vavoua", "Bahoulifla", "Bonoufla"],
+                "Domangbeu":["Bahibli", "Didibobli", "Domangbeu", "Gbélibli", "Litobli"],
+                "Gregbeu":["Bahigbeu 1", "Bahigbeu 2", "Dahirougbeu 2", "Dèdègbeu", "Grégbeu",
+                "Guéguigbeu 1", "Guéguigbeu 2", "Liabo", "Nigbéhigbeu", "Vovodou", "Zoukpangbeu"],
+                "Guessabo":["Bassaraguhé", "Bédiègbeu", "Dagorézon", "Débo 1", "Débo 2",
+                "Détroya", "Diléya", "Gorodi", "Guessabo", "Guétuzon 1", "Guétuzon 2",
+                "Ouatigbeu", "Ponagbeu", "Zagbézon", "Zitta"],
+                "Zoukougbeu":["Dahoungbeu", "Garobo", "Mahigbeu", "Nadigbeu", "Nimé",
+                "Zahirougbeu", "Zakogbeu", "Zoukougbeu", "Belleville"],
+
+
+          }
+    },
+
+    Iffou:{departments:["Daoukro","M_Bahiakro","Prikro"],
+         subPrefectures:{
+            Daoukro:["Akpassanou", "Ananda", "Daoukro", "Ettrokro", "N'Gattakro", "Ouéllé", "Samanza"],
+            M_Bahiakro:["Bonguéra", "Kondossou", "M'Bahiakro"],
+            Prikro:["Anianou", "Famienkro", "Koffi-Amonkro", "Nafana", "Prikro"],
+
+
+         },
+
+          villages:{"Akpassanou":["Akpassanou", "Doménansou", "Foutou", "Gbangbo-Tiémélékro"],
+          "Ananda":["Alloko-Koffikro", "Ananda", "Angouakro", "Assabli-Komenankro",
+          "Assokro 1", "Assokro 2", "Daigbai-Bayanou", "Goli-N'Zikro", "Kodia-Essékro",
+          "Nangokro", "Potossou", "Yapi-Bonikro"],
+          "Daoukro":["Abbo-Kénégny", "Agni-Assikasso", "Allokokro", "Anoumabo",
+          "Assuéti", "Bénanou", "Dadiékro 1", "Dadiékro 2", "Daoukro", "Dengbé",
+          "Kongoti", "Kouassi-Diétèkro", "Koutoukounou", "Lagoukro", "Léki-Kouadiokro",
+          "Lékikro", "N'Guessankro", "Pépressou"],
+          "Ettrokro":["Ettien-Kouadiokro", "Ettrokro", "Koffikro", "Lalassou",
+          "Akakro", "Assa-Comoékro", "Comoé-N'Goua", "Katimassou", "Kokossou",
+          "Konien-Kouamékro", "Tchoumoukro"],
+          "N'Gattakro":["Adjékro", "Akakro", "Amoikonkro", "Komenan-Yaokro",
+          "N'Gattakro", "N'Tèkléfè"],
+          "Ouéllé":["Balékokro", "Dagou-N'Gattakro", "Kodi", "Kodiakro",
+          "Koumélékro", "Krindjabo", "N'Zi-Akakro", "Ouéllé (Djokro)",
+          "Ouellé-Koumanou", "Sika-Komenankro", "Abouadoukpinkro", "Adiaou",
+          "Assalékro", "Bendiè-Komenankro", "Daoulébo", "Ebini-Kouadiokro",
+          "Egoukro", "Kouakoussékro", "Koviessou", "Panigokro", "Prikro-Ouellé"],
+          "Samanza":["Agba-Tanoukro", "Aka-Comoékro", "Akpokro", "Ekra-Kpinkro",
+          "Nouffoukro", "Ouakabessi", "Tiokonou", "Zanzansou"],
+          "Bonguéra":["Anzandougou", "Bédara", "Bonguéra", "Désidougou", "Dondoni",
+          "Koffidougou", "Konkidougou", "Kossandougou", "Kouakoudougou", "Koumandougou",
+          "Krohoudougou", "Manidougou", "Moussobadougou", "N'Dodougou", "Ouassadougou",
+          "Sandougou-Kossia", "Sandougou-Kouma", "Siaridougou", "Tollédougou", "Totodougou"],
+          "Kondossou":["Akafou-N'Drikro", "Akakro", "Aouma Broukro",
+          "Attokro", "Bandamankro", "Dabokria", "Dadiékro", "Komenan-Koffikro",
+          "Komenankro", "Kondossou", "Kouadio-Amanikro", "Kouassikro 2", "Kpakpanou",
+          "Pongo-Koffikro", "Touré-Makari"],
+          "M'Bahiakro":["Abokro", "Akrifoukro", "Kouassikro 1", "M'Bahiakro",
+          "N'Diorékro", "Ouokoukro", "Totokro", "Yérakro", "Adi-Yapikro",
+          "Akpoué-Boué", "Allangouassou", "Amanikro", "Amankro", "Angamankro",
+          "Aoussi-Dossankro", "Bendékro", "Bofoin-N'Gattakro", "Boyabo", "Dangoukro",
+          "Dienzoukro", "Essuikro", "Kandoli-Kouassikro", "Koffi-Yaokro", "Koffi-Yaokro",
+          "Komienkro", "Kondokro", "Kondrobo", "Kongokro", "Kongoti", "Kora-Akissikro",
+          "Kossé-N'Gattakro", "Kouamé-Akessékro", "Krima-Essuikro", "Krimakro-N'Dénou",
+          "M'Bahiablékro", "Nandé-Kroukro", "N'Zi-N'Ziblékro", "Panigokro", "Pobikro",
+          "Sahébo", "Séguéla-Koffikro", "Yapikro", "Zanhoukro"],
+          "Anianou":["Affounvassou", "Akorablékro", "Anianou", "Attoumabo",
+          "Koffikpinkro", "Kotobo", "N'Zuéfoufoué", "Pédéoua"],
+          "Famienkro":["Assouadié", "Bénian", "Bognankro", "Ettien-N'Guessankro",
+          "Famienkro", "Groumania", "Kamaya", "Kamélesso", "Koffesso", "Lindoukro",
+          "Morokro", "Sérébou", "Timbo"],
+          "Koffi-Amonkro":["Aboua-Comoékro", "Adi-Ekrakro", "Adikankro", "Adikro",
+          "Akanangbo", "Anzan-Kouamékro", "Donguikro", "Flamonkro", "Gbangbo-N'Dakro",
+          "Koffi-Amonkro", "Koffié-Kpri", "Kouamé-Bossinkro", "Kouamé-Koffikro",
+          "Kouassikro-Kan", "Kouassikro-Pri", "Yabouakikro"],
+          "Nafana":["Agnassou", "Ahouan-Bonvoinsou", "Ahouan-Débarcadère", "Alluinamouénou",
+          "Alluissou", "Assoumou-Kouassikro", "Elognékro", "Koffi-Akakro",
+          "Koffi-Ségbrégbékro", "Nafana", "Tétessi"],
+          "Prikro":["Abédéni", "Babrassou", "Badessankro", "Bahérémi", "Bétié",
+          "Bofoinbo", "Katéman-N'Guessankro", "Konandi-N'Dakro", "Krakoukro",
+          "Ouatti", "Prikro", "Agbakro", "Babakro", "Djamdjankro", "Djonkro",
+          "Farakro", "Gbrakro", "Konandikro", "Lendékro", "Linguézan", "N'Godjou",
+          "Péré", "Promokro", "Siaho", "Yaokro"],
+          }
+    },
+
+    Kabadougou :{departments:["Madinani","Séguélon","Odienné","Gbéléban","Samatiguila"],
+         subPrefectures:{
+            Madinani:["Fengolo", "Madinani", "N'Goloblasso"],
+            Séguélon:["Gbongaha", "Séguélon"],
+            Odienné:["Bako", "Bougousso", "Dioulatièdougou", "Odienné", "Tiémé"],
+            Gbéléban:["Gbéléban", "Samango", "Seydougou"],
+            Samatiguila:["Kimbirila-Sud", "Samatiguila"],
+         },
+
+          villages:{"Fengolo":["Fengolo", "Kakoro", "Tiébala", "Tiolasso", "Tiomozomon"],
+          "Madinani":["Fembyasso", "Kébiko", "Madinani", "Sanaba", "Sokouraba",
+          "Dabadougou", "Dienguélé", "Dognéindougou", "Fandasso", "Kadiasso",
+          "Kafingué", "Kokoun", "Lossingué", "Mahandiana-Koura", "N'Gapyé", "Siansoba", "Tora"],
+          "N'Goloblasso":["Bouroumasso", "Karasso", "Koroumba", "N'Goloblasso",
+          "Séguébé", "Zéguétiéla"],
+          "Gbongaha":["Gbongaha", "Karabiri", "Ouanégué", "Siréba", "Sirédéni"],
+          "Séguélon":["N'Déou", "Séguélon", "Sengbani", "Sianso-Koroni", "Timbani",
+          "Zangohoba", "Zangoho-Sokoura", "Farakoro", "Gbangué", "Lillé", "Lingoho",
+          "Moussadougou", "Namasso", "Nianzongo", "Ningoun", "Tiemba", "Zébénin"],
+          "Bako":["Bako", "Bohisso", "Linguesso", "Mindiadougou", "Moya 1",
+          "Sarakorodougou", "Tchigbéla", "Tomba", "Badjouala", "Férémandougou",
+          "Gondiédougou", "Kahanlo", "Kahanso", "Kona", "Korondougou", "Mamouroudougou",
+          "Mamoya", "M'Basso", "Mohi-Moussadougou", "Moya 2", "Niénesso", "Sokorodougou",
+          "Tindrima Sokoro", "Tindrima Sokoura", "Yagbèdougou", "Zandougou"],
+          "Bougousso":["Bengo", "Bougousso", "Djavahana", "Fassoronzo", "Féréfougoula",
+          "Foulla", "Kessédougou", "Niamatogola", "Sarala", "Signènè"],
+          "Dioulatièdougou":["Dagaba", "Dioulatièdougou", "Doumba", "Tiékorodougou",
+          "Bogoba", "Farako", "Kobala", "Koungbèni", "Massadougou", "Nafana-Sienso",
+          "Niénesso", "Sanankoroba", "Tindikoro"],
+          "Odienné":["Odienné", "Baradjan", "Bassékodougou", "Gbanhanla", "Gbèrèdougou",
+          "Kodougou", "Kouroukro-Mafélé", "Massadougou", "Néguéla", "Niamasso",
+          "Odienné-Sienso", "Samankoungolo", "Samesso", "Sirana", "Touroni", "Ziéwasso"],
+          "Tiémé":["N'Doniégué", "Tahanso", "Tiémé", "Zégbao"],
+          "Gbéléban":["Gbahanla", "Gbéléban"],
+          "Samango":["Blamadougou", "Bogodougou", "Dabadougou-Mafélé", "Farala",
+          "Gbéréla", "Gouarini", "Iradougou", "Kogona", "Lossogo", "Mahandouni", "M'Bégbélé",
+          "Niamana", "Salonkourani", "Samango", "Sandjougouna",
+          "Sellé", "Siensoni", "Somokro", "Tougousso"],
+          "Seydougou":["Badouala", "Balala", "Kabala", "Kohouéna",
+          "Seydougou", "Gbessasso"],
+          "Kimbirila-Sud":["Djirila", "Férédougou", "Gbaga", "Kadiola", "Kéré",
+          "Kimbirila-Sud", "Kotouba", "Mamougoula", "N'Dola", "Sanogobra-Mafélé"],
+          "Samatiguila":["Samatiguila", "Kéningouara", "Kérébadougou", "Tiessérila"]
+
+          }
+    },
+
+    Indénié_Djuablin :{departments:["Abengourou","Agnibilékrou","Bettié"],
+         subPrefectures:{
+            Abengourou:["Abengourou", "Amélékia", "Aniassué", "Ebilassokro", "Niablé",
+            "Yakassé-Féyassé", "Zaranou"],
+            Agnibilékrou:["Agnibilékrou", "Akoboissue", "Damé", "Duffrebo", "Tanguelan"],
+            Bettié:["Bettié", "Diamarakro"],
+
+         },
+
+          villages:{"Abengourou":["Abengourou", "Adaou", "Adonikro", "Adoukoffikro",
+          "Akoikro", "Comoékro", "Kirifi", "Kouamé-Boikro", "Kouassi-Bénièkro",
+          "Touzoukro", "Appoisso", "Appouéba", "Bossématié", "Dramanekro", "Kodjinan",
+          "N'Dakro", "Pokoukro"],
+            "Amélékia":["Améakro", "Amélékia", "Anougbakro", "Elinso", "Koitienkro",
+            "Konan Konankro", "Kouadiokro", "Tahakro", "Zébénou"],
+            "Aniassué":["Ahinikro", "Amangouakro", "Amian Kouassikro",
+            "Anékouadiokro", "Aniassué", "Assakro", "Assémanou", "Dallo",
+            "Ettienkro", "Kablankro", "N'Grakon", "Satikran"],
+            "Ebilassokro":["Adamakro", "Akati", "Apprompron-Afêwa", "Ebilassokro",
+            "Kouamé-Tiémélékro", "Moussakro"],
+            "Niablé":["Adjoumani-Kouassikro", "Niablé", "Zouhounou", "Abronamoué",
+            "Affalikro", "Angouakro", "Assèkro", "Brindoukro", "Diangobo", "Kouakou N'Dramankro"],
+            "Yakassé-Féyassé":["Apprompronou", "Eboissué", "Kouamé-N'Ziankro", "Morokro", "Padiégnan", "Sankadiokro", "Yakassé-Féyassé",
+            "Yao Brabikro", "Zamaka", "Zinzénou"],
+            "Zaranou":["Bébou", "Blékoum", "Bokakokorè", "Ehuasso", "Manfia",
+            "M'Basso-Agni", "N'Gouanda-Kouadiokro", "Prakro", "Soukou-Soukou", "Zaranou"],
+            "Agnibilékrou":["Agnanfoutou", "Agnibilékrou", "Assikasso", "Assuamé",
+            "Ayénou", "Kongodjan", "Nianda", "N'Zorékro", "Agnimou-Agninikro",
+            "Epononkro", "Kangakro", "Tankouakankro", "Yobouakro"],
+            "Akoboissue":["Akoboissué", "Brindoukro", "Emanzoukro", "Manzanouan",
+            "N'Djorékro Agni", "Siakakro", "Sinikosson 2"],
+            "Damé":["Adamakro", "Amangobo", "Brahimankro", "Damé", "Fraabo", "Kotokosso",
+            "Massakro", "Morrékro", "Sirikikro"],
+            "Duffrebo":["Adahama", "Agninikro", "Akpokro", "Akpouesso", "Amoriakro",
+            "Anziankro", "Attobro", "Bangoua", "Cécéluibo", "Comoé-N'Danou", "Duffrébo",
+            "Kokonou", "Kouaokro", "N'Djorékro-Abbey", "N'Drikro", "N'Grah"],
+            "Tanguelan":["Adanékro", "Assémienkro", "Assempanayé", "Ebakro",
+            "Kouamékro", "Miankouadiokro", "N'Guessankro", "Tanguélan"],
+            "Bettié":["Akréby", "Bettié", "Kossonoukro", "N'Zué Kouadiokro",
+            "Abradinou", "Aka-Comoékro", "Hérèdougou",
+            "Nioupinbéniékro", "Yérè-Yérè 1", "Yérè-Yérè 2"],
+            "Diamarakro":["Akakro", "Aneykro", "Attièkro", "Borobo", "Diamarakro",
+            "Issoufkro", "Kouamékro", "N'Zikro", "Tanokro"],
+
+          }
+    },
+
+    Lôh_Djiboua:{departments:["Divo","Guitry","Lakota"],
+         subPrefectures:{
+            Divo:["Chiepo", "Didoko", "Divo", "Hiré", "Nebo", "Ogoudou", "Zego"],
+            Guitry:["Dairo-Didizo", "Guitry", "Lauzoua", "Yocoboue"],
+            Lakota:["Djidji", "Gagore", "Goudouko", "Lakota", "Niambézaria", "Zikisso"],
+
+         },
+
+          villages:{"Chiepo":["Brevet", "Cfi-Baroko", "Chiépo",
+          "Divripo", "Djidjidou", "Dogozo", "Kétasso", "Kokpa",
+          "Kpatasso", "Siata"],
+          "Didoko":["Agbahou", "Diankro", "Didoko", "Doubo", "Groh1", "Groh2", "Guéhou",
+          "Iroporia", "Mbazo", "Zéhiri 1"],
+          "Divo":["Bada", "Brabodougou", "Briboré", "Daboré", "Dagrom",
+          "Datta", "Divo", "Godiléhiri", "Gouan", "Grozo", "Baroco-Manois",
+          "Boudoukou", "Cnra", "Dougako", "Doumbaro", "Gazaville",
+          "Gbagroubé", "Gly", "Gnama", "Gniguedougou", "Gopli",
+          "Grémian", "Grobiakoko", "Grobiassoumé", "Guiléhiri",
+          "Labodougou", "Léhiri-Kpenda", "Madouville", "Palmci-Boubo",
+          "Pétimpé", "Petit Bouaké", "Sur Les Rails", "Tabléguikou",
+          "Yobouékro", "Ziki Diès"],
+          "Hiré":["Bouakako", "Douaville", "Gogobro", "Hiré", "Kagbé", "Zaroko"],
+          "Nebo":["Adjéhililié", "Akabia", "Akazalilié", "Bazalilié",
+          "Boko", "Braboré", "Digo", "Dougako", "Gnéhiri", "Koukouédou",
+          "Kpérédi", "Krézoukoué", "Lagazé", "Lédou", "Légbélilié",
+          "Nébo", "Soubrélilié 1", "Soubrélilié 2"],
+          "Ogoudou":["Ahouanou 2", "Béhiri", "Blé", "Djékouamékro",
+          "Hermankono-Garo", "Kouamékro", "Obié", "Ogoudou", "Sakota",
+          "Yaokro", "Zérédoukou"],
+          "Zego":["Apparagra", "Bokasso", "Daako", "Goudi", "Zégo"],
+          "Dairo-Didizo":["Babokon-Dida", "Badadoukou", "Béhiri-Dies",
+          "Bouboudi", "Broudoukou-Kpenda", "Cochem-Baoulé",
+          "Cochem-Carrefour", "Cochem-Dida", "Dairo-Didizo",
+          "Hermankono-Dies", "Kopiédoukou-Gly 1",
+          "Kopiédoukou-Gly 2", "Zigrigbi 1", "Zigrigbi 2"],
+          "Guitry":["Awalézo", "Babokon-Appolo", "Babokon-Goboua",
+          "Bada-Goboua", "Brahéri", "Dioligby", "Gnambouasso",
+          "Guitry", "Kouta", "Lézoudoukou", "Nanéko", "Téhiri",
+          "Anoumabou", "Bobiadoukou", "Grogbako", "Kofesso", "Tiégba 2"],
+          "Lauzoua":["Adahidoukou", "Dougodou", "Gbasséko", "Gobléko", "Lauzoua",
+          "Lauzoua-Carrefour", "Zogognigbo"],
+          "Yocoboue":["Bangourédougou", "Dioulabougou-boléko", "Guégboudoukou",
+          "Méné", "Taboué", "Yakassé", "Yocoboué"],
+          "Djidji":["Békri", "Djidji", "Dousséba", "Godou", "Gogohouri", "Niablé"],
+          "Gagore":["Brihiri", "Digako", "Gagoré", "Kadéko", "Zatoboua"],
+          "Goudouko":["Akridou-Laddé", "Goudouko", "Kazéribéri",
+          "Kouassililié", "Niazaroko", "Zozo-Oliziriboué"],
+          "Lakota":[
+                   "Akabréboua", "Dahiri", "Daligoulilié", "Djéléboué", "Djidjé", "Djidjiri", "Gazolilié", "Gbahiri",
+                   "Lakota (Koudoulilié, Djorogalilié, Ouagalilié)", "Abatoulilié", "Baboué", "Biagouri", "Dagoboua",
+                   "Dagodou", "Dakouritrohouin", "Déboua", "Djagoboua", "Djatolilié", "Djimon", "Djoko", "Dogohiri",
+                   "Gaougnagbolilié", "Gbagrélilié", "Gnankouboué", "Gogné", "Gogoko", "Gragba", "Gragbalilié",
+                   "Guébolilié", "Guékoko", "Guiguédou", "Guiguiri"],
+          "Niambézaria":[
+                        "Béyo", "Bobolilié", "Gagoué", "Gnahouahué", "Gobéry", "Goboué", "Godélilié 1", "Godélilié 2",
+                        "Kokolilié", "Kpadagnoa", "Kparognoua", "Krikpoko 1", "Krikpoko 2", "Néko", "Niakoblognoa",
+                        "Niambézaria", "Niékotiégbo", "Tagobéri", "Toutouko", "Troko", "Zahidougba"],
+          "Zikisso":["Bogoboua", "Makobéri", "Niagbaméko", "Zikisso"]
+          }
+    },
+
+
+
+    Marahoué:{departments:["Bouaflé","Sinfra","Zuénoula"],
+         subPrefectures:{
+            Bouaflé:["Begbessou", "Bonon", "Bouaflé", "N'Douffoukankro",
+            "Pakouabo", "Tibeita", "Zaguiéta"],
+            Sinfra:["Bazré", "Kononfla", "Kouetinfla", "Sinfra"],
+            Zuénoula:["Gohitafla", "Iriefla", "Kanzra", "Maminigui",
+            "Vouéboufla", "Zanzra", "Zuénoula"],
+         },
+
+          villages:{
+                  "Begbessou":["Akakro", "Allahou-Bazi", "Angovia", "Bégbessou",
+                  "Diallé", "Kami", "Kouakou Gnanou", "Koubi",
+                  "N'Dakoffi-Yobouékro", "N'Gorankro", "Saiminbo"],
+                  "Bonon":["Blablata", "Bonon", "Madiéta", "Ouarébota", "Bognonzra", "Dabouzra", "Gobazra"],
+                  "Bouaflé":["Allangba Konankro", "Blama", "Bouaflé", "Garango",
+                  "Kongo Yobouessou", "Koupéla", "N'Gattakro", "Oussou Yaokro",
+                  "Tenkodogo", "Alley", "Blanfla", "Bokassou", "Bozi", "Dégbézéré",
+                  "Guézanoufla", "Kikiékro", "Konéfla", "Liadjénoufla 2", "Lotanzia",
+                  "N'Dénou", "Ouanzanou", "Pakogui", "Patizia", "Samarifla", "Sinfla",
+                  "Tangono Bouita", "Tuankro", "Yoho", "Zégata -Yaouré", "Zougoussou"],
+                  "N'Douffoukankro":["Akowuébo", "Attossé", "Bénou", "Blè", "Diacohou-Sud",
+                  "Nangrékro", "N'Dènoukro", "N'Douffoukankro"],
+                  "Pakouabo":["Aka-N'Guessankro", "Diacohou-Nord", "Krigambo", "Pakouabo",
+                  "Pangban-Kouamékro"],
+                  "Tibeita":["Baziafla", "Bohitiéfla", "Bouafla", "Danangoro", "Dianfla",
+                  "Tibéita", "Zanhouofla", "Zoola"],
+                  "Zaguiéta":["Bannonfla", "Biégon", "Blanoufla", "Dianoufla", "Iribafla",
+                  "Kangréta", "Sayéta", "Tofla", "Zaguiéta", "Zanoufla", "Zégata"],
+                  "Bazré":["Bazré", "Bendéfla", "Bounafla", "Gohouo", "Gonfla", "Koadi"],
+                  "Kononfla":["Bérita", "Diénembroufla", "Kayéta", "Kononfla", "Koumoudji", "Manoufla-N"],
+                  "Kouetinfla":["Gonazofla", "Katiénou", "Kouétinfla", "Kouroudoufla", "Manoufla-P", "Yanantinfla"],
+                  "Sinfra":[
+                          "Benhuafla", "Binoufla", "Gouénéfla", "Manoufla-S", "Proziblanfla",
+                          "Blontifla", "Djamandji", "Douafla", "Koblata", "Proniani",
+                          "Bégouafla", "Broufla", "Diénédoufla", "Huafla", "Nadiéta",
+                          "Paabénéfla", "Porabénéfla", "Sanégourifla", "Zéhouo", "Zéménafla-B",
+                          "Zéménafla-V", "Zougourouta"],
+                  "Gohitafla":[
+                       "Bléfla 1", "Bohidianfla", "Brodoufla", "Diabouéfla", "Diéhigalafla",
+                       "Dorifla", "Gohitafla", "Grazra", "Kouaisséizra 2", "Ouréitafla",
+                        "Viéproye", "Zrabisséifla", "Bohikouaifla", "Bongofla", "Duicéifla",
+                        "Goafla", "Gohounfla", "Gouzanfla", "Kouafla", "Kouaisséizra 1",
+                        "Ouinéfla", "Zraluo"],
+                  "Iriefla":["Iriéfla", "Kaloufla", "Toafla", "Trabiménéfla"],
+                  "Kanzra":["Bagozra", "Blablata", "Bonéfla", "Dhézra 1", "Dhézra 2",
+                  "Duafla", "Gouéhizra", "Kanzra", "Kouablézra", "Kouréra", "Nénézra",
+                  "Nianoufla", "Quiéizra", "Srazra", "Vaafla", "Vréhenfla", "Zangrofla",
+                  "Ziduho-Bouénou", "Zorofla"],
+                  "Maminigui":["Bibikoréfla", "Gouenfla", "Guériafla", "Maminigui",
+                  "Manfla", "Soribouafla", "Zambléfla"],
+                  "Vouéboufla":["Badiéfla", "Bangofla", "Binhouléra", "Bohfla",
+                  "Brouzra", "Diéifla", "Gbouédéfla", "Gounga", "Manématiéfla 1",
+                  "Petit Zirifla", "Pohizra", "Tuéifla", "Vouéboufla", "Zirifla", "Zougounéfla"],
+                  "Zanzra":["Balogui", "Banoufla 1", "Béziaka", "Bouata", "Complexe Sucrier",
+                  "Douénéfla", "Douenzra", "Gouénéfla", "Gouétifla", "Kouézra 2",
+                  "Kouyafla", "Ourouzra", "Pouézra", "Séizra 1", "Séizra 2",
+                  "Théra", "Tranhonfla", "Uénéfla", "Zanzra"],
+                  "Zuénoula":["Baazra 1", "Baazra 2", "Banoufla 2", "Bohizra",
+                  "Diéoulizra 1", "Diéoulizra 2", "Drikouaïfla 1", "Drikouaïfla 2",
+                  "Gaizra", "Ganzra", "Goaboifla", "Gonhounfla", "Gouatifla",
+                  "Gouézra", "Kaya-Ziduho", "Klazra", "Kouézra 1", "Koudougou",
+                  "Zuenoula", "Binzra", "Bogopinfla", "Douanoufla", "Gohifla",
+                  "Goréta", "Grohounfla", "Kavaka", "Koinfla", "Kouréfla 2",
+                  "Minfla", "Paoubigrofla", "Paoufla", "Vaniébotifla", "Zigofla"],
+
+          }
+    },
+
+    La_Mé :{departments:["Adzopé","Akoupé","Alépé","Yakassé_Attobrou"],
+         subPrefectures:{
+            Adzopé:["Adzopé", "Agou", "Annépé", "Assikoi", "Bécédi-Brignan", "Yakassé-Mé"],
+            Akoupé:["Afféry", "Akoupé", "Bécouéfin"],
+            Alépé:["Aboisso-Comoé", "Alépé", "Allosso", "Danguira", "Oghiwapo"],
+            Yakassé_Attobrou:["Abongoua", "Biéby", "Yakassé-Attobrou"],
+
+         },
+
+          villages:{
+          "Adzopé":["Abou-Sékakoi", "Ahokoi", "Ahouabo", "Ananguié",
+          "Biasso", "Bouapé", "Djougbosso", "Duquesnes-Crémone", "Miadzin",
+          "Moapé", "N'Koupé", "Zodji"],
+          "Agou":["Agou", "Andé", "Ayallo", "Boudépé", "Diapé", "Grand-Akoudzin", "N'Guessankoi"],
+          "Annépé":["Annépé", "Bassadzin", "Diasson", "Lobo-Akoudzin", "Nyan"],
+          "Assikoi":["Adonkoi", "Apiadji", "Assikoi", "Lobo-Hopé", "Massandji"],
+          "Bécédi-Brignan":["Bécédi-Anon", "Bécédi-Brignan", "Mafa-Mafou", "Mopé"],
+          "Yakassé-Mé":["Abié", "Yakassé-Mé"],
+          "Afféry":["Afféry", "Asseudji", "Daguikoi", "Dodokoa"],
+          "Akoupé":["Agbaou", "Ahéoua", "Akoupé 1", "Akoupé 2", "Assangbadji",
+          "Assikoun", "Bacon", "Kodjan", "Yadio", "Cadonat", "Yaffo-Attié"],
+          "Bécouéfin":["Adikokoi", "Bécouéfin", "Bonahouin", "Soribadougou"],
+          "Aboisso-Comoé":["Aboisso-Comoé", "Aka-Chantier", "Arounankro", "Galékro",
+          "Kouadio-Kouassikro", "N'Zérékou"],
+          "Alépé":["Abrotchi", "Alépé", "Ingrakon", "Monga", "Montézo", "Nianda",
+          "Ahoutoué", "Grand-Alépé", "M'Bohoin", "Memni", "Monnèkoi", "Mopodji", "Yakassé-Comoé"],
+          "Allosso":["Allosso 1", "Allosso 2", "Anokro", "Egnambo-carrefour",
+          "Kouakro", "Koutoukro 1", "Koutoukro 2"],
+          "Danguira":["Ahouakoi", "Angobèkoi", "Angoikoi", "Daguikoi", "Danguira",
+          "Dzeudji", "Kodioussou", "Kossandji", "Mafia", "Mobiokoi", "N'Sankoi",
+          "Tèbikoi", "Yapokoi"],
+          "Oghiwapo":["Akouré", "Andou-M'Batto", "Dabrè", "Domolon", "Motobé", "N'Gokro", "Nougoussi", "Oguédoumé"],
+          "Abongoua":["Abongoua", "Adjamé", "M'Basso-Akyé"],
+          "Biéby":["Biéby", "Mèbifon"],
+          "Yakassé-Attobrou":["Abradine 1", "Abradine 2", "Ahuikoi", "Assié-Orié", "Diangobo",
+          "Fiassé", "Kong 1", "Kong 2", "Yakassé-Attobrou"]
+          }
+    },
+
+    Moronou :{departments:["Arrah","Bongouanou","M_Batto"],
+         subPrefectures:{
+            Arrah:["Arrah", "Kotobi", "Krebe"],
+            Bongouanou:["Andé", "Assie-Koumassi", "Bongouanou", "N'Guessankro"],
+            M_Batto :["Anoumaba", "Assahara", "M'Batto", "Tiémélékro"],
+
+
+         },
+
+          villages:{"Arrah":["Arrah", "Konongrè", "Assikro", "Brou-Attakro", "Etilékro",
+          "Kouadiokro", "M'Brakro", "Yaffo-Agni"],
+                    "Kotobi":["Abongoua", "Kotobi", "N'Zanfouénou", "Yaffo-Abongoua"],
+                    "Krebe":["Assalé-Kouassikro", "Assouakro", "Dalosso",
+                    "Erobo", "Gouabo", "Krégbé", "Midakro"],
+                    "Andé":["Afféré 1", "Afféré 2", "Agbossou", "Agoua", "Andé", "Anékro",
+                    "Bénéné", "Brou-Akpaoussou", "Ellinzué", "Findimanou", "Yobouessou"],
+                    "Assie-Koumassi":["Assié-Assasso", "Assié-Kokoré", "Assié-Kouamékro",
+                    "Assié-Koumassi", "Assié-Koyékro", "Assié-Méakro"],
+                    "Bongouanou":["Ahorosso", "Akakro", "Amonkro", "Assoakro", "Bocassi",
+                    "Bongouanou", "Broukro", "Ehuikro", "Tanosso", "Assaouffoué", "Banabo",
+                    "Kangandisso", "Kayabo", "N'Guinou"],
+                    "N'Guessankro":["Agnialiessou", "Ahounienfoutou", "Akobakabo", "Allangbakro",
+                    "Bouadikro", "Essuikro", "Fronobo", "Kinimokro", "M'Baoucessou",
+                    "N'Dolikro", "N'Guessankro", "Niandian", "N'Zuékokoré"],
+                    "Anoumaba":["Allongo", "Angbanou", "Anoumaba", "Bettimbo",
+                    "Koubébo", "Allakro", "Appiakro", "Bocabo", "Damoikro",
+                    "Kongotty", "N'Drossou", "N'Gbribo", "Takikro"],
+                    "Assahara":["Adouakouakro", "Assahara", "Assiébosson Kouman",
+                    "Bouafoukro", "Komambo", "Kouakro", "N'Drikro"],
+                    "M'Batto":["Ahounan", "Akpibo", "Assié Akpessé", "Assoumoukro",
+                    "Diékadiokro", "M'Batto", "N'Gramassabo", "Agnia", "Agoua",
+                    "Angamankro", "Assalékro", "Ehuikro", "Tiékou-Carrefour"],
+                    "Tiémélékro":["Adibrobo", "Ahouanou 2", "Bédiakro", "Djangobo",
+                    "Ettien-Tiémélékro", "Frondobo", "Kongokro", "Ménou", "Télébo",
+                    "Tiémélékro", "Tomidanou", "Ahouanou 1", "Amoikro", "Bindékro",
+                    "Djamalabo", "Djékabo", "Katiénou", "Kouadiotékro", "N'Gohinou",
+                    "Sandiébounga", "Sérébissou", "Yobouébo"],
+
+          }
+    },
+
+
+
+    N_Zi :{
+    },
+
+    Kakpin :{
+    },
+
+    Kakpin :{
+    },
+
+    Kakpin :{
+    },
+
+
+    Kakpin :{
+    },
+
+
+    Kakpin :{
+    },
+
+
+    Kakpin :{
+    },
+
+
+    };
+
+    const regionSelect = document.getElementById("region");
+    const departmentSelect = document.getElementById("department");
+    const subPrefectureSelect = document.getElementById("subPrefecture");
+    const villageSelect = document.getElementById("village");
+
+    function updateDepartments() {
+      const selectedRegion = regionSelect.value;
+      const departments = regionsData[selectedRegion].departments;
+      fillSelect(departmentSelect, departments);
+      updateSubPrefectures();
+    }
+
+    function updateSubPrefectures() {
+      const selectedRegion = regionSelect.value;
+      const selectedDepartment = departmentSelect.value;
+      const subPrefectures = regionsData[selectedRegion].subPrefectures[selectedDepartment];
+      fillSelect(subPrefectureSelect, subPrefectures);
+      updateVillages();
+    }
+
+    function updateVillages() {
+      const selectedRegion = regionSelect.value;
+      const selectedDepartment = departmentSelect.value;
+      const selectedSubPrefecture = subPrefectureSelect.value;
+      const villages = regionsData[selectedRegion].villages[selectedSubPrefecture];
+      fillSelect(villageSelect, villages);
+    }
+
+    function fillSelect(selectElement, options) {
+      // Supprimer les options actuelles
+      selectElement.innerHTML = "";
+
+      // Ajouter les nouvelles options
+      options.forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        selectElement.add(optionElement);
+      });
+    }
+
+    // Initialiser les départements au chargement de la page
+    updateDepartments();
+  </script>
+{% endblock content %}

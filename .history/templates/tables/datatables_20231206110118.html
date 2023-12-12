@@ -1,0 +1,316 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">DataTables</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Tables</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Datatables</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title">Multi Filter Select</h4>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="multi-filter-select" class="display table table-striped table-hover" >
+									<thead>
+										<tr>
+											<th>Régions</th>
+											<th>Départements</th>
+											<th>Sous préfectures</th>
+											<th>Villages</th>
+											<th>Act de création</th>
+											<th>Mode d'accès à la terre</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Région</th>
+											<th>départements</th>
+											<th>Sous préfècture</th>
+											<th>Villages</th>
+											<th>Act de création</th>
+											<th>Mode d'accès à la terre</th>
+
+										</tr>
+									</tfoot>
+									<tbody>
+									{% for histoire in histoires %}
+										<tr>
+											<td> {{ histoire.nom_region }} </td>
+											<td>{{ histoire.nom_departement }} </td>
+											<td>{{ histoire.sous_prefecture  }} </td>
+											<td>{{ histoire.nom_village }} </td>
+											<td>{{ histoire.acte_creation }} </td>
+											<td>{% for i in histoire.mode_accès_terre %}<div>{{ i }}</div>{% endfor %}</td>
+										</tr>
+										{% endfor %}
+
+
+									</tbody>
+								</table>
+
+								<div class="card-header">
+									<h4 class="card-title">Modification-Suppression</h4>
+								</div>
+
+  <!-- Search Bar -->
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search..." id="searchInput">
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped"   id="myTable1">
+      <thead>
+        <tr>
+
+          <th scope="col">Régions</th>
+          <th scope="col">Départements</th>
+          <th scope="col">sous préfecture</th>
+          <th scope="col">villages</th>
+          <th scope="col">Act de création</th>
+          <th scope="col">Mise à disposion terre</th>
+          <th scope="col">Mode accès terre</th>
+          <th scope="col">Détail</th>
+          <th scope="col">Tirez le PV</th>
+          <th scope="col">Modifier</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        <!-- Table rows go here -->
+        <tr>
+
+        {% for histoire in histoires %}
+          <td>{{ histoire.nom_region }} </td>
+          <td>{{ histoire.nom_departement }}</td>
+          <td>{{ histoire.sous_prefecture  }}</td>
+          <td>{{ histoire.nom_village }}</td>
+          <td>{{ histoire.acte_creation }}</td>
+          <td>{% for i in histoire.mode_mise_a_diposition %}<div>{{ i }}</div>{% endfor %}</td>
+          <td>{% for i in histoire.mode_accès_terre %}<div>{{ i }}</div>{% endfor %}</td>
+          <td><a class="btn btn-sm btn-success" href="{% url 'detail' histoire.id %}">details</a></td>
+          <td><a class="btn btn-sm btn-success" href="{% url 'rapport' histoire.id %}">pv</a></td>
+               {% if  user.is_authenticated and user.is_staff and user.is_superuser %}
+          <td><a class="btn btn-sm btn-danger" href="{% url 'admin:app_histoire_change' histoire.id %}">Modifier</a></td>
+                                {% endif %}
+        </tr>
+        	{% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+
+<!-- Add Bootstrap JS and Popper.js -->
+
+<!-- Your additional scripts go here -->
+
+<script>
+
+
+
+/*		=================================
+**		==== Simple Table Controller ====
+**		=================================
+**
+**
+**			With Pure JavaScript ..
+**
+**
+**		No Libraries or Frameworks needed!
+**
+**
+**				fb.com/bastony
+**
+*/
+
+
+
+// get the table element
+var $table = document.getElementById("myTable1"),
+// number of rows per page
+$n = 10,
+// number of rows of the table
+$rowCount = $table.rows.length,
+// get the first cell's tag name (in the first row)
+$firstRow = $table.rows[0].firstElementChild.tagName,
+// boolean var to check if table has a head row
+$hasHead = ($firstRow === "TH"),
+// an array to hold each row
+$tr = [],
+// loop counters, to start count from rows[1] (2nd row) if the first row has a head tag
+$i,$ii,$j = ($hasHead)?1:0,
+// holds the first row if it has a (<TH>) & nothing if (<TD>)
+$th = ($hasHead?$table.rows[(0)].outerHTML:"");
+// count the number of pages
+var $pageCount = Math.ceil($rowCount / $n);
+// if we had one page only, then we have nothing to do ..
+if ($pageCount > 1) {
+	// assign each row outHTML (tag name & innerHTML) to the array
+	for ($i = $j,$ii = 0; $i < $rowCount; $i++, $ii++)
+		$tr[$ii] = $table.rows[$i].outerHTML;
+	// create a div block to hold the buttons
+	$table.insertAdjacentHTML("afterend","<div id='buttons'></div");
+	// the first sort, default page is the first one
+	sort(1);
+}
+
+// ($p) is the selected page number. it will be generated when a user clicks a button
+function sort($p) {
+	/* create ($rows) a variable to hold the group of rows
+	** to be displayed on the selected page,
+	** ($s) the start point .. the first row in each page, Do The Math
+	*/
+	var $rows = $th,$s = (($n * $p)-$n);
+	for ($i = $s; $i < ($s+$n) && $i < $tr.length; $i++)
+		$rows += $tr[$i];
+
+	// now the table has a processed group of rows ..
+	$table.innerHTML = $rows;
+	// create the pagination buttons
+	document.getElementById("buttons").innerHTML = pageButtons($pageCount,$p);
+	// CSS Stuff
+	document.getElementById("id"+$p).setAttribute("class","active");
+}
+
+
+// ($pCount) : number of pages,($cur) : current page, the selected one ..
+function pageButtons($pCount,$cur) {
+	/* this variables will disable the "Prev" button on 1st page
+	   and "next" button on the last one */
+	var	$prevDis = ($cur == 1)?"disabled":"",
+		$nextDis = ($cur == $pCount)?"disabled":"",
+		/* this ($buttons) will hold every single button needed
+		** it will creates each button and sets the onclick attribute
+		** to the "sort" function with a special ($p) number..
+		*/
+		$buttons = "<input type='button' value='<< Prev' onclick='sort("+($cur - 1)+")' "+$prevDis+">";
+	for ($i=1; $i<=$pCount;$i++)
+		$buttons += "<input type='button' id='id"+$i+"'value='"+$i+"' onclick='sort("+$i+")'>";
+	$buttons += "<input type='button' value='Next >>' onclick='sort("+($cur + 1)+")' "+$nextDis+">";
+	return $buttons;
+}
+
+
+
+
+
+
+  // Function to filter table rows based on search input
+ function searchTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable1");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+      var found = false;
+      for (var j = 0; j <= 6; j++) {
+        td = tr[i].getElementsByTagName("td")[j];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            found = true;
+            break;
+          }
+        }
+      }
+      tr[i].style.display = found ? "" : "none";
+    }
+  }
+
+  // Attach the search function to the input event
+  document.getElementById("searchInput").addEventListener("input", searchTable);
+</script>
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
+{% block extrajs %}
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 10,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+{% endblock extrajs %}
