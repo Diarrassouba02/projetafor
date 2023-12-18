@@ -1,0 +1,58 @@
+<!-- templates/visualisation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisation</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Récupérer les données du contexte Django
+            const data = JSON.parse('{{ data|escapejs }}');
+
+            // Extraire les labels et les données
+            const labels = data.map(item => item.region);
+            const nbDepartementsData = data.map(item => item.nbdepartements);
+            const nbSousPrefecturesData = data.map(item => item.nbsous_prefectures);
+            const nbVillagesData = data.map(item => item.nbvillages);
+
+            // Créer le graphique
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Nombre de Départements',
+                            data: nbDepartementsData,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Nombre de Sous-Préfectures',
+                            data: nbSousPrefecturesData,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Nombre de Villages',
+                            data: nbVillagesData,
+                            backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                            borderColor: 'rgba(255, 205, 86, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                }
+            });
+        });
+    </script>
+</body>
+</html>
