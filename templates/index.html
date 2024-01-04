@@ -16,7 +16,7 @@
 
 
 
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('myChart').getContext('2d');
 
@@ -67,7 +67,28 @@
             y: {
                 stacked: true
             }
-        }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+                position: 'bottom',
+                labels : {
+                    padding: 10,
+                    fontColor: '#1d7af3',
+                }
+            },
+            tooltips: {
+                bodySpacing: 4,
+                mode:"nearest",
+                intersect: 0,
+                position:"nearest",
+                xPadding:10,
+                yPadding:10,
+                caretPadding:10
+            },
+            layout:{
+                padding:{left:15,right:15,top:15,bottom:15}
+            }
     };
 
     const chart = new Chart(ctx, {
@@ -154,14 +175,33 @@
                     ]
                 },
                 options: {
-                    scales: {
-                        x: {
-                            stacked: true
-                        },
-                        y: {
-                            stacked: true
-                        }
-                    }
+                    
+                    responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position : 'bottom',
+                labels : {
+                    
+                    fontSize: 11,
+                    usePointStyle : true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+
                 }
             });
         });
@@ -172,8 +212,187 @@
 
 
 
+        document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels1|safe }};
+            var data = {{ data1|safe }};
+
+            var ctx = document.getElementById('personnetrouve').getContext('2d');
+
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+
+                  options : {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position : 'bottom',
+                labels : {
+                    fontColor: 'rgb(154, 154, 154)',
+                    fontSize: 11,
+                    usePointStyle : true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+            });
+        });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels2|safe }};
+            var data = {{ data2|safe }};
+
+            var ctx = document.getElementById('mise_a_disp').getContext('2d');
+
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+                  options : {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position : 'bottom',
+                labels : {
+                    fontColor: 'rgb(154, 154, 154)',
+                    fontSize: 11,
+                    usePointStyle : true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+            });
+        });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels3|safe }};
+            var data = {{ data3|safe }};
+
+            var ctx = document.getElementById('mode_acces').getContext('2d');
+
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+                  options : {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position : 'bottom',
+                labels : {
+                    fontColor: 'rgb(154, 154, 154)',
+                    fontSize: 11,
+                    usePointStyle : true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+            });
+        });
+
+
+
+
+
+
+
+
+
+
 
     </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {% endblock content %}

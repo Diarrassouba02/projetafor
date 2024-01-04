@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/danfojs-nightly@1.0.2/lib/bundle.js"></script>
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="plot_div"></div>
+
+    <div id="plot_div"></div>
+    <script>
+      const df = new dfd.DataFrame({
+        Price: [19, 26, 55],
+        Location: ["NG", "GH", "SA"],
+        Type: ["Residential", "Non-Residential", "Utility"],
+      });
+
+      df.plot("plot_div").pie({ config: { values: "Price", labels: "Type" } });
+    </script>
+  </body>
+</html>
+e

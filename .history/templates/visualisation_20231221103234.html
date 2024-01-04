@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personne Trouve Chart</title>
+    <!-- Include Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- The canvas element where the chart will be rendered -->
+    <canvas id="personneTrouveChart" width="400" height="200"></canvas>
+
+    <script>
+        // Extract the 'personne_trouve' values from Django context
+        var pertrouveData = JSON.parse('{{ pertrouve|safe }}');
+
+        // Count occurrences of each 'personne_trouve'
+        var counts = {};
+        pertrouveData.forEach(item => {
+            var key = item.personne_trouve;
+            counts[key] = (counts[key] || 0) + 1;
+        });
+
+        // Extract unique values and their counts
+        var categories = Object.keys(counts);
+        var data = categories.map(category => counts[category]);
+
+        // Get the canvas element
+        var ctx = document.getElementById('personneTrouveChart').getContext('2d');
+
+        // Create a bar chart using Chart.js
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: 'Count',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
