@@ -1,0 +1,911 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+<div class="content">
+	<div class="page-inner">
+		<h4 class="page-title">Statistique par région : {{  nom_regions_select }} (nombre village {{nbvilege}})</h4>
+
+
+		               <div class="card-body">
+                        <form action="{% url 'visualisation' %}" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                <label for="region">Choisissez une région :</label>
+                                    <select class="custom-select" id="region" name="region">
+                                        <option value="District_Abidjan">District Autonome d'Abidjan</option>
+                                        <option value="District_Yamoussoukro">District Autonome de Yamoussoukro</option>
+                                        <option value="Agnéby_Tiassa">Agnéby-Tiassa</option>
+                                        <option value="Bafing">Bafing</option>
+                                        <option value="Bagoué">Bagoué</option>
+                                        <option value="Bélier">Bélier</option>
+                                        <option value="Béré">Béré</option>
+                                        <option value="Bounkani">Bounkani</option>
+                                        <option value="Cavally">Cavally</option>
+                                        <option value="Folon">Folon</option>
+                                        <option value="Gbêkê">Gbêkê</option>
+                                        <option value="Gbôkle">Gbôkle</option>
+                                        <option value="Gôh">Gôh</option>
+                                        <option value="Gontougo">Gontougo</option>
+                                        <option value="Grands_Ponts">Grands-Ponts</option>
+                                        <option value="Guémon">Guémon</option>
+                                        <option value="Hambol">Hambol</option>
+                                        <option value="Haut_Sassandra">Haut-Sassandra</option>
+                                        <option value="Iffou">Iffou</option>
+                                        <option value="Kabadougou">Kabadougou</option>
+                                        <option value="Indénié_Djuablin">Indénié-Djuablin</option>
+                                        <option value="Lôh_Djiboua">Lôh-Djiboua</option>
+                                        <option value="La_Mé">La Mé</option>
+                                        <option value="Moronou">Moronou</option>
+                                        <option value="Nawa">Nawa</option>
+                                        <option value="N_Zi">N'Zi</option>
+                                        <option value="Poro">Poro</option>
+                                        <option value="San_Pédro">San-Pédro</option>
+                                        <option value="Sud_Comoé">Sud-Comoé</option>
+                                        <option value="Tchologo">Tchologo</option>
+                                        <option value="Tonkpi">Tonkpi</option>
+                                        <option value="Worodougou">Worodougou</option>
+                                    </select>
+								</div>
+								</div>
+								<button class="btn btn-success" type="submit">Visualiser</button>
+								 </form>
+								</div>
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Répartition des départements</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="barChartreg"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Répartition des villages par sous-préfecture</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="barChartsp"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Personnes trouvées par le fondateur</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="personnetrouve" style="width: 50%; height: 50%"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Mode d'accès à la terre</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Mode de mise à la disposition de la terre</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="radarChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <div class="card-title"> Nombre de Village sans acte de création</div>
+
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="mb-4 mt-2">
+                         <h1>{{ act }}</h1>
+                            <h1>soit {{ actp }}%</h1>
+                        </div>
+                        <div class="pull-in">
+                            <canvas id="dailySalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-primary bg-primary-gradient">
+                    <div class="card-body">
+                        <h4 class="mb-1 fw-bold">Nombre de fondateur n'ayant pas d'accords avec les personnes trouvées</h4>
+                        <div class="mb-4 mt-2">
+                            <h1>{{ lien_persone }}</h1>
+                            <h1>soit {{ lien_persone_non }}%</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+
+
+
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Répartition des périodes d'installations</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="datein"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Qualités des déclarants</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="barChartsp"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Personnes trouvées par le fondateur</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="personnetrouve" style="width: 50%; height: 50%"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Mode d'accès à la terre</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Mode de mise à la disposition de la terre</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="radarChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <div class="card-title">Nombre de Village sans acte de création</div>
+
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="mb-4 mt-2">
+                        	<h1>{{ act }}</h1>
+                            <h1>soit {{ actp }}%</h1>
+                        </div>
+                        <div class="pull-in">
+                            <canvas id="dailySalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-primary bg-primary-gradient">
+                    <div class="card-body">
+                        <h4 class="mb-1 fw-bold">Nombre de fondateur n'ayant pas d'accords avec les personnes trouvées</h4>
+                        <div class="mb-4 mt-2">
+                        	 <h1>{{ lien_persone }}</h1>
+                            <h1>soit {{ lien_persone_non }}%</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+
+
+</div>
+
+
+
+
+</div>
+{% endblock content %}
+{% block extrajs %}
+<script>
+
+	var barChartsp = document.getElementById('barChartsp').getContext('2d'),
+	personnetrouve = document.getElementById('personnetrouve').getContext('2d'),
+	doughnutChart = document.getElementById('doughnutChart').getContext('2d'),
+	radarChart = document.getElementById('radarChart').getContext('2d')
+	qualitedec = document.getElementById('quald').getContext('2d'),;
+
+
+
+
+	document.addEventListener('DOMContentLoaded', function () {
+    var barChartreg = document.getElementById('barChartreg').getContext('2d');
+	var myLineChart = new Chart(barChartreg, {
+		type: 'bar',
+		data: {
+			labels: {{ labels|safe }},
+			datasets: [{
+				label: "sous-préfèctures",
+				borderColor: "#1d7af3",
+				pointBorderColor: "#FFF",
+				pointBackgroundColor: "#1d7af3",
+				pointBorderWidth: 2,
+				pointHoverRadius: 4,
+				pointHoverBorderWidth: 1,
+				pointRadius: 4,
+			    backgroundColor: 'rgb(23, 125, 255)',
+				fill: true,
+				borderWidth: 2,
+				data: {{ nbsp|safe }},
+
+			},
+			{
+                label: 'Villages',
+                data: {{ nbv|safe }},
+                backgroundColor: 'rgba( 255, 0, 255, 1 )',
+                borderColor: 'rgba( 0, 0, 0, 1 )',
+                borderWidth: 1
+             }]
+		},
+		options : {
+
+			scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    },
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position: 'bottom',
+				labels : {
+					padding: 10,
+					fontColor: '#1d7af3',
+				}
+			},
+			tooltips: {
+				bodySpacing: 4,
+				mode:"nearest",
+				intersect: 0,
+				position:"nearest",
+				xPadding:10,
+				yPadding:10,
+				caretPadding:10
+			},
+			layout:{
+				padding:{left:15,right:15,top:15,bottom:15}
+			}
+		}
+	});
+	});
+
+
+
+
+
+
+
+
+
+        // Données
+        var data = {{ data1|safe }};
+
+        // Organiser les données pour le graphique
+        var datasets = {};
+        data.forEach(function(entry, index) {
+            var dep = entry.dep;
+            if (!datasets[dep]) {
+                var colors = ['#ff00ff', '#ff8c00', '#008080', '#1e90ff', '#ff1493','#9400d3'];  // Définir vos couleurs ici
+                datasets[dep] = {
+                    label: dep,
+                    data: [],
+                    backgroundColor: colors[index % colors.length]  // Utiliser l'index pour répéter les couleurs si nécessaire
+                };
+            }
+            datasets[dep].data.push({ x: entry.nom_sp, y: entry.nbv1 });
+        });
+
+        // Créer le graphique
+
+        var barChart = new Chart(barChartsp, {
+            type: 'bar',
+            data: {
+                datasets: Object.values(datasets),
+            },
+            options : {
+
+			scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    },
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position: 'bottom',
+				labels : {
+					padding: 10,
+					fontColor: '#1d7af3',
+				}
+			},
+			tooltips: {
+				bodySpacing: 4,
+				mode:"nearest",
+				intersect: 0,
+				position:"nearest",
+				xPadding:10,
+				yPadding:10,
+				caretPadding:10
+			},
+			layout:{
+				padding:{left:15,right:15,top:15,bottom:15}
+			}
+		}
+        });
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels2|safe }};
+            var data = {{ data2|safe }};
+
+
+            var myPieChart = new Chart(personnetrouve, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+
+             options : {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position : 'bottom',
+				labels : {
+					fontColor: 'rgb(154, 154, 154)',
+					fontSize: 11,
+					usePointStyle : true,
+					padding: 20
+				}
+			},
+			pieceLabel: {
+				render: 'percentage',
+				fontColor: 'white',
+				fontSize: 14,
+			},
+			tooltips: false,
+			layout: {
+				padding: {
+					left: 20,
+					right: 20,
+					top: 20,
+					bottom: 20
+				}
+			}
+		}
+
+            });
+        });
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels3|safe }};
+            var data = {{ data3|safe }};
+
+
+
+            var myPieChart = new Chart(doughnutChart, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+                options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend : {
+				position: 'bottom'
+			},
+			layout: {
+				padding: {
+					left: 20,
+					right: 20,
+					top: 20,
+					bottom: 20
+				}
+			}
+		}
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels4|safe }};
+            var data = {{ data4|safe }};
+
+
+            var myPieChart = new Chart(radarChart, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+                options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend : {
+				position: 'bottom'
+			},
+			layout: {
+				padding: {
+					left: 20,
+					right: 20,
+					top: 20,
+					bottom: 20
+				}
+			}
+		}
+            });
+        });
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var barChartreg = document.getElementById('datein').getContext('2d');
+	var myLineChart = new Chart(barChartreg, {
+		type: 'bar',
+		data: {
+			labels: {{ labelsepoque|safe }},
+			datasets: [{
+				label: "Nombre de village",
+				borderColor: "#1d7af3",
+				pointBorderColor: "#FFF",
+				pointBackgroundColor: "#1d7af3",
+				pointBorderWidth: 2,
+				pointHoverRadius: 4,
+				pointHoverBorderWidth: 1,
+				pointRadius: 4,
+			    backgroundColor: [
+					'rgba( 255, 0, 255, 1 )',
+					'rgba(255, 140, 0, 1)',
+					'rgba( 255, 255, 0, 1 )',
+					'rgba(30, 144, 255, 1)',
+					// Add more colors as needed
+				],
+				fill: true,
+				borderWidth: 2,
+				data: {{ dataepoque|safe }},
+
+			}]
+		},
+		options : {
+
+			scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    },
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position: 'bottom',
+				labels : {
+					padding: 10,
+					fontColor: '#1d7af3',
+				}
+			},
+			tooltips: {
+				bodySpacing: 4,
+				mode:"nearest",
+				intersect: 0,
+				position:"nearest",
+				xPadding:10,
+				yPadding:10,
+				caretPadding:10
+			},
+			layout:{
+				padding:{left:15,right:15,top:15,bottom:15}
+			}
+		}
+	});
+	});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels4|safe }};
+            var data = {{ data4|safe }};
+
+
+            var myPieChart = new Chart(radarChart, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+                options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend : {
+				position: 'bottom'
+			},
+			layout: {
+				padding: {
+					left: 20,
+					right: 20,
+					top: 20,
+					bottom: 20
+				}
+			}
+		}
+            });
+        });
+
+
+
+
+
+
+	var myMultipleLineChart = new Chart(multipleLineChart, {
+		type: 'line',
+		data: {
+			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+			datasets: [{
+				label: "Python",
+				borderColor: "#1d7af3",
+				pointBorderColor: "#FFF",
+				pointBackgroundColor: "#1d7af3",
+				pointBorderWidth: 2,
+				pointHoverRadius: 4,
+				pointHoverBorderWidth: 1,
+				pointRadius: 4,
+				backgroundColor: 'transparent',
+				fill: true,
+				borderWidth: 2,
+				data: [30, 45, 45, 68, 69, 90, 100, 158, 177, 200, 245, 256]
+			},{
+				label: "PHP",
+				borderColor: "#59d05d",
+				pointBorderColor: "#FFF",
+				pointBackgroundColor: "#59d05d",
+				pointBorderWidth: 2,
+				pointHoverRadius: 4,
+				pointHoverBorderWidth: 1,
+				pointRadius: 4,
+				backgroundColor: 'transparent',
+				fill: true,
+				borderWidth: 2,
+				data: [10, 20, 55, 75, 80, 48, 59, 55, 23, 107, 60, 87]
+			}, {
+				label: "Ruby",
+				borderColor: "#f3545d",
+				pointBorderColor: "#FFF",
+				pointBackgroundColor: "#f3545d",
+				pointBorderWidth: 2,
+				pointHoverRadius: 4,
+				pointHoverBorderWidth: 1,
+				pointRadius: 4,
+				backgroundColor: 'transparent',
+				fill: true,
+				borderWidth: 2,
+				data: [10, 30, 58, 79, 90, 105, 117, 160, 185, 210, 185, 194]
+			}]
+		},
+		options : {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position: 'top',
+			},
+			tooltips: {
+				bodySpacing: 4,
+				mode:"nearest",
+				intersect: 0,
+				position:"nearest",
+				xPadding:10,
+				yPadding:10,
+				caretPadding:10
+			},
+			layout:{
+				padding:{left:15,right:15,top:15,bottom:15}
+			}
+		}
+	});
+
+	var myMultipleBarChart = new Chart(multipleBarChart, {
+		type: 'bar',
+		data: {
+			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+			datasets : [{
+				label: "First time visitors",
+				backgroundColor: '#59d05d',
+				borderColor: '#59d05d',
+				data: [95, 100, 112, 101, 144, 159, 178, 156, 188, 190, 210, 245],
+			},{
+				label: "Visitors",
+				backgroundColor: '#fdaf4b',
+				borderColor: '#fdaf4b',
+				data: [145, 256, 244, 233, 210, 279, 287, 253, 287, 299, 312,356],
+			}, {
+				label: "Pageview",
+				backgroundColor: '#177dff',
+				borderColor: '#177dff',
+				data: [185, 279, 273, 287, 234, 312, 322, 286, 301, 320, 346, 399],
+			}],
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position : 'bottom'
+			},
+			title: {
+				display: true,
+				text: 'Traffic Stats'
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false
+			},
+			responsive: true,
+			scales: {
+				xAxes: [{
+					stacked: true,
+				}],
+				yAxes: [{
+					stacked: true
+				}]
+			}
+		}
+	});
+
+	// Chart with HTML Legends
+
+	var gradientStroke = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+	gradientStroke.addColorStop(0, '#177dff');
+	gradientStroke.addColorStop(1, '#80b6f4');
+
+	var gradientFill = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+	gradientFill.addColorStop(0, "rgba(23, 125, 255, 0.7)");
+	gradientFill.addColorStop(1, "rgba(128, 182, 244, 0.3)");
+
+	var gradientStroke2 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+	gradientStroke2.addColorStop(0, '#f3545d');
+	gradientStroke2.addColorStop(1, '#ff8990');
+
+	var gradientFill2 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+	gradientFill2.addColorStop(0, "rgba(243, 84, 93, 0.7)");
+	gradientFill2.addColorStop(1, "rgba(255, 137, 144, 0.3)");
+
+	var gradientStroke3 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+	gradientStroke3.addColorStop(0, '#fdaf4b');
+	gradientStroke3.addColorStop(1, '#ffc478');
+
+	var gradientFill3 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+	gradientFill3.addColorStop(0, "rgba(253, 175, 75, 0.7)");
+	gradientFill3.addColorStop(1, "rgba(255, 196, 120, 0.3)");
+
+	var myHtmlLegendsChart = new Chart(htmlLegendsChart, {
+		type: 'line',
+		data: {
+			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+			datasets: [ {
+				label: "Subscribers",
+				borderColor: gradientStroke2,
+				pointBackgroundColor: gradientStroke2,
+				pointRadius: 0,
+				backgroundColor: gradientFill2,
+				legendColor: '#f3545d',
+				fill: true,
+				borderWidth: 1,
+				data: [154, 184, 175, 203, 210, 231, 240, 278, 252, 312, 320, 374]
+			}, {
+				label: "New Visitors",
+				borderColor: gradientStroke3,
+				pointBackgroundColor: gradientStroke3,
+				pointRadius: 0,
+				backgroundColor: gradientFill3,
+				legendColor: '#fdaf4b',
+				fill: true,
+				borderWidth: 1,
+				data: [256, 230, 245, 287, 240, 250, 230, 295, 331, 431, 456, 521]
+			}, {
+				label: "Active Users",
+				borderColor: gradientStroke,
+				pointBackgroundColor: gradientStroke,
+				pointRadius: 0,
+				backgroundColor: gradientFill,
+				legendColor: '#177dff',
+				fill: true,
+				borderWidth: 1,
+				data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 900]
+			}]
+		},
+		options : {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				display: false
+			},
+			tooltips: {
+				bodySpacing: 4,
+				mode:"nearest",
+				intersect: 0,
+				position:"nearest",
+				xPadding:10,
+				yPadding:10,
+				caretPadding:10
+			},
+			layout:{
+				padding:{left:15,right:15,top:15,bottom:15}
+			},
+			scales: {
+				yAxes: [{
+					ticks: {
+						fontColor: "rgba(0,0,0,0.5)",
+						fontStyle: "500",
+						beginAtZero: false,
+						maxTicksLimit: 5,
+						padding: 20
+					},
+					gridLines: {
+						drawTicks: false,
+						display: false
+					}
+				}],
+				xAxes: [{
+					gridLines: {
+						zeroLineColor: "transparent"
+					},
+					ticks: {
+						padding: 20,
+						fontColor: "rgba(0,0,0,0.5)",
+						fontStyle: "500"
+					}
+				}]
+			},
+			legendCallback: function(chart) {
+				var text = [];
+				text.push('<ul class="' + chart.id + '-legend html-legend">');
+				for (var i = 0; i < chart.data.datasets.length; i++) {
+					text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+					if (chart.data.datasets[i].label) {
+						text.push(chart.data.datasets[i].label);
+					}
+					text.push('</li>');
+				}
+				text.push('</ul>');
+				return text.join('');
+			}
+		}
+	});
+
+	var myLegendContainer = document.getElementById("myChartLegend");
+
+	// generate HTML legend
+	myLegendContainer.innerHTML = myHtmlLegendsChart.generateLegend();
+
+	// bind onClick event to all LI-tags of the legend
+	var legendItems = myLegendContainer.getElementsByTagName('li');
+	for (var i = 0; i < legendItems.length; i += 1) {
+		legendItems[i].addEventListener("click", legendClickCallback, false);
+	}
+</script>
+{% endblock extrajs %}

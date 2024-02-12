@@ -5,7 +5,7 @@
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                 <div>
                     <h3 class="text-white pb-2 fw-bold">Tableau de bord</h3>
-                    <h5 class="text-white pb-2 fw-bold">Agence Foncière Rurale côte d'Ivoire</h5>
+                    <h5 class="text-white pb-2 fw-bold">(AFOR) Agence Foncière Rurale</h5>
                 </div>
                 <div class="ml-md-auto py-2 py-md-0">
                       {% if  user.is_authenticated and user.is_staff and user.is_superuser %}
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-7 col-stats">
                                 <div class="numbers">
-                                    <p class="card-category">Régions/Distict Autonome concernées</p>
+                                    <p class="card-category">Régions/Districts Autonomes concernés</p>
                                     <h4 class="card-title">{{ nrg }}</h4>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-7 col-stats">
                                 <div class="numbers">
-                                    <p class="card-category">Départements Concernés</p>
+                                    <p class="card-category">Départements concernés</p>
                                     <h4 class="card-title">{{ ndp }}</h4>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-7 col-stats">
                                 <div class="numbers">
-                                    <p class="card-category">Nombre de sous-préfèctures concernées</p>
+                                    <p class="card-category">sous-préfecturs concernées</p>
                                     <h4 class="card-title">{{ nsp }} </h4>
                                 </div>
                             </div>
@@ -94,16 +94,17 @@
                 </div>
             </div>
         </div>
-        <div class="row">
 
 
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-head-row">
-                            <div class="card-title">Nombre de département, sous-préfècture, et village par région</div>
+
+<div class="row">
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-head-row">
+                <div class="card-title">Le nombre de départements, sous-préfectures, et villages par région</div>
                             <div class="card-tools">
-
                                 <a href="#" class="btn btn-info btn-border btn-round btn-sm">
                                     <span class="btn-label">
                                         <i class="fa fa-print"></i>
@@ -126,11 +127,11 @@
 
 
 
-                 <div class="col-md-6">
+<div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-head-row">
-                            <div class="card-title">Nombre de département, sous-préfècture, et village par région</div>
+                            <div class="card-title">Le nombre de départements, sous-préfèctures, et villages par région</div>
                             <div class="card-tools">
 
                                 <a href="#" class="btn btn-info btn-border btn-round btn-sm">
@@ -152,6 +153,10 @@
             </div>
 
         </div>
+
+
+
+
         <div class="row">
 
 
@@ -196,7 +201,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-head-row">
-                            <div class="card-title">Mise à la disposition </div>
+                            <div class="card-title">Mise à la disposition de la terre </div>
                             <div class="card-tools">
                                 <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
                                     <span class="btn-label">
@@ -260,7 +265,7 @@
            <div class="col-md-4">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <div class="card-title">Pourcentage de Villages sans acts de création</div>
+                        <div class="card-title">Pourcentage de Villages sans acte de création</div>
 
                     </div>
                     <div class="card-body pb-0">
@@ -274,7 +279,7 @@
                 </div>
                 <div class="card card-primary bg-primary-gradient">
                     <div class="card-body">
-                        <h4 class="mb-1 fw-bold">Pourcentage de fondateur n'ayants aucun accords avec les personnes trouvées</h4>
+                        <h4 class="mb-1 fw-bold">Pourcentage de fondateurs n'ayant aucun accord avec les personnes trouvées</h4>
                             <div class="card-body pb-0">
                         <div class="mb-4 mt-2">
                             <h1>{{ lien_persone_non }}%</h1>
@@ -289,6 +294,193 @@
         </div>
 
 
+
+
+
+
+
+<div class="row">
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-head-row">
+                <div class="card-title">Répartition des périodes d'installations </div>
+                            <div class="card-tools">
+                                <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                                    <span class="btn-label">
+                                        <i class="fa fa-print"></i>
+                                    </span>
+                                    Print
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="min-height: 375px">
+                            <canvas id="epin"></canvas>
+                        </div>
+                        <div id="myChartLegent"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+<div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-head-row">
+                            <div class="card-title">Qualités des déclarants</div>
+                            <div class="card-tools">
+
+                                <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                                    <span class="btn-label">
+                                        <i class="fa fa-print"></i>
+                                    </span>
+                                    Print
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="min-height: 375px">
+                            <canvas id="quald"></canvas>
+                        </div>
+                        <div id="myChartLegend"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+<div class="row">
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-head-row">
+                <div class="card-title">Répartition des dates d'officialisations </div>
+                            <div class="card-tools">
+                                <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                                    <span class="btn-label">
+                                        <i class="fa fa-print"></i>
+                                    </span>
+                                    Print
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="min-height: 375px">
+                            <canvas id="dateoff"></canvas>
+                        </div>
+                        <div id="myChartLegent"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+<div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-head-row">
+                            <div class="card-title">Distribution des autorités d'officiallisations</div>
+                            <div class="card-tools">
+
+                                <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                                    <span class="btn-label">
+                                        <i class="fa fa-print"></i>
+                                    </span>
+                                    Print
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="min-height: 375px">
+                            <canvas id="auoff"></canvas>
+                        </div>
+                        <div id="myChartLegend"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+ <div class="row">
+                <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-head-row">
+                            <div class="card-title">Distribution des activités des fondateurs</div>
+                            <div class="card-tools">
+                                <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
+                                    <span class="btn-label">
+                                        <i class="fa fa-pencil"></i>
+                                    </span>
+                                    Export
+                                </a>
+                                <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                                    <span class="btn-label">
+                                        <i class="fa fa-print"></i>
+                                    </span>
+                                    Print
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="min-height: 375px">
+                            <canvas id="actfon"></canvas>
+                        </div>
+                        <div id="myChartLegend"></div>
+                    </div>
+                </div>
+            </div>
+           <div class="col-md-4">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <div class="card-title">Nombre de Fondateur n'ayant pas de lien avec les personnes trouvées</div>
+
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="mb-4 mt-2">
+                            <h1>{{ lien }}</h1>
+                             <h1> soit  {{ liennul }}%</h1>
+                        </div>
+                        <div class="pull-in">
+                            <canvas id="dailySalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-primary bg-primary-gradient">
+                    <div class="card-body">
+                        <h4 class="mb-1 fw-bold">Nombre de village ayant un chef de terre</h4>
+                            <div class="card-body pb-0">
+                        <div class="mb-4 mt-2">
+                            <h1> {{ chef_terre }}</h1>
+                            <h1> soit  {{ chefoui }}%</h1>
+                        </div>
+                        <div class="pull-in">
+                            <canvas id="dailySalesChart"></canvas>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 

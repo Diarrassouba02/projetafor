@@ -9,7 +9,7 @@
 {% block content %}
 <div class="content">
 	<div class="page-inner">
-		<h4 class="page-title">Statistique région : {{  nom_regions_select }}</h4>
+		<h4 class="page-title">Statistique par région : {{  nom_regions_select }} (nombre village {{nbvilege}})</h4>
 
 
 		               <div class="card-body">
@@ -86,7 +86,7 @@
 			<div class="col-md-6">
 				<div class="card">
 					<div class="card-header">
-						<div class="card-title">Personnes trouvés par le fondateur</div>
+						<div class="card-title">Personnes trouvées par le fondateur</div>
 					</div>
 					<div class="card-body">
 						<div class="chart-container">
@@ -125,12 +125,13 @@
 			<div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <div class="card-title"> Villages sans acts de création</div>
+                        <div class="card-title"> Nombre de Village sans acte de création</div>
 
                     </div>
                     <div class="card-body pb-0">
                         <div class="mb-4 mt-2">
-                            <h1>{{ actp }}%</h1>
+                         <h1>{{ act }}</h1>
+                            <h1>soit {{ actp }}%</h1>
                         </div>
                         <div class="pull-in">
                             <canvas id="dailySalesChart"></canvas>
@@ -139,26 +140,119 @@
                 </div>
                 <div class="card card-primary bg-primary-gradient">
                     <div class="card-body">
-                        <h4 class="mb-1 fw-bold">Pourcentage de fondateur n'ayants pas d'accords les personnes trouvées</h4>
+                        <h4 class="mb-1 fw-bold">Nombre de fondateur n'ayant pas d'accords avec les personnes trouvées</h4>
                         <div class="mb-4 mt-2">
-                            <h1>{{ lien_persone_non }}%</h1>
+                            <h1>{{ lien_persone }}</h1>
+                            <h1>soit {{ lien_persone_non }}%</h1>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
 		</div>
-	</div>
+
+
+
+
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Répartition des périodes d'installations</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="datein"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Qualités des déclarants</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="quald"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Répartition des dates d'officialisations</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="dateoff" style="width: 50%; height: 50%"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Distribution des autorités d'officiallisations</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="autoff" style="width: 50%; height: 50%"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Distribution des activités des fondateurs</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-container">
+							<canvas id="actfon"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <div class="card-title">Nombre de Fondateur n'ayant pas de lien avec les personnes trouvées</div>
+
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="mb-4 mt-2">
+                        	<h1>{{ lien }}</h1>
+                             <h1> soit  {{ liennul }}%</h1>
+                        </div>
+                        <div class="pull-in">
+                            <canvas id="dailySalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-primary bg-primary-gradient">
+                    <div class="card-body">
+                        <h4 class="mb-1 fw-bold">Nombre de village ayant un chef de terre</h4>
+                        <div class="mb-4 mt-2">
+                        	 <h1> {{ chef_terre }}</h1>
+                            <h1> soit  {{ chefoui }}%</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+
+
+
+</div>
+
+
+
+
 </div>
 {% endblock content %}
 {% block extrajs %}
@@ -167,7 +261,10 @@
 	var barChartsp = document.getElementById('barChartsp').getContext('2d'),
 	personnetrouve = document.getElementById('personnetrouve').getContext('2d'),
 	doughnutChart = document.getElementById('doughnutChart').getContext('2d'),
-	radarChart = document.getElementById('radarChart').getContext('2d');
+	radarChart = document.getElementById('radarChart').getContext('2d'),
+	dateoff = document.getElementById('dateoff').getContext('2d'),
+	actfon = document.getElementById('actfon').getContext('2d'),
+	quald = document.getElementById('quald').getContext('2d');
 
 
 
@@ -307,23 +404,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         document.addEventListener('DOMContentLoaded', function() {
             var labels = {{ labels2|safe }};
             var data = {{ data2|safe }};
-
 
 
             var myPieChart = new Chart(personnetrouve, {
@@ -468,6 +551,290 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
             });
         });
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var barChartreg = document.getElementById('datein').getContext('2d');
+	var myLineChart = new Chart(barChartreg, {
+		type: 'bar',
+		data: {
+			labels: {{ labelsepoque|safe }},
+			datasets: [{
+				label: "Nombre de village",
+				borderColor: "#1d7af3",
+				pointBorderColor: "#FFF",
+				pointBackgroundColor: "#1d7af3",
+				pointBorderWidth: 2,
+				pointHoverRadius: 4,
+				pointHoverBorderWidth: 1,
+				pointRadius: 4,
+			    backgroundColor: [
+					'rgba( 255, 0, 255, 1 )',
+					'rgba(255, 140, 0, 1)',
+					'rgba( 255, 255, 0, 1 )',
+					'rgba(30, 144, 255, 1)',
+					// Add more colors as needed
+				],
+				fill: true,
+				borderWidth: 2,
+				data: {{ dataepoque|safe }},
+
+			}]
+		},
+		options : {
+
+			scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    },
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position: 'bottom',
+				labels : {
+					padding: 10,
+					fontColor: '#1d7af3',
+				}
+			},
+			tooltips: {
+				bodySpacing: 4,
+				mode:"nearest",
+				intersect: 0,
+				position:"nearest",
+				xPadding:10,
+				yPadding:10,
+				caretPadding:10
+			},
+			layout:{
+				padding:{left:15,right:15,top:15,bottom:15}
+			}
+		}
+	});
+	});
+
+
+
+
+ document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labelsquad|safe }};
+            var data = {{ dataquad|safe }};
+
+
+            var myPieChart = new Chart(quald, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+
+             options : {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position : 'bottom',
+				labels : {
+					fontColor: 'rgb(154, 154, 154)',
+					fontSize: 11,
+					usePointStyle : true,
+					padding: 20
+				}
+			},
+			pieceLabel: {
+				render: 'percentage',
+				fontColor: 'white',
+				fontSize: 14,
+			},
+			tooltips: false,
+			layout: {
+				padding: {
+					left: 20,
+					right: 20,
+					top: 20,
+					bottom: 20
+				}
+			}
+		}
+
+            });
+        });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labelsoff|safe }};
+            var data = {{ dataoff|safe }};
+
+
+            var myPieChart = new Chart(dateoff, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+
+             options : {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position : 'bottom',
+				labels : {
+					fontColor: 'rgb(154, 154, 154)',
+					fontSize: 11,
+					usePointStyle : true,
+					padding: 20
+				}
+			},
+			pieceLabel: {
+				render: 'percentage',
+				fontColor: 'white',
+				fontSize: 14,
+			},
+			tooltips: false,
+			layout: {
+				padding: {
+					left: 20,
+					right: 20,
+					top: 20,
+					bottom: 20
+				}
+			}
+		}
+
+            });
+        });
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var barChartreg = document.getElementById('autoff').getContext('2d');
+	var myLineChart = new Chart(barChartreg, {
+		type: 'bar',
+		data: {
+			labels: {{ labelsauoff|safe }},
+			datasets: [{
+				label: "Nombre de village",
+				borderColor: "#1d7af3",
+				pointBorderColor: "#FFF",
+				pointBackgroundColor: "#1d7af3",
+				pointBorderWidth: 2,
+				pointHoverRadius: 4,
+				pointHoverBorderWidth: 1,
+				pointRadius: 4,
+			    backgroundColor: [
+					'rgba( 255, 0, 255, 1 )',
+					'rgba(255, 140, 0, 1)',
+					'rgba( 255, 255, 0, 1 )',
+					'rgba(30, 144, 255, 1)',
+					// Add more colors as needed
+				],
+				fill: true,
+				borderWidth: 2,
+				data: {{ dataauoff|safe }},
+
+			}]
+		},
+		options : {
+
+			scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    },
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				position: 'bottom',
+				labels : {
+					padding: 10,
+					fontColor: '#1d7af3',
+				}
+			},
+			tooltips: {
+				bodySpacing: 4,
+				mode:"nearest",
+				intersect: 0,
+				position:"nearest",
+				xPadding:10,
+				yPadding:10,
+				caretPadding:10
+			},
+			layout:{
+				padding:{left:15,right:15,top:15,bottom:15}
+			}
+		}
+	});
+	});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labelsactfon|safe }};
+            var data = {{ dataactfon|safe }};
+
+
+            var myPieChart = new Chart(actfon, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+                options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend : {
+				position: 'bottom'
+			},
+			layout: {
+				padding: {
+					left: 20,
+					right: 20,
+					top: 20,
+					bottom: 20
+				}
+			}
+		}
+            });
+        });
+
 
 
 
