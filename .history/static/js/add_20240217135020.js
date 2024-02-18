@@ -385,7 +385,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const campementOrigineDiv = document.createElement("div");
         campementOrigineDiv.className = "col-md-3";
-        const campementOrigineInput = document.createElement("input");
+        const campementOrigineInput = document.createElement("textarea");
         campementOrigineInput.type = "text";
         campementOrigineInput.name = `campementOrigine_${campementCount}`;
         campementOrigineInput.placeholder = "Origine";
@@ -447,7 +447,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const localisationDiv = document.createElement("div");
         localisationDiv.className = "col-md-3";
-        const localisationInput = document.createElement("input");
+        const localisationInput = document.createElement("textarea");
         localisationInput.type = "text";
         localisationInput.name = `localisation_${siteCount}`;
         localisationInput.placeholder = "Localisation";
@@ -501,13 +501,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const ancientSiteNameInput = document.createElement("input");
         ancientSiteNameInput.type = "text";
         ancientSiteNameInput.name = `ancientSiteName_${ancientSiteCount}`;
-        ancientSiteNameInput.placeholder = "Ancient Site";
+        ancientSiteNameInput.placeholder = "Ancien Site";
         ancientSiteNameInput.className = "form-control speech-input";
         ancientSiteNameDiv.appendChild(ancientSiteNameInput);
 
         const ancientSiteMotifDiv = document.createElement("div");
         ancientSiteMotifDiv.className = "col-md-4";
-        const ancientSiteMotifInput = document.createElement("input");
+        const ancientSiteMotifInput = document.createElement("textarea");
         ancientSiteMotifInput.type = "text";
         ancientSiteMotifInput.name = `ancientSiteMotif_${ancientSiteCount}`;
         ancientSiteMotifInput.placeholder = "Motif";
@@ -618,7 +618,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const limiteDiv = document.createElement("div");
         limiteDiv.className = "col-md-3";
-        const limiteInput = document.createElement("input");
+        const limiteInput = document.createElement("textarea");
         limiteInput.type = "text";
         limiteInput.name = `limite_${limiteVillageLitigeCount}`;
         limiteInput.placeholder = "Limite";
@@ -627,7 +627,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const zoneLitigeeDiv = document.createElement("div");
         zoneLitigeeDiv.className = "col-md-3";
-        const zoneLitigeeInput = document.createElement("input");
+        const zoneLitigeeInput = document.createElement("textarea");
         zoneLitigeeInput.type = "text";
         zoneLitigeeInput.name = `zoneLitigee_${limiteVillageLitigeCount}`;
         zoneLitigeeInput.placeholder = "Zone litigée";

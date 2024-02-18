@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const ancientSiteNameInput = document.createElement("input");
         ancientSiteNameInput.type = "text";
         ancientSiteNameInput.name = `ancientSiteName_${ancientSiteCount}`;
-        ancientSiteNameInput.placeholder = "Ancient Site";
+        ancientSiteNameInput.placeholder = "Ancien Site";
         ancientSiteNameInput.className = "form-control speech-input";
         ancientSiteNameDiv.appendChild(ancientSiteNameInput);
 

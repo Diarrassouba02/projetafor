@@ -192,7 +192,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-3 mb-3">
-                                <label for="validationDefaultUsername">Activitées fondateur</label>
+                                <label for="validationDefaultUsername">Activité du fondateur</label>
                                     <div class="input-group">
                                         <input type="text" name="activitef" class="form-control speech-input" id="activitef" required>
                                     </div>
@@ -210,7 +210,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                <label for="ville">Personnes Trouvée sur les Lieux:</label>
+                                <label for="ville">Personnes trouvées sur les Lieux:</label>
                                     <select  class="custom-select mb-3" id="personne_trouve" name="personne_trouve">
                                         <option value="Village">Village</option>
 							            <option value="groupement de personne">Groupement De Personne</option>
@@ -221,7 +221,7 @@
                             </div>
                         <div class="form-row">
                         <div class="container mt-4">
-                                   <label for="ville">citer si possible les villages/campement/ou groupement de personne trouvés sur les lieux :</label>
+                                   <label for="ville">citer si possible les villages/campements/ou groupement de personne trouvées sur les lieux :</label>
                            <div id="villagetrouves">
                             <!-- Les champs de saisie des cités des villagetrouves regroupés seront ajoutés ici -->
                             </div>
@@ -244,11 +244,11 @@
                                 <div class="col-md-3 mb-3">
                                 <label for="validationDefaultUsername">Lien avec personnes trouvées</label>
                                     <div class="input-group">
-                                        <input type="text" name="lien" class="form-control speech-input" id="personne" >
+                                        <textarea  type="text" name="lien" class="form-control speech-input" id="personne" ></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                <label for="validationDefaultUsername">époque d'installation</label>
+                                <label for="validationDefaultUsername">Epoque d'installation</label>
                                     <div class="input-group">
                                         <input type="text" name="epoque" class="form-control speech-input" list="epoque" required>
                                         <datalist id="epoque">
@@ -257,6 +257,7 @@
                                             <option value="Avant l'époque coloniale">
                                             <option value="1945">
                                             <option value="1950">
+                                              <option value="Inconnue">
                                         </datalist>
                                     </div>
                                 </div>
@@ -295,14 +296,16 @@
                                              <option value="Avant l'époque coloniale">
                                             <option value="1945">
                                             <option value="1950">
+                                            <option value="Inconnue">
                                         </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="validationDefaultUsername">Nom de l'Autoritée d'officialissation</label>
+                                    <label for="validationDefaultUsername">Nom de l'Autorité d'officialisation</label>
                                     <div class="input-group">
                                         <input type="text" name="nomaut" class="form-control speech-input" list="nomaut" required>
                                         <datalist id="nomaut">
+                                            <option value="Inconnue">
                                             <option value="Administration du territoire">
                                             <option value="ARSO">
                                             <option value="AVB">
@@ -318,11 +321,12 @@
                                     <select  class="custom-select mb-3" id="act" name="act">
                                         <option value="oui">oui</option>
 							            <option value="non">non</option>
+							            <option value="Inconnu">
                                     </select>
                                 </div>
                             </div>
                             <div class="container mt-4">
-                                      <label for="validationDefaultUsername">Citer les peules des campements ensuite précisé le campement et l'origine de ces peuples</label>
+                                      <label for="validationDefaultUsername">Citer les peules des campements ensuite préciser le campement et l'origine de ces peuples</label>
                                 <div id="campements">
                                 <!-- Les champs de saisie des campements seront ajoutés ici -->
                                 </div>
@@ -358,10 +362,10 @@
                                 <div class="col-md-3 mb-3">
                                 <label for="mode_accès_terre">Mode d'accès à la terre?</label>
                                     <select  multiple class="form-control custom-select mb-3" id="mode" name="mode">
-                                        <option value="Héritage">héritage</option>
-							            <option value="Dont">dont</option>
-							            <option value="Prêt ">prêt </option>
-							            <option value="Achat">achat</option>
+                                        <option value="Héritage">Héritage</option>
+							            <option value="Dont">Don</option>
+							            <option value="Prêt ">Prêt </option>
+							            <option value="Achat">Achat</option>
 							            <option value="Location">Location</option>
                                     </select>
                                 </div>
@@ -370,15 +374,16 @@
                                     <select  class="custom-select mb-3" id="chef" name="chef">
                                         <option value="oui">oui</option>
 							            <option value="non">non</option>
+
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                 <label for="ville">Mise à la disposition?</label>
                                     <select  multiple class="form-control custom-select mb-3" id="disposition" name="disposition">
-                                        <option value="Héritage">héritage</option>
-							            <option value="Dont">dont</option>
-							            <option value="Prêt ">prêt </option>
-							            <option value="Achat">achat</option>
+                                        <option value="Héritage">Héritage</option>
+							            <option value="Dont">Don</option>
+							            <option value="Prêt ">Prêt </option>
+							            <option value="Achat">Achat</option>
 							            <option value="Location">Location</option>
                                     </select>
                                 </div>
@@ -395,7 +400,7 @@
                             <!-- Champ caché pour stocker le nombre de cités des villages regroupés -->
                             <input type="hidden" name="village_count" id="village_count" value="0">
                             <div class="container mt-4">
-                                       <label for="validationDefaultUsername">Citer les villages voisins et leur limites avec le village actuel précisé s'il y'a des zones de litiges</label>
+                                       <label for="validationDefaultUsername">Citer les villages voisins et les limites avec le village actuel préciser s'il y'a des zones de litiges</label>
                                 <div id="limite_village_litige">
                                 <!-- Les champs de saisie de limites, villages en litige seront ajoutés ici -->
                                 </div>
