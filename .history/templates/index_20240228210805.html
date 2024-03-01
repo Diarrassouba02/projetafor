@@ -1,0 +1,775 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block wrapper_extra_class %}
+	overlay-sidebar
+{% endblock wrapper_extra_class %}
+{% block sidebar_class %}
+	sidebar sidebar-style-2
+{% endblock sidebar_class %}
+{% block content %}
+{% include 'includes/dashboard-content.html' %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const allBars = {{ labels|safe }};
+    const maxBarsToShow = 5;
+    const initialDepartementsData = {{ nbdepartements|safe }};
+    const initialSousPrefecturesData = {{ nbsous_prefectures|safe }};
+    const initialVillagesData = {{ nbvillages|safe }};
+
+    let displayDepartementsData = initialDepartementsData.slice(0, maxBarsToShow);
+    let displaySousPrefecturesData = initialSousPrefecturesData.slice(0, maxBarsToShow);
+    let displayVillagesData = initialVillagesData.slice(0, maxBarsToShow);
+
+    const displayLabels = allBars.slice(0, maxBarsToShow);
+
+    const data = {
+        labels: displayLabels,
+        datasets: [
+            {
+                label: 'Départements',
+                data: displayDepartementsData,
+                backgroundColor: 'rgba(255, 140, 0, 1)',
+                borderColor: 'rgba(255, 140, 0, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Sous-Préfectures',
+                data: displaySousPrefecturesData,
+                backgroundColor: 'rgba(30, 144, 255, 1)',
+                borderColor: 'rgba(30, 144, 255, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Villages',
+                data: displayVillagesData,
+                backgroundColor: 'rgba(255, 0, 255, 1)',
+                borderColor: 'rgba(255, 0, 255, 1)',
+                borderWidth: 1
+            }
+        ]
+    };
+
+    const options = {
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
+            }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+                position: 'bottom',
+                labels : {
+                    padding: 10,
+                    fontColor: '#1d7af3',
+                }
+            },
+            tooltips: {
+                bodySpacing: 4,
+                mode:"nearest",
+                intersect: 0,
+                position:"nearest",
+                xPadding:10,
+                yPadding:10,
+                caretPadding:10
+            },
+            layout:{
+                padding:{left:15,right:15,top:15,bottom:15}
+            }
+    };
+
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+
+    let animationInterval;
+    let isAnimationPaused = false;
+    let startIndex = maxBarsToShow;
+
+    function rotateData() {
+        displayDepartementsData.shift();
+        displayDepartementsData.push(initialDepartementsData[startIndex]);
+
+        displaySousPrefecturesData.shift();
+        displaySousPrefecturesData.push(initialSousPrefecturesData[startIndex]);
+
+        displayVillagesData.shift();
+        displayVillagesData.push(initialVillagesData[startIndex]);
+
+        displayLabels.shift();
+        displayLabels.push(allBars[startIndex]);
+
+        chart.data.datasets[0].data = displayDepartementsData;
+        chart.data.datasets[1].data = displaySousPrefecturesData;
+        chart.data.datasets[2].data = displayVillagesData;
+        chart.data.labels = displayLabels;
+        chart.update();
+
+        startIndex = (startIndex + 1) % initialDepartementsData.length;
+    }
+
+    function toggleAnimation() {
+        if (isAnimationPaused) {
+            animationInterval = setInterval(rotateData, 1000);
+        } else {
+            clearInterval(animationInterval);
+        }
+
+        isAnimationPaused = !isAnimationPaused;
+    }
+
+    ctx.canvas.addEventListener('click', toggleAnimation);
+
+    // Démarrez l'animation initiale
+    animationInterval = setInterval(rotateData, 1000);
+});
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('myChart2').getContext('2d');
+
+            const myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: {{ labels|safe }},
+                    datasets: [
+                        {
+                            label: 'Départements',
+                            data: {{ nbdepartements|safe }},
+                            backgroundColor: 'rgba( 255, 140, 0, 1 )',
+                            borderColor: 'rgba( 0, 0, 0, 1 )',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Sous-Préfectures',
+                            data: {{ nbsous_prefectures|safe }},
+                            backgroundColor: 'rgba(30, 144, 255, 1)',
+                            borderColor: 'rgba( 255, 255, 0, 1 )',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Villages',
+                            data: {{ nbvillages|safe }},
+                            backgroundColor: 'rgba( 255, 0, 255, 1 )',
+                            borderColor: 'rgba( 0, 0, 0, 1 )',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+
+                    responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position : 'bottom',
+                labels : {
+
+                    fontSize: 11,
+                    usePointStyle : true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+
+                }
+            });
+        });
+
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels1|safe }};
+            var data = {{ data1|safe }};
+
+            var ctx = document.getElementById('personnetrouve').getContext('2d');
+
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+
+                  options : {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position : 'bottom',
+                labels : {
+                    fontColor: 'rgb(154, 154, 154)',
+                    fontSize: 11,
+                    usePointStyle : true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+            });
+        });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels2|safe }};
+            var data = {{ data2|safe }};
+
+            var ctx = document.getElementById('mise_a_disp').getContext('2d');
+
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            'RGBA( 0, 255, 127, 1 )',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+                  options : {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position : 'bottom',
+                labels : {
+                    fontColor: 'rgb(154, 154, 154)',
+                    fontSize: 11,
+                    usePointStyle : true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+            });
+        });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labels3|safe }};
+            var data = {{ data3|safe }};
+
+            var ctx = document.getElementById('mode_acces').getContext('2d');
+
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            'RGBA( 0, 255, 127, 1 )',
+                            // Add more colors as needed
+                        ],
+                    }],
+                },
+                  options : {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                position : 'bottom',
+                labels : {
+                    fontColor: 'rgb(154, 154, 154)',
+                    fontSize: 11,
+                    usePointStyle : true,
+                    padding: 20
+                }
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: 'white',
+                fontSize: 14,
+            },
+            tooltips: false,
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
+                }
+            }
+        }
+            });
+        });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labelsepoque|safe }};
+            var data = {{ dataepoque|safe }};
+            const ctx = document.getElementById('epin').getContext('2d');
+            // Créer le diagramme à barres
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nombre de village',
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            'RGBA( 0, 255, 127, 1 )',
+                            // Add more colors as needed
+                        ],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }],
+                },
+        options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			},
+		}
+
+            });
+        });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labelsquad|safe }};
+            var data = {{ dataquad|safe }};
+            const ctx = document.getElementById('quald').getContext('2d');
+            // Créer le diagramme à barres
+            const myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nombre de déclarants',
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            'RGBA( 0, 255, 127, 1 )',
+                            // Add more colors as needed
+                        ],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }],
+                },
+        options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			},
+		}
+
+            });
+        });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labelsoff|safe }};
+            var data = {{ dataoff|safe }};
+            const ctx = document.getElementById('dateoff').getContext('2d');
+            // Créer le diagramme à barres
+            const myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nombre de village',
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            'RGBA( 0, 255, 127, 1 )',
+                            // Add more colors as needed
+                        ],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }],
+                },
+        options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			},
+		}
+
+            });
+        });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labelsauoff|safe }};
+            var data = {{ dataauoff|safe }};
+            const ctx = document.getElementById('auoff').getContext('2d');
+            // Créer le diagramme à barres
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nombre de village',
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            'RGBA( 0, 255, 127, 1 )',
+                            // Add more colors as needed
+                        ],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }],
+                },
+        options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			},
+		}
+
+            });
+        });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var labels = {{ labelsactfon|safe }};
+            var data = {{ dataactfon|safe }};
+            const ctx = document.getElementById('actfon').getContext('2d');
+            // Créer le diagramme à barres
+            const myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nombre de fondateur',
+                        data: data,
+                        backgroundColor: [
+                            'rgba( 255, 0, 255, 1 )',
+                            'rgba(255, 140, 0, 1)',
+                            'rgba( 255, 255, 0, 1 )',
+                            'rgba(30, 144, 255, 1)',
+                            'RGBA( 0, 255, 127, 1 )',
+                            // Add more colors as needed
+                        ],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }],
+                },
+        options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			},
+		}
+
+            });
+        });
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('worcloud-container');
+    var text = "{{ text1 }}";
+    var lines = text.split(/[,\. ]+/g);
+    var data = Highcharts.reduce(lines, function (arr, word) {
+        var obj = Highcharts.find(arr, function (obj) {
+            return obj.name === word;
+        });
+        if (obj) {
+            obj.weight += 1;
+        } else {
+            arr.push({
+                name: word,
+                weight: 1
+            });
+        }
+        return arr;
+    }, []).filter(function (item) {
+        return item.weight > 4; // Filtrer les mots avec un poids supérieur à 4
+    });
+
+    Highcharts.chart(ctx, {
+        series: [{
+            type: 'wordcloud',
+            data: data,
+            name: 'Occurrences'
+        }],
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        },
+        title: {
+            text: 'Wordcloud'
+        }
+    });
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var count_by_region = {{ count_by_region|safe }};
+
+            var data = {
+                labels: Object.keys(count_by_region),
+                datasets: [{
+                    label: "nombre d'ancien site",
+                    data: Object.values(count_by_region),
+                    backgroundColor: [
+                        'rgba(255, 0, 255, 1)',
+                        'rgba(255, 140, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(30, 144, 255, 1)',
+                        'rgba(0, 255, 127, 1)',
+                        // Add more colors as needed
+                    ],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const ctx = document.getElementById('ancien_site').getContext('2d');
+            const doughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var dicregsite  = {{ dicregsite|safe }};
+
+            var data = {
+                labels: Object.keys(dicregsite),
+                datasets: [{
+                    label: "nombre de site d'adoration",
+                    data: Object.values(dicregsite),
+                    backgroundColor: [
+                        'rgba(255, 0, 255, 1)',
+                        'rgba(255, 140, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(30, 144, 255, 1)',
+                        'rgba(0, 255, 127, 1)',
+                        // Add more colors as needed
+                    ],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const ctx = document.getElementById('site_adoration').getContext('2d');
+            const doughnutChart = new Chart(ctx, {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            var dicregsite  = {{ dicregsite|safe }};
+
+            var data = {
+                labels: Object.keys(dicregsite),
+                datasets: [{
+                    label: "nombre de site d'adoration",
+                    data: Object.values(dicregsite),
+                    backgroundColor: [
+                        'rgba(255, 0, 255, 1)',
+                        'rgba(255, 140, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(30, 144, 255, 1)',
+                        'rgba(0, 255, 127, 1)',
+                        // Add more colors as needed
+                    ],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const ctx = document.getElementById('successeur').getContext('2d');
+            const doughnutChart = new Chart(ctx, {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
